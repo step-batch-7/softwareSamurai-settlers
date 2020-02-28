@@ -1,0 +1,32 @@
+{
+  "name": "softwaresamurai-settlers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "nyc mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/step-batch-7/softwareSamurai-settlers.git"
+  },
+  "author": "Software Samurai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/step-batch-7/softwareSamurai-settlers/issues"
+  },
+  "homepage": "https://github.com/step-batch-7/softwareSamurai-settlers#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "cookie-parser": "^1.4.4"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "chai": "^4.2.0",
+    "nyc": "^15.0.0",
+    "mocha": "^7.1.0",
+    "supertest": "^4.0.2",
+    "sinon": "^9.0.0"
+  }
+}
