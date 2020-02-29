@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "nyc mocha"
+    "test": "nyc mocha",
+    "lint": "npx eslint ."
   },
   "repository": {
     "type": "git",
