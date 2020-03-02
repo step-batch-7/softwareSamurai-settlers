@@ -7,7 +7,7 @@
     "start": "node server.js",
     "test": "nyc mocha --recursive",
     "lint": "npx eslint .",
-    "push heroku": "git push heroku master"
+    "push-heroku": "git push heroku master"
   },
   "repository": {
     "type": "git",
