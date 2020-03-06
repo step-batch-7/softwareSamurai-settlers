@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/catanStyle.css" />
+    <script src="/js/board.js"></script>
     <title>Settlers Of Catan</title>
   </head>
-  <body>
+  <body onload="getTerrains()">
     <div id="container">
       <div id="game-area">
         <div id="board">
@@ -23,7 +24,7 @@
             </svg>
             <div id="rows">
               <g class="row">
-                <svg class="terrain" count="7" id="k">
+                <svg class="terrain" id="k">
                   <polyline
                     id="hexagon"
                     points="50,0 100,30 100,90 50,120 0,90 0,30 50,0"
