@@ -2,9 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=developmentCardsice-width, initial-scale=1.0"
+    />
     <link rel="stylesheet" href="/css/catanStyle.css" />
     <script src="/js/board.js"></script>
+    <script src="/js/requests.js"></script>
     <title>Settlers Of Catan</title>
   </head>
   <body onload="getTerrains()">
@@ -204,12 +208,12 @@
                 <text x="48" y="29" style="fill:white;font-size:25;">0</text>
               </svg>
             </div>
-            <div id="crop">
+            <div id="grain">
               <svg height="112" width="72">
                 <image
                   x="5"
                   y="10"
-                  xlink:href="/assets/cards/resourceCards/cropCard.jpg"
+                  xlink:href="/assets/cards/resourceCards/grainCard.jpg"
                   height="110"
                   width="60"
                 />
@@ -217,12 +221,12 @@
                 <text x="48" y="29" style="fill:white;font-size:25;">0</text>
               </svg>
             </div>
-            <div id="dev">
+            <div id="developmentCards">
               <svg height="112" width="72">
                 <image
                   x="5"
                   y="10"
-                  xlink:href="/assets/cards/devCards/devCard.jpg"
+                  xlink:href="/assets/cards/developmentCards/developmentCard.jpg"
                   height="110"
                   width="60"
                 />
@@ -257,7 +261,13 @@
                 width="50"
               />
               <circle cx="48" cy="35" r="12" style="fill:rgba(0,0,0,0.6)" />
-              <text x="43" y="42" style="fill:white;font-size:20;">0</text>
+              <text
+                x="48"
+                y="40"
+                style="fill:white;font-size:15; text-anchor:middle"
+              >
+                0
+              </text>
             </svg>
           </div>
           <div id="wool">
@@ -270,7 +280,13 @@
                 width="50"
               />
               <circle cx="48" cy="35" r="12" style="fill:rgba(0,0,0,0.6)" />
-              <text x="43" y="42" style="fill:white;font-size:20;">0</text>
+              <text
+                x="48"
+                y="40"
+                style="fill:white;font-size:15; text-anchor:middle"
+              >
+                0
+              </text>
             </svg>
           </div>
           <div id="lumber">
@@ -283,7 +299,13 @@
                 width="50"
               />
               <circle cx="48" cy="35" r="12" style="fill:rgba(0,0,0,0.6)" />
-              <text x="43" y="42" style="fill:white;font-size:20;">0</text>
+              <text
+                x="48"
+                y="40"
+                style="fill:white;font-size:15; text-anchor:middle"
+              >
+                0
+              </text>
             </svg>
           </div>
           <div id="ore">
@@ -296,33 +318,51 @@
                 width="50"
               />
               <circle cx="48" cy="35" r="12" style="fill:rgba(0,0,0,0.6)" />
-              <text x="43" y="42" style="fill:white;font-size:20;">0</text>
+              <text
+                x="48"
+                y="40"
+                style="fill:white;font-size:15; text-anchor:middle"
+              >
+                0
+              </text>
             </svg>
           </div>
-          <div id="crop">
+          <div id="grain">
             <svg height="140" width="60">
               <image
                 x="5"
                 y="10"
-                xlink:href="/assets/cards/resourceCards/cropCard.jpg"
+                xlink:href="/assets/cards/resourceCards/grainCard.jpg"
                 height="135"
                 width="50"
               />
               <circle cx="48" cy="35" r="12" style="fill:rgba(0,0,0,0.6)" />
-              <text x="43" y="42" style="fill:white;font-size:20;">0</text>
+              <text
+                x="48"
+                y="40"
+                style="fill:white;font-size:15; text-anchor:middle"
+              >
+                0
+              </text>
             </svg>
           </div>
-          <div id="dev">
+          <div id="developmentCards">
             <svg height="140" width="60">
               <image
                 x="5"
                 y="10"
-                xlink:href="/assets/cards/devCards/devCard.jpg"
+                xlink:href="/assets/cards/developmentCards/developmentCard.jpg"
                 height="135"
                 width="50"
               />
               <circle cx="48" cy="35" r="12" style="fill:rgba(0,0,0,0.6)" />
-              <text x="43" y="42" style="fill:white;font-size:20;">0</text>
+              <text
+                x="48"
+                y="40"
+                style="fill:white;font-size:15; text-anchor:middle"
+              >
+                0
+              </text>
             </svg>
           </div>
         </div>
