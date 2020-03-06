@@ -21,6 +21,12 @@ class DevCards {
       victoryCards: this.victoryCards
     };
   }
+  totalCards() {
+    const progCards = this.yearOfPlenty + this.roadBuilding + this.monoPoly;
+    const {library, chapel, greatHall, market, university} = this.victoryCards;
+    const victoryCards = library + chapel + greatHall + market + university;
+    return this.knight + progCards + victoryCards;
+  }
 }
 
 module.exports = DevCards;

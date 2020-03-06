@@ -21,4 +21,10 @@ describe('DevCards', () => {
       assert.deepStrictEqual(devCards.count(), expected);
     });
   });
+  describe('totalCount', () => {
+    it('should give total number of devCards', () => {
+      const devCards = new DevCards();
+      assert.strictEqual(devCards.totalCards(), 0);
+    });
+  });
 });

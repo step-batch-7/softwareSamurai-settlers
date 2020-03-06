@@ -9,7 +9,8 @@ class Cards {
   count() {
     return {
       resources: this.resources.count(),
-      devCards: this.devCards.count()
+      devCards: this.devCards.count(),
+      totalDevCards: this.devCards.totalCards()
     };
   }
 }

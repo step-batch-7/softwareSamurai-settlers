@@ -24,7 +24,8 @@ describe('Cards', () => {
             market: 0,
             university: 0
           }
-        }
+        },
+        totalDevCards: 0
       };
       const cards = new Cards();
       assert.deepStrictEqual(cards.count(), expected);
