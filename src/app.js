@@ -1,5 +1,8 @@
 const express = require('express');
-
 const app = express();
+const {serveCardsCount} = require('../lib/handlers');
 
-module.exports = { app };
+app.use(express.static('public'));
+app.get('/cardsCount', serveCardsCount);
+
+module.exports = {app};
