@@ -79,7 +79,7 @@
   },
   "overrides": [
     {
-      "files": ["test*.js"],
+      "files": ["test/**/test*.js"],
       "rules": {
         "max-len": "warn",
         "max-statements": "off"
