@@ -145,6 +145,11 @@ body {
   margin: 0px -3px -38px 0px;
 }
 
+#robber {
+  width: 55px;
+  height: 57px;
+}
+
 .number-token {
   fill: rgb(71, 69, 69);
   stroke: white;

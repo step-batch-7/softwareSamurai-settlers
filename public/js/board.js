@@ -4,6 +4,15 @@ const getTerrains = async function() {
     const terrainsInfo = await response.json();
     const terrains = document.getElementsByClassName('terrain');
     Array.from(terrains).forEach(terrain => {
+      if (terrainsInfo[terrain.id].resource === 'desert') {
+        const html = `<image class="terrain-image"
+         xlink:href='/assets/terrains/${terrainsInfo[terrain.id].resource}.jpg'
+          count="${terrainsInfo[terrain.id].noToken}"></image>
+         <image id="robber" xlink:href='/assets/robber.png'></image>
+        `;
+        terrain.innerHTML += html;
+        return;
+      }
       const html = `<image class="terrain-image" xlink:href='/assets/terrains/${
         terrainsInfo[terrain.id].resource
       }.jpg' count="${terrainsInfo[terrain.id].noToken}"></image>
