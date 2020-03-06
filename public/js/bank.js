@@ -20,5 +20,3 @@ const requestHttp = (method, url, data, callBack) => {
   req.open(method, url, true);
   req.send(data);
 };
-
-window.onload = getBankStatus;
