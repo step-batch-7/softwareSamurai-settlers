@@ -1,12 +1,11 @@
 const express = require('express');
-
-const { getTerrainDetails } = require('./handlers');
+const { getBankStatus, getTerrainDetails } = require('./handlers');
+const { serveCardsCount } = require('../lib/handlers');
 
 const app = express();
-const {serveCardsCount} = require('../lib/handlers');
-
-app.use(express.static('public'));
+app.get('/bankStatus', getBankStatus);
 app.get('/', (req, res) => res.redirect('catan.html'));
 app.get('/cardsCount', serveCardsCount);
 app.get('/terrains', getTerrainDetails);
+app.use(express.static('public'));
 module.exports = { app };
