@@ -1,2 +1,7 @@
 node_modules
 .nyc_output
+.DS_Store
+public/.DS_Store
+public/assets/.DS_Store
+public/assets/cards/developmentCards/.DS_Store
+public/assets/cards/.DS_Store
