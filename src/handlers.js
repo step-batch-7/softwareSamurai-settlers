@@ -1,3 +1,12 @@
+/* eslint-disable max-statements */
+const productions = {
+  fields: 'grain',
+  forest: 'lumber',
+  hills: 'brick',
+  pasture: 'wool',
+  mountains: 'ore'
+};
+
 const getTerrainDetails = function(req, res) {
   const boardData = {
     terrainsInfo: req.app.locals.board.getTerrains(),
@@ -8,13 +17,14 @@ const getTerrainDetails = function(req, res) {
 };
 
 const getBankStatus = (req, res) => {
-  const { bank } = req.app.locals;
+  const {bank} = req.app.locals;
   const bankStatus = bank.status;
   res.json(bankStatus);
 };
 
 const getCardsCount = function(req, res) {
-  res.json(req.app.locals.player.cardsCount());
+  const {player} = req.app.locals;
+  res.json(player.cardsCount());
 };
 
 const getAvailableSettlements = function(req, res) {
@@ -25,11 +35,11 @@ const getAvailableSettlements = function(req, res) {
 const randNum = () => Math.ceil(Math.random() * 6);
 
 const getRandomDiceNum = function(req, res) {
-  res.json({ dice1: randNum(), dice2: randNum() });
+  res.json({dice1: randNum(), dice2: randNum()});
 };
 
 const buildSettlement = function(req, res) {
-  const { intersection } = req.body;
+  const {intersection} = req.body;
   req.app.locals.board.buildSettlement(intersection);
   req.app.locals.player.addSettlement(intersection);
   res.end();
@@ -43,14 +53,14 @@ const addResourcesToPlayer = function(req, res) {
     pasture: 'wool',
     mountains: 'ore'
   };
-  const { board, bank, player } = req.app.locals;
+  const {board, bank, player} = req.app.locals;
   const terrains = board.getTerrains();
   const settlement = player.settlements.slice().pop();
   const tokenIds = settlement.split('');
   const resourceCards = tokenIds.reduce((resourceCards, tokenId) => {
     if (terrains[tokenId]) {
       const terrain = terrains[tokenId].resource;
-      resourceCards.push({ resource: productions[terrain], count: 1 });
+      resourceCards.push({resource: productions[terrain], count: 1});
     }
     return resourceCards;
   }, []);
@@ -62,15 +72,15 @@ const addResourcesToPlayer = function(req, res) {
 };
 
 const addRoad = function(req, res) {
-  const { board, player } = req.app.locals;
-  const { pathId } = req.body;
+  const {board, player} = req.app.locals;
+  const {pathId} = req.body;
   board.addRoad(pathId);
   player.addRoad(pathId);
   res.end();
 };
 
 const servePossiblePathsForRoad = (req, res) => {
-  const { player, board } = req.app.locals;
+  const {player, board} = req.app.locals;
   const settlement = player.settlements.slice().pop();
   const possiblePositionsForRoad = board.getEmptyPaths();
   const possiblePositionsToBuildRoad = possiblePositionsForRoad.filter(
@@ -83,6 +93,31 @@ const servePossiblePathsForRoad = (req, res) => {
   res.json(possiblePositionsToBuildRoad);
 };
 
+const getResources = function(req, res) {
+  const terrains = req.app.locals.board.getTerrains();
+  const matchedTerrains = {};
+  for (const terrain in terrains) {
+    if (terrains[terrain]['noToken'] === req.body.numToken) {
+      matchedTerrains[terrain] = terrains[terrain];
+    }
+  }
+  const {bank, player} = req.app.locals;
+
+  const resourceId = player.getMatchingSettlements(matchedTerrains);
+  const resourceCards = resourceId.reduce((resourceCards, tokenId) => {
+    if (terrains[tokenId]) {
+      const terrain = terrains[tokenId].resource;
+      resourceCards.push({resource: productions[terrain], count: 1});
+    }
+    return resourceCards;
+  }, []);
+  resourceCards.forEach(resourceCard => {
+    bank.remove(resourceCard);
+    player.addResources(resourceCard);
+  });
+  res.json(player.cardsCount());
+};
+
 module.exports = {
   getTerrainDetails,
   getCardsCount,
@@ -92,5 +127,6 @@ module.exports = {
   addResourcesToPlayer,
   getRandomDiceNum,
   servePossiblePathsForRoad,
-  addRoad
+  addRoad,
+  getResources
 };

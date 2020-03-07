@@ -25,5 +25,13 @@ const showDicePhase = async function() {
   const body = await res.json();
   const {dice1, dice2} = await body;
   updateDicePhase(dice1, dice2);
-  
+  const reqText = JSON.stringify({numToken: dice1 + dice2});
+  const response = await fetch('/getResources', {
+    method: 'POST',
+    body: reqText,
+    headers: {'Content-Type': 'application/json'}
+  });
+  const data = await response.json();
+  const {resources, totalDevCards} = await data;
+  updateResourceCards(resources, totalDevCards);
 };

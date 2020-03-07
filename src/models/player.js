@@ -21,6 +21,19 @@ class Player {
   getRoads() {
     return this.roads.slice();
   }
+
+  getMatchingSettlements(selectedTerrains) {
+    const matchedSettlements = [];
+    for (const terrain in selectedTerrains) {
+      for (let index = 0; index < this.settlements.length; index++) {
+        if (this.settlements[index].includes(terrain)) {
+          matchedSettlements.push(terrain);
+        }
+      }
+    }
+    return matchedSettlements;
+  }
+
   addResources(card) {
     if (card) {
       const isCardAdded = this.cards.addResources(card);
@@ -30,4 +43,4 @@ class Player {
   }
 }
 
-module.exports = { Player };
+module.exports = {Player};

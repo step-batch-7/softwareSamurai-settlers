@@ -16,7 +16,7 @@ class Resources {
     };
   }
 
-  add({ resource, count }) {
+  add({resource, count}) {
     if (resource && count) {
       this[resource] = this[resource] + count;
       return true;
