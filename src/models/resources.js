@@ -6,7 +6,7 @@ class Resources {
     this.brick = 0;
     this.grain = 0;
   }
-  count() {
+  status() {
     return {
       ore: this.ore,
       wool: this.wool,

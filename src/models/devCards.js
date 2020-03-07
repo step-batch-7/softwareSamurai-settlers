@@ -12,16 +12,15 @@ class DevCards {
       university: 0
     };
   }
-  count() {
+  status() {
     return {
       knight: this.knight,
       yearOfPlenty: this.yearOfPlenty,
       roadBuilding: this.roadBuilding,
-      monoPoly: this.monoPoly,
-      victoryCards: this.victoryCards
+      monoPoly: this.monoPoly
     };
   }
-  totalCards() {
+  count() {
     const progCards = this.yearOfPlenty + this.roadBuilding + this.monoPoly;
     const {library, chapel, greatHall, market, university} = this.victoryCards;
     const victoryCards = library + chapel + greatHall + market + university;

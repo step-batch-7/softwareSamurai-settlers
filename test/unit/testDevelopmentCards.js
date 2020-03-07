@@ -9,22 +9,16 @@ describe('DevCards', () => {
         knight: 0,
         yearOfPlenty: 0,
         roadBuilding: 0,
-        monoPoly: 0,
-        victoryCards: {
-          library: 0,
-          chapel: 0,
-          greatHall: 0,
-          market: 0,
-          university: 0
-        }
+        monoPoly: 0
       };
-      assert.deepStrictEqual(devCards.count(), expected);
+      assert.deepStrictEqual(devCards.status(), expected);
     });
   });
+  
   describe('totalCount', () => {
     it('should give total number of devCards', () => {
       const devCards = new DevCards();
-      assert.strictEqual(devCards.totalCards(), 0);
+      assert.strictEqual(devCards.count(), 0);
     });
   });
 });

@@ -12,7 +12,7 @@ describe('Resources', () => {
         brick: 0,
         grain: 0
       };
-      assert.deepStrictEqual(resources.count(), expected);
+      assert.deepStrictEqual(resources.status(), expected);
     });
   });
 });
