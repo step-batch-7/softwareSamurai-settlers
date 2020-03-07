@@ -112,6 +112,7 @@ body {
   width: 100%;
   height: 82%;
   left: 6%;
+  display: flex;
 }
 
 #board-border {
@@ -216,4 +217,30 @@ svg {
   height: 30px;
   width: 30px;
   margin: -2% 0% 0% 0%;
+}
+
+#turn {
+  height: 100%;
+  width: 28%;
+  display: flex;
+  margin-left: 72%;
+}
+#turn-details,
+#dice-box {
+  height: 100%;
+  width: 50%;
+}
+#dice {
+  height: 11%;
+  width: 100%;
+  display: flex;
+  margin: 370% 0% 6% 0%;
+}
+#dice1,
+#dice2 {
+  width: 42%;
+  height: 84%;
+  margin: 3%;
+  border: black solid;
+  border-radius: 7px;
 }
