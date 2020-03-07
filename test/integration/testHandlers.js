@@ -61,3 +61,11 @@ describe('Get /cardsCount', () => {
     });
   });
 });
+
+describe('Post /addResourcesToPlayer', () => {
+  it('should give add resources to player for /addResourcesToPlayer', done => {
+    request(app)
+      .post('/addResourcesToPlayer')
+      .expect(200, done);
+  });
+});

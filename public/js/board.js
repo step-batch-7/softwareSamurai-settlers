@@ -77,5 +77,6 @@ const buildSettlement = async function() {
 
   if (response.ok) {
     renderNewSettlement(intersection);
+    distributeResources();
   }
 };
