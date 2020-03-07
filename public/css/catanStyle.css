@@ -187,12 +187,15 @@ svg {
 }
 
 .point {
-  background-color: white;
   width: 20px;
   height: 20px;
   border-radius: 10px;
   text-align: center;
-  opacity: 0.4;
   box-sizing: border-box;
+}
+
+.visibleIntersection {
+  background-color: white;
+  opacity: 0.4;
   cursor: pointer;
 }

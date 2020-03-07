@@ -23,3 +23,14 @@ const getTerrains = async function() {
     });
   }
 };
+
+const requestSettlement = async function() {
+  const response = await fetch('/requestSettlement');
+  if (response.ok) {
+    const positions = await response.json();
+    positions.forEach(position => {
+      const intersection = document.getElementById(position);
+      intersection.classList.add('visibleIntersection');
+    });
+  }
+};

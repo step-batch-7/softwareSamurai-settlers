@@ -1,10 +1,8 @@
-const { Board } = require('./models/board');
 const Bank = require('./models/bank');
 const Cards = require('./models/cards');
 
 const getTerrainDetails = function(req, res) {
-  const board = new Board();
-  res.json(board.getTerrains());
+  res.json(req.app.locals.board.getTerrains());
 };
 
 const getBankStatus = (req, res) => {
@@ -18,8 +16,14 @@ const getCardsCount = function(req, res) {
   res.json(cards.count());
 };
 
+const getAvailableSettlements = function(req, res) {
+  const settlements = req.app.locals.board.getAvailableSettlements();
+  res.json(settlements);
+};
+
 module.exports = {
   getTerrainDetails,
   getCardsCount,
-  getBankStatus
+  getBankStatus,
+  getAvailableSettlements
 };
