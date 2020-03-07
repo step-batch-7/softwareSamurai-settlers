@@ -197,12 +197,12 @@ svg {
 
 @keyframes open-animation {
   0% {
-    box-shadow: 0 0 0 0 rgba(248, 205, 205, 0.7),
-      0 0 0 8px rgba(248, 205, 205, 0.7), 0 0 0 0 rgba(248, 205, 205, 0.7);
+    box-shadow: 0 0 0 0 rgba(248, 205, 205, 0.7), 0 0 0 8px rgba(248, 205, 205, 0.7),
+      0 0 0 0 rgba(248, 205, 205, 0.7);
   }
   100% {
-    box-shadow: 0 0 0 4px rgba(248, 205, 205, 0.3),
-      0 0 0 16px rgba(248, 205, 205, 0.3), 0 0 0 0 rgba(248, 205, 205, 0.7);
+    box-shadow: 0 0 0 4px rgba(248, 205, 205, 0.3), 0 0 0 16px rgba(248, 205, 205, 0.3),
+      0 0 0 0 rgba(248, 205, 205, 0.7);
   }
 }
 
@@ -241,8 +241,6 @@ svg {
   width: 42%;
   height: 84%;
   margin: 3%;
-  border: black solid;
-  border-radius: 7px;
 }
 
 /*---------------------------- Roads ------------------*/
