@@ -16,8 +16,7 @@ const getBankStatus = (req, res) => {
 };
 
 const getCardsCount = function(req, res) {
-  const cards = new Cards();
-  res.json(cards.count());
+  res.json(req.app.locals.cards.count());
 };
 
 const getAvailableSettlements = function(req, res) {
@@ -26,7 +25,7 @@ const getAvailableSettlements = function(req, res) {
 };
 
 const buildSettlement = function(req, res) {
-  const { intersection } = req.body;
+  const {intersection} = req.body;
   req.app.locals.board.buildSettlement(intersection);
   req.app.locals.player.addSettlement(intersection);
   res.end();
