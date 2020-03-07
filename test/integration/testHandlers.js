@@ -6,6 +6,6 @@ describe('Get /cardsCount', () => {
     request(app)
       .get('/cardsCount')
       .expect(200, done)
-      .expect('Content-Type', 'application/json; charset=utf-8')
+      .expect('Content-Type', 'application/json; charset=utf-8');
   });
 });
