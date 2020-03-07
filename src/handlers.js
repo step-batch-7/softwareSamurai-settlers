@@ -21,9 +21,17 @@ const getAvailableSettlements = function(req, res) {
   res.json(settlements);
 };
 
+const buildSettlement = function(req, res) {
+  const { intersection } = req.body;
+  req.app.locals.board.buildSettlement(intersection);
+  req.app.locals.player.addSettlement(intersection);
+  res.end();
+};
+
 module.exports = {
   getTerrainDetails,
   getCardsCount,
   getBankStatus,
-  getAvailableSettlements
+  getAvailableSettlements,
+  buildSettlement
 };

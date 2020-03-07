@@ -1,16 +1,24 @@
 const express = require('express');
 const { Board } = require('./models/board');
+const { Player } = require('./models/player');
 const {
   getBankStatus,
   getTerrainDetails,
   getCardsCount,
-  getAvailableSettlements
+  getAvailableSettlements,
+  buildSettlement
 } = require('./handlers');
 
 const app = express();
 
+app.use(express.json());
 app.use(express.static('public'));
+
 app.locals.board = new Board();
+app.locals.player = new Player();
+
+app.post('/buildSettlement', buildSettlement);
+
 app.get('/', (req, res) => res.redirect('catan.html'));
 app.get('/requestSettlement', getAvailableSettlements);
 app.get('/bankStatus', getBankStatus);

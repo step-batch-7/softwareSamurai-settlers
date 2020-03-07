@@ -31,6 +31,18 @@ const requestSettlement = async function() {
     positions.forEach(position => {
       const intersection = document.getElementById(position);
       intersection.classList.add('visibleIntersection');
+      intersection.onclick = buildSettlement;
     });
   }
+};
+
+const buildSettlement = async function() {
+  const intersection = event.target.id;
+  const response = await fetch('/buildSettlement', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ intersection })
+  });
 };

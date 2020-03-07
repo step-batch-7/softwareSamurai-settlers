@@ -88,6 +88,13 @@ class Board {
   getAvailableSettlements() {
     return this.availableSettlements;
   }
+
+  buildSettlement(intersection) {
+    const remaining = this.availableSettlements.filter(settlement => {
+      return intersection !== settlement;
+    });
+    this.availableSettlements = remaining;
+  }
 }
 
 module.exports = { Board };
