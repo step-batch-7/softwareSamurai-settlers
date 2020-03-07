@@ -15,6 +15,13 @@ class Resources {
       grain: this.grain
     };
   }
+
+  add(resources) {
+    resources.forEach(resource => {
+      const { count } = Object.values(resource);
+      this[resource] = this[resource] + count;
+    });
+  }
 }
 
 module.exports = Resources;

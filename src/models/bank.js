@@ -28,6 +28,13 @@ class Bank {
     const developmentCards = getDevelopmentCardCount(this.developmentCards);
     return { lumber, brick, ore, wool, grain, developmentCards };
   }
+
+  remove(resources) {
+    resources.forEach(resource => {
+      const { count } = Object.values(resource);
+      this.resources[resource] = this.resources[resource] - count;
+    });
+  }
 }
 
 module.exports = Bank;

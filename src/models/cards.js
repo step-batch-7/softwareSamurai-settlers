@@ -13,6 +13,10 @@ class Cards {
       totalDevCards: this.devCards.count()
     };
   }
+
+  addResources (cards) {
+    this.resources.add(cards);
+  }
 }
 
 module.exports = Cards;

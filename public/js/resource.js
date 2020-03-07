@@ -9,6 +9,7 @@ const updateResourceCards = function(resources, devCardsCount) {
 const fetchCardsCount = async function() {
   const res = await fetch('/cardsCount');
   const body = await res.json();
-  const {resources, totalDevCards} = await body;
+  const { resources, totalDevCards } = await body;
+  console.log(resources);
   updateResourceCards(resources, totalDevCards);
 };
