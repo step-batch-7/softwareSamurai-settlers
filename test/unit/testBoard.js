@@ -33,4 +33,76 @@ describe('Board class', () => {
       assert.deepStrictEqual(expectedTerrains, actualTerrains);
     });
   });
+
+  describe('getAvailableSettlements', () => {
+    it('should give available settlements positions ', () => {
+      const board = new Board();
+      const expected = [
+        'k1',
+        'j1',
+        'i2',
+        'k2',
+        'jk',
+        'ij',
+        'i1',
+        'kl',
+        'jkr',
+        'ijq',
+        'hi',
+        'l1',
+        'klr',
+        'jqr',
+        'hiq',
+        'h1',
+        'al',
+        'lmr',
+        'qrs',
+        'hpq',
+        'gh',
+        'a1',
+        'alm',
+        'mrs',
+        'pqs',
+        'ghp',
+        'g2',
+        'a2',
+        'abm',
+        'mns',
+        'ops',
+        'fgp',
+        'g1',
+        'ab',
+        'bmn',
+        'nos',
+        'fop',
+        'fg',
+        'b1',
+        'bcn',
+        'dno',
+        'efo',
+        'f1',
+        'bc',
+        'cdn',
+        'deo',
+        'ef',
+        'c1',
+        'cd',
+        'de',
+        'e2',
+        'c2',
+        'd1',
+        'e1'
+      ];
+      const actual = board.getAvailableSettlements();
+      assert.deepStrictEqual(expected, actual);
+    });
+  });
+
+  describe('buildSettlement', () => {
+    it('should remove settlement fro available settlements ', () => {
+      const board = new Board();
+      board.buildSettlement('k2');
+      assert.notInclude(board.availableSettlements, 'k2');
+    });
+  });
 });

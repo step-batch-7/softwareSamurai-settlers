@@ -31,7 +31,6 @@ const requestSettlement = async function() {
     positions.forEach(position => {
       const intersection = document.getElementById(position);
       intersection.classList.add('visibleIntersection');
-      // intersection.onclick = buildSettlement;
       intersection.addEventListener('click', buildSettlement, false);
     });
   }
