@@ -244,3 +244,66 @@ svg {
   border: black solid;
   border-radius: 7px;
 }
+
+/*---------------------------- Roads ------------------*/
+
+.allRoads {
+  position: absolute;
+  width: 720px;
+  height: 544px;
+  margin-top: 50px;
+}
+
+.tiltedRoads {
+  display: flex;
+  justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
+  margin: 1.5% auto -2.2%;
+}
+
+.straight-roads {
+  display: flex;
+  justify-content: space-around;
+  margin: 6.12% auto;
+}
+
+.road,
+.right-top-tilted-road,
+.left-top-tilted-road,
+.right-down-tilted-road,
+.left-down-tilted-road {
+  background-color: white;
+  opacity: 0.4;
+  border-radius: 10px;
+  text-align: center;
+  box-sizing: border-box;
+  width: 13px;
+  height: 40px;
+  cursor: pointer;
+}
+
+g.tiltedRoads > .right-top-tilted-road {
+  transform: rotate(55deg);
+}
+
+g.tiltedRoads > .left-top-tilted-road {
+  transform: rotate(125deg);
+}
+
+g.tiltedRoads > .right-down-tilted-road {
+  transform: rotate(60deg);
+}
+
+g.tiltedRoads > .left-down-tilted-road {
+  transform: rotate(-58deg);
+}
+
+svg {
+  fill: #074a6669;
+}
+
+.show-road {
+  width: 13px;
+  height: 40px;
+}
