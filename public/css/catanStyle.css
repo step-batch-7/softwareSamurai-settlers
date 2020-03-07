@@ -333,6 +333,11 @@ svg {
   height: 40px;
 }
 
+.road-image {
+  height: 100%;
+  width: 100%;
+}
+
 /*-----------hide-----------*/
 .hide {
   pointer-events: none;

@@ -1,5 +1,5 @@
 const request = require('supertest');
-const {app} = require('../../src/app');
+const { app } = require('../../src/app');
 
 describe('Get static file', () => {
   it('Should redirected to catan page for /', done => {
@@ -39,7 +39,17 @@ describe('buildSettlement', () => {
     request(app)
       .post('/buildSettlement')
       .set('content-type', 'application/json')
-      .send({intersection: 'k1'})
+      .send({ intersection: 'k1' })
+      .expect(200, done);
+  });
+});
+
+describe('Get buildRoad', () => {
+  it('should build the Road on given position', done => {
+    request(app)
+      .post('/buildRoad')
+      .set('content-type', 'application/json')
+      .send({ pathId: 'k1-kj' })
       .expect(200, done);
   });
 });

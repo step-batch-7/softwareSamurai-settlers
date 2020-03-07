@@ -1,6 +1,6 @@
 const express = require('express');
-const {Board} = require('./models/board');
-const {Player} = require('./models/player');
+const { Board } = require('./models/board');
+const { Player } = require('./models/player');
 const Cards = require('./models/cards');
 const Bank = require('./models/bank');
 
@@ -12,7 +12,8 @@ const {
   buildSettlement,
   addResourcesToPlayer,
   getRandomDiceNum,
-  servePossiblePathsForRoad
+  servePossiblePathsForRoad,
+  addRoad
 } = require('./handlers');
 
 const app = express();
@@ -34,5 +35,6 @@ app.get('/terrains', getTerrainDetails);
 app.post('/buildSettlement', buildSettlement);
 app.post('/addResourcesToPlayer', addResourcesToPlayer);
 app.post('/servePossiblePathsForRoad', servePossiblePathsForRoad);
+app.post('/buildRoad', addRoad);
 
-module.exports = {app};
+module.exports = { app };

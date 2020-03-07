@@ -1,7 +1,7 @@
 const getTerrains = async function() {
   const response = await fetch('/terrains');
   if (response.ok) {
-    const { terrainsInfo, settlements } = await response.json();
+    const { terrainsInfo, settlements, roads } = await response.json();
     const terrains = document.getElementsByClassName('terrain');
     Array.from(terrains).forEach(terrain => {
       if (terrainsInfo[terrain.id].resource === 'desert') {
@@ -23,6 +23,7 @@ const getTerrains = async function() {
       terrain.innerHTML += html;
     });
     renderSettlements(settlements);
+    renderRoads(roads);
   }
 };
 
@@ -33,6 +34,16 @@ const renderSettlements = function(settlements) {
     const img = `<image href='/assets/builds/settlement.svg' 
     style="height:100%; width:100%;">`;
     intersection.innerHTML = img;
+  });
+};
+
+const renderRoads = function(roads) {
+  roads.forEach(road => {
+    const path = document.getElementById(road);
+    path.classList.add('afterRoad');
+    const img = `<image href='/assets/roads/blueRoad.svg' 
+    class="road-image">`;
+    path.innerHTML = img;
   });
 };
 
@@ -56,6 +67,27 @@ const removeAvailableSettlements = function() {
   });
 };
 
+const buildRoad = async function(pathId) {
+  const response = await fetch('/buildRoad', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ pathId })
+  });
+  if (response.ok) {
+    const path = document.getElementById(pathId);
+    path.style.backgroundColor = 'transparent';
+    path.style.opacity = 1;
+    path.style.animation = 'none';
+    path.classList.remove('show-road');
+    path.classList.add('afterRoad');
+
+    const img = '<image href="/assets/roads/blueRoad.svg" class="road-image">';
+    path.innerHTML = img;
+  }
+};
+
 const showPossiblePathsForRoad = async function() {
   const response = await fetch('/servePossiblePathsForRoad', {
     method: 'POST',
@@ -71,6 +103,7 @@ const showPossiblePathsForRoad = async function() {
     pathIds.forEach(pathId => {
       const path = document.getElementById(pathId);
       path.classList.remove('hide');
+      path.addEventListener('click', buildRoad.bind(null, pathId));
     });
   }
 };

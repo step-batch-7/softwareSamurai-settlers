@@ -1,7 +1,8 @@
 const getTerrainDetails = function(req, res) {
   const boardData = {
     terrainsInfo: req.app.locals.board.getTerrains(),
-    settlements: req.app.locals.player.getSettlements()
+    settlements: req.app.locals.player.getSettlements(),
+    roads: req.app.locals.player.getRoads()
   };
   res.json(boardData);
 };
@@ -60,6 +61,14 @@ const addResourcesToPlayer = function(req, res) {
   res.end();
 };
 
+const addRoad = function(req, res) {
+  const { board, player } = req.app.locals;
+  const { pathId } = req.body;
+  board.addRoad(pathId);
+  player.addRoad(pathId);
+  res.end();
+};
+
 const servePossiblePathsForRoad = (req, res) => {
   const { player, board } = req.app.locals;
   const settlement = player.settlements.slice().pop();
@@ -82,5 +91,6 @@ module.exports = {
   buildSettlement,
   addResourcesToPlayer,
   getRandomDiceNum,
-  servePossiblePathsForRoad
+  servePossiblePathsForRoad,
+  addRoad
 };

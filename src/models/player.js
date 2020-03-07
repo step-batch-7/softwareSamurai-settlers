@@ -3,6 +3,7 @@ const Cards = require('./cards');
 class Player {
   constructor() {
     this.settlements = [];
+    this.roads = [];
     this.cards = new Cards();
   }
   cardsCount() {
@@ -11,8 +12,14 @@ class Player {
   addSettlement(settlement) {
     this.settlements.push(settlement);
   }
+  addRoad(road) {
+    this.roads.push(road);
+  }
   getSettlements() {
-    return this.settlements;
+    return this.settlements.slice();
+  }
+  getRoads() {
+    return this.roads.slice();
   }
   addResources(card) {
     if (card) {

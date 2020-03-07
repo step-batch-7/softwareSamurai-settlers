@@ -189,6 +189,13 @@ class Board {
   getEmptyPaths() {
     return this.paths.filter(path => !this.roads.includes(path));
   }
+  addRoad(path) {
+    if (path) {
+      this.roads.push(path);
+      return true;
+    }
+    return false;
+  }
 }
 
 module.exports = { Board };
