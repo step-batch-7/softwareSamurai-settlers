@@ -1,5 +1,4 @@
 const Bank = require('./models/bank');
-const Cards = require('./models/cards');
 
 const getTerrainDetails = function(req, res) {
   const boardData = {
