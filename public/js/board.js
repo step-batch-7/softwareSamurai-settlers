@@ -31,12 +31,22 @@ const requestSettlement = async function() {
     positions.forEach(position => {
       const intersection = document.getElementById(position);
       intersection.classList.add('visibleIntersection');
-      intersection.onclick = buildSettlement;
+      // intersection.onclick = buildSettlement;
+      intersection.addEventListener('click', buildSettlement, false);
     });
   }
 };
 
+const removeAvailableSettlements = function() {
+  const settlementOptions = document.getElementsByClassName('point');
+  Array.from(settlementOptions).forEach(option => {
+    option.classList.remove('visibleIntersection');
+    option.removeEventListener('click', buildSettlement);
+  });
+};
+
 const renderSettlement = function(intersection) {
+  removeAvailableSettlements();
   intersection.classList.remove('point');
   intersection.classList.remove('visibleIntersection');
   intersection.classList.add('afterSettlement');
