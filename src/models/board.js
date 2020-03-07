@@ -166,7 +166,7 @@ class Board {
 
   buildSettlement(intersection) {
     const adjacentRoads = this.allRoads.filter(road => {
-      return road.includes(intersection);
+      return road.split('-').includes(intersection);
     });
 
     const adjacentSettlements = adjacentRoads.reduce((adjSettlements, road) => {
@@ -177,7 +177,7 @@ class Board {
 
     adjacentSettlements.forEach(settlement => {
       const index = this.availableSettlements.indexOf(settlement);
-      this.availableSettlements.splice(index, 1);
+      index !== -1 && this.availableSettlements.splice(index, 1);
     });
 
     const index = this.availableSettlements.indexOf(intersection);
