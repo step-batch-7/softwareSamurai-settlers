@@ -15,7 +15,7 @@ const getBankStatus = (req, res) => {
 };
 
 const getCardsCount = function(req, res) {
-  res.json(req.app.locals.cards.count());
+  res.json(req.app.locals.player.cardsCount());
 };
 
 const getAvailableSettlements = function(req, res) {

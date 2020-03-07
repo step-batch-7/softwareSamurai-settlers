@@ -1,7 +1,6 @@
 const express = require('express');
 const {Board} = require('./models/board');
 const {Player} = require('./models/player');
-const Cards = require('./models/cards');
 const {
   getBankStatus,
   getTerrainDetails,
@@ -17,7 +16,6 @@ app.use(express.static('public'));
 
 app.locals.board = new Board();
 app.locals.player = new Player();
-app.locals.cards = new Cards();
 
 app.post('/buildSettlement', buildSettlement);
 
