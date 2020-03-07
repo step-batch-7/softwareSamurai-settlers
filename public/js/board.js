@@ -40,8 +40,8 @@ const renderSettlement = function(intersection) {
   intersection.classList.remove('point');
   intersection.classList.remove('visibleIntersection');
   intersection.classList.add('afterSettlement');
-  const img =
-    '<image href=\'/assets/builds/settlement.svg\' style="height:100%; width:100%;">';
+  const img = `<image href='/assets/builds/settlement.svg' 
+    style="height:100%; width:100%;">`;
   intersection.innerHTML = img;
 };
 
