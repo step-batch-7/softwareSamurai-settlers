@@ -11,7 +11,8 @@ const {
   getAvailableSettlements,
   buildSettlement,
   addResourcesToPlayer,
-  getRandomDiceNum
+  getRandomDiceNum,
+  servePossiblePathsForRoad
 } = require('./handlers');
 
 const app = express();
@@ -32,5 +33,6 @@ app.get('/cardsCount', getCardsCount);
 app.get('/terrains', getTerrainDetails);
 app.post('/buildSettlement', buildSettlement);
 app.post('/addResourcesToPlayer', addResourcesToPlayer);
+app.post('/servePossiblePathsForRoad', servePossiblePathsForRoad);
 
 module.exports = {app};

@@ -60,13 +60,21 @@ describe('Get /cardsCount', () => {
         .expect('Content-Type', 'application/json; charset=utf-8');
     });
   });
-});
 
-describe('Post /addResourcesToPlayer', () => {
-  it('should give add resources to player for /addResourcesToPlayer', done => {
-    request(app)
-      .post('/addResourcesToPlayer')
-      .expect(200, done);
+  describe('Post /addResourcesToPlayer', () => {
+    it('should give add resources to player for /addResourcesToPlayer', done => {
+      request(app)
+        .post('/addResourcesToPlayer')
+        .expect(200, done);
+    });
+  });
+
+  describe('Post /servePossiblePathsForRoad', () => {
+    it('should serve possible paths for building a road for /servePossiblePathsForRoad', done => {
+      request(app)
+        .post('/servePossiblePathsForRoad')
+        .expect(200, done);
+    });
   });
 });
 

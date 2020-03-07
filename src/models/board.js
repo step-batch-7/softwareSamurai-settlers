@@ -80,7 +80,7 @@ class Board {
       'e1'
     ];
 
-    this.allRoads = [
+    this.paths = [
       'k1-k2',
       'jk-k1',
       'j1-jk',
@@ -154,6 +154,8 @@ class Board {
       'de-e1',
       'e1-e2'
     ];
+
+    this.roads = [];
   }
 
   getTerrains() {
@@ -165,7 +167,7 @@ class Board {
   }
 
   buildSettlement(intersection) {
-    const adjacentRoads = this.allRoads.filter(road => {
+    const adjacentRoads = this.paths.filter(road => {
       return road.split('-').includes(intersection);
     });
 
@@ -182,6 +184,10 @@ class Board {
 
     const index = this.availableSettlements.indexOf(intersection);
     this.availableSettlements.splice(index, 1);
+  }
+
+  getEmptyPaths() {
+    return this.paths.filter(path => !this.roads.includes(path));
   }
 }
 

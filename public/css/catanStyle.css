@@ -332,3 +332,9 @@ svg {
   width: 13px;
   height: 40px;
 }
+
+/*-----------hide-----------*/
+.hide {
+  pointer-events: none;
+  background-color: transparent;
+}

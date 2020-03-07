@@ -7,7 +7,7 @@ const getTerrainDetails = function(req, res) {
 };
 
 const getBankStatus = (req, res) => {
-  const {bank} = req.app.locals;
+  const { bank } = req.app.locals;
   const bankStatus = bank.status;
   res.json(bankStatus);
 };
@@ -24,12 +24,11 @@ const getAvailableSettlements = function(req, res) {
 const randNum = () => Math.ceil(Math.random() * 6);
 
 const getRandomDiceNum = function(req, res) {
-  
-  res.json({dice1: randNum(), dice2: randNum()});
+  res.json({ dice1: randNum(), dice2: randNum() });
 };
 
 const buildSettlement = function(req, res) {
-  const {intersection} = req.body;
+  const { intersection } = req.body;
   req.app.locals.board.buildSettlement(intersection);
   req.app.locals.player.addSettlement(intersection);
   res.end();
@@ -43,14 +42,14 @@ const addResourcesToPlayer = function(req, res) {
     pasture: 'wool',
     mountains: 'ore'
   };
-  const {board, bank, player} = req.app.locals;
+  const { board, bank, player } = req.app.locals;
   const terrains = board.getTerrains();
   const settlement = player.settlements.slice().pop();
   const tokenIds = settlement.split('');
   const resourceCards = tokenIds.reduce((resourceCards, tokenId) => {
     if (terrains[tokenId]) {
       const terrain = terrains[tokenId].resource;
-      resourceCards.push({resource: productions[terrain], count: 1});
+      resourceCards.push({ resource: productions[terrain], count: 1 });
     }
     return resourceCards;
   }, []);
@@ -61,6 +60,20 @@ const addResourcesToPlayer = function(req, res) {
   res.end();
 };
 
+const servePossiblePathsForRoad = (req, res) => {
+  const { player, board } = req.app.locals;
+  const settlement = player.settlements.slice().pop();
+  const possiblePositionsForRoad = board.getEmptyPaths();
+  const possiblePositionsToBuildRoad = possiblePositionsForRoad.filter(
+    position => {
+      return position
+        .split('-')
+        .some(intersection => settlement === intersection);
+    }
+  );
+  res.json(possiblePositionsToBuildRoad);
+};
+
 module.exports = {
   getTerrainDetails,
   getCardsCount,
@@ -68,5 +81,6 @@ module.exports = {
   getAvailableSettlements,
   buildSettlement,
   addResourcesToPlayer,
-  getRandomDiceNum
+  getRandomDiceNum,
+  servePossiblePathsForRoad
 };

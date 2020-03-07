@@ -56,6 +56,25 @@ const removeAvailableSettlements = function() {
   });
 };
 
+const showPossiblePathsForRoad = async function() {
+  const response = await fetch('/servePossiblePathsForRoad', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  if (response.ok) {
+    const pathIds = await response.json();
+    const allRoads = document.querySelector('.allRoads');
+    allRoads.classList.remove('hide');
+    pathIds.forEach(pathId => {
+      const path = document.getElementById(pathId);
+      path.classList.remove('hide');
+    });
+  }
+};
+
 const renderNewSettlement = function(intersection) {
   removeAvailableSettlements();
   intersection.classList.remove('point');
@@ -79,5 +98,6 @@ const buildSettlement = async function() {
   if (response.ok) {
     renderNewSettlement(intersection);
     distributeResources();
+    showPossiblePathsForRoad();
   }
 };
