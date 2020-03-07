@@ -7,7 +7,7 @@ const getTerrainDetails = function(req, res) {
 
 const getBankStatus = (req, res) => {
   const bank = new Bank();
-  const bankStatus = bank.getBankStatus();
+  const bankStatus = bank.status;
   res.json(bankStatus);
 };
 

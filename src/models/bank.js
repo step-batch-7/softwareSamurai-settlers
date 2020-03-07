@@ -1,7 +1,7 @@
 const getDevelopmentCardCount = function(developmentCards) {
-  const developmentCardNames = Object.keys(developmentCards);
-  return developmentCardNames.reduce((noOfCards, developmentCardName) => {
-    return noOfCards + developmentCards[developmentCardName];
+  return developmentCards.reduce((noOfCards, developmentCard) => {
+    const [noOfDevelopmentCards] = Object.values(developmentCard);
+    return noOfCards + noOfDevelopmentCards;
   }, 0);
 };
 
@@ -14,16 +14,16 @@ class Bank {
       wool: 19,
       grain: 19
     };
-    this.developmentCards = {
-      knights: 14,
-      monopoly: 2,
-      roadBuilding: 2,
-      yearOfPlenty: 2,
-      victoryPoints: 5
-    };
+    this.developmentCards = [
+      { knights: 14 },
+      { monopoly: 2 },
+      { roadBuilding: 2 },
+      { yearOfPlenty: 2 },
+      { victoryPoints: 5 }
+    ];
   }
 
-  getBankStatus() {
+  get status() {
     const { lumber, brick, ore, wool, grain } = this.resources;
     const developmentCards = getDevelopmentCardCount(this.developmentCards);
     return { lumber, brick, ore, wool, grain, developmentCards };

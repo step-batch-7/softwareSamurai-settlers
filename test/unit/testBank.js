@@ -6,7 +6,7 @@ describe('Bank', () => {
   describe('getBankStatus', () => {
     it('should return the status of the bank', () => {
       const bank = new Bank();
-      const actual = bank.getBankStatus();
+      const actual = bank.status;
       const expected = {
         lumber: 19,
         brick: 19,
