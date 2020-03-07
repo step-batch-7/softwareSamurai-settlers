@@ -25,6 +25,25 @@ describe('Get getTerrainDetails', () => {
   });
 });
 
+describe('getAvailableSettlements', () => {
+  it('should give all the available settlements ', done => {
+    request(app)
+      .get('/requestSettlement')
+      .expect(200, done)
+      .expect(/k1/);
+  });
+});
+
+describe('buildSettlement', () => {
+  it('should build the settlement on given position', done => {
+    request(app)
+      .post('/buildSettlement')
+      .set('content-type', 'application/json')
+      .send({ intersection: 'k1' })
+      .expect(200, done);
+  });
+});
+
 describe('Get /cardsCount', () => {
   it('should give count of resource and devCards', done => {
     request(app)
