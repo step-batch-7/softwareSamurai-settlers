@@ -1,7 +1,7 @@
 const getTerrains = async function() {
   const response = await fetch('/terrains');
   if (response.ok) {
-    const terrainsInfo = await response.json();
+    const { terrainsInfo, settlements } = await response.json();
     const terrains = document.getElementsByClassName('terrain');
     Array.from(terrains).forEach(terrain => {
       if (terrainsInfo[terrain.id].resource === 'desert') {
@@ -21,7 +21,18 @@ const getTerrains = async function() {
       ${terrainsInfo[terrain.id].noToken}</text>`;
       terrain.innerHTML += html;
     });
+    renderSettlements(settlements);
   }
+};
+
+const renderSettlements = function(settlements) {
+  settlements.forEach(settlement => {
+    const intersection = document.getElementById(settlement);
+    intersection.classList.add('afterSettlement');
+    const img = `<image href='/assets/builds/settlement.svg' 
+    style="height:100%; width:100%;">`;
+    intersection.innerHTML = img;
+  });
 };
 
 const requestSettlement = async function() {
@@ -44,7 +55,7 @@ const removeAvailableSettlements = function() {
   });
 };
 
-const renderSettlement = function(intersection) {
+const renderNewSettlement = function(intersection) {
   removeAvailableSettlements();
   intersection.classList.remove('point');
   intersection.classList.remove('visibleIntersection');
@@ -65,6 +76,6 @@ const buildSettlement = async function() {
   });
 
   if (response.ok) {
-    renderSettlement(intersection);
+    renderNewSettlement(intersection);
   }
 };

@@ -2,7 +2,11 @@ const Bank = require('./models/bank');
 const Cards = require('./models/cards');
 
 const getTerrainDetails = function(req, res) {
-  res.json(req.app.locals.board.getTerrains());
+  const boardData = {
+    terrainsInfo: req.app.locals.board.getTerrains(),
+    settlements: req.app.locals.player.getSettlements()
+  };
+  res.json(boardData);
 };
 
 const getBankStatus = (req, res) => {
