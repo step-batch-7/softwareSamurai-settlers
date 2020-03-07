@@ -32,4 +32,13 @@ describe('Get /cardsCount', () => {
       .expect(200, done)
       .expect('Content-Type', 'application/json; charset=utf-8');
   });
+
+  describe('Get /bankStatus', () => {
+    it('should give bank status for /bankStatus', done => {
+      request(app)
+        .get('/bankStatus')
+        .expect(200, done)
+        .expect('Content-Type', 'application/json; charset=utf-8');
+    });
+  });
 });

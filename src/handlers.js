@@ -1,4 +1,4 @@
-const {Board} = require('./models/board');
+const { Board } = require('./models/board');
 const Bank = require('./models/bank');
 const Cards = require('./models/cards');
 
@@ -10,7 +10,7 @@ const getTerrainDetails = function(req, res) {
 const getBankStatus = (req, res) => {
   const bank = new Bank();
   const bankStatus = bank.getBankStatus();
-  res.end(JSON.stringify(bankStatus));
+  res.json(bankStatus);
 };
 
 const getCardsCount = function(req, res) {
