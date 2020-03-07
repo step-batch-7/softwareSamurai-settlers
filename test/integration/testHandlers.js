@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { app } = require('../../src/app');
+const {app} = require('../../src/app');
 
 describe('Get static file', () => {
   it('Should redirected to catan page for /', done => {
@@ -39,7 +39,7 @@ describe('buildSettlement', () => {
     request(app)
       .post('/buildSettlement')
       .set('content-type', 'application/json')
-      .send({ intersection: 'k1' })
+      .send({intersection: 'k1'})
       .expect(200, done);
   });
 });
@@ -66,6 +66,14 @@ describe('Post /addResourcesToPlayer', () => {
   it('should give add resources to player for /addResourcesToPlayer', done => {
     request(app)
       .post('/addResourcesToPlayer')
+      .expect(200, done);
+  });
+});
+
+describe('get /diceNumbers', () => {
+  it('should random 2 dice numbers', done => {
+    request(app)
+      .get('/diceNumbers')
       .expect(200, done);
   });
 });
