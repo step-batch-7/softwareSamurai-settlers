@@ -188,8 +188,8 @@ svg {
 }
 
 .point {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   border-radius: 80%;
   text-align: center;
   box-sizing: border-box;
@@ -197,12 +197,33 @@ svg {
 
 @keyframes open-animation {
   0% {
-    box-shadow: 0 0 0 0 rgba(248, 205, 205, 0.7), 0 0 0 8px rgba(248, 205, 205, 0.7),
-      0 0 0 0 rgba(248, 205, 205, 0.7);
+    box-shadow: 0 0 0 0 rgba(248, 205, 205, 0.3),
+      0 0 0 7px rgba(248, 205, 205, 0.5);
   }
+
+  15% {
+    box-shadow: 0 0 0 0 rgba(248, 205, 205, 0.3),
+      0 0 0 10px rgba(248, 205, 205, 0.5);
+  }
+
+  35% {
+    box-shadow: 0 0 0 8px rgba(248, 205, 205, 0.5),
+      0 0 0 12px rgba(248, 205, 205, 0.5);
+  }
+
+  75% {
+    box-shadow: 0 0 0 4px rgba(248, 205, 205, 0.5),
+      0 0 0 10px rgba(248, 205, 205, 0.5);
+  }
+
+  85% {
+    box-shadow: 0 0 0 4px rgba(248, 205, 205, 0.5),
+      0 0 0 7px rgba(248, 205, 205, 0.5);
+  }
+
   100% {
-    box-shadow: 0 0 0 4px rgba(248, 205, 205, 0.3), 0 0 0 16px rgba(248, 205, 205, 0.3),
-      0 0 0 0 rgba(248, 205, 205, 0.7);
+    box-shadow: 0 0 0 4px rgba(248, 205, 205, 0.5),
+      0 0 0 5px rgba(248, 205, 205, 0.5);
   }
 }
 
@@ -210,12 +231,12 @@ svg {
   background-color: whitesmoke;
   opacity: 0.5;
   cursor: pointer;
-  animation: open-animation 1.5s infinite;
+  animation: open-animation 3s infinite;
 }
 
 .afterSettlement {
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   margin: -2% 0% 0% 0%;
 }
 
