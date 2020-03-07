@@ -199,3 +199,9 @@ svg {
   opacity: 0.4;
   cursor: pointer;
 }
+
+.afterSettlement {
+  height: 30px;
+  width: 30px;
+  margin: -2% 0% 0% 0%;
+}

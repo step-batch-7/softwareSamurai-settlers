@@ -36,13 +36,26 @@ const requestSettlement = async function() {
   }
 };
 
+const renderSettlement = function(intersection) {
+  intersection.classList.remove('point');
+  intersection.classList.remove('visibleIntersection');
+  intersection.classList.add('afterSettlement');
+  const img =
+    '<image href=\'/assets/builds/settlement.svg\' style="height:100%; width:100%;">';
+  intersection.innerHTML = img;
+};
+
 const buildSettlement = async function() {
-  const intersection = event.target.id;
+  const intersection = event.target;
   const response = await fetch('/buildSettlement', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ intersection })
+    body: JSON.stringify({ intersection: intersection.id })
   });
+
+  if (response.ok) {
+    renderSettlement(intersection);
+  }
 };
