@@ -14,8 +14,12 @@ class Cards {
     };
   }
 
-  addResources(cards) {
-    this.resources.add(cards);
+  addResources(card) {
+    if (card) {
+      const isCardAdded = this.resources.add(card);
+      return isCardAdded;
+    }
+    return false;
   }
 }
 

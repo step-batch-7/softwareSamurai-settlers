@@ -14,6 +14,13 @@ class Player {
   getSettlements() {
     return this.settlements;
   }
+  addResources(card) {
+    if (card) {
+      const isCardAdded = this.cards.addResources(card);
+      return isCardAdded;
+    }
+    return false;
+  }
 }
 
-module.exports = {Player};
+module.exports = { Player };

@@ -29,10 +29,12 @@ class Bank {
     return { lumber, brick, ore, wool, grain, developmentCards };
   }
 
-  remove(resources) {
-    resources.forEach(({ resource, count }) => {
+  remove({ resource, count }) {
+    if (resource && count) {
       this.resources[resource] = this.resources[resource] - count;
-    });
+      return true;
+    }
+    return false;
   }
 }
 

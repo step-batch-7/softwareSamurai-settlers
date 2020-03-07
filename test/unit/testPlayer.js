@@ -1,5 +1,5 @@
-const assert = require('assert');
-const {Player} = require('../../src/models/player');
+const { assert } = require('chai');
+const { Player } = require('../../src/models/player');
 
 describe('Player', () => {
   describe('cardsCount', () => {
@@ -22,6 +22,22 @@ describe('Player', () => {
         totalDevCards: 0
       };
       assert.deepStrictEqual(player.cardsCount(), expected);
+    });
+  });
+  describe('addResources', () => {
+    it('should add given resources to existing resources and return true for valid resources', () => {
+      const player = new Player();
+      assert.isTrue(player.addResources({ resource: 'wool', count: 2 }));
+    });
+
+    it('should not add given resources if given resources is undefined', () => {
+      const player = new Player();
+      assert.isFalse(player.addResources());
+    });
+
+    it('should not add given resources if given resources is not valid', () => {
+      const player = new Player();
+      assert.isFalse(player.addResources('wrong'));
     });
   });
 });

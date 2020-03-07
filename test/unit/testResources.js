@@ -1,4 +1,4 @@
-const assert = require('assert');
+const { assert } = require('chai');
 const Resources = require('../../src/models/resources');
 
 describe('Resources', () => {

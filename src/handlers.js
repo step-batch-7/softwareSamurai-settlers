@@ -36,7 +36,7 @@ const addResourcesToPlayer = function(req, res) {
     pasture: 'wool',
     mountains: 'ore'
   };
-  const { board, bank, cards, player } = req.app.locals;
+  const { board, bank, player } = req.app.locals;
   const terrains = board.getTerrains();
   const settlement = player.settlements.slice().pop();
   const tokenIds = settlement.split('');
@@ -44,8 +44,10 @@ const addResourcesToPlayer = function(req, res) {
     const terrain = terrains[tokenId].resource;
     return { resource: productions[terrain], count: 1 };
   });
-  bank.remove(resourceCards);
-  cards.addResources(resourceCards);
+  resourceCards.forEach(resourceCard => {
+    bank.remove(resourceCard);
+    player.addResources(resourceCard);
+  });
   res.end();
 };
 
