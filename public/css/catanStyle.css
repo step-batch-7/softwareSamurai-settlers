@@ -235,12 +235,18 @@ svg {
   width: 100%;
   display: flex;
   margin: 370% 0% 6% 0%;
+  cursor: pointer;
 }
 #dice1,
 #dice2 {
   width: 42%;
   height: 84%;
   margin: 3%;
+}
+
+#dice1:hover,
+#dice2:hover {
+  transform: scale(1.03);
 }
 
 /*---------------------------- Roads ------------------*/
