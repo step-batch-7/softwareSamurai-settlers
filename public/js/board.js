@@ -8,7 +8,8 @@ const getTerrains = async function() {
         const html = `<image class="terrain-image"
          xlink:href='/assets/terrains/${terrainsInfo[terrain.id].resource}.jpg'
           count="${terrainsInfo[terrain.id].noToken}"></image>
-         <image id="robber" xlink:href='/assets/robber.png'></image>
+         <image id="robber"  x='0' y='30'  
+          xlink:href='/assets/robber.png'></image>
         `;
         terrain.innerHTML += html;
         return;
