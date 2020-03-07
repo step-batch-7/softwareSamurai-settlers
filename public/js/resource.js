@@ -34,4 +34,5 @@ const showDicePhase = async function() {
   const data = await response.json();
   const {resources, totalDevCards} = await data;
   updateResourceCards(resources, totalDevCards);
+  getBankStatus();
 };
