@@ -25,4 +25,5 @@ const showDicePhase = async function() {
   const body = await res.json();
   const {dice1, dice2} = await body;
   updateDicePhase(dice1, dice2);
+  
 };

@@ -24,6 +24,7 @@ const getAvailableSettlements = function(req, res) {
 const randNum = () => Math.ceil(Math.random() * 6);
 
 const getRandomDiceNum = function(req, res) {
+  
   res.json({dice1: randNum(), dice2: randNum()});
 };
 
