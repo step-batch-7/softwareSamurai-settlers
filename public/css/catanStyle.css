@@ -68,7 +68,7 @@ body {
   display: flex;
   border-radius: 7px;
   margin: 2px;
-  justify-content: flex-start;
+  justify-content: space-evenly;
 }
 
 #current-player {
