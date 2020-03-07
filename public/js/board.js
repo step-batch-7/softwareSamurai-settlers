@@ -3,6 +3,7 @@ const getTerrains = async function() {
   if (response.ok) {
     const terrainsInfo = await response.json();
     const terrains = document.getElementsByClassName('terrain');
+    console.log(terrainsInfo, terrains);
     Array.from(terrains).forEach(terrain => {
       if (terrainsInfo[terrain.id].resource === 'desert') {
         const html = `<image class="terrain-image"
