@@ -14,7 +14,7 @@ class Cards {
     };
   }
 
-  addResources (cards) {
+  addResources(cards) {
     this.resources.add(cards);
   }
 }

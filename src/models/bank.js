@@ -30,8 +30,7 @@ class Bank {
   }
 
   remove(resources) {
-    resources.forEach(resource => {
-      const { count } = Object.values(resource);
+    resources.forEach(({ resource, count }) => {
       this.resources[resource] = this.resources[resource] - count;
     });
   }

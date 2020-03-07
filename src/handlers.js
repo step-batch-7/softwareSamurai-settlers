@@ -22,7 +22,7 @@ const getAvailableSettlements = function(req, res) {
 };
 
 const buildSettlement = function(req, res) {
-  const {intersection} = req.body;
+  const { intersection } = req.body;
   req.app.locals.board.buildSettlement(intersection);
   req.app.locals.player.addSettlement(intersection);
   res.end();
@@ -36,9 +36,9 @@ const addResourcesToPlayer = function(req, res) {
     pasture: 'wool',
     mountains: 'ore'
   };
-  const { board, bank, cards } = req.app.locals;
+  const { board, bank, cards, player } = req.app.locals;
   const terrains = board.getTerrains();
-  const [settlement] = ['aef'];
+  const settlement = player.settlements.slice().pop();
   const tokenIds = settlement.split('');
   const resourceCards = tokenIds.map(tokenId => {
     const terrain = terrains[tokenId].resource;

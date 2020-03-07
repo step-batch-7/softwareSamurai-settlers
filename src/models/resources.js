@@ -17,8 +17,7 @@ class Resources {
   }
 
   add(resources) {
-    resources.forEach(resource => {
-      const { count } = Object.values(resource);
+    resources.forEach(({ resource, count }) => {
       this[resource] = this[resource] + count;
     });
   }
