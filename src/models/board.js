@@ -79,6 +79,81 @@ class Board {
       'd1',
       'e1'
     ];
+
+    this.allRoads = [
+      'k1-k2',
+      'jk-k1',
+      'j1-jk',
+      'ij-j1',
+      'i2-ij',
+      'i1-i2',
+      'k2-kl',
+      'jk-jkr',
+      'ij-ijq',
+      'hi-i1',
+      'kl-l1',
+      'kl-klr',
+      'jkr-klr',
+      'jkr-jqr',
+      'ijq-jqr',
+      'hiq-ijq',
+      'hi-hiq',
+      'h1-hi',
+      'al-l1',
+      'klr-lmr',
+      'jqr-qrs',
+      'hiq-hpq',
+      'gh-h1',
+      'a1-al',
+      'al-alm',
+      'alm-lmr',
+      'lmr-mrs',
+      'mrs-qrs',
+      'pqs-qrs',
+      'hpq-pqs',
+      'ghp-hpq',
+      'gh-ghp',
+      'g2-gh',
+      'a1-a2',
+      'abm-alm',
+      'mns-mrs',
+      'ops-pqs',
+      'fgp-ghp',
+      'g1-g2',
+      'a2-ab',
+      'ab-abm',
+      'abm-bmn',
+      'bmn-mns',
+      'mns-nos',
+      'nos-ops',
+      'fop-ops',
+      'fgp-fop',
+      'fg-fgp',
+      'fg-g1',
+      'ab-b1',
+      'bcn-bmn',
+      'dno-nos',
+      'efo-fop',
+      'f1-fg',
+      'b1-bc',
+      'bc-bcn',
+      'bcn-cdn',
+      'cdn-dno',
+      'deo-dno',
+      'deo-efo',
+      'ef-efo',
+      'ef-f1',
+      'bc-c1',
+      'cd-cdn',
+      'de-deo',
+      'e2-ef',
+      'c1-c2',
+      'c2-cd',
+      'd1-cd',
+      'd1-de',
+      'de-e1',
+      'e1-e2'
+    ];
   }
 
   getTerrains() {
@@ -90,10 +165,23 @@ class Board {
   }
 
   buildSettlement(intersection) {
-    const remaining = this.availableSettlements.filter(settlement => {
-      return intersection !== settlement;
+    const adjacentRoads = this.allRoads.filter(road => {
+      return road.includes(intersection);
     });
-    this.availableSettlements = remaining;
+
+    const adjacentSettlements = adjacentRoads.reduce((adjSettlements, road) => {
+      const settlement = road.split('-').find(point => point !== intersection);
+      adjSettlements.push(settlement);
+      return adjSettlements;
+    }, []);
+
+    adjacentSettlements.forEach(settlement => {
+      const index = this.availableSettlements.indexOf(settlement);
+      this.availableSettlements.splice(index, 1);
+    });
+
+    const index = this.availableSettlements.indexOf(intersection);
+    this.availableSettlements.splice(index, 1);
   }
 }
 
