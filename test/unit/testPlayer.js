@@ -42,7 +42,9 @@ describe('Player', () => {
   });
   describe('getMatchingTerrains', function() {
     const selectedTerrains = {
+      // eslint-disable-next-line id-length
       a: {noToken: 9, resource: 'fields'},
+      // eslint-disable-next-line id-length
       b: {noToken: 8, resource: 'forest'}
     };
     it('should find no terrain when no settlements are their', () => {
