@@ -95,15 +95,14 @@ const servePossiblePathsForRoad = (req, res) => {
 
 const getResources = function(req, res) {
   const terrains = req.app.locals.board.getTerrains();
-  const matchedTerrains = {};
+  const selectedTerrains = {};
   for (const terrain in terrains) {
     if (terrains[terrain]['noToken'] === req.body.numToken) {
-      matchedTerrains[terrain] = terrains[terrain];
+      selectedTerrains[terrain] = terrains[terrain];
     }
   }
   const {bank, player} = req.app.locals;
-
-  const resourceId = player.getMatchingSettlements(matchedTerrains);
+  const resourceId = player.getMatchingTerrains(selectedTerrains);
   const resourceCards = resourceId.reduce((resourceCards, tokenId) => {
     if (terrains[tokenId]) {
       const terrain = terrains[tokenId].resource;

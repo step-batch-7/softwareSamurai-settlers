@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { app } = require('../../src/app');
+const {app} = require('../../src/app');
 
 describe('Get static file', () => {
   it('Should redirected to catan page for /', done => {
@@ -39,7 +39,7 @@ describe('buildSettlement', () => {
     request(app)
       .post('/buildSettlement')
       .set('content-type', 'application/json')
-      .send({ intersection: 'k1' })
+      .send({intersection: 'k1'})
       .expect(200, done);
   });
 });
@@ -49,7 +49,7 @@ describe('Get buildRoad', () => {
     request(app)
       .post('/buildRoad')
       .set('content-type', 'application/json')
-      .send({ pathId: 'k1-kj' })
+      .send({pathId: 'k1-kj'})
       .expect(200, done);
   });
 });
@@ -92,6 +92,30 @@ describe('get /diceNumbers', () => {
   it('should random 2 dice numbers', done => {
     request(app)
       .get('/diceNumbers')
+      .expect(200, done);
+  });
+});
+
+describe('post /getResources', () => {
+  it('should get resources if numberToken matches the terrain', done => {
+    request(app)
+      .post('/buildSettlement')
+      .set('content-type', 'application/json')
+      .send({intersection: 'k1'})
+      .expect(200, done);
+  });
+  it('should get resources if numberToken matches the terrain', done => {
+    request(app)
+      .post('/buildSettlement')
+      .set('content-type', 'application/json')
+      .send({intersection: '2'})
+      .expect(200, done);
+  });
+  it('hjk', done => {
+    request(app)
+      .post('/getResources')
+      .set('content-type', 'application/json')
+      .send({numToken: 10})
       .expect(200, done);
   });
 });

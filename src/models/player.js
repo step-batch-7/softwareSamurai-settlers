@@ -22,16 +22,19 @@ class Player {
     return this.roads.slice();
   }
 
-  getMatchingSettlements(selectedTerrains) {
-    const matchedSettlements = [];
+  getMatchingTerrains(selectedTerrains) {
+    let matchedTerrains = [];
     for (const terrain in selectedTerrains) {
-      for (let index = 0; index < this.settlements.length; index++) {
-        if (this.settlements[index].includes(terrain)) {
-          matchedSettlements.push(terrain);
-        }
-      }
+      matchedTerrains = matchedTerrains.concat(
+        this.settlements.reduce((matchedSettlements, settlement, index) => {
+          if (this.settlements[index].includes(terrain)) {
+            matchedSettlements.push(terrain);
+          }
+          return matchedSettlements;
+        }, [])
+      );
     }
-    return matchedSettlements;
+    return matchedTerrains;
   }
 
   addResources(card) {
