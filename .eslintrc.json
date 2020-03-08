@@ -82,7 +82,8 @@
       "files": ["test/**/test*.js"],
       "rules": {
         "max-len": "warn",
-        "max-statements": "off"
+        "max-statements": "off",
+        "id-length": "error"
       }
     },
     {
