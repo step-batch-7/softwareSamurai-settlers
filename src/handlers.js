@@ -22,7 +22,7 @@ const getBankStatus = (req, res) => {
 };
 
 const getCardsCount = function(req, res) {
-  const {game} = req.app.locals;
+  const { game } = req.app.locals;
   res.json(game.cardsCount());
 };
 
@@ -96,14 +96,6 @@ const servePossiblePathsForRoadInSetup = (req, res) => {
   res.json(possiblePositionsToBuildRoad);
 };
 
-const updateTransaction = (resourceCards, bank, player) => {
-  resourceCards.forEach(resourceCard => {
-    if (bank.remove(resourceCard)) {
-      player.addResources(resourceCard);
-    }
-  });
-};
-
 const servePossiblePathsForRoad = (req, res) => {
   const { player, board } = req.app.locals;
   const roads = player.getRoads();
@@ -121,28 +113,11 @@ const servePossiblePathsForRoad = (req, res) => {
   res.json(possiblePaths);
 };
 
-const pickTerrains = (terrains, numToken) => {
-  const selectedTerrains = [];
-  for (const terrain in terrains) {
-    if (terrains[terrain]['noToken'] === numToken) {
-      selectedTerrains.push(terrain);
-    }
-  }
-  return selectedTerrains;
-};
-
 const getResources = function(req, res) {
-  const { bank, player, board } = req.app.locals;
-  const terrains = board.getTerrains();
   const { numToken } = req.body;
-  const selectedTerrains = pickTerrains(terrains, numToken);
-  const terrainsId = player.getTerrainsId();
-  const resourceId = terrainsId.filter(id => selectedTerrains.includes(id));
-  const resourceCards = resourceId.map(id => {
-    return { resource: productions[board.getResource(id)], count: 1 };
-  });
-  updateTransaction(resourceCards, bank, player);
-  res.json(player.cardsCount());
+  const { game } = req.app.locals;
+  game.resourceProduction(numToken);
+  res.json(game.cardsCount());
 };
 
 const getBuildStatus = function(req, res) {
