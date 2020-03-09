@@ -82,10 +82,6 @@ class Game {
     });
   }
 
-  bankStatus() {
-    return this.bank.status;
-  }
-
   addRoad(pathId) {
     if (pathId) {
       const isRoadAddedToBoard = this.board.addRoad(pathId);
