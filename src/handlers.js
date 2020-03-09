@@ -82,9 +82,13 @@ const servePossiblePathsForRoad = (req, res) => {
   const { player, board } = req.app.locals;
   const settlement = player.settlements.slice().pop();
   const possiblePositionsForRoad = board.getEmptyPaths();
-  const possiblePositionsToBuildRoad = possiblePositionsForRoad.filter(position => {
-    return position.split('-').some(intersection => settlement === intersection);
-  });
+  const possiblePositionsToBuildRoad = possiblePositionsForRoad.filter(
+    position => {
+      return position
+        .split('-')
+        .some(intersection => settlement === intersection);
+    }
+  );
   res.json(possiblePositionsToBuildRoad);
 };
 
