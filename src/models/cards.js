@@ -15,8 +15,11 @@ class Cards {
   }
 
   addResources(card) {
-    const isCardAdded = this.resources.add(card);
-    return isCardAdded;
+    return this.resources.add(card);
+  }
+
+  haveResources(resources) {
+    return this.resources.have(resources);
   }
 }
 

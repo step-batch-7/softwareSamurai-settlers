@@ -9,7 +9,7 @@ const updateResourceCards = function(resources, devCardsCount) {
 const fetchCardsCount = async function() {
   const res = await fetch('/cardsCount');
   const body = await res.json();
-  const {resources, totalDevCards} = await body;
+  const { resources, totalDevCards } = await body;
   updateResourceCards(resources, totalDevCards);
 };
 
@@ -21,23 +21,31 @@ const updateDicePhase = function(num1, num2) {
 };
 
 const getResources = async function(dice1, dice2) {
-  const reqText = JSON.stringify({numToken: dice1 + dice2});
+  const reqText = JSON.stringify({ numToken: dice1 + dice2 });
   const res = await fetch('/getResources', {
     method: 'POST',
     body: reqText,
-    headers: {'Content-Type': 'application/json'}
+    headers: { 'Content-Type': 'application/json' }
   });
   const body = await res.json();
-  const {resources, totalDevCards} = await body;
-  return {resources, totalDevCards};
+  const { resources, totalDevCards } = await body;
+  return { resources, totalDevCards };
+};
+
+const getBuildStatus = async function() {
+  const res = await fetch('/buildStatus');
+  if (res.ok) {
+    const status = await res.json();
+  }
 };
 
 const showDicePhase = async function() {
   const res = await fetch('/diceNumbers');
   const body = await res.json();
-  const {dice1, dice2} = await body;
+  const { dice1, dice2 } = await body;
   updateDicePhase(dice1, dice2);
-  const {resources, totalDevCards} = await getResources(dice1, dice2);
+  const { resources, totalDevCards } = await getResources(dice1, dice2);
   updateResourceCards(resources, totalDevCards);
   getBankStatus();
+  getBuildStatus();
 };

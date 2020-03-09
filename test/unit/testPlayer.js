@@ -1,5 +1,5 @@
-const {assert} = require('chai');
-const {Player} = require('../../src/models/player');
+const { assert } = require('chai');
+const { Player } = require('../../src/models/player');
 
 describe('Player', () => {
   describe('cardsCount', () => {
@@ -24,10 +24,11 @@ describe('Player', () => {
       assert.deepStrictEqual(player.cardsCount(), expected);
     });
   });
+
   describe('addResources', () => {
     it('should add given resources to existing resources and return true for valid resources', () => {
       const player = new Player();
-      assert.isTrue(player.addResources({resource: 'wool', count: 2}));
+      assert.isTrue(player.addResources({ resource: 'wool', count: 2 }));
     });
 
     it('should not add given resources if given resources is undefined', () => {
@@ -40,12 +41,13 @@ describe('Player', () => {
       assert.isFalse(player.addResources('wrong'));
     });
   });
+
   describe('getMatchingTerrains', function() {
     const selectedTerrains = {
       // eslint-disable-next-line id-length
-      a: {noToken: 9, resource: 'fields'},
+      a: { noToken: 9, resource: 'fields' },
       // eslint-disable-next-line id-length
-      b: {noToken: 8, resource: 'forest'}
+      b: { noToken: 8, resource: 'forest' }
     };
     it('should find no terrain when no settlements are their', () => {
       const player = new Player();
@@ -60,6 +62,25 @@ describe('Player', () => {
         player.getMatchingTerrains(selectedTerrains),
         expected
       );
+    });
+  });
+
+  describe('canBuildSettlement', () => {
+    it('should give true if player has resources to build settlement', () => {
+      const player = new Player();
+      player.addResources({ resource: 'wool', count: 2 });
+      player.addResources({ resource: 'brick', count: 2 });
+      player.addResources({ resource: 'lumber', count: 2 });
+      player.addResources({ resource: 'grain', count: 2 });
+      assert.isTrue(player.canBuildSettlement());
+    });
+
+    it('should give false if player has resources to build settlement', () => {
+      const player = new Player();
+      player.addResources({ resource: 'wool', count: 2 });
+      player.addResources({ resource: 'brick', count: 2 });
+      player.addResources({ resource: 'lumber', count: 2 });
+      assert.isFalse(player.canBuildSettlement());
     });
   });
 });

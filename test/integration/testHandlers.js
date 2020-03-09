@@ -1,5 +1,5 @@
 const request = require('supertest');
-const {app} = require('../../src/app');
+const { app } = require('../../src/app');
 
 describe('Get static file', () => {
   it('Should redirected to catan page for /', done => {
@@ -39,7 +39,7 @@ describe('buildSettlement', () => {
     request(app)
       .post('/buildSettlement')
       .set('content-type', 'application/json')
-      .send({intersection: 'k1'})
+      .send({ intersection: 'k1' })
       .expect(200, done);
   });
 });
@@ -49,7 +49,7 @@ describe('Get buildRoad', () => {
     request(app)
       .post('/buildRoad')
       .set('content-type', 'application/json')
-      .send({pathId: 'k1-kj'})
+      .send({ pathId: 'k1-kj' })
       .expect(200, done);
   });
 });
@@ -101,21 +101,65 @@ describe('post /getResources', () => {
     request(app)
       .post('/buildSettlement')
       .set('content-type', 'application/json')
-      .send({intersection: 'k1'})
+      .send({ intersection: 'k1' })
       .expect(200, done);
   });
   it('should get resources if numberToken matches the terrain', done => {
     request(app)
       .post('/buildSettlement')
       .set('content-type', 'application/json')
-      .send({intersection: '2'})
+      .send({ intersection: '2' })
       .expect(200, done);
   });
   it('hjk', done => {
     request(app)
       .post('/getResources')
       .set('content-type', 'application/json')
-      .send({numToken: 10})
+      .send({ numToken: 10 })
       .expect(200, done);
+  });
+});
+
+describe('/buildStatus', () => {
+  it('should give false if user cannot build settlement', done => {
+    request(app)
+      .get('/buildStatus')
+      .expect(200, done)
+      .expect(/"settlement":false/);
+  });
+
+  it('building settlemnts for tests', done => {
+    request(app)
+      .post('/buildSettlement')
+      .set('content-type', 'application/json')
+      .send({ intersection: 'hiq' })
+      .expect(200, done);
+  });
+
+  it('building settlements for tests', done => {
+    request(app)
+      .post('/addResourcesToPlayer')
+      .expect(200, done);
+  });
+
+  it('building settlements for tests', done => {
+    request(app)
+      .post('/buildSettlement')
+      .set('content-type', 'application/json')
+      .send({ intersection: 'fop' })
+      .expect(200, done);
+  });
+
+  it('building settlements for tests', done => {
+    request(app)
+      .post('/addResourcesToPlayer')
+      .expect(200, done);
+  });
+
+  it('should give true if user can build settlement', done => {
+    request(app)
+      .get('/buildStatus')
+      .expect(200, done)
+      .expect(/"settlement":true/);
   });
 });

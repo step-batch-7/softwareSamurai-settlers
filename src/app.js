@@ -1,6 +1,6 @@
 const express = require('express');
-const {Board} = require('./models/board');
-const {Player} = require('./models/player');
+const { Board } = require('./models/board');
+const { Player } = require('./models/player');
 const Cards = require('./models/cards');
 const Bank = require('./models/bank');
 
@@ -14,7 +14,8 @@ const {
   getRandomDiceNum,
   servePossiblePathsForRoad,
   addRoad,
-  getResources
+  getResources,
+  getBuildStatus
 } = require('./handlers');
 
 const app = express();
@@ -28,6 +29,7 @@ app.locals.cards = new Cards();
 app.locals.bank = new Bank();
 
 app.get('/', (req, res) => res.redirect('catan.html'));
+app.get('/buildStatus', getBuildStatus);
 app.get('/requestSettlement', getAvailableSettlements);
 app.get('/bankStatus', getBankStatus);
 app.get('/diceNumbers', getRandomDiceNum);
@@ -39,4 +41,4 @@ app.post('/addResourcesToPlayer', addResourcesToPlayer);
 app.post('/servePossiblePathsForRoad', servePossiblePathsForRoad);
 app.post('/buildRoad', addRoad);
 
-module.exports = {app};
+module.exports = { app };

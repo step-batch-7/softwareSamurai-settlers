@@ -53,7 +53,7 @@ const requestSettlement = async function() {
   if (response.ok) {
     const positions = await response.json();
 
-    positions.forEach(position => {  
+    positions.forEach(position => {
       const intersection = document.getElementById(position);
       intersection.classList.add('visibleIntersection');
       intersection.addEventListener('click', buildSettlement, false);

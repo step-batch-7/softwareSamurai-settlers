@@ -16,12 +16,19 @@ class Resources {
     };
   }
 
-  add({resource, count}) {
+  add({ resource, count }) {
     if (resource && count) {
       this[resource] = this[resource] + count;
       return true;
     }
     return false;
+  }
+
+  have(resources) {
+    const areEnough = Object.keys(resources).every(resource => {
+      return this[resource] >= resources[resource];
+    });
+    return areEnough;
   }
 }
 
