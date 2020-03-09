@@ -1,11 +1,3 @@
-const productions = {
-  fields: 'grain',
-  forest: 'lumber',
-  hills: 'brick',
-  pasture: 'wool',
-  mountains: 'ore'
-};
-
 const getTerrainDetails = function(req, res) {
   const boardData = {
     terrainsInfo: req.app.locals.board.getTerrains(),
