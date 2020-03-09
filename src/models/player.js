@@ -1,4 +1,3 @@
-const Cards = require('./cards');
 const Resources = require('./resources');
 const DevCards = require('./devCards');
 
@@ -6,7 +5,6 @@ class Player {
   constructor() {
     this.settlements = [];
     this.roads = [];
-    this.cards = new Cards();
     this.resources = new Resources();
     this.devCards = new DevCards();
   }
@@ -36,19 +34,19 @@ class Player {
   }
   addResources(card) {
     if (card) {
-      const isCardAdded = this.cards.addResources(card);
+      const isCardAdded = this.resources.add(card);
       return isCardAdded;
     }
     return false;
   }
   canBuildSettlement() {
     const resourcesNeeded = { grain: 1, brick: 1, lumber: 1, wool: 1 };
-    return this.cards.haveResources(resourcesNeeded);
+    return this.resources.have(resourcesNeeded);
   }
 
   deductCardsForSettlement() {
     const settlementResources = { grain: 1, lumber: 1, brick: 1, wool: 1 };
-    this.cards.deductResources(settlementResources);
+    this.resources.deduct(settlementResources);
   }
 }
 

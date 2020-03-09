@@ -1,7 +1,6 @@
 const express = require('express');
 const { Board } = require('./models/board');
 const { Player } = require('./models/player');
-const Cards = require('./models/cards');
 const Bank = require('./models/bank');
 
 const {
@@ -28,7 +27,6 @@ app.use(express.static('public'));
 
 app.locals.board = new Board();
 app.locals.player = new Player();
-app.locals.cards = new Cards();
 app.locals.bank = new Bank();
 
 app.get('/', (req, res) => res.redirect('catan.html'));
