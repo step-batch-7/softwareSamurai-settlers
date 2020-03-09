@@ -63,6 +63,23 @@ class Game {
     this.player.deductCardsForSettlement(intersection);
     this.bank.add({ grain: 1, lumber: 1, brick: 1, wool: 1 });
   }
+
+  addResourcesToPlayer() {
+    const terrains = this.board.getTerrains();
+    const settlement = this.player.settlements.slice().pop();
+    const tokenIds = settlement.split('');
+    const resourceCards = tokenIds.reduce((resourceCards, tokenId) => {
+      if (terrains[tokenId]) {
+        const terrain = terrains[tokenId].resource;
+        resourceCards.push({ resource: productions[terrain], count: 1 });
+      }
+      return resourceCards;
+    }, []);
+    resourceCards.forEach(resourceCard => {
+      this.bank.remove(resourceCard);
+      this.player.addResources(resourceCard);
+    });
+  }
 }
 
 module.exports = { Game };

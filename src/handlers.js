@@ -16,7 +16,7 @@ const getTerrainDetails = function(req, res) {
 };
 
 const getBankStatus = (req, res) => {
-  const {game} = req.app.locals;
+  const { game } = req.app.locals;
   res.json(game.bankStatus());
 };
 
@@ -38,11 +38,8 @@ const getRandomDiceNum = function(req, res) {
 
 const buildSettlement = function(req, res) {
   const { intersection } = req.body;
-  const { board, player, bank } = req.app.locals;
-  board.buildSettlement(intersection);
-  player.addSettlement(intersection);
-  player.deductCardsForSettlement(intersection);
-  bank.add({ grain: 1, lumber: 1, brick: 1, wool: 1 });
+  const { game } = req.app.locals;
+  game.buildSettlement(intersection);
   res.end();
 };
 
@@ -54,21 +51,8 @@ const buildInitialSettlement = function(req, res) {
 };
 
 const addResourcesToPlayer = function(req, res) {
-  const { board, bank, player } = req.app.locals;
-  const terrains = board.getTerrains();
-  const settlement = player.settlements.slice().pop();
-  const tokenIds = settlement.split('');
-  const resourceCards = tokenIds.reduce((resourceCards, tokenId) => {
-    if (terrains[tokenId]) {
-      const terrain = terrains[tokenId].resource;
-      resourceCards.push({ resource: productions[terrain], count: 1 });
-    }
-    return resourceCards;
-  }, []);
-  resourceCards.forEach(resourceCard => {
-    bank.remove(resourceCard);
-    player.addResources(resourceCard);
-  });
+  const { game } = req.app.locals;
+  game.addResourcesToPlayer();
   res.end();
 };
 

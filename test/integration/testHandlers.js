@@ -129,34 +129,6 @@ describe('/buildStatus', () => {
       .expect(200, done)
       .expect(/"settlement":false/);
   });
-
-  it('building settlements for tests', done => {
-    request(app)
-      .post('/buildInitialSettlement')
-      .set('content-type', 'application/json')
-      .send({ intersection: 'hiq' })
-      .expect(200, done);
-  });
-
-  it('building settlements for tests', done => {
-    request(app)
-      .post('/addResourcesToPlayer')
-      .expect(200, done);
-  });
-
-  it('building settlements for tests', done => {
-    request(app)
-      .post('/buildInitialSettlement')
-      .set('content-type', 'application/json')
-      .send({ intersection: 'fop' })
-      .expect(200, done);
-  });
-
-  it('building settlements for tests', done => {
-    request(app)
-      .post('/addResourcesToPlayer')
-      .expect(200, done);
-  });
 });
 
 describe('Get /getPossiblePathsForRoad', () => {
