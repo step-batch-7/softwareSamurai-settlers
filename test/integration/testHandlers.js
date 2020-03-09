@@ -104,14 +104,7 @@ describe('post /getResources', () => {
       .send({ intersection: 'k1' })
       .expect(200, done);
   });
-  it('should get resources if numberToken matches the terrain', done => {
-    request(app)
-      .post('/buildSettlement')
-      .set('content-type', 'application/json')
-      .send({ intersection: '2' })
-      .expect(200, done);
-  });
-  it('hjk', done => {
+  it('should increase resources based on number token', done => {
     request(app)
       .post('/getResources')
       .set('content-type', 'application/json')

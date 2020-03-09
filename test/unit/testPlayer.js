@@ -41,27 +41,11 @@ describe('Player', () => {
       assert.isFalse(player.addResources('wrong'));
     });
   });
-
-  describe('getMatchingTerrains', function() {
-    const selectedTerrains = {
-      // eslint-disable-next-line id-length
-      a: { noToken: 9, resource: 'fields' },
-      // eslint-disable-next-line id-length
-      b: { noToken: 8, resource: 'forest' }
-    };
-    it('should find no terrain when no settlements are their', () => {
+  describe('getTerrainsId', () => {
+    it('should give terrains Id of the settlement', () => {
       const player = new Player();
-      assert.deepStrictEqual(player.getMatchingTerrains(selectedTerrains), []);
-    });
-    it('should find terrains which matches the given terrain', () => {
-      const player = new Player();
-      player.addSettlement('ab');
-      player.addSettlement('jk');
-      const expected = ['a', 'b'];
-      assert.deepStrictEqual(
-        player.getMatchingTerrains(selectedTerrains),
-        expected
-      );
+      player.addSettlement('jkr');
+      assert.deepStrictEqual(player.getTerrainsId(), ['j', 'k', 'r']);
     });
   });
 

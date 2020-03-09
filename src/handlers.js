@@ -1,4 +1,3 @@
-/* eslint-disable max-statements */
 const productions = {
   fields: 'grain',
   forest: 'lumber',
@@ -93,34 +92,35 @@ const servePossiblePathsForRoad = (req, res) => {
   res.json(possiblePositionsToBuildRoad);
 };
 
-const getResources = function(req, res) {
-  const terrains = req.app.locals.board.getTerrains();
-  const selectedTerrains = {};
-  for (const terrain in terrains) {
-    if (terrains[terrain]['noToken'] === req.body.numToken) {
-      selectedTerrains[terrain] = terrains[terrain];
-    }
-  }
-  const { bank, player } = req.app.locals;
-  const resourceId = player.getMatchingTerrains(selectedTerrains);
-  const resourceCards = resourceId.reduce((resourceCards, tokenId) => {
-    if (terrains[tokenId]) {
-      const terrain = terrains[tokenId].resource;
-      resourceCards.push({ resource: productions[terrain], count: 1 });
-    }
-    return resourceCards;
-  }, []);
+const updateTransaction = (resourceCards, bank, player) => {
   resourceCards.forEach(resourceCard => {
     bank.remove(resourceCard);
     player.addResources(resourceCard);
   });
-  res.json(player.cardsCount());
 };
 
-const getBuildStatus = function(req, res) {
-  const { player } = req.app.locals;
-  const canBuildSettlement = player.canBuildSettlement();
-  res.json({ settlement: canBuildSettlement });
+const pickTerrains = (terrains, numToken) => {
+  const selectedTerrains = [];
+  for (const terrain in terrains) {
+    if (terrains[terrain]['noToken'] === numToken) {
+      selectedTerrains.push(terrain);
+    }
+  }
+  return selectedTerrains;
+};
+
+const getResources = function(req, res) {
+  const { bank, player, board } = req.app.locals;
+  const terrains = board.getTerrains();
+  const { numToken } = req.body;
+  const selectedTerrains = pickTerrains(terrains, numToken);
+  const terrainsId = player.getTerrainsId();
+  const resourceId = terrainsId.filter(id => selectedTerrains.includes(id));
+  const resourceCards = resourceId.map(id => {
+    return { resource: productions[board.getResource(id)], count: 1 };
+  });
+  updateTransaction(resourceCards, bank, player);
+  res.json(player.cardsCount());
 };
 
 module.exports = {
@@ -133,6 +133,5 @@ module.exports = {
   getRandomDiceNum,
   servePossiblePathsForRoad,
   addRoad,
-  getResources,
-  getBuildStatus
+  getResources
 };

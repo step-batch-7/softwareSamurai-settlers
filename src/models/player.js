@@ -21,22 +21,11 @@ class Player {
   getRoads() {
     return this.roads.slice();
   }
-
-  getMatchingTerrains(selectedTerrains) {
-    let matchedTerrains = [];
-    for (const terrain in selectedTerrains) {
-      matchedTerrains = matchedTerrains.concat(
-        this.settlements.reduce((matchedSettlements, settlement, index) => {
-          if (this.settlements[index].includes(terrain)) {
-            matchedSettlements.push(terrain);
-          }
-          return matchedSettlements;
-        }, [])
-      );
-    }
-    return matchedTerrains;
+  getTerrainsId() {
+    return this.settlements.reduce((terrainsId, settlement) => {
+      return terrainsId.concat(settlement.split(''));
+    }, []);
   }
-
   addResources(card) {
     if (card) {
       const isCardAdded = this.cards.addResources(card);
@@ -44,11 +33,6 @@ class Player {
     }
     return false;
   }
-
-  canBuildSettlement() {
-    const resourcesNeeded = { grain: 1, brick: 1, lumber: 1, wool: 1 };
-    return this.cards.haveResources(resourcesNeeded);
-  }
 }
 
-module.exports = { Player };
+module.exports = {Player};
