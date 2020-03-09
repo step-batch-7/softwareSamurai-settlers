@@ -31,6 +31,18 @@ class Game {
     return this.player.cardsCount();
   }
 
+  getBoardData() {
+    return {
+      terrainsInfo: this.board.getTerrains(),
+      settlements: this.player.getSettlements(),
+      roads: this.player.getRoads()
+    };
+  }
+
+  getAvailableSettlements() {
+    return this.board.getAvailableSettlements();
+  }
+
   resourceProduction(numToken) {
     const terrains = this.board.getTerrains();
     const selectedTerrains = pickTerrains(terrains, numToken);
@@ -91,6 +103,59 @@ class Game {
     return false;
   }
 
+  possiblePathsForSetup() {
+    const settlement = this.player.settlements.slice().pop();
+    const possiblePositionsForRoad = this.board.getEmptyPaths();
+    const possiblePositionsToBuildRoad = possiblePositionsForRoad.filter(
+      position => {
+        return position
+          .split('-')
+          .some(intersection => settlement === intersection);
+      }
+    );
+    return possiblePositionsToBuildRoad;
+  }
+
+  possiblePaths() {
+    const roads = this.player.getRoads();
+    const intersections = roads.reduce((intersections, road) => {
+      return intersections.concat(road.split('-'));
+    }, []);
+
+    const remainingPaths = this.board.getEmptyPaths();
+    const possiblePaths = intersections.reduce(
+      (possiblePaths, intersection) => {
+        const positionsToBuildRoad = remainingPaths.filter(position => {
+          return position.split('-').includes(intersection);
+        });
+        return possiblePaths.concat(positionsToBuildRoad);
+      },
+      []
+    );
+    return possiblePaths;
+  }
+
+  canBuild() {
+    const canBuildSettlement = this.player.canBuildSettlement();
+    const canBuildRoad = this.player.canBuildRoad();
+    return { settlement: canBuildSettlement, road: canBuildRoad };
+  }
+
+  getAvailableAdjSettlements() {
+    const settlements = this.board.getAvailableSettlements();
+    const roads = this.player.getRoads();
+    const adjSettlements = settlements.filter(settlement => {
+      return roads.some(road => road.split('-').includes(settlement));
+    });
+    return adjSettlements;
+  }
+
+  addRoadWithResources(pathId) {
+    this.board.addRoad(pathId);
+    this.player.addRoad(pathId);
+    this.player.deductCardsForRoad(pathId);
+    this.bank.add({ lumber: 1, brick: 1 });
+  }
 }
 
 module.exports = { Game };

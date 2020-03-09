@@ -118,6 +118,7 @@ const buildRoadWithResources = async function(pathId) {
     appendRoad(pathId);
     fetchCardsCount();
     getBankStatus();
+    getBuildStatus();
   }
 };
 

@@ -1,9 +1,6 @@
 const getTerrainDetails = function(req, res) {
-  const boardData = {
-    terrainsInfo: req.app.locals.board.getTerrains(),
-    settlements: req.app.locals.player.getSettlements(),
-    roads: req.app.locals.player.getRoads()
-  };
+  const { game } = req.app.locals;
+  const boardData = game.getBoardData();
   res.json(boardData);
 };
 
@@ -18,7 +15,8 @@ const getCardsCount = function(req, res) {
 };
 
 const getAvailableSettlements = function(req, res) {
-  const settlements = req.app.locals.board.getAvailableSettlements();
+  const { game } = req.app.locals;
+  const settlements = game.getAvailableSettlements();
   res.json(settlements);
 };
 
@@ -49,45 +47,21 @@ const addResourcesToPlayer = function(req, res) {
 };
 
 const addRoad = function(req, res) {
-  // const { board, player } = req.app.locals;
-  // const { pathId } = req.body;
-  // board.addRoad(pathId);
-  // player.addRoad(pathId);
-  // res.end();
   const { game } = req.app.locals;
-  const {pathId} = req.body;
+  const { pathId } = req.body;
   game.addRoad(pathId);
   res.end();
 };
 
 const servePossiblePathsForRoadInSetup = (req, res) => {
-  const { player, board } = req.app.locals;
-  const settlement = player.settlements.slice().pop();
-  const possiblePositionsForRoad = board.getEmptyPaths();
-  const possiblePositionsToBuildRoad = possiblePositionsForRoad.filter(
-    position => {
-      return position
-        .split('-')
-        .some(intersection => settlement === intersection);
-    }
-  );
+  const { game } = req.app.locals;
+  const possiblePositionsToBuildRoad = game.possiblePathsForSetup();
   res.json(possiblePositionsToBuildRoad);
 };
 
 const servePossiblePathsForRoad = (req, res) => {
-  const { player, board } = req.app.locals;
-  const roads = player.getRoads();
-  const intersections = roads.reduce((intersections, road) => {
-    return intersections.concat(road.split('-'));
-  }, []);
-
-  const remainingPaths = board.getEmptyPaths();
-  const possiblePaths = intersections.reduce((possiblePaths, intersection) => {
-    const positionsToBuildRoad = remainingPaths.filter(position => {
-      return position.split('-').includes(intersection);
-    });
-    return possiblePaths.concat(positionsToBuildRoad);
-  }, []);
+  const { game } = req.app.locals;
+  const possiblePaths = game.possiblePaths();
   res.json(possiblePaths);
 };
 
@@ -99,29 +73,22 @@ const getResources = function(req, res) {
 };
 
 const getBuildStatus = function(req, res) {
-  const { player } = req.app.locals;
-  const canBuildSettlement = player.canBuildSettlement();
-  const canBuildRoad = player.canBuildRoad();
-  res.json({ settlement: canBuildSettlement, road: canBuildRoad });
+  const { game } = req.app.locals;
+  const buildStatus = game.canBuild();
+  res.json(buildStatus);
 };
 
 const getAvailableAdjSettlements = function(req, res) {
-  const { board, player } = req.app.locals;
-  const settlements = board.getAvailableSettlements();
-  const roads = player.getRoads();
-  const adjSettlements = settlements.filter(settlement => {
-    return roads.some(road => road.split('-').includes(settlement));
-  });
+  // });
+  const { game } = req.app.locals;
+  const adjSettlements = game.getAvailableAdjSettlements();
   res.json(adjSettlements);
 };
 
 const addRoadWithResources = function(req, res) {
-  const { board, player, bank } = req.app.locals;
   const { pathId } = req.body;
-  board.addRoad(pathId);
-  player.addRoad(pathId);
-  player.deductCardsForRoad(pathId);
-  bank.add({ lumber: 1, brick: 1 });
+  const { game } = req.app.locals;
+  game.addRoadWithResources(pathId);
   res.end();
 };
 
