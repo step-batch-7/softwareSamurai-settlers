@@ -79,7 +79,6 @@ const getBuildStatus = function(req, res) {
 };
 
 const getAvailableAdjSettlements = function(req, res) {
-  // });
   const { game } = req.app.locals;
   const adjSettlements = game.getAvailableAdjSettlements();
   res.json(adjSettlements);

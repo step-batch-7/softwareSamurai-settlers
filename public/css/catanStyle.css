@@ -304,8 +304,8 @@ svg {
 .left-top-tilted-road,
 .right-down-tilted-road,
 .left-down-tilted-road {
-  background-color: white;
-  opacity: 0.4;
+  background-color: #0B22B9;
+  opacity: 0.3;
   border-radius: 10px;
   text-align: center;
   box-sizing: border-box;
@@ -316,8 +316,8 @@ svg {
 }
 
 .road {
-  background-color: white;
-  opacity: 0.4;
+  background-color: #0B22B9;
+  opacity: 0.3;
   border-radius: 10px;
   text-align: center;
   box-sizing: border-box;
@@ -360,6 +360,11 @@ svg {
 .afterRoad {
   cursor: initial;
 }
+
+#road, #settlement {
+cursor: pointer;
+}
+
 /*-----------hide-----------*/
 .hide {
   pointer-events: none;

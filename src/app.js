@@ -40,12 +40,12 @@ app.get('/bankStatus', getBankStatus);
 app.get('/diceNumbers', getRandomDiceNum);
 app.get('/cardsCount', getCardsCount);
 app.get('/terrains', getTerrainDetails);
+app.get('/getPossiblePathsForRoadInSetup', servePossiblePathsForRoadInSetup);
 app.get('/getPossiblePathsForRoad', servePossiblePathsForRoad);
 app.post('/getResources', getResources);
 app.post('/buildSettlement', buildSettlement);
 app.post('/buildInitialSettlement', buildInitialSettlement);
 app.post('/addResourcesToPlayer', addResourcesToPlayer);
-app.post('/servePossiblePathsForRoadInSetup', servePossiblePathsForRoadInSetup);
 app.post('/buildRoad', addRoad);
 app.post('/buildRoadWithResources', addRoadWithResources);
 

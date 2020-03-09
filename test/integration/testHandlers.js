@@ -88,10 +88,10 @@ describe('Get /cardsCount', () => {
     });
   });
 
-  describe('Post /servePossiblePathsForRoadInSetup', () => {
-    it('should serve possible paths for building a road for /servePossiblePathsForRoadInSetup', done => {
+  describe('get /getPossiblePathsForRoadInSetup', () => {
+    it('should get possible paths for building a road for /getPossiblePathsForRoadInSetup', done => {
       request(app)
-        .post('/servePossiblePathsForRoadInSetup')
+        .get('/getPossiblePathsForRoadInSetup')
         .expect(200, done);
     });
   });

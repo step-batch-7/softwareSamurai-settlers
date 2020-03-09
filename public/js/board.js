@@ -123,12 +123,7 @@ const buildRoadWithResources = async function(pathId) {
 };
 
 const showPossiblePathsForRoadInSetUp = async function() {
-  const response = await fetch('/servePossiblePathsForRoadInSetup', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
+  const response = await fetch('/getPossiblePathsForRoadInSetup');
 
   if (response.ok) {
     const pathIds = await response.json();
