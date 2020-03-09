@@ -82,6 +82,17 @@ const removeAvailableSettlements = function(buildingFunction) {
   });
 };
 
+const appendRoad = function(pathId) {
+  const path = document.getElementById(pathId);
+  path.style.backgroundColor = 'transparent';
+  path.style.opacity = 1;
+  path.style.animation = 'none';
+  path.classList.add('afterRoad');
+  hideAllPaths();
+  const img = '<image href="/assets/roads/blueRoad.svg" class="road-image">';
+  path.innerHTML = img;
+};
+
 const buildRoad = async function(pathId) {
   const response = await fetch('/buildRoad', {
     method: 'POST',
@@ -91,14 +102,22 @@ const buildRoad = async function(pathId) {
     body: JSON.stringify({ pathId })
   });
   if (response.ok) {
-    const path = document.getElementById(pathId);
-    path.style.backgroundColor = 'transparent';
-    path.style.opacity = 1;
-    path.style.animation = 'none';
-    path.classList.add('afterRoad');
-    hideAllPaths();
-    const img = '<image href="/assets/roads/blueRoad.svg" class="road-image">';
-    path.innerHTML = img;
+    appendRoad(pathId);
+  }
+};
+
+const buildRoadWithResources = async function(pathId) {
+  const response = await fetch('/buildRoadWithResources', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ pathId })
+  });
+  if (response.ok) {
+    appendRoad(pathId);
+    fetchCardsCount();
+    getBankStatus();
   }
 };
 
@@ -172,7 +191,7 @@ const getPossiblePathsForRoad = async function() {
     pathIds.forEach(pathId => {
       const path = document.getElementById(pathId);
       path.classList.remove('hide');
-      path.addEventListener('click', buildRoad.bind(null, pathId));
+      path.addEventListener('click', buildRoadWithResources.bind(null, pathId));
     });
   }
 };

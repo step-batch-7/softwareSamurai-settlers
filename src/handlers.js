@@ -121,7 +121,8 @@ const getResources = function(req, res) {
 const getBuildStatus = function(req, res) {
   const { player } = req.app.locals;
   const canBuildSettlement = player.canBuildSettlement();
-  res.json({ settlement: canBuildSettlement });
+  const canBuildRoad = player.canBuildRoad();
+  res.json({ settlement: canBuildSettlement, road: canBuildRoad });
 };
 
 const getAvailableAdjSettlements = function(req, res) {
@@ -132,6 +133,16 @@ const getAvailableAdjSettlements = function(req, res) {
     return roads.some(road => road.split('-').includes(settlement));
   });
   res.json(adjSettlements);
+};
+
+const addRoadWithResources = function(req, res) {
+  const { board, player, bank } = req.app.locals;
+  const { pathId } = req.body;
+  board.addRoad(pathId);
+  player.addRoad(pathId);
+  player.deductCardsForRoad(pathId);
+  bank.add({ lumber: 1, brick: 1 });
+  res.end();
 };
 
 module.exports = {
@@ -148,5 +159,6 @@ module.exports = {
   getBuildStatus,
   servePossiblePathsForRoad,
   buildInitialSettlement,
-  getAvailableAdjSettlements
+  getAvailableAdjSettlements,
+  addRoadWithResources
 };

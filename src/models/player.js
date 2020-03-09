@@ -44,9 +44,19 @@ class Player {
     return this.resources.have(resourcesNeeded);
   }
 
+  canBuildRoad() {
+    const resourcesNeeded = { brick: 1, lumber: 1 };
+    return this.resources.have(resourcesNeeded);
+  }
+
   deductCardsForSettlement() {
     const settlementResources = { grain: 1, lumber: 1, brick: 1, wool: 1 };
     this.resources.deduct(settlementResources);
+  }
+
+  deductCardsForRoad() {
+    const roadResources = { lumber: 1, brick: 1 };
+    this.resources.deduct(roadResources);
   }
 }
 

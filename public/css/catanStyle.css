@@ -181,7 +181,7 @@ svg {
 
 .disabledUnit {
   opacity: 0.6;
-  pointer-events: none;
+  cursor: not-allowed;
 }
 /* ----------------------- interactions for settlements ------------------------------------*/
 

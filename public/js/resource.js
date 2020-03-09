@@ -32,15 +32,21 @@ const getResources = async function(dice1, dice2) {
   return { resources, totalDevCards };
 };
 
+const updateBuildingStatus = function(status, buildingId) {
+  if (status) {
+    document.getElementById(buildingId).classList.remove('disabledUnit');
+    return;
+  }
+  document.getElementById(buildingId).classList.add('disabledUnit');
+};
+
 const getBuildStatus = async function() {
   const res = await fetch('/buildStatus');
   if (res.ok) {
-    const { settlement } = await res.json();
-    if (settlement) {
-      document.getElementById('settlement').classList.remove('disabledUnit');
-      return;
-    }
-    document.getElementById('settlement').classList.add('disabledUnit');
+    const { settlement, road } = await res.json();
+  
+    updateBuildingStatus(settlement, 'settlement');
+    updateBuildingStatus(road, 'road');
   }
 };
 

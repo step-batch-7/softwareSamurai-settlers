@@ -18,7 +18,8 @@ const {
   getBuildStatus,
   servePossiblePathsForRoad,
   buildInitialSettlement,
-  getAvailableAdjSettlements
+  getAvailableAdjSettlements,
+  addRoadWithResources
 } = require('./handlers');
 
 const app = express();
@@ -46,5 +47,6 @@ app.post('/buildInitialSettlement', buildInitialSettlement);
 app.post('/addResourcesToPlayer', addResourcesToPlayer);
 app.post('/servePossiblePathsForRoadInSetup', servePossiblePathsForRoadInSetup);
 app.post('/buildRoad', addRoad);
+app.post('/buildRoadWithResources', addRoadWithResources);
 
 module.exports = { app };
