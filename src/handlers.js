@@ -28,7 +28,7 @@ const getCardsCount = function(req, res) {
 };
 
 const getAvailableSettlements = function(req, res) {
-  const settlements = req.app.locals.board.getAvailableSettlements();
+  const settlements = req.app.locals.board.getAvailableSettlements();  
   res.json(settlements);
 };
 

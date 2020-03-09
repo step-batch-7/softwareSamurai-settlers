@@ -40,6 +40,7 @@ const renderSettlements = function(settlements) {
 const renderRoads = function(roads) {
   roads.forEach(road => {
     const path = document.getElementById(road);
+    path.style.opacity = '1';
     path.classList.add('afterRoad');
     const img = `<image href='/assets/roads/blueRoad.svg' 
     class="road-image">`;
@@ -51,7 +52,8 @@ const requestSettlement = async function() {
   const response = await fetch('/requestSettlement');
   if (response.ok) {
     const positions = await response.json();
-    positions.forEach(position => {
+
+    positions.forEach(position => {  
       const intersection = document.getElementById(position);
       intersection.classList.add('visibleIntersection');
       intersection.addEventListener('click', buildSettlement, false);
@@ -80,9 +82,9 @@ const buildRoad = async function(pathId) {
     path.style.backgroundColor = 'transparent';
     path.style.opacity = 1;
     path.style.animation = 'none';
-    path.classList.remove('show-road');
+    // path.classList.remove('show-road');
     path.classList.add('afterRoad');
-
+    hideAllPaths();
     const img = '<image href="/assets/roads/blueRoad.svg" class="road-image">';
     path.innerHTML = img;
   }
@@ -98,8 +100,8 @@ const showPossiblePathsForRoad = async function() {
 
   if (response.ok) {
     const pathIds = await response.json();
-    const allRoads = document.querySelector('.allRoads');
-    allRoads.classList.remove('hide');
+    // const allRoads = document.querySelector('.allRoads');
+    // allRoads.classList.remove('hide');
     pathIds.forEach(pathId => {
       const path = document.getElementById(pathId);
       path.classList.remove('hide');

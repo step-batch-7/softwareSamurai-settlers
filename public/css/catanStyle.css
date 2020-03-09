@@ -173,17 +173,17 @@ svg {
 
 /* ----------------------- interactions for settlements ------------------------------------*/
 
-.allIntersections {
+.pathsAndIntersections {
   position: absolute;
   width: 720px;
   height: 544px;
-  margin-top: 46px;
+  margin-top: 52px;
 }
 
 .point-block {
   display: flex;
   justify-content: space-between;
-  margin: 0.6% auto 1.2%;
+  margin: 0% auto 0%;
   height: 20px;
 }
 
@@ -272,28 +272,22 @@ svg {
 
 /*---------------------------- Roads ------------------*/
 
-.allRoads {
-  position: absolute;
-  width: 720px;
-  height: 544px;
-  margin-top: 50px;
-}
-
 .tiltedRoads {
   display: flex;
   justify-content: space-around;
   display: flex;
   justify-content: space-around;
-  margin: 1.5% auto -2.2%;
+  height: 3%;
+  margin: 0px auto -2px;
 }
 
 .straight-roads {
   display: flex;
   justify-content: space-around;
-  margin: 6.12% auto;
+  height: 5.8%;
+  margin: 0px auto 2px;
 }
 
-.road,
 .right-top-tilted-road,
 .left-top-tilted-road,
 .right-down-tilted-road,
@@ -306,6 +300,19 @@ svg {
   width: 13px;
   height: 40px;
   cursor: pointer;
+  margin: -12px;
+}
+
+.road {
+  background-color: white;
+  opacity: 0.4;
+  border-radius: 10px;
+  text-align: center;
+  box-sizing: border-box;
+  width: 13px;
+  height: 40px;
+  cursor: pointer;
+  margin-top: -5px;
 }
 
 g.tiltedRoads > .right-top-tilted-road {
@@ -338,6 +345,9 @@ svg {
   width: 100%;
 }
 
+.afterRoad {
+  cursor: initial;
+}
 /*-----------hide-----------*/
 .hide {
   pointer-events: none;
