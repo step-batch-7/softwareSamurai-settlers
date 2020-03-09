@@ -113,13 +113,15 @@ const updateTransaction = (resourceCards, bank, player) => {
 
 const servePossiblePathsForRoad = (req, res) => {
   const { player, board } = req.app.locals;
-  const settlements = player.getSettlements();
+  const roads = player.getRoads();
+  const intersections = roads.reduce((intersections, road) => {
+    return intersections.concat(road.split('-'));
+  }, []);
+
   const remainingPaths = board.getEmptyPaths();
-  const possiblePaths = settlements.reduce((possiblePaths, settlement) => {
+  const possiblePaths = intersections.reduce((possiblePaths, intersection) => {
     const positionsToBuildRoad = remainingPaths.filter(position => {
-      return position
-        .split('-')
-        .some(intersection => settlement === intersection);
+      return position.split('-').includes(intersection);
     });
     return possiblePaths.concat(positionsToBuildRoad);
   }, []);
