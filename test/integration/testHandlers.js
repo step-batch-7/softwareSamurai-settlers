@@ -113,6 +113,7 @@ describe('post /getResources', () => {
       .send({ intersection: 'k1' })
       .expect(200, done);
   });
+
   it('should increase resources based on number token', done => {
     request(app)
       .post('/getResources')
@@ -135,6 +136,15 @@ describe('Get /getPossiblePathsForRoad', () => {
   it('Should give possible paths adjacent to existing settlements', done => {
     request(app)
       .get('/getPossiblePathsForRoad')
+      .expect(200, done);
+  });
+});
+
+describe('/buildInitialSettlement', () => {
+  it('should build the settlement on given intersection', done => {
+    request(app)
+      .post('/buildInitialSettlement')
+      .send({ intersection: 'k1' })
       .expect(200, done);
   });
 });
