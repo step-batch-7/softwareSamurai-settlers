@@ -33,6 +33,10 @@ class Player {
     }
     return false;
   }
+  canBuildSettlement() {
+    const resourcesNeeded = { grain: 1, brick: 1, lumber: 1, wool: 1 };
+    return this.cards.haveResources(resourcesNeeded);
+  }
 }
 
 module.exports = {Player};

@@ -123,6 +123,12 @@ const getResources = function(req, res) {
   res.json(player.cardsCount());
 };
 
+const getBuildStatus = function(req, res) {
+  const { player } = req.app.locals;
+  const canBuildSettlement = player.canBuildSettlement();
+  res.json({ settlement: canBuildSettlement });
+};
+
 module.exports = {
   getTerrainDetails,
   getCardsCount,
@@ -133,5 +139,6 @@ module.exports = {
   getRandomDiceNum,
   servePossiblePathsForRoad,
   addRoad,
-  getResources
+  getResources,
+  getBuildStatus
 };
