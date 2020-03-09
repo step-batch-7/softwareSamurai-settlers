@@ -126,7 +126,6 @@ describe('/buildStatus', () => {
       .post('/buildSettlement')
       .set('content-type', 'application/json')
       .send({ intersection: 'hiq' })
-      // .send({ intersection: '2' })
       .expect(200, done);
   });
 
@@ -141,7 +140,6 @@ describe('/buildStatus', () => {
       .post('/buildSettlement')
       .set('content-type', 'application/json')
       .send({ intersection: 'fop' })
-      // .send({ numToken: 10 })
       .expect(200, done);
   });
 
@@ -166,16 +164,3 @@ describe('Get /getPossiblePathsForRoad', () => {
       .expect(200, done);
   });
 });
-
-// it('building settlements for tests', done => {
-//   request(app)
-//     .post('/addResourcesToPlayer')
-//     .expect(200, done);
-// });
-
-// it('should give true if user can build settlement', done => {
-//   request(app)
-//     .get('/buildStatus')
-//     .expect(200, done)
-//     .expect(/"settlement":true/);
-// });

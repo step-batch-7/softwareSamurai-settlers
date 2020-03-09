@@ -114,25 +114,6 @@ const servePossiblePathsForRoad = (req, res) => {
   res.json(possiblePaths);
 };
 
-// const getResources = function(req, res) {
-//   const terrains = req.app.locals.board.getTerrains();
-//   const selectedTerrains = {};
-//   for (const terrain in terrains) {
-//     if (terrains[terrain]['noToken'] === req.body.numToken) {
-//       selectedTerrains[terrain] = terrains[terrain];
-//     }
-//   }
-//   const { bank, player } = req.app.locals;
-//   const resourceId = player.getMatchingTerrains(selectedTerrains);
-//   const resourceCards = resourceId.reduce((resourceCards, tokenId) => {
-//     if (terrains[tokenId]) {
-//       const terrain = terrains[tokenId].resource;
-//       resourceCards.push({ resource: productions[terrain], count: 1 });
-//     }
-//     return resourceCards;
-//   }, []);
-// };
-
 const pickTerrains = (terrains, numToken) => {
   const selectedTerrains = [];
   for (const terrain in terrains) {
