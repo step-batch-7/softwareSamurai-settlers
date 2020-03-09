@@ -177,12 +177,14 @@ svg {
   width: 11%;
   border: solid 1px;
   margin-top: 19px;
+  cursor: pointer;
 }
 
 .disabledUnit {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
 /* ----------------------- interactions for settlements ------------------------------------*/
 
 .pathsAndIntersections {
@@ -359,10 +361,6 @@ svg {
 
 .afterRoad {
   cursor: initial;
-}
-
-#road, #settlement {
-cursor: pointer;
 }
 
 /*-----------hide-----------*/

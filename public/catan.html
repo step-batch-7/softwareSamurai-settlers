@@ -487,7 +487,7 @@
             </div>
           </div>
           <div id="actions">
-              <div class="unit"></div>
+            <div class="unit" style="pointer-events: none; border: none;"></div>
             <div
               class="unit disabledUnit"
               id="road"
@@ -499,15 +499,18 @@
                 style="height:100%; width:100%;"
               />
             </div>
-            <div class="unit disabledUnit" id="settlement"  onclick="requestSettlement()">
-                <img
-                  src="/assets/builds/settlement.svg"
-                  style="height:100%; width:100%;"
-                 
-                />
-              </div>
-            <div class="unit"></div>
-            <div class="unit"></div>
+            <div
+              class="unit disabledUnit"
+              id="settlement"
+              onclick="requestSettlement()"
+            >
+              <img
+                src="/assets/builds/settlement.svg"
+                style="height:100%; width:100%;"
+              />
+            </div>
+            <div class="unit" style="pointer-events: none; border: none;"></div>
+            <div class="unit" style="pointer-events: none; border: none;"></div>
           </div>
         </div>
       </div>
