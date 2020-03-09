@@ -157,13 +157,6 @@ describe('/buildStatus', () => {
       .post('/addResourcesToPlayer')
       .expect(200, done);
   });
-
-  it('should give true if user can build settlement', done => {
-    request(app)
-      .get('/buildStatus')
-      .expect(200, done)
-      .expect(/"settlement":true/);
-  });
 });
 
 describe('Get /getPossiblePathsForRoad', () => {

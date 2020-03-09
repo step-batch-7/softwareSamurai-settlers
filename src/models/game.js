@@ -49,8 +49,19 @@ class Game {
       }
     });
   }
-  bankStatus(){
+  bankStatus() {
     return this.bank.status;
+  }
+  buildInitialSettlement(intersection) {
+    this.board.buildSettlement(intersection);
+    this.player.addSettlement(intersection);
+  }
+
+  buildSettlement(intersection) {
+    this.board.buildSettlement(intersection);
+    this.player.addSettlement(intersection);
+    this.player.deductCardsForSettlement(intersection);
+    this.bank.add({ grain: 1, lumber: 1, brick: 1, wool: 1 });
   }
 }
 

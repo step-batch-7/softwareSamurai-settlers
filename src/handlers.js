@@ -48,9 +48,8 @@ const buildSettlement = function(req, res) {
 
 const buildInitialSettlement = function(req, res) {
   const { intersection } = req.body;
-  const { board, player } = req.app.locals;
-  board.buildSettlement(intersection);
-  player.addSettlement(intersection);
+  const { game } = req.app.locals;
+  game.buildInitialSettlement(intersection);
   res.end();
 };
 
