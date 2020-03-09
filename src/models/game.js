@@ -52,6 +52,7 @@ class Game {
   bankStatus() {
     return this.bank.status;
   }
+
   buildInitialSettlement(intersection) {
     this.board.buildSettlement(intersection);
     this.player.addSettlement(intersection);
@@ -80,6 +81,20 @@ class Game {
       this.player.addResources(resourceCard);
     });
   }
+
+  bankStatus() {
+    return this.bank.status;
+  }
+
+  addRoad(pathId) {
+    if (pathId) {
+      const isRoadAddedToBoard = this.board.addRoad(pathId);
+      const isRoadAddedToPlayer = this.player.addRoad(pathId);
+      return isRoadAddedToBoard && isRoadAddedToPlayer;
+    }
+    return false;
+  }
+
 }
 
 module.exports = { Game };

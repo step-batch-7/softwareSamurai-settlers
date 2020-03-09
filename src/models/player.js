@@ -19,8 +19,13 @@ class Player {
     this.settlements.push(settlement);
   }
   addRoad(road) {
-    this.roads.push(road);
+    if (road) {
+      this.roads.push(road);
+      return true;
+    }
+    return false;
   }
+
   getSettlements() {
     return this.settlements.slice();
   }

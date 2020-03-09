@@ -1,4 +1,4 @@
-const assert = require('assert');
+const { assert } = require('chai');
 const { Game } = require('../../src/models/game');
 
 describe('Game', () => {
@@ -40,4 +40,22 @@ describe('Game', () => {
       assert.deepStrictEqual(actual, expected);
     });
   });
+
+  describe('addRoad', () => {
+    it('should add the road to Game when pathId is valid', () => {
+      const game = new Game();
+      assert.isTrue(game.addRoad('kl-klr'));
+    });
+
+    it('should not add the road to Game when pathId is undefined ', () => {
+      const game = new Game();
+      assert.isFalse(game.addRoad());
+    });
+
+    it('should not add the road to Game when pathId is invalid ', () => {
+      const game = new Game();
+      assert.isFalse(game.addRoad('abc-def'));
+    });
+  });
+
 });

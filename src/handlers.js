@@ -49,10 +49,14 @@ const addResourcesToPlayer = function(req, res) {
 };
 
 const addRoad = function(req, res) {
-  const { board, player } = req.app.locals;
-  const { pathId } = req.body;
-  board.addRoad(pathId);
-  player.addRoad(pathId);
+  // const { board, player } = req.app.locals;
+  // const { pathId } = req.body;
+  // board.addRoad(pathId);
+  // player.addRoad(pathId);
+  // res.end();
+  const { game } = req.app.locals;
+  const {pathId} = req.body;
+  game.addRoad(pathId);
   res.end();
 };
 
