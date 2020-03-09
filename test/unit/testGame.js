@@ -24,4 +24,20 @@ describe('Game', () => {
       assert.deepStrictEqual(game.cardsCount(), expected);
     });
   });
+
+  describe('bankStatus', () => {
+    it('should return the status of the bank', () => {
+      const game = new Game();
+      const actual = game.bankStatus();
+      const expected = {
+        lumber: 19,
+        brick: 19,
+        ore: 19,
+        wool: 19,
+        grain: 19,
+        developmentCards: 25
+      };
+      assert.deepStrictEqual(actual, expected);
+    });
+  });
 });

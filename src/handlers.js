@@ -16,9 +16,8 @@ const getTerrainDetails = function(req, res) {
 };
 
 const getBankStatus = (req, res) => {
-  const { bank } = req.app.locals;
-  const bankStatus = bank.status;
-  res.json(bankStatus);
+  const {game} = req.app.locals;
+  res.json(game.bankStatus());
 };
 
 const getCardsCount = function(req, res) {
