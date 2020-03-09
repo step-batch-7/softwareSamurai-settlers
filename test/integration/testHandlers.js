@@ -28,9 +28,18 @@ describe('Get getTerrainDetails', () => {
 describe('getAvailableSettlements', () => {
   it('should give all the available settlements ', done => {
     request(app)
-      .get('/requestSettlement')
+      .get('/requestInitialSettlement')
       .expect(200, done)
       .expect(/k1/);
+  });
+});
+
+describe('/getAdjAvailableSettlements', () => {
+  it('should get empty array for no roads', done => {
+    request(app)
+      .get('/requestSettlement')
+      .expect(200, done)
+      .expect(/\[\]/);
   });
 });
 

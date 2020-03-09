@@ -56,13 +56,6 @@ const buildInitialSettlement = function(req, res) {
 };
 
 const addResourcesToPlayer = function(req, res) {
-  const productions = {
-    fields: 'grain',
-    forest: 'lumber',
-    hills: 'brick',
-    pasture: 'wool',
-    mountains: 'ore'
-  };
   const { board, bank, player } = req.app.locals;
   const terrains = board.getTerrains();
   const settlement = player.settlements.slice().pop();
@@ -158,6 +151,16 @@ const getBuildStatus = function(req, res) {
   res.json({ settlement: canBuildSettlement });
 };
 
+const getAvailableAdjSettlements = function(req, res) {
+  const { board, player } = req.app.locals;
+  const settlements = board.getAvailableSettlements();
+  const roads = player.getRoads();
+  const adjSettlements = settlements.filter(settlement => {
+    return roads.some(road => road.split('-').includes(settlement));
+  });
+  res.json(adjSettlements);
+};
+
 module.exports = {
   getTerrainDetails,
   getCardsCount,
@@ -171,5 +174,6 @@ module.exports = {
   getResources,
   getBuildStatus,
   servePossiblePathsForRoad,
-  buildInitialSettlement
+  buildInitialSettlement,
+  getAvailableAdjSettlements
 };

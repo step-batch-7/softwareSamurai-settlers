@@ -62,7 +62,7 @@ const requestSettlement = async function() {
 };
 
 const requestInitialSettlement = async function() {
-  const response = await fetch('/requestSettlement');
+  const response = await fetch('/requestInitialSettlement');
   if (response.ok) {
     const positions = await response.json();
 
@@ -161,6 +161,7 @@ const buildSettlement = async function() {
     renderNewSettlement(intersection, buildSettlement);
     fetchCardsCount();
     getBankStatus();
+    getBuildStatus();
   }
 };
 

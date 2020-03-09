@@ -17,7 +17,8 @@ const {
   getResources,
   getBuildStatus,
   servePossiblePathsForRoad,
-  buildInitialSettlement
+  buildInitialSettlement,
+  getAvailableAdjSettlements
 } = require('./handlers');
 
 const app = express();
@@ -32,7 +33,8 @@ app.locals.bank = new Bank();
 
 app.get('/', (req, res) => res.redirect('catan.html'));
 app.get('/buildStatus', getBuildStatus);
-app.get('/requestSettlement', getAvailableSettlements);
+app.get('/requestInitialSettlement', getAvailableSettlements);
+app.get('/requestSettlement', getAvailableAdjSettlements);
 app.get('/bankStatus', getBankStatus);
 app.get('/diceNumbers', getRandomDiceNum);
 app.get('/cardsCount', getCardsCount);
