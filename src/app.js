@@ -1,7 +1,8 @@
 const express = require('express');
 const { Board } = require('./models/board');
 const { Player } = require('./models/player');
-const Bank = require('./models/bank');
+const { Bank } = require('./models/bank');
+const { Game } = require('./models/game');
 
 const {
   getBankStatus,
@@ -28,6 +29,7 @@ app.use(express.static('public'));
 app.locals.board = new Board();
 app.locals.player = new Player();
 app.locals.bank = new Bank();
+app.locals.game = new Game();
 
 app.get('/', (req, res) => res.redirect('catan.html'));
 app.get('/buildStatus', getBuildStatus);

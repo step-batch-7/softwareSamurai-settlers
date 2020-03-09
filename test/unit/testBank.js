@@ -1,6 +1,6 @@
 const { assert } = require('chai');
 
-const Bank = require('../../src/models/bank');
+const { Bank } = require('../../src/models/bank');
 
 describe('Bank', () => {
   describe('getBankStatus', () => {
