@@ -48,6 +48,7 @@ class Game {
         this.player.addResources(card);
       }
     });
+  }
   bankStatus(){
     return this.bank.status;
   }
