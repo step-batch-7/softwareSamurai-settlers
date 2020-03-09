@@ -67,4 +67,19 @@ describe('Player', () => {
       assert.isFalse(player.canBuildSettlement());
     });
   });
+
+  describe('/deductCardsForSettlement', () => {
+    it('should deduct the cards needed to build settlement', () => {
+      const player = new Player();
+      player.addResources({ resource: 'wool', count: 1 });
+      player.addResources({ resource: 'brick', count: 1 });
+      player.addResources({ resource: 'lumber', count: 1 });
+      player.addResources({ resource: 'grain', count: 2 });
+      player.deductCardsForSettlement();
+      assert.equal(player.cards.resources.grain, 1);
+      assert.equal(player.cards.resources.lumber, 0);
+      assert.equal(player.cards.resources.brick, 0);
+      assert.equal(player.cards.resources.wool, 0);
+    });
+  });
 });

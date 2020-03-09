@@ -39,8 +39,19 @@ const getRandomDiceNum = function(req, res) {
 
 const buildSettlement = function(req, res) {
   const { intersection } = req.body;
-  req.app.locals.board.buildSettlement(intersection);
-  req.app.locals.player.addSettlement(intersection);
+  const { board, player, bank } = req.app.locals;
+  board.buildSettlement(intersection);
+  player.addSettlement(intersection);
+  player.deductCardsForSettlement(intersection);
+  bank.add({ grain: 1, lumber: 1, brick: 1, wool: 1 });
+  res.end();
+};
+
+const buildInitialSettlement = function(req, res) {
+  const { intersection } = req.body;
+  const { board, player } = req.app.locals;
+  board.buildSettlement(intersection);
+  player.addSettlement(intersection);
   res.end();
 };
 
@@ -156,5 +167,6 @@ module.exports = {
   addRoad,
   getResources,
   getBuildStatus,
-  servePossiblePathsForRoad
+  servePossiblePathsForRoad,
+  buildInitialSettlement
 };

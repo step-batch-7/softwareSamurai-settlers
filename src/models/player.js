@@ -37,6 +37,11 @@ class Player {
     const resourcesNeeded = { grain: 1, brick: 1, lumber: 1, wool: 1 };
     return this.cards.haveResources(resourcesNeeded);
   }
+
+  deductCardsForSettlement() {
+    const settlementResources = { grain: 1, lumber: 1, brick: 1, wool: 1 };
+    this.cards.deductResources(settlementResources);
+  }
 }
 
 module.exports = {Player};

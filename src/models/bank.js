@@ -36,6 +36,12 @@ class Bank {
     }
     return false;
   }
+
+  add(resources) {
+    for (const resource in resources) {
+      this.resources[resource] += resources[resource];
+    }
+  }
 }
 
 module.exports = Bank;

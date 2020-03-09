@@ -121,9 +121,9 @@ describe('/buildStatus', () => {
       .expect(/"settlement":false/);
   });
 
-  it('building settlemnts for tests', done => {
+  it('building settlements for tests', done => {
     request(app)
-      .post('/buildSettlement')
+      .post('/buildInitialSettlement')
       .set('content-type', 'application/json')
       .send({ intersection: 'hiq' })
       .expect(200, done);
@@ -137,7 +137,7 @@ describe('/buildStatus', () => {
 
   it('building settlements for tests', done => {
     request(app)
-      .post('/buildSettlement')
+      .post('/buildInitialSettlement')
       .set('content-type', 'application/json')
       .send({ intersection: 'fop' })
       .expect(200, done);

@@ -61,11 +61,24 @@ const requestSettlement = async function() {
   }
 };
 
-const removeAvailableSettlements = function() {
+const requestInitialSettlement = async function() {
+  const response = await fetch('/requestSettlement');
+  if (response.ok) {
+    const positions = await response.json();
+
+    positions.forEach(position => {
+      const intersection = document.getElementById(position);
+      intersection.classList.add('visibleIntersection');
+      intersection.addEventListener('click', buildInitialSettlement, false);
+    });
+  }
+};
+
+const removeAvailableSettlements = function(buildingFunction) {
   const settlementOptions = document.getElementsByClassName('point');
   Array.from(settlementOptions).forEach(option => {
     option.classList.remove('visibleIntersection');
-    option.removeEventListener('click', buildSettlement);
+    option.removeEventListener('click', buildingFunction);
   });
 };
 
@@ -107,14 +120,31 @@ const showPossiblePathsForRoadInSetUp = async function() {
   }
 };
 
-const renderNewSettlement = function(intersection) {
-  removeAvailableSettlements();
+const renderNewSettlement = function(intersection, buildingFunction) {
+  removeAvailableSettlements(buildingFunction);
   intersection.classList.remove('point');
   intersection.classList.remove('visibleIntersection');
   intersection.classList.add('afterSettlement');
   const img = `<image href='/assets/builds/settlement.svg' 
     style="height:100%; width:100%;">`;
   intersection.innerHTML = img;
+};
+
+const buildInitialSettlement = async function() {
+  const intersection = event.target;
+  const response = await fetch('/buildInitialSettlement', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ intersection: intersection.id })
+  });
+
+  if (response.ok) {
+    renderNewSettlement(intersection, buildInitialSettlement);
+  }
+  distributeResources();
+  showPossiblePathsForRoadInSetUp();
 };
 
 const buildSettlement = async function() {
@@ -128,9 +158,9 @@ const buildSettlement = async function() {
   });
 
   if (response.ok) {
-    renderNewSettlement(intersection);
-    distributeResources();
-    showPossiblePathsForRoadInSetUp();
+    renderNewSettlement(intersection, buildSettlement);
+    fetchCardsCount();
+    getBankStatus();
   }
 };
 

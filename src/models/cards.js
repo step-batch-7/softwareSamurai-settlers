@@ -21,6 +21,10 @@ class Cards {
   haveResources(resources) {
     return this.resources.have(resources);
   }
+
+  deductResources(resources) {
+    this.resources.deduct(resources);
+  }
 }
 
 module.exports = Cards;

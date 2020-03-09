@@ -30,6 +30,14 @@ class Resources {
     });
     return areEnough;
   }
+
+  deduct(resources) {
+    for (const resource in resources) {
+      if (this[resource] > 0) {
+        this[resource] -= resources[resource];
+      }
+    }
+  }
 }
 
 module.exports = Resources;

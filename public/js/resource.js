@@ -35,7 +35,12 @@ const getResources = async function(dice1, dice2) {
 const getBuildStatus = async function() {
   const res = await fetch('/buildStatus');
   if (res.ok) {
-    const status = await res.json();
+    const { settlement } = await res.json();
+    if (settlement) {
+      document.getElementById('settlement').classList.remove('disabledUnit');
+      return;
+    }
+    document.getElementById('settlement').classList.add('disabledUnit');
   }
 };
 

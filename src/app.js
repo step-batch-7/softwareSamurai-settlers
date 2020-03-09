@@ -16,7 +16,8 @@ const {
   addRoad,
   getResources,
   getBuildStatus,
-  servePossiblePathsForRoad
+  servePossiblePathsForRoad,
+  buildInitialSettlement
 } = require('./handlers');
 
 const app = express();
@@ -39,6 +40,7 @@ app.get('/terrains', getTerrainDetails);
 app.get('/getPossiblePathsForRoad', servePossiblePathsForRoad);
 app.post('/getResources', getResources);
 app.post('/buildSettlement', buildSettlement);
+app.post('/buildInitialSettlement', buildInitialSettlement);
 app.post('/addResourcesToPlayer', addResourcesToPlayer);
 app.post('/servePossiblePathsForRoadInSetup', servePossiblePathsForRoadInSetup);
 app.post('/buildRoad', addRoad);

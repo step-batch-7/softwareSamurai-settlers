@@ -8,7 +8,7 @@ const main = () => {
   getTerrains();
   getBankStatus();
   fetchCardsCount();
-  requestSettlement();
+  requestInitialSettlement();
 };
 
 const distributeResources = async () => {
