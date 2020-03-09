@@ -44,7 +44,7 @@ describe('buildSettlement', () => {
   });
 });
 
-describe('Get buildRoad', () => {
+describe('Get /buildRoad', () => {
   it('should build the Road on given position', done => {
     request(app)
       .post('/buildRoad')
@@ -79,10 +79,10 @@ describe('Get /cardsCount', () => {
     });
   });
 
-  describe('Post /servePossiblePathsForRoad', () => {
-    it('should serve possible paths for building a road for /servePossiblePathsForRoad', done => {
+  describe('Post /servePossiblePathsForRoadInSetup', () => {
+    it('should serve possible paths for building a road for /servePossiblePathsForRoadInSetup', done => {
       request(app)
-        .post('/servePossiblePathsForRoad')
+        .post('/servePossiblePathsForRoadInSetup')
         .expect(200, done);
     });
   });
@@ -126,6 +126,7 @@ describe('/buildStatus', () => {
       .post('/buildSettlement')
       .set('content-type', 'application/json')
       .send({ intersection: 'hiq' })
+      // .send({ intersection: '2' })
       .expect(200, done);
   });
 
@@ -140,6 +141,7 @@ describe('/buildStatus', () => {
       .post('/buildSettlement')
       .set('content-type', 'application/json')
       .send({ intersection: 'fop' })
+      // .send({ numToken: 10 })
       .expect(200, done);
   });
 
@@ -156,3 +158,24 @@ describe('/buildStatus', () => {
       .expect(/"settlement":true/);
   });
 });
+
+describe('Get /getPossiblePathsForRoad', () => {
+  it('Should give possible paths adjacent to existing settlements', done => {
+    request(app)
+      .get('/getPossiblePathsForRoad')
+      .expect(200, done);
+  });
+});
+
+// it('building settlements for tests', done => {
+//   request(app)
+//     .post('/addResourcesToPlayer')
+//     .expect(200, done);
+// });
+
+// it('should give true if user can build settlement', done => {
+//   request(app)
+//     .get('/buildStatus')
+//     .expect(200, done)
+//     .expect(/"settlement":true/);
+// });

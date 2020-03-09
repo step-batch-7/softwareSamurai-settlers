@@ -89,8 +89,8 @@ const buildRoad = async function(pathId) {
   }
 };
 
-const showPossiblePathsForRoad = async function() {
-  const response = await fetch('/servePossiblePathsForRoad', {
+const showPossiblePathsForRoadInSetUp = async function() {
+  const response = await fetch('/servePossiblePathsForRoadInSetup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -130,6 +130,18 @@ const buildSettlement = async function() {
   if (response.ok) {
     renderNewSettlement(intersection);
     distributeResources();
-    showPossiblePathsForRoad();
+    showPossiblePathsForRoadInSetUp();
+  }
+};
+
+const getPossiblePathsForRoad = async function() {
+  const response = await fetch('/getPossiblePathsForRoad');
+  if (response.ok) {
+    const pathIds = await response.json();
+    pathIds.forEach(pathId => {
+      const path = document.getElementById(pathId);
+      path.classList.remove('hide');
+      path.addEventListener('click', buildRoad.bind(null, pathId));
+    });
   }
 };

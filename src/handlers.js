@@ -78,7 +78,7 @@ const addRoad = function(req, res) {
   res.end();
 };
 
-const servePossiblePathsForRoad = (req, res) => {
+const servePossiblePathsForRoadInSetup = (req, res) => {
   const { player, board } = req.app.locals;
   const settlement = player.settlements.slice().pop();
   const possiblePositionsForRoad = board.getEmptyPaths();
@@ -98,6 +98,40 @@ const updateTransaction = (resourceCards, bank, player) => {
     player.addResources(resourceCard);
   });
 };
+
+const servePossiblePathsForRoad = (req, res) => {
+  const { player, board } = req.app.locals;
+  const settlements = player.getSettlements();
+  const remainingPaths = board.getEmptyPaths();
+  const possiblePaths = settlements.reduce((possiblePaths, settlement) => {
+    const positionsToBuildRoad = remainingPaths.filter(position => {
+      return position
+        .split('-')
+        .some(intersection => settlement === intersection);
+    });
+    return possiblePaths.concat(positionsToBuildRoad);
+  }, []);
+  res.json(possiblePaths);
+};
+
+// const getResources = function(req, res) {
+//   const terrains = req.app.locals.board.getTerrains();
+//   const selectedTerrains = {};
+//   for (const terrain in terrains) {
+//     if (terrains[terrain]['noToken'] === req.body.numToken) {
+//       selectedTerrains[terrain] = terrains[terrain];
+//     }
+//   }
+//   const { bank, player } = req.app.locals;
+//   const resourceId = player.getMatchingTerrains(selectedTerrains);
+//   const resourceCards = resourceId.reduce((resourceCards, tokenId) => {
+//     if (terrains[tokenId]) {
+//       const terrain = terrains[tokenId].resource;
+//       resourceCards.push({ resource: productions[terrain], count: 1 });
+//     }
+//     return resourceCards;
+//   }, []);
+// };
 
 const pickTerrains = (terrains, numToken) => {
   const selectedTerrains = [];
@@ -137,8 +171,9 @@ module.exports = {
   buildSettlement,
   addResourcesToPlayer,
   getRandomDiceNum,
-  servePossiblePathsForRoad,
+  servePossiblePathsForRoadInSetup,
   addRoad,
   getResources,
-  getBuildStatus
+  getBuildStatus,
+  servePossiblePathsForRoad
 };
