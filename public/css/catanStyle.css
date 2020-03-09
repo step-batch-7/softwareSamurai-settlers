@@ -100,13 +100,23 @@ body {
   justify-content: space-evenly;
 }
 
+/*-------------------lowerBar-----------------*/
+
 #actions {
   height: 50%;
   width: 40%;
   display: flex;
   justify-content: space-evenly;
-  margin-top: 2.5%;
+  margin-top: 5.5%;
 }
+
+.unit {
+  height: 100%;
+  width: 12%;
+  border: teal solid;
+}
+
+/*--------------------board---------------------*/
 
 #board {
   width: 100%;
