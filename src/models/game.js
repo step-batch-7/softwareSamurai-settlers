@@ -8,6 +8,9 @@ class Game {
     this.bank = new Bank();
     this.player = new Player();
   }
+  cardsCount() {
+    return this.player.cardsCount();
+  }
 }
 
 module.exports = { Game };

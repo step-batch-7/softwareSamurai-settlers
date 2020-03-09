@@ -22,8 +22,8 @@ const getBankStatus = (req, res) => {
 };
 
 const getCardsCount = function(req, res) {
-  const { player } = req.app.locals;
-  res.json(player.cardsCount());
+  const {game} = req.app.locals;
+  res.json(game.cardsCount());
 };
 
 const getAvailableSettlements = function(req, res) {
