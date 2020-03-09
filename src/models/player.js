@@ -1,13 +1,21 @@
 const Cards = require('./cards');
+const Resources = require('./resources');
+const DevCards = require('./devCards');
 
 class Player {
   constructor() {
     this.settlements = [];
     this.roads = [];
     this.cards = new Cards();
+    this.resources = new Resources();
+    this.devCards = new DevCards();
   }
   cardsCount() {
-    return this.cards.count();
+    return {
+      resources: this.resources.status(),
+      devCards: this.devCards.status(),
+      totalDevCards: this.devCards.count()
+    };
   }
   addSettlement(settlement) {
     this.settlements.push(settlement);
@@ -44,4 +52,4 @@ class Player {
   }
 }
 
-module.exports = {Player};
+module.exports = { Player };

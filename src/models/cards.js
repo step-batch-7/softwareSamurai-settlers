@@ -6,13 +6,6 @@ class Cards {
     this.resources = new Resources();
     this.devCards = new DevCards();
   }
-  count() {
-    return {
-      resources: this.resources.status(),
-      devCards: this.devCards.status(),
-      totalDevCards: this.devCards.count()
-    };
-  }
 
   addResources(card) {
     return this.resources.add(card);
