@@ -105,8 +105,9 @@ const servePossiblePathsForRoadInSetup = (req, res) => {
 
 const updateTransaction = (resourceCards, bank, player) => {
   resourceCards.forEach(resourceCard => {
-    bank.remove(resourceCard);
-    player.addResources(resourceCard);
+    if (bank.remove(resourceCard)) {
+      player.addResources(resourceCard);
+    }
   });
 };
 

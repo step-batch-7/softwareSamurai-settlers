@@ -29,8 +29,13 @@ class Bank {
     return { lumber, brick, ore, wool, grain, developmentCards };
   }
 
+  haveResource(resource, count) {
+    const presentCount = this.resources[resource];
+    return presentCount - count >= 0;
+  }
+
   remove({ resource, count }) {
-    if (resource && count) {
+    if (resource && count && this.haveResource(resource, count)) {
       this.resources[resource] = this.resources[resource] - count;
       return true;
     }
