@@ -82,7 +82,6 @@ const buildRoad = async function(pathId) {
     path.style.backgroundColor = 'transparent';
     path.style.opacity = 1;
     path.style.animation = 'none';
-    // path.classList.remove('show-road');
     path.classList.add('afterRoad');
     hideAllPaths();
     const img = '<image href="/assets/roads/blueRoad.svg" class="road-image">';
@@ -100,8 +99,6 @@ const showPossiblePathsForRoad = async function() {
 
   if (response.ok) {
     const pathIds = await response.json();
-    // const allRoads = document.querySelector('.allRoads');
-    // allRoads.classList.remove('hide');
     pathIds.forEach(pathId => {
       const path = document.getElementById(pathId);
       path.classList.remove('hide');
