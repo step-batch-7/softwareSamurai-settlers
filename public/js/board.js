@@ -212,3 +212,68 @@ const getPossiblePathsForRoad = async function() {
     });
   }
 };
+
+const renderPlayerInfo = (player, playerDetail) => {
+  for (const property in playerDetail) {
+    const playerPropertyElement = player.querySelector(`#${property}`);
+    if (property === 'resourceCards' || property === 'developmentCards') {
+      playerPropertyElement.innerHTML = playerDetail[property];
+    }
+    playerPropertyElement.innerText = playerDetail[property];
+  }
+};
+
+const renderPlayersDetails = function() {
+  const playersDetail = [
+    {
+      resourceCards: 0,
+      developmentCards: 0,
+      victoryPoint: 0,
+      playedNightCards: 0,
+      longestRoadCount: 0,
+      remainingSettlement: 5,
+      remainingRoads: 15,
+      remainingCities: 4
+    },
+    {
+      resourceCards: 10,
+      developmentCards: 2,
+      victoryPoint: 0,
+      playedNightCards: 0,
+      longestRoadCount: 0,
+      remainingSettlement: 5,
+      remainingRoads: 15,
+      remainingCities: 4
+    },
+    {
+      resourceCards: 0,
+      developmentCards: 0,
+      victoryPoint: 0,
+      playedNightCards: 0,
+      longestRoadCount: 0,
+      remainingSettlement: 5,
+      remainingRoads: 15,
+      remainingCities: 4
+    },
+    {
+      resourceCards: 0,
+      developmentCards: 0,
+      victoryPoint: 0,
+      playedNightCards: 0,
+      longestRoadCount: 0,
+      remainingSettlement: 5,
+      remainingRoads: 15,
+      remainingCities: 4
+    }
+  ];
+
+  playersDetail.forEach((playerDetail, index) => {
+    if (index === 0) {
+      const currentPlayer = document.getElementById('current-player');
+      renderPlayerInfo(currentPlayer, playerDetail);
+      return;
+    }
+    const player = document.getElementById(`player-info${index}`);
+    renderPlayerInfo(player, playerDetail);
+  });
+};

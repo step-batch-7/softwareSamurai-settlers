@@ -9,6 +9,7 @@ const main = () => {
   getBankStatus();
   fetchCardsCount();
   requestInitialSettlement();
+  renderPlayersDetails();
 };
 
 const distributeResources = async () => {

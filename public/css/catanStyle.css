@@ -53,8 +53,8 @@ body {
   display: flex;
 }
 
-#resCard-count,
-#devCard-count {
+#resource-cards,
+#development-cards {
   width: 50%;
   height: 100%;
 }
