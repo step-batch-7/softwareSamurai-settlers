@@ -39,12 +39,26 @@ class Game {
     this.turn = new Turn(['p-1', 'p-2', 'p-3', 'p-4']);
   }
 
+  static initializeGame(hostName) {
+    const game = new Game();
+    game.addPlayer(hostName);
+    return game;
+  }
+
   cardsCount() {
     return this.player.cardsCount();
   }
 
-  addPlayer() {
-    this.players.push(new Player());
+  generateNewPlayerId() {
+    let [lastId] = Object.keys(this.players)
+      .sort()
+      .reverse();
+    return ++lastId || 1;
+  }
+
+  addPlayer(name) {
+    const id = this.generateNewPlayerId();
+    this.players[id] = new Player(name);
   }
 
   getBoardData() {

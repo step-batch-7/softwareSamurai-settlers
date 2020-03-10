@@ -2,7 +2,8 @@ const Resources = require('./resources');
 const DevCards = require('./devCards');
 
 class Player {
-  constructor() {
+  constructor(name) {
+    this.name = name;
     this.settlements = [];
     this.roads = [];
     this.resources = new Resources();

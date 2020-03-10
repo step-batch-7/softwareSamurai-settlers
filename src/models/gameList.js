@@ -6,13 +6,15 @@ class GameList {
   }
 
   generateGameId() {
-    this.lastId = ++this.lastId || 1000;
-    return this.lastId;
+    let [lastId] = Object.keys(this.games)
+      .sort()
+      .reverse();
+    return ++lastId || 1000;
   }
 
-  initializeGame() {
+  createGame(hostName) {
     const id = this.generateGameId();
-    this.games[id] = new Game();
+    this.games[id] = Game.initializeGame(hostName);
   }
 
   getGame(gameId) {

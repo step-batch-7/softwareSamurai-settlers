@@ -91,6 +91,12 @@ const addRoadWithResources = function(req, res) {
   res.end();
 };
 
+const hostNewGame = function(req, res) {
+  const { hostName } = req.body;
+  req.app.locals.gameList.createGame(hostName);
+  res.redirect('/templates/waitingPage.html');
+};
+
 module.exports = {
   getTerrainDetails,
   getCardsCount,
@@ -106,5 +112,6 @@ module.exports = {
   servePossiblePathsForRoad,
   buildInitialSettlement,
   getAvailableAdjSettlements,
-  addRoadWithResources
+  addRoadWithResources,
+  hostNewGame
 };

@@ -17,11 +17,13 @@ const {
   servePossiblePathsForRoad,
   buildInitialSettlement,
   getAvailableAdjSettlements,
-  addRoadWithResources
+  addRoadWithResources,
+  hostNewGame
 } = require('./handlers');
 
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
@@ -30,6 +32,7 @@ app.locals.gameList = new GameList();
 
 app.get('/', (req, res) => res.redirect('catan.html'));
 app.get('/buildStatus', getBuildStatus);
+app.post('/host', hostNewGame);
 app.get('/requestInitialSettlement', getAvailableSettlements);
 app.get('/requestSettlement', getAvailableAdjSettlements);
 app.get('/bankStatus', getBankStatus);
