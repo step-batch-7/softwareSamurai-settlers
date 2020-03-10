@@ -8,6 +8,7 @@ class Player {
     this.roads = [];
     this.resources = new Resources();
     this.devCards = new DevCards();
+    this.victoryPoint = 0;
   }
   cardsCount() {
     return {

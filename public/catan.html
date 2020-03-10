@@ -519,7 +519,7 @@
               onmouseout="makeNormal('settlement')"
             >
               <img
-                src="/assets/builds/settlement.svg"
+                src="/assets/settlements/blueSettlement.svg"
                 alt="settlement"
                 style="height:100%; margin: -6px;"
               />
@@ -662,10 +662,270 @@
             </svg>
           </div>
         </div>
-        <div id="player-info1"></div>
-        <div id="player-info2"></div>
-        <div id="player-info3"></div>
-        <div id="current-player"></div>
+        <div id="player-info1">
+            <div id="cards-count">
+              <div id="resCard-count">
+                <svg height="90" width="75">
+                  <image x="10" y="20" xlink:href="assets/cards/resourceCards/resCardBg.jpg" height="60" width="50" />
+                  <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
+                  <text x="50" y="24" style="fill:white;font-size:20;">0</text>
+                </svg>
+              </div>
+              <div id="devCard-count">
+                <svg height="90" width="75">
+                  <image x="10" y="20" xlink:href="assets/cards/developmentCards/developmentCard1.jpg" height="60" width="50" />
+                  <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
+                  <text x="50" y="24" style="fill:white;font-size:20;">0</text>
+                </svg>
+              </div>
+            </div>
+            <div id="player-status">
+              <div class="component">
+                <div>
+                  <img src="assets/star.png" alt="star" height="40px" width="40px" />
+                </div>
+                <div id="points" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img src="assets/robber.png" alt="knight" height="40px" width="20px" />
+                </div>
+                <div id="knight-count" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img
+                    src="assets/longestRoad.svg"
+                    alt="road"
+                    height="40px"
+                    width="40px"
+                  />
+                </div>
+                <div id="longest-road" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img
+                    src="assets/settlements/redSettlement.svg"
+                    alt="settlement"
+                    height="40px"
+                    width="40px"
+                  />
+                </div>
+                <div id="settlements-count" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img src="assets/roads/redRoad.svg" alt="road" height="40px" width="40px" />
+                </div>
+                <div id="road-count" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img src="assets/cities/redCity.svg" alt="city" height="40px" width="40px" />
+                </div>
+                <div id="city-count" class="count">0</div>
+              </div>
+            </div>
+          </div>
+          <div id="player-info2">
+            <div id="cards-count">
+              <div id="resCard-count">
+                <svg height="90" width="75">
+                  <image x="10" y="20" xlink:href="assets/cards/resourceCards/resCardBg.jpg" height="60" width="50" />
+                  <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
+                  <text x="50" y="24" style="fill:white;font-size:20;">0</text>
+                </svg>
+              </div>
+              <div id="devCard-count">
+                <svg height="90" width="75">
+                  <image x="10" y="20" xlink:href="assets/cards/developmentCards/developmentCard1.jpg" height="60" width="50" />
+                  <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
+                  <text x="50" y="24" style="fill:white;font-size:20;">0</text>
+                </svg>
+              </div>
+            </div>
+            <div id="player-status">
+              <div class="component">
+                <div>
+                  <img src="assets/star.png" alt="star" height="40px" width="40px" />
+                </div>
+                <div id="points" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img src="assets/robber.png" alt="knight" height="40px" width="20px" />
+                </div>
+                <div id="knight-count" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img
+                    src="assets/longestRoad.svg"
+                    alt="road"
+                    height="40px"
+                    width="40px"
+                  />
+                </div>
+                <div id="longest-road" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img
+                    src="assets/settlements/orangeSettlement.svg"
+                    alt="settlement"
+                    height="40px"
+                    width="40px"
+                  />
+                </div>
+                <div id="settlements-count" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img src="assets/roads/orangeRoad.svg" alt="road" height="40px" width="40px" />
+                </div>
+                <div id="road-count" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img src="assets/cities/orangeCity.svg" alt="city" height="40px" width="40px" />
+                </div>
+                <div id="city-count" class="count">0</div>
+              </div>
+            </div>
+          </div>
+          <div id="player-info3">
+            <div id="cards-count">
+              <div id="resCard-count">
+                <svg height="90" width="75">
+                  <image x="10" y="20" xlink:href="assets/cards/resourceCards/resCardBg.jpg" height="60" width="50" />
+                  <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
+                  <text x="50" y="24" style="fill:white;font-size:20;">0</text>
+                </svg>
+              </div>
+              <div id="devCard-count">
+                <svg height="90" width="75">
+                  <image x="10" y="20" xlink:href="assets/cards/developmentCards/developmentCard1.jpg" height="60" width="50" />
+                  <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
+                  <text x="50" y="24" style="fill:white;font-size:20;">0</text>
+                </svg>
+              </div>
+            </div>
+            <div id="player-status">
+              <div class="component">
+                <div>
+                  <img src="assets/star.png" alt="star" height="40px" width="40px" />
+                </div>
+                <div id="points" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img src="assets/robber.png" alt="knight" height="40px" width="20px" />
+                </div>
+                <div id="knight-count" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img
+                    src="assets/longestRoad.svg"
+                    alt="road"
+                    height="40px"
+                    width="40px"
+                  />
+                </div>
+                <div id="longest-road" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img
+                    src="assets/settlements/yellowSettlement.svg"
+                    alt="settlement"
+                    height="40px"
+                    width="40px"
+                  />
+                </div>
+                <div id="settlements-count" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img src="assets/roads/yellowRoad.svg" alt="road" height="40px" width="40px" />
+                </div>
+                <div id="road-count" class="count">0</div>
+              </div>
+              <div class="component">
+                <div>
+                  <img src="assets/cities/yellowCity.svg" alt="city" height="40px" width="40px" />
+                </div>
+                <div id="city-count" class="count">0</div>
+              </div>
+            </div>
+          </div>
+          <div id="current-player">
+              <div id="cards-count">
+                  <div id="resCard-count">
+                    <svg height="140" width="85">
+                      <image x="5" y="30" xlink:href="assets/cards/resourceCards/resCardBg.jpg" height="100" width="65" />
+                      <circle cx="60" cy="30" r="15" style="fill:rgba(0,0,0,0.6)" />
+                      <text x="53" y="39" style="fill:white;font-size:25;">0</text>
+                    </svg>
+                  </div>
+                  <div id="devCard-count">
+                      <svg height="140" width="85">
+                          <image x="2" y="30" xlink:href="assets/cards/developmentCards/developmentCard1.jpg" height="100" width="65" />
+                          <circle cx="60" cy="30" r="15" style="fill:rgba(0,0,0,0.6)" />
+                          <text x="53" y="39" style="fill:white;font-size:25;">0</text>
+                        </svg>
+                  </div>
+                </div>
+                <div id="player-status" style="margin-top:4%">
+                  <div class="component">
+                    <div>
+                      <img src="assets/star.png" alt="star" height="40px" width="40px" />
+                    </div>
+                    <div id="points" class="count">0</div>
+                  </div>
+                  <div class="component">
+                    <div>
+                      <img src="assets/robber.png" alt="knight" height="40px" width="20px" />
+                    </div>
+                    <div id="knight-count" class="count">0</div>
+                  </div>
+                  <div class="component">
+                    <div>
+                      <img
+                        src="assets/longestRoad.svg"
+                        alt="road"
+                        height="40px"
+                        width="40px"
+                      />
+                    </div>
+                    <div id="longest-road" class="count">0</div>
+                  </div>
+                  <div class="component">
+                    <div>
+                      <img
+                        src="assets/settlements/blueSettlement.svg"
+                        alt="settlement"
+                        height="40px"
+                        width="40px"
+                      />
+                    </div>
+                    <div id="settlements-count" class="count">0</div>
+                  </div>
+                  <div class="component">
+                    <div>
+                      <img src="assets/roads/blueRoad.svg" alt="road" height="40px" width="40px" />
+                    </div>
+                    <div id="road-count" class="count">0</div>
+                  </div>
+                  <div class="component">
+                    <div>
+                      <img src="assets/cities/blueCity.svg" alt="city" height="40px" width="40px" />
+                    </div>
+                    <div id="city-count" class="count">0</div>
+                  </div>
+          </div>
+        </div>
       </div>
     </div>
   </body>

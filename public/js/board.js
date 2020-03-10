@@ -31,7 +31,7 @@ const renderSettlements = function(settlements) {
   settlements.forEach(settlement => {
     const intersection = document.getElementById(settlement);
     intersection.classList.add('afterSettlement');
-    const img = `<image href='/assets/builds/settlement.svg' 
+    const img = `<image href='/assets/settlements/blueSettlement.svg' 
     style="height:100%; width:100%;">`;
     intersection.innerHTML = img;
   });
@@ -153,7 +153,7 @@ const renderNewSettlement = function(intersection, buildingFunction) {
   intersection.classList.remove('point');
   intersection.classList.remove('visibleIntersection');
   intersection.classList.add('afterSettlement');
-  const img = `<image href='/assets/builds/settlement.svg' 
+  const img = `<image href='/assets/settlements/blueSettlement.svg' 
     style="height:100%; width:100%;">`;
   intersection.innerHTML = img;
 };
