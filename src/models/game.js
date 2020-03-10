@@ -34,6 +34,7 @@ class Game {
     this.board = new Board();
     this.bank = new Bank();
     this.player = new Player();
+    this.players = {};
     this.players = [];
     this.turn = new Turn(['p-1', 'p-2', 'p-3', 'p-4']);
   }
@@ -138,13 +139,12 @@ class Game {
     const settlements = this.player.getSettlements();
     const possiblePaths = paths.filter(path => {
       const isPathConnectedToRoad = roads.some(isRoadIncluded.bind(null, path));
-      const isPathConnectedToSettlement = settlements.some((settlement) => {
+      const isPathConnectedToSettlement = settlements.some(settlement => {
         return isIntersectionIncluded(path, settlement);
       });
       return isPathConnectedToRoad || isPathConnectedToSettlement;
     });
     return possiblePaths;
-
   }
 
   canBuild() {
