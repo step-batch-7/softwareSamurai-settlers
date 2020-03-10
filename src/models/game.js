@@ -148,7 +148,7 @@ class Game {
   }
 
   getAvailableAdjSettlements() {
-    const settlements = this.board.getAvailableSettlements();
+    const settlements = this.getAvailableSettlements();
     const roads = this.player.getRoads();
     const adjSettlements = settlements.filter(settlement => {
       return roads.some(road => road.split('-').includes(settlement));

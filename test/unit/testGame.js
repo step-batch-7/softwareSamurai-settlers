@@ -58,4 +58,10 @@ describe('Game', () => {
     });
   });
 
+  describe('getAvailableAdjSettlements ', () => {
+    it('should give empty array if no positions are available', () => {
+      const game = new Game();
+      assert.deepStrictEqual(game.getAvailableAdjSettlements(), []);
+    });
+  });
 });
