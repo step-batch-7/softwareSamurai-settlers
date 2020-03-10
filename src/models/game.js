@@ -150,10 +150,11 @@ class Game {
   getAvailableAdjSettlements() {
     const settlements = this.getAvailableSettlements();
     const roads = this.player.getRoads();
-    const adjSettlements = settlements.filter(settlement => {
+    let adjSettlements = settlements.filter(settlement => {
       return roads.some(road => road.split('-').includes(settlement));
     });
-    return adjSettlements;
+    adjSettlements = new Set(adjSettlements);
+    return Array.from(adjSettlements);
   }
 
   addRoadWithResources(pathId) {

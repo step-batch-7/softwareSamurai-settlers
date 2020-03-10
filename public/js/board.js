@@ -65,7 +65,6 @@ const requestInitialSettlement = async function() {
   const response = await fetch('/requestInitialSettlement');
   if (response.ok) {
     const positions = await response.json();
-
     positions.forEach(position => {
       const intersection = document.getElementById(position);
       intersection.classList.add('visibleIntersection');
