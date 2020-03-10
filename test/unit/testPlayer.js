@@ -82,4 +82,21 @@ describe('Player', () => {
       assert.equal(player.resources.wool, 0);
     });
   });
+  describe('addRoad', () => {
+    it('should give true if the road is present', () => {
+      const player = new Player();
+      player.addResources({ resource: 'brick', count: 1 });
+      player.addResources({ resource: 'lumber', count: 1 });
+      assert.isTrue(player.addRoad('a1-al'));
+      assert.deepStrictEqual(player.roads, ['a1-al']);
+    });
+
+    it('should give false if road is not present', () => {
+      const player = new Player();
+      player.addResources({ resource: 'brick', count: 1 });
+      player.addResources({ resource: 'lumber', count: 1 });
+      assert.isFalse(player.addRoad());
+      assert.deepStrictEqual(player.roads, []);
+    });
+  });
 });
