@@ -20,9 +20,9 @@ const updateDicePhase = function(num1, num2) {
   secondDice.src = `./assets/dice/${num2}.jpg`;
 };
 
-const getResources = async function(dice1, dice2) {
+const resourceProduction = async function(dice1, dice2) {
   const reqText = JSON.stringify({ numToken: dice1 + dice2 });
-  const res = await fetch('/getResources', {
+  const res = await fetch('/resourceProduction', {
     method: 'POST',
     body: reqText,
     headers: { 'Content-Type': 'application/json' }
@@ -57,5 +57,5 @@ const showDicePhase = async function() {
   const body = await res.json();
   const { dice1, dice2 } = await body;
   updateDicePhase(dice1, dice2);
-  getResources(dice1, dice2);
+  resourceProduction(dice1, dice2);
 };

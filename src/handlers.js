@@ -65,7 +65,7 @@ const servePossiblePathsForRoad = (req, res) => {
   res.json(possiblePaths);
 };
 
-const getResources = function(req, res) {
+const resourceProduction = function(req, res) {
   const { numToken } = req.body;
   const { game } = req.app.locals;
   game.resourceProduction(numToken);
@@ -101,7 +101,7 @@ module.exports = {
   getRandomDiceNum,
   servePossiblePathsForRoadInSetup,
   addRoad,
-  getResources,
+  resourceProduction,
   getBuildStatus,
   servePossiblePathsForRoad,
   buildInitialSettlement,

@@ -105,7 +105,7 @@ describe('get /diceNumbers', () => {
   });
 });
 
-describe('post /getResources', () => {
+describe('post /resourceProduction', () => {
   it('should get resources if numberToken matches the terrain', done => {
     request(app)
       .post('/buildSettlement')
@@ -116,7 +116,7 @@ describe('post /getResources', () => {
 
   it('should increase resources based on number token', done => {
     request(app)
-      .post('/getResources')
+      .post('/resourceProduction')
       .set('content-type', 'application/json')
       .send({ numToken: 10 })
       .expect(200, done);
