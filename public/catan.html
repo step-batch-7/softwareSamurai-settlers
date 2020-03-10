@@ -351,7 +351,7 @@
           <div id="turn">
             <div id="turn-details"></div>
             <div id="dice-box">
-              <div id="dice" onclick="showDicePhase()">
+              <div id="dice">
                 <div id="dice1">
                   <img src="./assets/dice/1.jpg" height="55px" width="55px" />
                 </div>
@@ -359,7 +359,14 @@
                   <img src="./assets/dice/6.jpg" height="55px" width="55px" />
                 </div>
               </div>
-              <label style="margin-left:15%;">Roll The Dice</label>
+              <button
+                style="margin-left:15%; cursor: pointer;"
+                onclick="showDicePhase()"
+                onmouseover="makeBig('dice')"
+                onmouseout="makeNormal('dice')"
+              >
+               Roll The Dice
+              </button>
             </div>
           </div>
         </div>
@@ -487,43 +494,57 @@
             </div>
           </div>
           <div id="actions">
-            <div class="unit" style="pointer-events: none; border: none;"></div>
-            <div
+            <button
+              class="unit"
+              style="pointer-events: none; border: none;"
+            ></button>
+            <button
               class="unit disabledUnit"
               id="road"
               onclick="getPossiblePathsForRoad()"
+              onmouseover="makeBig('road')"
+              onmouseout="makeNormal('road')"
             >
               <img
                 src="/assets/roads/blueRoad.svg"
                 alt="road"
-                style="height:100%; width:100%;"
+                style="height:86%; width:100%;margin-top: 10%;"
               />
-            </div>
-            <div
+            </button>
+            <button
               class="unit disabledUnit"
               id="settlement"
               onclick="requestSettlement()"
+              onmouseover="makeBig('settlement')"
+              onmouseout="makeNormal('settlement')"
             >
               <img
                 src="/assets/builds/settlement.svg"
-                style="height:100%; width:100%;"
+                alt="settlement"
+                style="height:100%; margin: -6px;"
               />
-            </div>
-            <div class="unit" style="pointer-events: none; border: none;"></div>
-            <div class="unit" style="pointer-events: none; border: none;"></div>
+            </button>
+            <button
+              class="unit"
+              style="pointer-events: none; border: none;"
+            ></button>
+            <button
+              class="unit"
+              style="pointer-events: none; border: none;"
+            ></button>
           </div>
         </div>
       </div>
       <div id="other-players">
         <div id="game-Log"></div>
         <div id="bank">
-          <div style="height:100%; width:17%;">
+          <div style="height:100%; width:20%;">
             <img
-              src="/assets/bank.svg"
+              src="/assets/bank.jpg"
               alt="bank"
               height="58%"
               width="100%"
-              style="margin-top: 46%;"
+              style="margin-top: 43%;"
             />
           </div>
           <div id="brick">

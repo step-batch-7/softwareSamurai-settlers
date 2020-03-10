@@ -183,6 +183,13 @@ const buildSettlement = async function() {
 const getPossiblePathsForRoad = async function() {
   const response = await fetch('/getPossiblePathsForRoad');
   if (response.ok) {
+    if (
+      Array.from(document.getElementById('road').classList).includes(
+        'disabledUnit'
+      )
+    ) {
+      return;
+    }
     const pathIds = await response.json();
     pathIds.forEach(pathId => {
       const path = document.getElementById(pathId);

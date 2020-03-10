@@ -18,3 +18,16 @@ const distributeResources = async () => {
     getBankStatus();
   }
 };
+
+const makeNormal = buildingType => {
+  const element = document.getElementById(buildingType);
+  element.style.transform = 'scale(1)';
+};
+
+const makeBig = buildingType => {
+  const element = document.getElementById(buildingType);
+
+  if (!Array.from(element.classList).includes('disabledUnit')) {
+    element.style.transform = 'scale(1.03)';
+  }
+};
