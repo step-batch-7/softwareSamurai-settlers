@@ -38,9 +38,8 @@ class Game {
     this.players = [];
   }
 
-  static initializeGame(hostName) {
+  static initializeGame() {
     const game = new Game();
-    game.addPlayer(hostName);
     return game;
   }
 
@@ -58,6 +57,7 @@ class Game {
   addPlayer(name) {
     const id = this.generateNewPlayerId();
     this.players[id] = new Player(name);
+    return id;
   }
 
   getBoardData() {

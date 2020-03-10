@@ -93,7 +93,12 @@ const addRoadWithResources = function(req, res) {
 
 const hostNewGame = function(req, res) {
   const { hostName } = req.body;
-  req.app.locals.gameList.createGame(hostName);
+  const { sessions, gameList } = req.app.locals;
+  const gameId = gameList.createGame();
+  const game = gameList.getGame(gameId);
+  const playerId = game.addPlayer(hostName);
+  const sessionId = sessions.createSession(gameId, playerId);
+  res.cookie('session_Id', sessionId);
   res.redirect('/templates/waitingPage.html');
 };
 

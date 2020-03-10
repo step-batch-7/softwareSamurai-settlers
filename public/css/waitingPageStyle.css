@@ -108,49 +108,17 @@ body {
 }
 
 .person:nth-child(1) > .userIcon {
-  /* background: rgb(2, 0, 36);
-  background: linear-gradient(
-    160deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(28, 28, 175, 1) 2%,
-    rgba(0, 212, 255, 1) 100%
-  ); */
   background: rgb(1, 166, 255);
 }
 
 .person:nth-child(2) > .userIcon {
-  /* background: rgb(2, 0, 36);
-  background: linear-gradient(
-    160deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(233, 12, 41, 1) 0%,
-    rgba(231, 91, 123, 1) 100%
-  ); */
   background: rgb(231, 0, 1);
 }
 
 .person:nth-child(3) > .userIcon {
-  /* background: rgb(2, 0, 36);
-  background: linear-gradient(
-    160deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(12, 138, 4, 1) 0%,
-    rgba(25, 146, 17, 1) 11%,
-    rgba(33, 152, 25, 1) 19%,
-    rgba(36, 154, 28, 1) 21%,
-    rgba(76, 181, 68, 1) 46%,
-    rgba(198, 231, 190, 5) 100%
-  ); */
   background: rgb(31, 217, 53);
 }
 
 .person:nth-child(4) > .userIcon {
-  /* background: rgb(0, 0, 0);
-  background: linear-gradient(
-    160deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(255, 100, 0, 1) 0%,
-    rgba(237, 225, 193, 1) 100%
-  ); */
   background: rgb(250, 135, 37);
 }

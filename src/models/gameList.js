@@ -14,7 +14,9 @@ class GameList {
 
   createGame(hostName) {
     const id = this.generateGameId();
-    this.games[id] = Game.initializeGame(hostName);
+    const game = Game.initializeGame(hostName);
+    this.games[id] = game;
+    return id;
   }
 
   getGame(gameId) {
