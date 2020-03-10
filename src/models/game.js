@@ -61,6 +61,7 @@ class Game {
       }
     });
   }
+
   bankStatus() {
     return this.bank.status;
   }
@@ -138,7 +139,12 @@ class Game {
   canBuild() {
     const canBuildSettlement = this.player.canBuildSettlement();
     const canBuildRoad = this.player.canBuildRoad();
-    return { settlement: canBuildSettlement, road: canBuildRoad };
+    const havePositionsToBuildSettlements =
+      this.getAvailableAdjSettlements().length > 0;
+    return {
+      settlement: canBuildSettlement && havePositionsToBuildSettlements,
+      road: canBuildRoad
+    };
   }
 
   getAvailableAdjSettlements() {
