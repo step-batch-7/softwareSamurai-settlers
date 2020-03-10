@@ -49,13 +49,27 @@ body {
   text-shadow: -1px -1px 0 #000;
 }
 
+#host-name-box {
+  font-size: 25px;
+  width: 90%;
+  height: 20%;
+  margin-left: 6%;
+}
+
 #hostName {
   color: white;
   background: transparent;
   border: none;
+  outline: none;
   border-bottom: solid 1px whitesmoke;
   width: 70%;
-  height: 20%;
+  height: 80%;
+  font-size: 20px;
+}
+
+::placeholder {
+  color: white;
+  opacity: 0.5;
 }
 
 form {
