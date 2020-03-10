@@ -29,4 +29,15 @@ describe('Bank', () => {
       assert.isFalse(bank.haveResource('ore', 20));
     });
   });
+  describe('add', () => {
+    it('should not add resources to the bank', () => {
+      const bank = new Bank();
+      assert.isFalse(bank.add({ lumber: 1, brick: 1 }));
+    });
+    it('should add resources to the bank', () => {
+      const bank = new Bank();
+      bank.remove({ resource: 'lumber', count: 1 });
+      assert.isTrue(bank.add({ lumber: 1 }));
+    });
+  });
 });

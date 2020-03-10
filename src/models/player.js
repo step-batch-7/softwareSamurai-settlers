@@ -61,7 +61,7 @@ class Player {
 
   deductCardsForRoad() {
     const roadResources = { lumber: 1, brick: 1 };
-    this.resources.deduct(roadResources);
+    return this.resources.deduct(roadResources);
   }
 }
 

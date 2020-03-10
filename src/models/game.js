@@ -161,8 +161,10 @@ class Game {
   addRoadWithResources(pathId) {
     this.board.addRoad(pathId);
     this.player.addRoad(pathId);
-    this.player.deductCardsForRoad(pathId);
-    this.bank.add({ lumber: 1, brick: 1 });
+    const isDeducted = this.player.deductCardsForRoad(pathId);
+    if (isDeducted) {
+      this.bank.add({ lumber: 1, brick: 1 });
+    }
   }
 }
 

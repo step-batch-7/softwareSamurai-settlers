@@ -44,8 +44,13 @@ class Bank {
 
   add(resources) {
     for (const resource in resources) {
+      const totalResources = this.resources[resource] + resources[resource];
+      if (totalResources > 19) {
+        return false;
+      }
       this.resources[resource] += resources[resource];
     }
+    return true;
   }
 }
 

@@ -32,11 +32,14 @@ class Resources {
   }
 
   deduct(resources) {
+    let status = false;
     for (const resource in resources) {
       if (this[resource] > 0) {
         this[resource] -= resources[resource];
+        status = true;
       }
     }
+    return status;
   }
 }
 
