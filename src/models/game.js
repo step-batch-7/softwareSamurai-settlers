@@ -1,6 +1,7 @@
 const { Player } = require('./player');
 const { Board } = require('./board');
 const { Bank } = require('./bank');
+const { Turn } = require('./turn');
 
 const productions = {
   fields: 'grain',
@@ -33,10 +34,16 @@ class Game {
     this.board = new Board();
     this.bank = new Bank();
     this.player = new Player();
+    this.players = [];
+    this.turn = new Turn(['p-1', 'p-2', 'p-3', 'p-4']);
   }
 
   cardsCount() {
     return this.player.cardsCount();
+  }
+
+  addPlayer() {
+    this.players.push(new Player());
   }
 
   getBoardData() {
