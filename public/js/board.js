@@ -81,6 +81,16 @@ const removeAvailableSettlements = function(buildingFunction) {
   });
 };
 
+const removeAvailableRoads = function(buildingFunction) {
+  const roadOptions = document.getElementsByClassName('path');
+  Array.from(roadOptions).forEach(option => {
+    if (!option.classList.includes('hide')) {
+      option.classList.add('hide');
+      option.removeEventListener('click', buildingFunction);
+    }
+  });
+};
+
 const appendRoad = function(pathId) {
   const path = document.getElementById(pathId);
   path.style.backgroundColor = 'transparent';
@@ -92,7 +102,8 @@ const appendRoad = function(pathId) {
   path.innerHTML = img;
 };
 
-const buildRoad = async function(pathId) {
+const buildRoad = async function() {
+  const pathId = event.target.id;
   const response = await fetch('/buildRoad', {
     method: 'POST',
     headers: {
@@ -102,10 +113,12 @@ const buildRoad = async function(pathId) {
   });
   if (response.ok) {
     appendRoad(pathId);
+    removeAvailableRoads(buildRoad);
   }
 };
 
-const buildRoadWithResources = async function(pathId) {
+const buildRoadWithResources = async function() {
+  const pathId = event.target.id;
   const response = await fetch('/buildRoadWithResources', {
     method: 'POST',
     headers: {
@@ -118,6 +131,7 @@ const buildRoadWithResources = async function(pathId) {
     fetchCardsCount();
     getBankStatus();
     getBuildStatus();
+    removeAvailableRoads(buildRoadWithResources);
   }
 };
 
@@ -129,7 +143,7 @@ const showPossiblePathsForRoadInSetUp = async function() {
     pathIds.forEach(pathId => {
       const path = document.getElementById(pathId);
       path.classList.remove('hide');
-      path.addEventListener('click', buildRoad.bind(null, pathId));
+      path.addEventListener('click', buildRoad);
     });
   }
 };
@@ -190,10 +204,11 @@ const getPossiblePathsForRoad = async function() {
       return;
     }
     const pathIds = await response.json();
+
     pathIds.forEach(pathId => {
       const path = document.getElementById(pathId);
       path.classList.remove('hide');
-      path.addEventListener('click', buildRoadWithResources.bind(null, pathId));
+      path.addEventListener('click', buildRoadWithResources);
     });
   }
 };
