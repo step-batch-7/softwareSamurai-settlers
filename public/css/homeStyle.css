@@ -1,0 +1,84 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  background: rgb(69, 145, 245);
+  background-image: url('/assets/page_bg.png');
+  background-size: contain;
+  overflow: hidden;
+}
+
+#screen {
+  width: 100%;
+  height: 100%;
+}
+
+#landing-box {
+  width: 21%;
+  height: 52%;
+  border-radius: 7px;
+  border: solid whitesmoke 1px;
+  margin: 5% 0% 0% 39%;
+  background-color: transparent;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+}
+
+.text-box {
+  font-size: 35px;
+  height: 13%;
+  width: 68%;
+  margin-left: 17%;
+  text-align: center;
+  border-radius: 7px;
+  padding-top: 2%;
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.5);
+  text-shadow: -1px 1px 0 #000;
+  text-shadow: 1px 1px 0 #000;
+  text-shadow: 1px -1px 0 #000;
+  text-shadow: -1px -1px 0 #000;
+}
+
+.text-box > a {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.title {
+  font-size: 35px;
+  font-weight: 200;
+  height: 13%;
+  width: 68%;
+  margin-left: 17%;
+  text-align: center;
+  border-radius: 7px;
+  padding-top: 2%;
+  color: white;
+  text-shadow: -1px 1px 0 #000;
+  text-shadow: 1px 1px 0 #000;
+  text-shadow: 1px -1px 0 #000;
+  text-shadow: -1px -1px 0 #000;
+}
+
+.text-box:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.8);
+}
+
+#help {
+  height: 70%;
+  width: 85%;
+  margin-top: 1%;
+}
+
+#help:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+#logo {
+  display: flex;
+  justify-content: space-between;
+  height: 25%;
+  width: 100%;
+}
