@@ -1,4 +1,5 @@
 const { assert } = require('chai');
+const sinon = require('sinon');
 const { Game } = require('../../src/models/game');
 
 describe('Game', () => {
@@ -62,6 +63,19 @@ describe('Game', () => {
     it('should give empty array if no positions are available', () => {
       const game = new Game();
       assert.deepStrictEqual(game.getAvailableAdjSettlements(), []);
+    });
+  });
+  describe('start', () => {
+    it('should start the game', () => {
+      const players = { p1: 'red', p2: 'green', p3: 'orange', p4: 'white' };
+      const game = new Game();
+      sinon.replace(game, 'players', players);
+      assert.isTrue(game.start());
+    });
+
+    it('should not start the game', () => {
+      const game = new Game();
+      assert.isFalse(game.start());
     });
   });
 });

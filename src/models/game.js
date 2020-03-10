@@ -36,7 +36,6 @@ class Game {
     this.player = new Player();
     this.players = {};
     this.players = [];
-    this.turn = new Turn(['p-1', 'p-2', 'p-3', 'p-4']);
   }
 
   static initializeGame(hostName) {
@@ -189,6 +188,15 @@ class Game {
     if (isDeducted) {
       this.bank.add({ lumber: 1, brick: 1 });
     }
+  }
+
+  start() {
+    const playerIds = Object.keys(this.players);
+    if (playerIds.length === 4) {
+      this.turn = new Turn(playerIds);
+      return true;
+    }
+    return false;
   }
 }
 
