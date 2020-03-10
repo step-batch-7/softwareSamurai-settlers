@@ -20,6 +20,14 @@ const pickTerrains = (terrains, numToken) => {
   return selectedTerrains;
 };
 
+const isIntersectionIncluded = (path, intersection) => {
+  return path.split('-').includes(intersection);
+};
+
+const isRoadIncluded = (path, road) => {
+  return path.split('-').some(isIntersectionIncluded.bind(null, road));
+};
+
 class Game {
   constructor() {
     this.board = new Board();
@@ -118,23 +126,18 @@ class Game {
   }
 
   possiblePaths() {
+    const paths = this.board.getEmptyPaths();
     const roads = this.player.getRoads();
-    const intersections = roads.reduce((intersections, road) => {
-      return intersections.concat(road.split('-'));
-    }, []);
+    const settlements = this.player.getSettlements();
+    const possiblePaths = paths.filter(path => {
+      const isPathConnectedToRoad = roads.some(isRoadIncluded.bind(null, path));
+      const isPathConnectedToSettlement = settlements.some((settlement) => {
+        return isIntersectionIncluded(path, settlement);
+      });
+      return isPathConnectedToRoad || isPathConnectedToSettlement;
+    });
+    return possiblePaths;
 
-    const remainingPaths = this.board.getEmptyPaths();
-    const possiblePaths = intersections.reduce(
-      (possiblePaths, intersection) => {
-        const positionsToBuildRoad = remainingPaths.filter(position => {
-          return position.split('-').includes(intersection);
-        });
-        return possiblePaths.concat(positionsToBuildRoad);
-      },
-      []
-    );
-    const uniquePaths = new Set(possiblePaths);
-    return Array.from(uniquePaths);
   }
 
   canBuild() {
