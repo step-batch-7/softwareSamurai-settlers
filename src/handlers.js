@@ -69,7 +69,7 @@ const getResources = function(req, res) {
   const { numToken } = req.body;
   const { game } = req.app.locals;
   game.resourceProduction(numToken);
-  res.json(game.cardsCount());
+  res.end();
 };
 
 const getBuildStatus = function(req, res) {

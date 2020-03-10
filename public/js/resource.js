@@ -27,9 +27,11 @@ const getResources = async function(dice1, dice2) {
     body: reqText,
     headers: { 'Content-Type': 'application/json' }
   });
-  const body = await res.json();
-  const { resources, totalDevCards } = await body;
-  return { resources, totalDevCards };
+  if (res.ok) {
+    fetchCardsCount();
+    getBankStatus();
+    getBuildStatus();
+  }
 };
 
 const updateBuildingStatus = function(status, buildingId) {
@@ -44,7 +46,7 @@ const getBuildStatus = async function() {
   const res = await fetch('/buildStatus');
   if (res.ok) {
     const { settlement, road } = await res.json();
-  
+
     updateBuildingStatus(settlement, 'settlement');
     updateBuildingStatus(road, 'road');
   }
@@ -55,8 +57,5 @@ const showDicePhase = async function() {
   const body = await res.json();
   const { dice1, dice2 } = await body;
   updateDicePhase(dice1, dice2);
-  const { resources, totalDevCards } = await getResources(dice1, dice2);
-  updateResourceCards(resources, totalDevCards);
-  getBankStatus();
-  getBuildStatus();
+  getResources(dice1, dice2);
 };
