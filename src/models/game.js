@@ -133,7 +133,8 @@ class Game {
       },
       []
     );
-    return possiblePaths;
+    const uniquePaths = new Set(possiblePaths);
+    return Array.from(uniquePaths);
   }
 
   canBuild() {
