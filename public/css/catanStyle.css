@@ -2,6 +2,8 @@ body {
   width: 99vw;
   height: 98vh;
   font-family: sans-serif;
+  background:rgb(0, 145, 203);
+  background-image: url('/assets/page_bg.png');
   overflow: hidden;
 }
 
@@ -10,6 +12,7 @@ body {
   width: 724px;
   height: 602px;
   position: absolute;
+  clip-path: polygon(27% 1%, 73% 1%, 97% 50%, 73% 99%, 27% 99%, 3% 50%);
 }
 
 #container {
@@ -31,6 +34,7 @@ body {
 #game-Log {
   height: 17%;
   width: inherit;
+  background: white;
   border: black solid 1px;
   overflow: scroll;
   border-radius: 7px;
@@ -42,13 +46,15 @@ body {
   height: 13%;
   width: 100%;
   display: flex;
-  border-radius: 7px;
+  /* background:rgba(26, 161, 214, 0.815); */
   border: black solid 1px;
+  justify-content: space-between;
+  border-radius: 7px;
   margin: 2px;
 }
 
 #cards-count {
-  width: 38%;
+  width: 26%;
   height: 100%;
   display: flex;
 }
@@ -60,7 +66,7 @@ body {
 }
 
 #player-status {
-  width: 62%;
+  width: 56%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -68,7 +74,7 @@ body {
 
 .component {
   height: 40px;
-  width: 80px;
+  width: 72px;
   margin: 2px;
   border-radius: 5px;
   box-shadow: 1px 1px 2px 0.5px rgba(0, 0, 0, 0.2);
@@ -83,6 +89,7 @@ body {
 #bank {
   width: 100%;
   height: 17%;
+  background: white;
   border: black solid 1px;
   display: flex;
   border-radius: 7px;
@@ -91,14 +98,33 @@ body {
 }
 
 #current-player {
-  height: 21%;
+  height: 16%;
   width: 100%;
+  background: white;
   border: black solid 1px;
   margin-top: 2px;
   border-radius: 7px;
   display: flex;
+  justify-content: space-between;
 }
 
+.icon-size {
+  height: 30px;
+  width: 30px;
+}
+
+.player-initial {
+  height: 100%;
+  width: 11%;
+}
+
+#current-player-cards-count {
+  height: 100%;
+  width: 32%;
+  display: flex;
+}
+
+/*-----------------board--------------------*/
 #game-area {
   width: 70%;
 }
@@ -280,7 +306,7 @@ svg {
 }
 
 .visibleIntersection {
-  background-color: whitesmoke;
+  background-color: white;
   opacity: 0.5;
   cursor: pointer;
   animation: open-animation 3s infinite;

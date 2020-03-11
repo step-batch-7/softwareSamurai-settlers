@@ -219,6 +219,7 @@ const renderPlayerInfo = (player, playerDetail) => {
     if (property === 'resourceCards' || property === 'developmentCards') {
       playerPropertyElement.innerHTML = playerDetail[property];
     }
+    
     playerPropertyElement.innerText = playerDetail[property];
   }
 };
@@ -226,6 +227,7 @@ const renderPlayerInfo = (player, playerDetail) => {
 const renderPlayersDetails = function() {
   const playersDetail = [
     {
+      playerName: 'rahit',
       resourceCards: 0,
       developmentCards: 0,
       victoryPoint: 0,
@@ -236,6 +238,7 @@ const renderPlayersDetails = function() {
       remainingCities: 4
     },
     {
+      playerName: 'rahit',
       resourceCards: 10,
       developmentCards: 2,
       victoryPoint: 0,
@@ -246,6 +249,7 @@ const renderPlayersDetails = function() {
       remainingCities: 4
     },
     {
+      playerName: 'rahit',
       resourceCards: 0,
       developmentCards: 0,
       victoryPoint: 0,
@@ -256,6 +260,7 @@ const renderPlayersDetails = function() {
       remainingCities: 4
     },
     {
+      playerName: 'rahit',
       resourceCards: 0,
       developmentCards: 0,
       victoryPoint: 0,
