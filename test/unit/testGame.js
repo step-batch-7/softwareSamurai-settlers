@@ -1,6 +1,7 @@
 const { assert } = require('chai');
 const sinon = require('sinon');
 const { Game } = require('../../src/models/game');
+const { Player } = require('../../src/models/player');
 
 describe('Game', () => {
   describe('cardsCount', () => {
@@ -99,4 +100,72 @@ describe('Game', () => {
       assert.isFalse(game.hasStarted());
     });
   });
-});
+  describe('resourceProduction', function() {
+    it('should produce resources according to numToken if ', function() {
+      const players = { p1: new Player('p1'), p2: new Player('p2'), p3: new Player('p3'), p4: new Player('p4') };
+      players['p1'].settlements.push('efo');
+      players['p3'].settlements.push('bcn');
+      players['p4'].settlements.push('klr');
+
+      const game = new Game();
+      sinon.replace(game, 'players', players);
+      assert.isTrue(game.resourceProduction(5));
+      const actualPlayer1 = players['p1'].resources.status();
+      const actualPlayer2 = players['p2'].resources.status();
+      const actualPlayer3 = players['p3'].resources.status();
+      const actualPlayer4 = players['p4'].resources.status();
+      const actualBankResources = game.bank.resources;
+
+      const expectedPlayer1 = {
+        ore: 0,
+        wool: 1,
+        lumber: 0,
+        brick: 0,
+        grain: 0
+      };
+
+      const expectedPlayer2 = {
+        ore: 0,
+        wool: 0,
+        lumber: 0,
+        brick: 0,
+        grain: 0
+      };
+
+      const expectedPlayer3 = {
+        ore: 0,
+        wool: 0,
+        lumber: 0,
+        brick: 1,
+        grain: 0
+      };
+
+      const expectedPlayer4 = {
+        ore: 0,
+        wool: 0,
+        lumber: 0,
+        brick: 0,
+        grain: 0
+      };
+
+      const expectedBankResources = {
+        ore: 19,
+        wool: 18,
+        lumber: 19,
+        brick: 18,
+        grain: 19
+      };
+
+      assert.deepStrictEqual(actualBankResources, expectedBankResources);
+      assert.deepStrictEqual(actualPlayer1, expectedPlayer1);
+      assert.deepStrictEqual(actualPlayer2, expectedPlayer2);
+      assert.deepStrictEqual(actualPlayer3, expectedPlayer3);
+      assert.deepStrictEqual(actualPlayer4, expectedPlayer4);
+    });
+
+    it('should produce resources according to numToken', function() {
+      const game = new Game();
+      assert.isFalse(game.resourceProduction());
+    });
+  });
+}); 

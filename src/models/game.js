@@ -35,7 +35,6 @@ class Game {
     this.bank = new Bank();
     this.player = new Player();
     this.players = {};
-    this.players = [];
     this.isStarted = false;
   }
 
@@ -75,20 +74,27 @@ class Game {
   }
 
   resourceProduction(numToken) {
-    const terrains = this.board.getTerrains();
-    const selectedTerrains = pickTerrains(terrains, numToken);
-    const terrainsId = this.player.getTerrainsId();
-    const resourceId = terrainsId.filter(id => selectedTerrains.includes(id));
-    const resourceCards = resourceId.map(id => {
-      return { resource: productions[this.board.getResource(id)], count: 1 };
-    });
-    this.deal(resourceCards);
+    if (numToken) {
+      const terrains = this.board.getTerrains();
+      const selectedTerrains = pickTerrains(terrains, numToken);
+      for (const player in this.players) {
+        const terrainsId = this.players[player].getTerrainsId();
+        const resourceId = terrainsId.filter(id => selectedTerrains.includes(id));
+        const resourceCards = resourceId.map(id => {
+          const resourceId = this.board.getResource(id);
+          return { resource: productions[resourceId], count: 1 };
+        });
+        this.distriute(this.players[player], resourceCards);
+      }
+      return true;
+    }
+    return false;
   }
 
-  deal(resourceCards) {
+  distriute(player, resourceCards) {
     resourceCards.forEach(card => {
       if (this.bank.remove(card)) {
-        this.player.addResources(card);
+        player.addResources(card);
       }
     });
   }
