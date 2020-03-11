@@ -36,6 +36,7 @@ class Game {
     this.player = new Player();
     this.players = {};
     this.players = [];
+    this.isStarted = false;
   }
 
   static initializeGame() {
@@ -57,6 +58,7 @@ class Game {
   addPlayer(name) {
     const id = this.generateNewPlayerId();
     this.players[id] = new Player(name);
+    this.start();
     return id;
   }
 
@@ -194,9 +196,13 @@ class Game {
     const playerIds = Object.keys(this.players);
     if (playerIds.length === 4) {
       this.turn = new Turn(playerIds);
-      return true;
+      this.isStarted = true;
     }
-    return false;
+    return this.isStarted;
+  }
+
+  hasStarted() {
+    return this.isStarted;
   }
 }
 

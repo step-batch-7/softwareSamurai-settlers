@@ -66,16 +66,37 @@ describe('Game', () => {
     });
   });
   describe('start', () => {
-    it('should start the game', () => {
+    it('should start the game when 4 players are added', () => {
       const players = { p1: 'red', p2: 'green', p3: 'orange', p4: 'white' };
       const game = new Game();
       sinon.replace(game, 'players', players);
       assert.isTrue(game.start());
     });
 
-    it('should not start the game', () => {
+    it('should start the game when no player is joined', () => {
       const game = new Game();
       assert.isFalse(game.start());
+    });
+
+    it('should not start the game when less than 4 players are added', () => {
+      const players = { p1: 'red', p2: 'green', p3: 'orange' };
+      const game = new Game();
+      sinon.replace(game, 'players', players);
+      assert.isFalse(game.start());
+    });
+  });
+
+  describe('isStarted', () => {
+    it('should return true when the game has started', () => {
+      const players = { p1: 'red', p2: 'green', p3: 'orange', p4: 'white' };
+      const game = new Game();
+      sinon.replace(game, 'players', players);
+      game.start();
+      assert.isTrue(game.hasStarted());
+    });
+    it('should return false when the has not started', () => {
+      const game = new Game();
+      assert.isFalse(game.hasStarted());
     });
   });
 });
