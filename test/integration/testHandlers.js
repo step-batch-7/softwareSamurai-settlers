@@ -17,7 +17,7 @@ describe('Handlers', () => {
     sinon.replace(app.locals.gameList, 'getGame', () => game);
   });
 
-  describe('/joinedPlayersDetails', () => {
+  context('/joinedPlayersDetails', () => {
     it('should give the details of joined players', done => {
       request(app)
         .get('/catan/joinedPlayerDetails')
@@ -27,7 +27,7 @@ describe('Handlers', () => {
     });
   });
 
-  describe('Get static file', () => {
+  context('Get static file', () => {
     it('Should give catan page for catan.html ', done => {
       request(app)
         .get('/catan/home.html')
@@ -35,7 +35,7 @@ describe('Handlers', () => {
     });
   });
 
-  describe('Get getTerrainDetails', () => {
+  context('Get getTerrainDetails', () => {
     it('Should give terrain details for /terrains', done => {
       request(app)
         .get('/catan/terrains')
@@ -45,7 +45,7 @@ describe('Handlers', () => {
     });
   });
 
-  describe('getAvailableSettlements', () => {
+  context('getAvailableSettlements', () => {
     it('should give all the available settlements ', done => {
       request(app)
         .get('/catan/requestInitialSettlement')
@@ -54,7 +54,7 @@ describe('Handlers', () => {
     });
   });
 
-  describe('/getAdjAvailableSettlements', () => {
+  context('/getAdjAvailableSettlements', () => {
     it('should get empty array for no roads', done => {
       request(app)
         .get('/catan/requestSettlement')
@@ -63,7 +63,7 @@ describe('Handlers', () => {
     });
   });
 
-  describe('buildSettlement', () => {
+  context('buildSettlement', () => {
     it('should build the settlement on given position', done => {
       request(app)
         .post('/catan/buildSettlement')
@@ -73,7 +73,7 @@ describe('Handlers', () => {
     });
   });
 
-  describe('Get /buildRoad', () => {
+  context('Get /buildRoad', () => {
     it('should build the Road on given position', done => {
       request(app)
         .post('/catan/buildRoad')
@@ -83,7 +83,7 @@ describe('Handlers', () => {
     });
   });
 
-  describe('Get /cardsCount', () => {
+  context('Get /cardsCount', () => {
     it('should give count of resource and devCards', done => {
       request(app)
         .get('/catan/cardsCount')
@@ -91,7 +91,7 @@ describe('Handlers', () => {
         .expect('Content-Type', 'application/json; charset=utf-8');
     });
 
-    describe('Get /bankStatus', () => {
+    context('Get /bankStatus', () => {
       it('should give bank status for /bankStatus', done => {
         request(app)
           .get('/catan/bankStatus')
@@ -100,7 +100,7 @@ describe('Handlers', () => {
       });
     });
 
-    describe('Post /addResourcesToPlayer', () => {
+    context('Post /addResourcesToPlayer', () => {
       it('should give add resources to player for /addResourcesToPlayer', done => {
         request(app)
           .post('/catan/addResourcesToPlayer')
@@ -108,7 +108,7 @@ describe('Handlers', () => {
       });
     });
 
-    describe('get /getPossiblePathsForRoadInSetup', () => {
+    context('get /getPossiblePathsForRoadInSetup', () => {
       it('should get possible paths for building a road for /getPossiblePathsForRoadInSetup', done => {
         request(app)
           .get('/catan/getPossiblePathsForRoadInSetup')
@@ -117,7 +117,7 @@ describe('Handlers', () => {
     });
   });
 
-  describe('get /diceNumbers', () => {
+  context('get /diceNumbers', () => {
     it('should random 2 dice numbers', done => {
       request(app)
         .get('/catan/diceNumbers')
@@ -125,7 +125,7 @@ describe('Handlers', () => {
     });
   });
 
-  describe('post /resourceProduction', () => {
+  context('post /resourceProduction', () => {
     it('should get resources if numberToken matches the terrain', done => {
       request(app)
         .post('/catan/buildSettlement')
@@ -143,7 +143,7 @@ describe('Handlers', () => {
     });
   });
 
-  describe('/buildStatus', () => {
+  context('/buildStatus', () => {
     it('should give false if user cannot build settlement', done => {
       request(app)
         .get('/catan/buildStatus')
@@ -152,7 +152,7 @@ describe('Handlers', () => {
     });
   });
 
-  describe('Get /getPossiblePathsForRoad', () => {
+  context('Get /getPossiblePathsForRoad', () => {
     it('Should give possible paths adjacent to existing settlements', done => {
       request(app)
         .get('/catan/getPossiblePathsForRoad')
@@ -160,7 +160,7 @@ describe('Handlers', () => {
     });
   });
 
-  describe('/buildInitialSettlement', () => {
+  context('/buildInitialSettlement', () => {
     it('should build the settlement on given intersection', done => {
       request(app)
         .post('/catan/buildInitialSettlement')
@@ -169,7 +169,7 @@ describe('Handlers', () => {
     });
   });
 
-  describe('/host', () => {
+  context('/host', () => {
     it('should host the game and redirect to the /waitingPage', done => {
       request(app)
         .post('/host')
@@ -177,11 +177,19 @@ describe('Handlers', () => {
     });
   });
 
-  describe('/join', () => {
+  context('/waiting.html', () => {
+    it('should give waiting page for given ', done => {
+      request(app)
+        .get('/catan/waiting.html')
+        .expect(200, done);
+    });
+  });
+
+  context('/join', () => {
     it('should join go to the waiting page if gameId is valid', done => {
       request(app)
-        .post('/host')
-        .expect(302, done);
+        .post('/join')
+        .expect(200, done);
     });
   });
 });

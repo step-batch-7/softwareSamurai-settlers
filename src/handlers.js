@@ -118,18 +118,23 @@ const joinGame = function(req, res) {
   res.render('join', { error: 'Game id is not valid' });
 };
 
+// eslint-disable-next-line max-statements
 const ensureGame = function(req, res, next) {
   const { sId } = req.cookies;
   const { sessions, gameList } = req.app.locals;
   const session = sessions.getSession(sId);
-  if (session) {
-    const game = gameList.getGame(session.gameId);
-    req.app.locals.game = game;
-    req.app.locals.playerId = session.playerId;
-    next();
+  if (!session) {
+    res.redirect('index.html');
     return;
   }
-  res.redirect('/index.html');
+  const game = gameList.getGame(session.gameId);
+  if (!game.hasStarted()) {
+    res.redirect('catan/waiting.html');
+    return;
+  }
+  req.app.locals.game = game;
+  req.app.locals.playerId = session.playerId;
+  next();
 };
 
 const hostNewGame = function(req, res) {
