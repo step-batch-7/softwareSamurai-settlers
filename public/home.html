@@ -536,581 +536,412 @@
         </div>
       </div>
       <div id="other-players">
-        <div id="game-Log"></div>
-        <div id="bank">
-          <div style="height:100%; width:20%;">
-            <img
-              src="/assets/bank.jpg"
-              alt="bank"
-              height="58%"
-              width="100%"
-              style="margin-top: 43%;"
-            />
-          </div>
-          <div id="brick">
-            <svg height="130" width="55">
-              <image
-                x="5"
-                y="4"
-                xlink:href="/assets/cards/resourceCards/brickCard.jpg"
-                height="135"
-                width="45"
+          <div id="game-Log"></div>
+          <div id="bank">
+            <div style="height:100%; width:20%;">
+              <img
+                src="/assets/bank.jpg"
+                alt="bank"
+                height="58%"
+                width="100%"
+                style="margin-top: 43%;"
               />
-              <circle cx="44" cy="35" r="9" style="fill:rgba(0,0,0,0.6)" />
-              <text
-                x="44"
-                y="40"
-                style="fill:white;font-size:12; text-anchor:middle"
-              >
-                0
-              </text>
-            </svg>
-          </div>
-          <div id="wool">
-            <svg height="130" width="55">
-              <image
-                x="5"
-                y="4"
-                xlink:href="/assets/cards/resourceCards/woolCard.jpg"
-                height="135"
-                width="45"
-              />
-              <circle cx="44" cy="35" r="9" style="fill:rgba(0,0,0,0.6)" />
-              <text
-                x="44"
-                y="40"
-                style="fill:white;font-size:12; text-anchor:middle"
-              >
-                0
-              </text>
-            </svg>
-          </div>
-          <div id="lumber">
-            <svg height="130" width="55">
-              <image
-                x="5"
-                y="4"
-                xlink:href="/assets/cards/resourceCards/lumberCard.jpg"
-                height="135"
-                width="45"
-              />
-              <circle cx="44" cy="35" r="9" style="fill:rgba(0,0,0,0.6)" />
-              <text
-                x="44"
-                y="40"
-                style="fill:white;font-size:12; text-anchor:middle"
-              >
-                0
-              </text>
-            </svg>
-          </div>
-          <div id="ore">
-            <svg height="130" width="55">
-              <image
-                x="5"
-                y="4"
-                xlink:href="/assets/cards/resourceCards/oreCard.jpg"
-                height="135"
-                width="45"
-              />
-              <circle cx="44" cy="35" r="9" style="fill:rgba(0,0,0,0.6)" />
-              <text
-                x="44"
-                y="40"
-                style="fill:white;font-size:12; text-anchor:middle"
-              >
-                0
-              </text>
-            </svg>
-          </div>
-          <div id="grain">
-            <svg height="130" width="55">
-              <image
-                x="5"
-                y="4"
-                xlink:href="/assets/cards/resourceCards/grainCard.jpg"
-                height="135"
-                width="45"
-              />
-              <circle cx="44" cy="35" r="9" style="fill:rgba(0,0,0,0.6)" />
-              <text
-                x="44"
-                y="40"
-                style="fill:white;font-size:12; text-anchor:middle"
-              >
-                0
-              </text>
-            </svg>
-          </div>
-          <div id="developmentCards">
-            <svg height="130" width="55">
-              <image
-                x="5"
-                y="4"
-                xlink:href="/assets/cards/developmentCards/developmentCard1.jpg"
-                height="135"
-                width="45"
-              />
-              <circle cx="44" cy="35" r="9" style="fill:rgba(0,0,0,0.6)" />
-              <text
-                x="44"
-                y="40"
-                style="fill:white;font-size:12; text-anchor:middle"
-              >
-                0
-              </text>
-            </svg>
-          </div>
-        </div>
-        <div id="player-info1">
-          <div id="cards-count">
-            <div id="resource-cards">
-              <svg height="90" width="75">
-                <image
-                  x="10"
-                  y="20"
-                  xlink:href="assets/cards/resourceCards/resCardBg.jpg"
-                  height="60"
-                  width="50"
-                />
-                <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
-                <text
-                  x="49"
-                  y="22"
-                  style="fill:white;font-size:15;"
-                  id="resourceCards"
-                >
-                  0
-                </text>
-              </svg>
             </div>
-            <div id="development-cards">
-              <svg height="90" width="75">
-                <image
-                  x="10"
-                  y="20"
-                  xlink:href="assets/cards/developmentCards/developmentCard1.jpg"
-                  height="60"
-                  width="50"
-                />
-                <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
-                <text
-                  x="49"
-                  y="22"
-                  style="fill:white;font-size:15;"
-                  id="developmentCards"
-                >
-                  0
-                </text>
-              </svg>
-            </div>
-          </div>
-          <div id="player-status">
-            <div class="component">
-              <div>
-                <img
-                  src="assets/star.png"
-                  alt="star"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="victoryPoint" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/robber.png"
-                  alt="knight"
-                  height="40px"
-                  width="20px"
-                />
-              </div>
-              <div id="playedNightCards" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/longestRoad.svg"
-                  alt="road"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="longestRoadCount" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/settlements/redSettlement.svg"
-                  alt="settlement"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="remainingSettlement" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/roads/redRoad.svg"
-                  alt="road"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="remainingRoads" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/cities/redCity.svg"
-                  alt="city"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="remainingCities" class="count">0</div>
-            </div>
-          </div>
-        </div>
-        <div id="player-info2">
-          <div id="cards-count">
-            <div id="resource-cards">
-              <svg height="90" width="75">
-                <image
-                  x="10"
-                  y="20"
-                  xlink:href="assets/cards/resourceCards/resCardBg.jpg"
-                  height="60"
-                  width="50"
-                />
-                <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
-                <text
-                  x="49"
-                  y="22"
-                  style="fill:white;font-size:15;"
-                  id="resourceCards"
-                >
-                  0
-                </text>
-              </svg>
-            </div>
-            <div id="development-cards">
-              <svg height="90" width="75">
-                <image
-                  x="10"
-                  y="20"
-                  xlink:href="assets/cards/developmentCards/developmentCard1.jpg"
-                  height="60"
-                  width="50"
-                />
-                <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
-                <text
-                  x="49"
-                  y="22"
-                  style="fill:white;font-size:15;"
-                  id="developmentCards"
-                >
-                  0
-                </text>
-              </svg>
-            </div>
-          </div>
-          <div id="player-status">
-            <div class="component">
-              <div>
-                <img
-                  src="assets/star.png"
-                  alt="star"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="victoryPoint" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/robber.png"
-                  alt="knight"
-                  height="40px"
-                  width="20px"
-                />
-              </div>
-              <div id="playedNightCards" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/longestRoad.svg"
-                  alt="road"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="longestRoadCount" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/settlements/orangeSettlement.svg"
-                  alt="settlement"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="remainingSettlement" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/roads/orangeRoad.svg"
-                  alt="road"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="remainingRoads" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/cities/orangeCity.svg"
-                  alt="city"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="remainingCities" class="count">0</div>
-            </div>
-          </div>
-        </div>
-        <div id="player-info3">
-          <div id="cards-count">
-            <div id="resource-cards">
-              <svg height="90" width="75">
-                <image
-                  x="10"
-                  y="20"
-                  xlink:href="assets/cards/resourceCards/resCardBg.jpg"
-                  height="60"
-                  width="50"
-                />
-                <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
-                <text
-                  x="49"
-                  y="22"
-                  style="fill:white;font-size:15;"
-                  id="resourceCards"
-                >
-                  0
-                </text>
-              </svg>
-            </div>
-            <div id="development-cards">
-              <svg height="90" width="75">
-                <image
-                  x="10"
-                  y="20"
-                  xlink:href="assets/cards/developmentCards/developmentCard1.jpg"
-                  height="60"
-                  width="50"
-                />
-                <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
-                <text
-                  x="49"
-                  y="22"
-                  style="fill:white;font-size:15;"
-                  id="developmentCards"
-                >
-                  0
-                </text>
-              </svg>
-            </div>
-          </div>
-          <div id="player-status">
-            <div class="component">
-              <div>
-                <img
-                  src="assets/star.png"
-                  alt="star"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="victoryPoint" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/robber.png"
-                  alt="knight"
-                  height="40px"
-                  width="20px"
-                />
-              </div>
-              <div id="playedNightCards" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/longestRoad.svg"
-                  alt="road"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="longestRoadCount" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/settlements/yellowSettlement.svg"
-                  alt="settlement"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="remainingSettlement" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/roads/yellowRoad.svg"
-                  alt="road"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="remainingRoads" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/cities/yellowCity.svg"
-                  alt="city"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="remainingCities" class="count">0</div>
-            </div>
-          </div>
-        </div>
-        <div id="current-player">
-          <div id="cards-count">
-            <div id="resource-cards">
-              <svg height="140" width="85">
+            <div id="brick">
+              <svg height="130" width="55">
                 <image
                   x="5"
-                  y="30"
-                  xlink:href="assets/cards/resourceCards/resCardBg.jpg"
-                  height="100"
-                  width="65"
+                  y="4"
+                  xlink:href="/assets/cards/resourceCards/brickCard.jpg"
+                  height="135"
+                  width="45"
                 />
-                <circle cx="60" cy="30" r="15" style="fill:rgba(0,0,0,0.6)" />
+                <circle cx="44" cy="35" r="9" style="fill:rgba(0,0,0,0.6)" />
                 <text
-                  x="51"
-                  y="38"
-                  style="fill:white;font-size:20;"
-                  id="resourceCards"
+                  x="44"
+                  y="40"
+                  style="fill:white;font-size:12; text-anchor:middle"
                 >
                   0
                 </text>
               </svg>
             </div>
-            <div id="development-cards">
-              <svg height="140" width="85">
+            <div id="wool">
+              <svg height="130" width="55">
                 <image
-                  x="2"
-                  y="30"
-                  xlink:href="assets/cards/developmentCards/developmentCard1.jpg"
-                  height="100"
-                  width="65"
+                  x="5"
+                  y="4"
+                  xlink:href="/assets/cards/resourceCards/woolCard.jpg"
+                  height="135"
+                  width="45"
                 />
-                <circle cx="60" cy="30" r="15" style="fill:rgba(0,0,0,0.6)" />
+                <circle cx="44" cy="35" r="9" style="fill:rgba(0,0,0,0.6)" />
                 <text
-                  x="51"
-                  y="38"
-                  style="fill:white;font-size:20;"
-                  id="developmentCards"
+                  x="44"
+                  y="40"
+                  style="fill:white;font-size:12; text-anchor:middle"
+                >
+                  0
+                </text>
+              </svg>
+            </div>
+            <div id="lumber">
+              <svg height="130" width="55">
+                <image
+                  x="5"
+                  y="4"
+                  xlink:href="/assets/cards/resourceCards/lumberCard.jpg"
+                  height="135"
+                  width="45"
+                />
+                <circle cx="44" cy="35" r="9" style="fill:rgba(0,0,0,0.6)" />
+                <text
+                  x="44"
+                  y="40"
+                  style="fill:white;font-size:12; text-anchor:middle"
+                >
+                  0
+                </text>
+              </svg>
+            </div>
+            <div id="ore">
+              <svg height="130" width="55">
+                <image
+                  x="5"
+                  y="4"
+                  xlink:href="/assets/cards/resourceCards/oreCard.jpg"
+                  height="135"
+                  width="45"
+                />
+                <circle cx="44" cy="35" r="9" style="fill:rgba(0,0,0,0.6)" />
+                <text
+                  x="44"
+                  y="40"
+                  style="fill:white;font-size:12; text-anchor:middle"
+                >
+                  0
+                </text>
+              </svg>
+            </div>
+            <div id="grain">
+              <svg height="130" width="55">
+                <image
+                  x="5"
+                  y="4"
+                  xlink:href="/assets/cards/resourceCards/grainCard.jpg"
+                  height="135"
+                  width="45"
+                />
+                <circle cx="44" cy="35" r="9" style="fill:rgba(0,0,0,0.6)" />
+                <text
+                  x="44"
+                  y="40"
+                  style="fill:white;font-size:12; text-anchor:middle"
+                >
+                  0
+                </text>
+              </svg>
+            </div>
+            <div id="developmentCards">
+              <svg height="130" width="55">
+                <image
+                  x="5"
+                  y="4"
+                  xlink:href="/assets/cards/developmentCards/developmentCard1.jpg"
+                  height="135"
+                  width="45"
+                />
+                <circle cx="44" cy="35" r="9" style="fill:rgba(0,0,0,0.6)" />
+                <text
+                  x="44"
+                  y="40"
+                  style="fill:white;font-size:12; text-anchor:middle"
                 >
                   0
                 </text>
               </svg>
             </div>
           </div>
-          <div id="player-status" style="margin-top:4%">
-            <div class="component">
-              <div>
-                <img
-                  src="assets/star.png"
-                  alt="star"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="victoryPoint" class="count">0</div>
+          <div id="player-info1">
+            <div class="player-initial">
+              <img src="/assets/icon_player.svg" alt="">
+              <div id="playerName"></div>
             </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/robber.png"
-                  alt="knight"
-                  height="40px"
-                  width="20px"
-                />
+              <div id="cards-count">
+                <div id="resource-cards">
+                  <svg height="90" width="75">
+                    <image x="10" y="20" xlink:href="assets/cards/resourceCards/resCardBg.jpg" height="60" width="50" />
+                    <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
+                    <text x="49" y="22" style="fill:white;font-size:15;" id="resourceCards">0</text>
+                  </svg>
+                </div>
+                <div id="development-cards">
+                  <svg height="90" width="75">
+                    <image x="10" y="20" xlink:href="assets/cards/developmentCards/developmentCard1.jpg" height="60" width="50" />
+                    <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
+                    <text  x="49" y="22" style="fill:white;font-size:15;" id="developmentCards">0</text>
+                  </svg>
+                </div>
               </div>
-              <div id="playedNightCards" class="count">0</div>
+              <div id="player-status">
+                <div class="component">
+                  <div>
+                    <img src="assets/star.png" alt="star" height="30px" width="30px" />
+                  </div>
+                  <div id="victoryPoint" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img src="assets/robber.png" alt="knight" height="25px" width="12px" style="margin-top: 20%;"/>
+                  </div>
+                  <div id="playedNightCards" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img
+                      src="assets/longestRoad.svg"
+                      alt="road"
+                      class="icon-size"
+                      style="margin: 20%;"
+                    />
+                  </div>
+                  <div id="longestRoadCount" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img
+                      src="assets/settlements/redSettlement.svg"
+                      alt="settlement"
+                      class="icon-size"
+                    />
+                  </div>
+                  <div id="remainingSettlement" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img src="assets/roads/redRoad.svg" alt="road" class="icon-size" style="margin: 10%;" />
+                  </div>
+                  <div id="remainingRoads" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img src="assets/cities/redCity.svg" alt="city" class="icon-size" style="margin: 10%;" />
+                  </div>
+                  <div id="remainingCities" class="count">0</div>
+                </div>
+              </div>
             </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/longestRoad.svg"
-                  alt="road"
-                  height="40px"
-                  width="40px"
-                />
+            <div id="player-info2">
+              <div class="player-initial">
+                    <img src="/assets/icon_player.svg" alt="">
+                    <div id="playerName"></div>
               </div>
-              <div id="longestRoadCount" class="count">0</div>
+              <div id="cards-count">
+                <div id="resource-cards">
+                  <svg height="90" width="75">
+                    <image x="10" y="20" xlink:href="assets/cards/resourceCards/resCardBg.jpg" height="60" width="50" />
+                    <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
+                    <text x="49" y="22" style="fill:white;font-size:15;" id="resourceCards">0</text>
+                  </svg>
+                </div>
+                <div id="development-cards">
+                  <svg height="90" width="75">
+                    <image x="10" y="20" xlink:href="assets/cards/developmentCards/developmentCard1.jpg" height="60" width="50" />
+                    <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
+                    <text x="49" y="22" style="fill:white;font-size:15;" id="developmentCards">0</text>
+                  </svg>
+                </div>
+              </div>
+              <div id="player-status">
+                <div class="component">
+                  <div>
+                    <img src="assets/star.png" alt="star" height="30px" width="30px" />
+                  </div>
+                  <div id="victoryPoint" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img src="assets/robber.png" alt="knight" height="25px" width="12px" style="margin-top: 20%;"/>
+                  </div>
+                  <div id="playedNightCards" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img
+                      src="assets/longestRoad.svg"
+                      alt="road"
+                      class="icon-size"
+                      style="margin: 20%;"
+                    />
+                  </div>
+                  <div id="longestRoadCount" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img
+                      src="assets/settlements/orangeSettlement.svg"
+                      alt="settlement"
+                      class="icon-size"
+                    />
+                  </div>
+                  <div id="remainingSettlement" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img src="assets/roads/orangeRoad.svg" alt="road" class="icon-size" style="margin: 10%;" />
+                  </div>
+                  <div id="remainingRoads" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img src="assets/cities/orangeCity.svg" alt="city" class="icon-size" style="margin: 10%;" />
+                  </div>
+                  <div id="remainingCities" class="count">0</div>
+                </div>
+              </div>
             </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/settlements/blueSettlement.svg"
-                  alt="settlement"
-                  height="40px"
-                  width="40px"
-                />
+            <div id="player-info3">
+              <div class="player-initial">
+                    <img src="/assets/icon_player.svg" alt="">
+                    <div id="playerName"></div>
               </div>
-              <div id="remainingSettlement" class="count">0</div>
+              <div id="cards-count">
+                <div id="resource-cards">
+                  <svg height="90" width="75">
+                    <image x="10" y="20" xlink:href="assets/cards/resourceCards/resCardBg.jpg" height="60" width="50" />
+                    <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
+                    <text x="49" y="22" style="fill:white;font-size:15;" id="resourceCards">0</text>
+                  </svg>
+                </div>
+                <div id="development-cards">
+                  <svg height="90" width="75">
+                    <image x="10" y="20" xlink:href="assets/cards/developmentCards/developmentCard1.jpg" height="60" width="50" />
+                    <circle cx="55" cy="17" r="12" style="fill:rgba(0,0,0,0.6)" />
+                    <text x="49" y="22" style="fill:white;font-size:15;"  id="developmentCards">0</text>
+                  </svg>
+                </div>
+              </div>
+              <div id="player-status">
+                <div class="component">
+                  <div>
+                    <img src="assets/star.png" alt="star" height="30px" width="30px" />
+                  </div>
+                  <div id="victoryPoint" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img src="assets/robber.png" alt="knight" height="25px" width="12px" style="margin-top: 20%;"/>
+                  </div>
+                  <div id="playedNightCards" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img
+                      src="assets/longestRoad.svg"
+                      alt="road"
+                      class="icon-size"
+                      style="margin: 20%;"
+                    />
+                  </div>
+                  <div id="longestRoadCount" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img
+                      src="assets/settlements/yellowSettlement.svg"
+                      alt="settlement"
+                      class="icon-size"
+                    />
+                  </div>
+                  <div id="remainingSettlement" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img src="assets/roads/yellowRoad.svg" alt="road" class="icon-size" style="margin: 10%;" />
+                  </div>
+                  <div id="remainingRoads" class="count">0</div>
+                </div>
+                <div class="component">
+                  <div>
+                    <img src="assets/cities/yellowCity.svg" alt="city" class="icon-size" style="margin: 10%;" />
+                  </div>
+                  <div id="remainingCities" class="count">0</div>
+                </div>
+              </div>
             </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/roads/blueRoad.svg"
-                  alt="road"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="remainingRoads" class="count">0</div>
-            </div>
-            <div class="component">
-              <div>
-                <img
-                  src="assets/cities/blueCity.svg"
-                  alt="city"
-                  height="40px"
-                  width="40px"
-                />
-              </div>
-              <div id="remainingCities" class="count">0</div>
+            <div id="current-player">
+                <div class="player-initial">
+                    <img src="/assets/icon_player.svg" alt="">
+                    <div id="playerName"></div>
+                </div>
+                <div id="current-player-cards-count">
+                    <div id="resource-cards">
+                      <svg height="140" width="75">
+                        <image x="5" y="30" xlink:href="assets/cards/resourceCards/resCardBg.jpg" height="100" width="50" />
+                        <circle cx="55" cy="35" r="14" style="fill:rgba(0,0,0,0.6)" />
+                        <text x="48" y="42" style="fill:white;font-size:20;" id="resourceCards">0</text>
+                      </svg>
+                    </div>
+                    <div id="development-cards">
+                        <svg height="140" width="75">
+                            <image x="2" y="30" xlink:href="assets/cards/developmentCards/developmentCard1.jpg" height="100" width="50" />
+                            <circle cx="55" cy="35" r="14" style="fill:rgba(0,0,0,0.6)" />
+                            <text x="48" y="42" style="fill:white;font-size:20;" id="developmentCards">0</text>
+                          </svg>
+                    </div>
+                </div>
+                  <div id="player-status" style="margin-top:4%">
+                    <div class="component">
+                      <div>
+                        <img src="assets/star.png" alt="star" height="30px" width="30px" />
+                      </div>
+                      <div id="victoryPoint" class="count">0</div>
+                    </div>
+                    <div class="component">
+                      <div>
+                        <img src="assets/robber.png" alt="knight" height="25px" width="12px" style="margin-top: 20%;"/>
+                      </div>
+                      <div id="playedNightCards" class="count">0</div>
+                    </div>
+                    <div class="component">
+                      <div>
+                        <img
+                          src="assets/longestRoad.svg"
+                          alt="road"
+                          height="30px"
+                          width="30px"
+                          style="margin: 20%;"
+                        />
+                      </div>
+                      <div id="longestRoadCount" class="count">0</div>
+                    </div>
+                    <div class="component">
+                      <div>
+                        <img
+                          id="settlementImg"
+                          src="assets/settlements/blueSettlement.svg"
+                          alt="settlement"
+                          class="icon-size"
+                        />
+                      </div>
+                      <div id="remainingSettlement" class="count">0</div>
+                    </div>
+                    <div class="component">
+                      <div>
+                        <img  id='roadImg' src="assets/roads/blueRoad.svg" alt="road" class="icon-size" style="margin: 10%;"/>
+                      </div>
+                      <div id="remainingRoads" class="count">0</div>
+                    </div>
+                    <div class="component">
+                      <div>
+                        <img id="cityImg" src="assets/cities/blueCity.svg" alt="city" class="icon-size" style="margin: 10%;"/>
+                      </div>
+                      <div id="remainingCities" class="count">0</div>
+                    </div>
             </div>
           </div>
         </div>
-      </div>
     </div>
   </body>
 </html>
+

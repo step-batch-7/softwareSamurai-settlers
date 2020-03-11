@@ -84,7 +84,7 @@ const removeAvailableSettlements = function(buildingFunction) {
 const removeAvailableRoads = function(buildingFunction) {
   const roadOptions = document.getElementsByClassName('path');
   Array.from(roadOptions).forEach(option => {
-    if (!option.classList.includes('hide')) {
+    if (!Array.from(option.classList).includes('hide')) {
       option.classList.add('hide');
       option.removeEventListener('click', buildingFunction);
     }
