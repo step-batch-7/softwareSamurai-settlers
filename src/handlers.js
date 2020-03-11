@@ -95,7 +95,9 @@ const serveWaitingPage = function(req, res) {
   const { sId } = req.cookies;
   const { sessions } = req.app.locals;
   const { gameId } = sessions.getSession(sId);
-  res.render('waiting', { gameId: gameId });
+  if (gameId) {
+    res.render('waiting', { gameId: gameId });
+  }
 };
 
 const serveJoinPage = function(req, res) {
@@ -130,10 +132,10 @@ const hostNewGame = function(req, res) {
 const getJoinedPlayerDetails = function(req, res) {
   const { sId } = req.cookies;
   const { sessions, gameList } = req.app.locals;
-  const { gameId } = sessions.getSession(sId);
-  if (gameId) {
-    const playerDetails = gameList.getPlayersDetails(gameId);
-    res.json(playerDetails);
+  const session = sessions.getSession(sId);
+  if (session) {
+    const details = gameList.getPlayersDetails(session.gameId);
+    res.json(details);
   }
 };
 

@@ -5,9 +5,12 @@ const main = async function() {
 const requestPlayerDetails = async function() {
   const response = await fetch('/catan/joinedPlayerDetails');
   if (response.ok) {
-    const details = await response.json();
-    Object.keys(details).forEach(color => {
-      document.getElementById(color).innerText = details[color];
+    const { playerDetails, isGameStarted } = await response.json();
+    if (isGameStarted) {
+      window.location = '/catan/home.html';
+    }
+    Object.keys(playerDetails).forEach(color => {
+      document.getElementById(color).innerText = playerDetails[color];
     });
   }
 };

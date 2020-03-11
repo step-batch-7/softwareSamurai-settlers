@@ -30,7 +30,10 @@ class GameList {
   }
 
   getPlayersDetails(gameId) {
-    return this.games[gameId].getPlayerDetails();
+    return {
+      playerDetails: this.games[gameId].getPlayerDetails(),
+      isGameStarted: this.games[gameId].hasStarted()
+    };
   }
 }
 
