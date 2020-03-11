@@ -36,6 +36,7 @@ class Game {
     this.player = new Player();
     this.players = {};
     this.isStarted = false;
+    this.availableColors = ['blue', 'red', 'green', 'orange'];
   }
 
   static initializeGame() {
@@ -55,8 +56,9 @@ class Game {
   }
 
   addPlayer(name) {
+    const color = this.availableColors.shift();
     const id = this.generateNewPlayerId();
-    this.players[id] = new Player(name);
+    this.players[id] = new Player(name, color);
     this.start();
     return id;
   }
@@ -211,6 +213,14 @@ class Game {
 
   hasStarted() {
     return this.isStarted;
+  }
+
+  getPlayerDetails() {
+    const details = {};
+    Object.keys(this.players).forEach(player => {
+      details[this.players[player].color] = this.players[player].name;
+    });
+    return details;
   }
 }
 

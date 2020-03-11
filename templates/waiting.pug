@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/waitingPageStyle.css" />
+    <script src="/js/waiting.js"> </script>
     <title>Document</title>
   </head>
-  <body>
+  <body onload="main()">
     <div id="container">
       <div id="msg">Waiting for other Settlers ....</div>
       <div id="gameId">Game Id : 
@@ -28,27 +29,27 @@
           <div class="userIcon">
             <img src="/assets/symbols/usericon.png" alt="" />
           </div>
-          <span class="username">?</span>
+          <span class="username" id="blue">?</span>
         </div>
         <div class="person">
           <div class="userIcon">
             <img src="/assets/symbols/usericon.png" alt="" />
           </div>
-          <span class="username">?</span>
-        </div>
-
-        <div class="person">
-          <div class="userIcon">
-            <img src="/assets/symbols/usericon.png" alt="" />
-          </div>
-          <span class="username">?</span>
+          <span class="username" id="red">?</span>
         </div>
 
         <div class="person">
           <div class="userIcon">
             <img src="/assets/symbols/usericon.png" alt="" />
           </div>
-          <span class="username">?</span>
+          <span class="username" id="green">?</span>
+        </div>
+
+        <div class="person">
+          <div class="userIcon">
+            <img src="/assets/symbols/usericon.png" alt="" />
+          </div>
+          <span class="username" id="orange">?</span>
         </div>
       </div>
     </div>

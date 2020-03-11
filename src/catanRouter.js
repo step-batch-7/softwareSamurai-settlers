@@ -17,7 +17,8 @@ const {
   addRoadWithResources,
   getRandomDiceNum,
   addResourcesToPlayer,
-  serveWaitingPage
+  serveWaitingPage,
+  getJoinedPlayerDetails
 } = require('./handlers');
 
 catanRouter.use(express.static('public'));
@@ -29,6 +30,7 @@ catanRouter.get('/requestSettlement', getAvailableAdjSettlements);
 catanRouter.get('/cardsCount', getCardsCount);
 catanRouter.post('/resourceProduction', resourceProduction);
 catanRouter.get('/bankStatus', getBankStatus);
+catanRouter.get('/joinedPlayerDetails', getJoinedPlayerDetails);
 catanRouter.post('/buildSettlement', buildSettlement);
 catanRouter.post('/buildInitialSettlement', buildInitialSettlement);
 catanRouter.get('/getPossiblePathsForRoad', servePossiblePathsForRoad);

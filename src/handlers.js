@@ -127,6 +127,16 @@ const hostNewGame = function(req, res) {
   res.redirect('/catan/waiting.html');
 };
 
+const getJoinedPlayerDetails = function(req, res) {
+  const { sId } = req.cookies;
+  const { sessions, gameList } = req.app.locals;
+  const { gameId } = sessions.getSession(sId);
+  if (gameId) {
+    const playerDetails = gameList.getPlayersDetails(gameId);
+    res.json(playerDetails);
+  }
+};
+
 module.exports = {
   getTerrainDetails,
   getCardsCount,
@@ -146,5 +156,6 @@ module.exports = {
   hostNewGame,
   serveWaitingPage,
   serveJoinPage,
-  joinGame
+  joinGame,
+  getJoinedPlayerDetails
 };

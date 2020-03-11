@@ -28,6 +28,10 @@ class GameList {
       return true;
     }
   }
+
+  getPlayersDetails(gameId) {
+    return this.games[gameId].getPlayerDetails();
+  }
 }
 
 module.exports = { GameList };
