@@ -79,7 +79,9 @@ class Game {
       const selectedTerrains = pickTerrains(terrains, numToken);
       for (const player in this.players) {
         const terrainsId = this.players[player].getTerrainsId();
-        const resourceId = terrainsId.filter(id => selectedTerrains.includes(id));
+        const resourceId = terrainsId.filter(id => {
+          return selectedTerrains.includes(id);
+        });
         const resourceCards = resourceId.map(id => {
           const resourceId = this.board.getResource(id);
           return { resource: productions[resourceId], count: 1 };
