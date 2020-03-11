@@ -33,7 +33,7 @@ class Game {
   constructor() {
     this.board = new Board();
     this.bank = new Bank();
-    this.player = new Player();
+    // this.player = new Player();
     this.players = {};
     this.isStarted = false;
     this.availableColors = ['blue', 'red', 'green', 'orange'];
@@ -44,8 +44,8 @@ class Game {
     return game;
   }
 
-  cardsCount() {
-    return this.player.cardsCount();
+  cardsCount(playerId) {
+    return this.players[playerId].cardsCount();
   }
 
   generateNewPlayerId() {
@@ -63,11 +63,11 @@ class Game {
     return id;
   }
 
-  getBoardData() {
+  getBoardData(playerId) {
     return {
       terrainsInfo: this.board.getTerrains(),
-      settlements: this.player.getSettlements(),
-      roads: this.player.getRoads()
+      settlements: this.players[playerId].getSettlements(),
+      roads: this.players[playerId].getRoads()
     };
   }
 
@@ -147,8 +147,8 @@ class Game {
     return false;
   }
 
-  possiblePathsForSetup() {
-    const settlement = this.player.settlements.slice().pop();
+  possiblePathsForSetup(playerId) {
+    const settlement = this.players[playerId].settlements.slice().pop();
     const possiblePositionsForRoad = this.board.getEmptyPaths();
     const possiblePositionsToBuildRoad = possiblePositionsForRoad.filter(
       position => {
@@ -160,10 +160,11 @@ class Game {
     return possiblePositionsToBuildRoad;
   }
 
-  possiblePaths() {
+  possiblePaths(playerId) {
+    const player = this.players[playerId];
     const paths = this.board.getEmptyPaths();
-    const roads = this.player.getRoads();
-    const settlements = this.player.getSettlements();
+    const roads = player.getRoads();
+    const settlements = player.getSettlements();
     const possiblePaths = paths.filter(path => {
       const isPathConnectedToRoad = roads.some(isRoadIncluded.bind(null, path));
       const isPathConnectedToSettlement = settlements.some(settlement => {
@@ -174,20 +175,21 @@ class Game {
     return possiblePaths;
   }
 
-  canBuild() {
-    const canBuildSettlement = this.player.canBuildSettlement();
-    const canBuildRoad = this.player.canBuildRoad();
+  canBuild(playerId) {
+    const player = this.players[playerId];
+    const canBuildSettlement = player.canBuildSettlement();
+    const canBuildRoad = player.canBuildRoad();
     const havePositionsToBuildSettlements =
-      this.getAvailableAdjSettlements().length > 0;
+      this.getAvailableAdjSettlements(playerId).length > 0;
     return {
       settlement: canBuildSettlement && havePositionsToBuildSettlements,
       road: canBuildRoad
     };
   }
 
-  getAvailableAdjSettlements() {
+  getAvailableAdjSettlements(playerId) {
     const settlements = this.getAvailableSettlements();
-    const roads = this.player.getRoads();
+    const roads = this.players[playerId].getRoads();
     let adjSettlements = settlements.filter(settlement => {
       return roads.some(road => road.split('-').includes(settlement));
     });
@@ -195,10 +197,11 @@ class Game {
     return Array.from(adjSettlements);
   }
 
-  addRoadWithResources(pathId) {
+  addRoadWithResources(playerId, pathId) {
+    const player = this.players[playerId];
     this.board.addRoad(pathId);
-    this.player.addRoad(pathId);
-    const isDeducted = this.player.deductCardsForRoad(pathId);
+    player.addRoad(pathId);
+    const isDeducted = player.deductCardsForRoad(pathId);
     if (isDeducted) {
       this.bank.add({lumber: 1, brick: 1});
     }

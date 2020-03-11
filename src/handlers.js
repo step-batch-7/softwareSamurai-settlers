@@ -1,6 +1,6 @@
 const getTerrainDetails = function(req, res) {
-  const {game} = req.app.locals;
-  const boardData = game.getBoardData();
+  const {game, playerId} = req.app.locals;
+  const boardData = game.getBoardData(playerId);
   res.json(boardData);
 };
 
@@ -10,8 +10,8 @@ const getBankStatus = (req, res) => {
 };
 
 const getCardsCount = function(req, res) {
-  const {game} = req.app.locals;
-  res.json(game.cardsCount());
+  const {game, playerId} = req.app.locals;
+  res.json(game.cardsCount(playerId));
 };
 
 const getAvailableSettlements = function(req, res) {
@@ -54,14 +54,14 @@ const addRoad = function(req, res) {
 };
 
 const servePossiblePathsForRoadInSetup = (req, res) => {
-  const {game} = req.app.locals;
-  const possiblePositionsToBuildRoad = game.possiblePathsForSetup();
+  const {game, playerId} = req.app.locals;
+  const possiblePositionsToBuildRoad = game.possiblePathsForSetup(playerId);
   res.json(possiblePositionsToBuildRoad);
 };
 
 const servePossiblePathsForRoad = (req, res) => {
-  const {game} = req.app.locals;
-  const possiblePaths = game.possiblePaths();
+  const {game, playerId} = req.app.locals;
+  const possiblePaths = game.possiblePaths(playerId);
   res.json(possiblePaths);
 };
 
@@ -73,21 +73,21 @@ const resourceProduction = function(req, res) {
 };
 
 const getBuildStatus = function(req, res) {
-  const {game} = req.app.locals;
-  const buildStatus = game.canBuild();
+  const {game, playerId} = req.app.locals;
+  const buildStatus = game.canBuild(playerId);
   res.json(buildStatus);
 };
 
 const getAvailableAdjSettlements = function(req, res) {
-  const {game} = req.app.locals;
-  const adjSettlements = game.getAvailableAdjSettlements();
+  const {game, playerId} = req.app.locals;
+  const adjSettlements = game.getAvailableAdjSettlements(playerId);
   res.json(adjSettlements);
 };
 
 const addRoadWithResources = function(req, res) {
   const {pathId} = req.body;
-  const {game} = req.app.locals;
-  game.addRoadWithResources(pathId);
+  const {game, playerId} = req.app.locals;
+  game.addRoadWithResources(playerId, pathId);
   res.end();
 };
 

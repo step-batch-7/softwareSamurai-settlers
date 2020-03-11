@@ -6,7 +6,14 @@ const {Player} = require('../../src/models/player');
 describe('Game', () => {
   describe('cardsCount', () => {
     it('should give cardsCount for the given player', () => {
+      const players = {
+        1: new Player(),
+        2: new Player(),
+        3: new Player(),
+        4: new Player()
+      };
       const game = new Game();
+      sinon.replace(game, 'players', players);
       const expected = {
         resources: {
           ore: 0,
@@ -23,7 +30,7 @@ describe('Game', () => {
         },
         totalDevCards: 0
       };
-      assert.deepStrictEqual(game.cardsCount(), expected);
+      assert.deepStrictEqual(game.cardsCount(1), expected);
     });
   });
 
@@ -69,8 +76,15 @@ describe('Game', () => {
 
   describe('getAvailableAdjSettlements ', () => {
     it('should give empty array if no positions are available', () => {
+      const players = {
+        1: new Player(),
+        2: new Player(),
+        3: new Player(),
+        4: new Player()
+      };
       const game = new Game();
-      assert.deepStrictEqual(game.getAvailableAdjSettlements(), []);
+      sinon.replace(game, 'players', players);
+      assert.deepStrictEqual(game.getAvailableAdjSettlements(1), []);
     });
   });
   describe('start', () => {
