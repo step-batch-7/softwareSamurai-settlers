@@ -1,5 +1,5 @@
 const getBankStatus = async function() {
-  const response = await fetch('/bankStatus');
+  const response = await fetch('/catan/bankStatus');
   if (response.ok) {
     const cards = await response.json();
     const bankElement = document.getElementById('bank');

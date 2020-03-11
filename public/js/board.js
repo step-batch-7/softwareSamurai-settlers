@@ -1,5 +1,5 @@
 const getTerrains = async function() {
-  const response = await fetch('/terrains');
+  const response = await fetch('/catan/terrains');
   if (response.ok) {
     const { terrainsInfo, settlements, roads } = await response.json();
     const terrains = document.getElementsByClassName('terrain');
@@ -49,7 +49,7 @@ const renderRoads = function(roads) {
 };
 
 const requestSettlement = async function() {
-  const response = await fetch('/requestSettlement');
+  const response = await fetch('/catan/requestSettlement');
   if (response.ok) {
     const positions = await response.json();
 
@@ -62,7 +62,7 @@ const requestSettlement = async function() {
 };
 
 const requestInitialSettlement = async function() {
-  const response = await fetch('/requestInitialSettlement');
+  const response = await fetch('/catan/requestInitialSettlement');
   if (response.ok) {
     const positions = await response.json();
     positions.forEach(position => {
@@ -104,7 +104,7 @@ const appendRoad = function(pathId) {
 
 const buildRoad = async function() {
   const pathId = event.target.id;
-  const response = await fetch('/buildRoad', {
+  const response = await fetch('/catan/buildRoad', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -119,7 +119,7 @@ const buildRoad = async function() {
 
 const buildRoadWithResources = async function() {
   const pathId = event.target.id;
-  const response = await fetch('/buildRoadWithResources', {
+  const response = await fetch('/catan/buildRoadWithResources', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -136,7 +136,7 @@ const buildRoadWithResources = async function() {
 };
 
 const showPossiblePathsForRoadInSetUp = async function() {
-  const response = await fetch('/getPossiblePathsForRoadInSetup');
+  const response = await fetch('/catan/getPossiblePathsForRoadInSetup');
 
   if (response.ok) {
     const pathIds = await response.json();
@@ -160,7 +160,7 @@ const renderNewSettlement = function(intersection, buildingFunction) {
 
 const buildInitialSettlement = async function() {
   const intersection = event.target;
-  const response = await fetch('/buildInitialSettlement', {
+  const response = await fetch('/catan/buildInitialSettlement', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -177,7 +177,7 @@ const buildInitialSettlement = async function() {
 
 const buildSettlement = async function() {
   const intersection = event.target;
-  const response = await fetch('/buildSettlement', {
+  const response = await fetch('/catan/buildSettlement', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -194,7 +194,7 @@ const buildSettlement = async function() {
 };
 
 const getPossiblePathsForRoad = async function() {
-  const response = await fetch('/getPossiblePathsForRoad');
+  const response = await fetch('/catan/getPossiblePathsForRoad');
   if (response.ok) {
     if (
       Array.from(document.getElementById('road').classList).includes(

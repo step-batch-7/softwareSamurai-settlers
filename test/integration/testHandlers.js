@@ -19,7 +19,7 @@ describe('Get static file', () => {
 describe('Get getTerrainDetails', () => {
   it('Should give terrain details for /terrains', done => {
     request(app)
-      .get('/terrains')
+      .get('/catan/terrains')
       .expect(200, done)
       .expect(/"i":{"noToken":9,"resource":"forest"}/);
   });
@@ -28,7 +28,7 @@ describe('Get getTerrainDetails', () => {
 describe('getAvailableSettlements', () => {
   it('should give all the available settlements ', done => {
     request(app)
-      .get('/requestInitialSettlement')
+      .get('/catan/requestInitialSettlement')
       .expect(200, done)
       .expect(/k1/);
   });
@@ -37,7 +37,7 @@ describe('getAvailableSettlements', () => {
 describe('/getAdjAvailableSettlements', () => {
   it('should get empty array for no roads', done => {
     request(app)
-      .get('/requestSettlement')
+      .get('/catan/requestSettlement')
       .expect(200, done)
       .expect(/\[\]/);
   });
@@ -46,7 +46,7 @@ describe('/getAdjAvailableSettlements', () => {
 describe('buildSettlement', () => {
   it('should build the settlement on given position', done => {
     request(app)
-      .post('/buildSettlement')
+      .post('/catan/buildSettlement')
       .set('content-type', 'application/json')
       .send({ intersection: 'k1' })
       .expect(200, done);
@@ -56,7 +56,7 @@ describe('buildSettlement', () => {
 describe('Get /buildRoad', () => {
   it('should build the Road on given position', done => {
     request(app)
-      .post('/buildRoad')
+      .post('/catan/buildRoad')
       .set('content-type', 'application/json')
       .send({ pathId: 'k1-kj' })
       .expect(200, done);
@@ -66,7 +66,7 @@ describe('Get /buildRoad', () => {
 describe('Get /cardsCount', () => {
   it('should give count of resource and devCards', done => {
     request(app)
-      .get('/cardsCount')
+      .get('/catan/cardsCount')
       .expect(200, done)
       .expect('Content-Type', 'application/json; charset=utf-8');
   });
@@ -74,7 +74,7 @@ describe('Get /cardsCount', () => {
   describe('Get /bankStatus', () => {
     it('should give bank status for /bankStatus', done => {
       request(app)
-        .get('/bankStatus')
+        .get('/catan/bankStatus')
         .expect(200, done)
         .expect('Content-Type', 'application/json; charset=utf-8');
     });
@@ -83,7 +83,7 @@ describe('Get /cardsCount', () => {
   describe('Post /addResourcesToPlayer', () => {
     it('should give add resources to player for /addResourcesToPlayer', done => {
       request(app)
-        .post('/addResourcesToPlayer')
+        .post('/catan/addResourcesToPlayer')
         .expect(200, done);
     });
   });
@@ -91,7 +91,7 @@ describe('Get /cardsCount', () => {
   describe('get /getPossiblePathsForRoadInSetup', () => {
     it('should get possible paths for building a road for /getPossiblePathsForRoadInSetup', done => {
       request(app)
-        .get('/getPossiblePathsForRoadInSetup')
+        .get('/catan/getPossiblePathsForRoadInSetup')
         .expect(200, done);
     });
   });
@@ -100,7 +100,7 @@ describe('Get /cardsCount', () => {
 describe('get /diceNumbers', () => {
   it('should random 2 dice numbers', done => {
     request(app)
-      .get('/diceNumbers')
+      .get('/catan/diceNumbers')
       .expect(200, done);
   });
 });
@@ -108,7 +108,7 @@ describe('get /diceNumbers', () => {
 describe('post /resourceProduction', () => {
   it('should get resources if numberToken matches the terrain', done => {
     request(app)
-      .post('/buildSettlement')
+      .post('/catan/buildSettlement')
       .set('content-type', 'application/json')
       .send({ intersection: 'k1' })
       .expect(200, done);
@@ -116,7 +116,7 @@ describe('post /resourceProduction', () => {
 
   it('should increase resources based on number token', done => {
     request(app)
-      .post('/resourceProduction')
+      .post('/catan/resourceProduction')
       .set('content-type', 'application/json')
       .send({ numToken: 10 })
       .expect(200, done);
@@ -126,7 +126,7 @@ describe('post /resourceProduction', () => {
 describe('/buildStatus', () => {
   it('should give false if user cannot build settlement', done => {
     request(app)
-      .get('/buildStatus')
+      .get('/catan/buildStatus')
       .expect(200, done)
       .expect(/"settlement":false/);
   });
@@ -135,7 +135,7 @@ describe('/buildStatus', () => {
 describe('Get /getPossiblePathsForRoad', () => {
   it('Should give possible paths adjacent to existing settlements', done => {
     request(app)
-      .get('/getPossiblePathsForRoad')
+      .get('/catan/getPossiblePathsForRoad')
       .expect(200, done);
   });
 });
@@ -143,7 +143,7 @@ describe('Get /getPossiblePathsForRoad', () => {
 describe('/buildInitialSettlement', () => {
   it('should build the settlement on given intersection', done => {
     request(app)
-      .post('/buildInitialSettlement')
+      .post('/catan/buildInitialSettlement')
       .send({ intersection: 'k1' })
       .expect(200, done);
   });

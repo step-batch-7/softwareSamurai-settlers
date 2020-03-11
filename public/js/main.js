@@ -13,7 +13,9 @@ const main = () => {
 };
 
 const distributeResources = async () => {
-  const response = await fetch('/addResourcesToPlayer', { method: 'POST' });
+  const response = await fetch('/catan/addResourcesToPlayer', {
+    method: 'POST'
+  });
   if (response.ok) {
     fetchCardsCount();
     getBankStatus();
