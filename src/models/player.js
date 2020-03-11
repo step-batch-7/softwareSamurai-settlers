@@ -74,7 +74,7 @@ class Player {
 
   deductCardsForSettlement() {
     const settlementResources = {grain: 1, lumber: 1, brick: 1, wool: 1};
-    this.resources.deduct(settlementResources);
+    return this.resources.deduct(settlementResources);
   }
 
   deductCardsForRoad() {

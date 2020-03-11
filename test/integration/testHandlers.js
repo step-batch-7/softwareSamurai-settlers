@@ -1,7 +1,7 @@
 const request = require('supertest');
 const sinon = require('sinon');
-const { app } = require('../../src/app');
-const { Game } = require('../../src/models/game');
+const {app} = require('../../src/app');
+const {Game} = require('../../src/models/game');
 
 describe('Handlers', () => {
   before(() => {
@@ -11,7 +11,7 @@ describe('Handlers', () => {
     game.addPlayer('shikhar');
     game.addPlayer('dhoni');
     sinon.replace(app.locals.sessions, 'getSession', () => {
-      return { gameId: 100, playerId: 1 };
+      return {gameId: 100, playerId: 1};
     });
 
     sinon.replace(app.locals.gameList, 'getGame', () => game);
@@ -54,7 +54,17 @@ describe('Handlers', () => {
     });
   });
 
-  context('/getAdjAvailableSettlements', () => {
+  describe('buildSettlement', () => {
+    it('should build the settlement on given position', done => {
+      request(app)
+        .post('/catan/buildSettlement')
+        .set('content-type', 'application/json')
+        .send({intersection: 'k1'})
+        .expect(200, done);
+    });
+  });
+
+  describe('/getAdjAvailableSettlements', () => {
     it('should get empty array for no roads', done => {
       request(app)
         .get('/catan/requestSettlement')
@@ -62,23 +72,12 @@ describe('Handlers', () => {
         .expect(/\[\]/);
     });
   });
-
-  context('buildSettlement', () => {
-    it('should build the settlement on given position', done => {
-      request(app)
-        .post('/catan/buildSettlement')
-        .set('content-type', 'application/json')
-        .send({ intersection: 'k1' })
-        .expect(200, done);
-    });
-  });
-
-  context('Get /buildRoad', () => {
+  describe('Get /buildRoad', () => {
     it('should build the Road on given position', done => {
       request(app)
         .post('/catan/buildRoad')
         .set('content-type', 'application/json')
-        .send({ pathId: 'k1-kj' })
+        .send({pathId: 'k1-kj'})
         .expect(200, done);
     });
   });
@@ -90,30 +89,44 @@ describe('Handlers', () => {
         .expect(200, done)
         .expect('Content-Type', 'application/json; charset=utf-8');
     });
+  });
 
-    context('Get /bankStatus', () => {
-      it('should give bank status for /bankStatus', done => {
-        request(app)
-          .get('/catan/bankStatus')
-          .expect(200, done)
-          .expect('Content-Type', 'application/json; charset=utf-8');
-      });
+  describe('Get /bankStatus', () => {
+    it('should give bank status for /bankStatus', done => {
+      request(app)
+        .get('/catan/bankStatus')
+        .expect(200, done)
+        .expect('Content-Type', 'application/json; charset=utf-8');
     });
+  });
 
-    context('Post /addResourcesToPlayer', () => {
-      it('should give add resources to player for /addResourcesToPlayer', done => {
-        request(app)
-          .post('/catan/addResourcesToPlayer')
-          .expect(200, done);
-      });
+  context('Post /addResourcesToPlayer', () => {
+    const game = new Game();
+    game.addPlayer('virat');
+    game.addPlayer('rohit');
+    game.addPlayer('shikhar');
+    game.addPlayer('dhoni');
+    game.buildInitialSettlement('efo', '1');
+    sinon.replace(app.locals, 'game', game);
+    app.locals.playerId = 1;
+    it('should build the settlement for getting resources', done => {
+      request(app)
+        .post('/catan/buildInitialSettlement')
+        .send({intersection: 'efo'})
+        .expect(200, done);
     });
+    it('should give add resources to player for /addResourcesToPlayer', done => {
+      request(app)
+        .post('/catan/addResourcesToPlayer', 1)
+        .expect(200, done);
+    });
+  });
 
-    context('get /getPossiblePathsForRoadInSetup', () => {
-      it('should get possible paths for building a road for /getPossiblePathsForRoadInSetup', done => {
-        request(app)
-          .get('/catan/getPossiblePathsForRoadInSetup')
-          .expect(200, done);
-      });
+  context('get /getPossiblePathsForRoadInSetup', () => {
+    it('should get possible paths for building a road for /getPossiblePathsForRoadInSetup', done => {
+      request(app)
+        .get('/catan/getPossiblePathsForRoadInSetup')
+        .expect(200, done);
     });
   });
 
@@ -130,15 +143,17 @@ describe('Handlers', () => {
       request(app)
         .post('/catan/buildSettlement')
         .set('content-type', 'application/json')
-        .send({ intersection: 'k1' })
+        .send({intersection: 'k1'})
         .expect(200, done);
     });
+  });
 
+  describe('post /resourceProduction', () => {
     it('should increase resources based on number token', done => {
       request(app)
         .post('/catan/resourceProduction')
         .set('content-type', 'application/json')
-        .send({ numToken: 10 })
+        .send({numToken: 10})
         .expect(200, done);
     });
   });
@@ -164,7 +179,7 @@ describe('Handlers', () => {
     it('should build the settlement on given intersection', done => {
       request(app)
         .post('/catan/buildInitialSettlement')
-        .send({ intersection: 'k1' })
+        .send({intersection: 'k1'})
         .expect(200, done);
     });
   });

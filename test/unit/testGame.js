@@ -1,7 +1,7 @@
-const { assert } = require('chai');
+const {assert} = require('chai');
 const sinon = require('sinon');
-const { Game } = require('../../src/models/game');
-const { Player } = require('../../src/models/player');
+const {Game} = require('../../src/models/game');
+const {Player} = require('../../src/models/player');
 
 describe('Game', () => {
   describe('cardsCount', () => {
@@ -68,7 +68,7 @@ describe('Game', () => {
   });
   describe('start', () => {
     it('should start the game when 4 players are added', () => {
-      const players = { p1: 'red', p2: 'green', p3: 'orange', p4: 'white' };
+      const players = {p1: 'red', p2: 'green', p3: 'orange', p4: 'white'};
       const game = new Game();
       sinon.replace(game, 'players', players);
       assert.isTrue(game.start());
@@ -80,7 +80,7 @@ describe('Game', () => {
     });
 
     it('should not start the game when less than 4 players are added', () => {
-      const players = { p1: 'red', p2: 'green', p3: 'orange' };
+      const players = {p1: 'red', p2: 'green', p3: 'orange'};
       const game = new Game();
       sinon.replace(game, 'players', players);
       assert.isFalse(game.start());
@@ -89,7 +89,7 @@ describe('Game', () => {
 
   describe('isStarted', () => {
     it('should return true when the game has started', () => {
-      const players = { p1: 'red', p2: 'green', p3: 'orange', p4: 'white' };
+      const players = {p1: 'red', p2: 'green', p3: 'orange', p4: 'white'};
       const game = new Game();
       sinon.replace(game, 'players', players);
       game.start();
@@ -181,5 +181,31 @@ describe('Game', () => {
       game.addPlayer('virat');
       assert.deepStrictEqual({ blue: 'virat' }, game.getPlayerDetails());
     });
+  });
+  describe('build settlement', () => {
+    it('should build a settlement and return true when cards are deducted', () => {
+      const game = new Game();
+      const players = {
+        p1: new Player('p1'),
+        p2: new Player('p2'),
+        p3: new Player('p3'),
+        p4: new Player('p4')
+      };
+      players['p2'].resources = {deduct: sinon.stub().returns(true)};
+      sinon.replace(game, 'players', players);
+      assert.isTrue(game.buildSettlement('kl', 'p2'));
+    });
+  });
+
+  it('should build a settlement and return true when cards are deducted', () => {
+    const game = new Game();
+    const players = {
+      p1: new Player('p1'),
+      p2: new Player('p2'),
+      p3: new Player('p3'),
+      p4: new Player('p4')
+    };
+    sinon.replace(game, 'players', players);
+    assert.isFalse(game.buildSettlement('kl', 'p2'));
   });
 });

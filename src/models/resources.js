@@ -16,7 +16,7 @@ class Resources {
     };
   }
 
-  add({ resource, count }) {
+  add({resource, count}) {
     if (resource && count) {
       this[resource] = this[resource] + count;
       return true;
@@ -32,11 +32,13 @@ class Resources {
   }
 
   deduct(resources) {
-    let status = false;
-    for (const resource in resources) {
-      if (this[resource] > 0) {
+    const resourceNames = Object.keys(resources);
+    const status = resourceNames.every(
+      resource => this[resource] >= resources[resource]
+    );
+    if (status) {
+      for (const resource in resources) {
         this[resource] -= resources[resource];
-        status = true;
       }
     }
     return status;

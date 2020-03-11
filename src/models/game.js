@@ -1,7 +1,7 @@
-const { Player } = require('./player');
-const { Board } = require('./board');
-const { Bank } = require('./bank');
-const { Turn } = require('./turn');
+const {Player} = require('./player');
+const {Board} = require('./board');
+const {Bank} = require('./bank');
+const {Turn} = require('./turn');
 
 const productions = {
   fields: 'grain',
@@ -86,7 +86,7 @@ class Game {
         });
         const resourceCards = resourceId.map(id => {
           const resourceId = this.board.getResource(id);
-          return { resource: productions[resourceId], count: 1 };
+          return {resource: productions[resourceId], count: 1};
         });
         this.distriute(this.players[player], resourceCards);
       }
@@ -107,32 +107,40 @@ class Game {
     return this.bank.status;
   }
 
-  buildInitialSettlement(intersection) {
+  buildInitialSettlement(intersection, playerId) {
     this.board.buildSettlement(intersection);
-    this.player.addSettlement(intersection);
+    this.players[playerId].addSettlement(intersection);
   }
 
-  buildSettlement(intersection) {
-    this.board.buildSettlement(intersection);
-    this.player.addSettlement(intersection);
-    this.player.deductCardsForSettlement(intersection);
-    this.bank.add({ grain: 1, lumber: 1, brick: 1, wool: 1 });
+  buildSettlement(intersection, playerId) {
+    const player = this.players[playerId];
+    if (player.deductCardsForSettlement(intersection)) {
+      player.addSettlement(intersection);
+      this.board.buildSettlement(intersection);
+      this.bank.add({grain: 1, lumber: 1, brick: 1, wool: 1});
+      return true;
+    }
+    return false;
   }
 
-  addResourcesToPlayer() {
+  addResourcesToPlayer(playerId) {
     const terrains = this.board.getTerrains();
-    const settlement = this.player.settlements.slice().pop();
+    const player = this.players[playerId];
+    const settlement = player
+      .getSettlements()
+      .slice()
+      .pop();
     const tokenIds = settlement.split('');
     const resourceCards = tokenIds.reduce((resourceCards, tokenId) => {
       if (terrains[tokenId]) {
         const terrain = terrains[tokenId].resource;
-        resourceCards.push({ resource: productions[terrain], count: 1 });
+        resourceCards.push({resource: productions[terrain], count: 1});
       }
       return resourceCards;
     }, []);
     resourceCards.forEach(resourceCard => {
       this.bank.remove(resourceCard);
-      this.player.addResources(resourceCard);
+      player.addResources(resourceCard);
     });
   }
 
@@ -198,7 +206,7 @@ class Game {
     this.player.addRoad(pathId);
     const isDeducted = this.player.deductCardsForRoad(pathId);
     if (isDeducted) {
-      this.bank.add({ lumber: 1, brick: 1 });
+      this.bank.add({lumber: 1, brick: 1});
     }
   }
 
@@ -224,4 +232,4 @@ class Game {
   }
 }
 
-module.exports = { Game };
+module.exports = {Game};
