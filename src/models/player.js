@@ -9,7 +9,7 @@ class Player {
     this.roads = [];
     this.resources = new Resources();
     this.devCards = new DevCards();
-    this.victoryPoint = 0;
+    this.victoryPoints = 0;
   }
   cardsCount() {
     return {
@@ -18,9 +18,20 @@ class Player {
       totalDevCards: this.devCards.count()
     };
   }
+
+  addVictoryPoints(points) {
+    if (points && Number.isInteger(points)) {
+      this.victoryPoints += points;
+      return true;
+    }
+    return false;
+  }
+
   addSettlement(settlement) {
+    this.addVictoryPoints(1);
     this.settlements.push(settlement);
   }
+
   addRoad(road) {
     if (road) {
       this.roads.push(road);
@@ -32,14 +43,17 @@ class Player {
   getSettlements() {
     return this.settlements.slice();
   }
+
   getRoads() {
     return this.roads.slice();
   }
+
   getTerrainsId() {
     return this.settlements.reduce((terrainsId, settlement) => {
       return terrainsId.concat(settlement.split(''));
     }, []);
   }
+
   addResources(card) {
     if (card) {
       const isCardAdded = this.resources.add(card);
@@ -47,25 +61,26 @@ class Player {
     }
     return false;
   }
+
   canBuildSettlement() {
-    const resourcesNeeded = { grain: 1, brick: 1, lumber: 1, wool: 1 };
+    const resourcesNeeded = {grain: 1, brick: 1, lumber: 1, wool: 1};
     return this.resources.have(resourcesNeeded);
   }
 
   canBuildRoad() {
-    const resourcesNeeded = { brick: 1, lumber: 1 };
+    const resourcesNeeded = {brick: 1, lumber: 1};
     return this.resources.have(resourcesNeeded);
   }
 
   deductCardsForSettlement() {
-    const settlementResources = { grain: 1, lumber: 1, brick: 1, wool: 1 };
+    const settlementResources = {grain: 1, lumber: 1, brick: 1, wool: 1};
     this.resources.deduct(settlementResources);
   }
 
   deductCardsForRoad() {
-    const roadResources = { lumber: 1, brick: 1 };
+    const roadResources = {lumber: 1, brick: 1};
     return this.resources.deduct(roadResources);
   }
 }
 
-module.exports = { Player };
+module.exports = {Player};
