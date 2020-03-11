@@ -137,10 +137,11 @@ class Game {
     this.distribute(player, resourceCards);
   }
 
-  addRoad(pathId) {
+  addRoad(playerId, pathId) {
+    const player = this.players[playerId];
     if (pathId) {
       const isRoadAddedToBoard = this.board.addRoad(pathId);
-      const isRoadAddedToPlayer = this.player.addRoad(pathId);
+      const isRoadAddedToPlayer = player.addRoad(pathId);
       return isRoadAddedToBoard && isRoadAddedToPlayer;
     }
     return false;

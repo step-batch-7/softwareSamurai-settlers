@@ -45,8 +45,15 @@ describe('Game', () => {
 
   describe('addRoad', () => {
     it('should add the road to Game when pathId is valid', () => {
+      const players = {
+        1: new Player(),
+        2: new Player(),
+        3: new Player(),
+        4: new Player()
+      };
       const game = new Game();
-      assert.isTrue(game.addRoad('kl-klr'));
+      sinon.replace(game, 'players', players);
+      assert.isTrue(game.addRoad(1, 'kl-klr'));
     });
 
     it('should not add the road to Game when pathId is undefined ', () => {
@@ -179,7 +186,7 @@ describe('Game', () => {
     it('should get player details of single player', () => {
       const game = new Game();
       game.addPlayer('virat');
-      assert.deepStrictEqual({ blue: 'virat' }, game.getPlayerDetails());
+      assert.deepStrictEqual({blue: 'virat'}, game.getPlayerDetails());
     });
   });
   describe('build settlement', () => {

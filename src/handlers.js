@@ -47,9 +47,9 @@ const addResourcesToPlayer = function(req, res) {
 };
 
 const addRoad = function(req, res) {
-  const {game} = req.app.locals;
+  const {game, playerId} = req.app.locals;
   const {pathId} = req.body;
-  game.addRoad(pathId);
+  game.addRoad(playerId, pathId);
   res.end();
 };
 
@@ -134,8 +134,8 @@ const ensureGame = function(req, res, next) {
 };
 
 const ensureGameStart = function(req, res, next) {
-  const { sId } = req.cookies;
-  const { sessions, gameList } = req.app.locals;
+  const {sId} = req.cookies;
+  const {sessions, gameList} = req.app.locals;
   const session = sessions.getSession(sId);
   const game = gameList.getGame(session.gameId);
   if (!game.hasStarted()) {
@@ -163,13 +163,13 @@ const getJoinedPlayerDetails = function(req, res) {
   if (session) {
     const playerDetails = game.getPlayerDetails();
     const isGameStarted = game.hasStarted(session.gameId);
-    res.json({ playerDetails, isGameStarted });
+    res.json({playerDetails, isGameStarted});
   }
 };
 
 const ensureSession = function(req, res, next) {
-  const { sId } = req.cookies;
-  const { sessions, gameList } = req.app.locals;
+  const {sId} = req.cookies;
+  const {sessions, gameList} = req.app.locals;
   const session = sessions.getSession(sId);
   if (session) {
     const game = gameList.getGame(session.gameId);
