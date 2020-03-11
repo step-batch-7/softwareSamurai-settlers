@@ -275,7 +275,7 @@ const playersDetail = [
     playedNightCards: 0,
     longestRoadCount: 0,
     remainingSettlement: 5,
-    remainingRoads: 15,
+    remainingRoads: 0,
     remainingCities: 4
   }
 ];
