@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Join</title>
+  </head>
+  <body>
+    <div id="screen">
+      <div id="logo">
+        <div>
+          <img src="./assets/name.png" alt="name" height="80%" width="90%" style="margin-left: 95%;" />
+        </div>
+        <div style="height:60%; width: 6%;">
+          <img id="help" src="./assets/help.png" alt="help" />
+        </div>
+      </div>
+      <div id="landing-box">
+        <div class="title">Join Game</div>
+        <form action="/join" method="POST">
+          <div id="join-name-box">
+            <label style="color: aliceblue;">Name</label><br /><input
+              id="join-name"
+              type="text"
+              placeholder="John"
+            />
+          </div>
+          <br /><br />
+          <div id="game-Id-box">
+            <label style="color: aliceblue;">GameId</label><br /><input
+              id="game-Id"
+              type="text"
+              placeholder="G-1234"
+            />
+          </div>
+          <button type="submit" class="text-box">Join</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

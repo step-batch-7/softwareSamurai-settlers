@@ -20,8 +20,10 @@ body {
   color: whitesmoke;
   font-size: large;
   align-self: center;
-  margin-top: 8%;
+  margin-top: 3%;
   margin-bottom: -10%;
+  /* width: 10%; */
+  height: 10%;
 }
 
 .loader {
@@ -45,6 +47,7 @@ body {
   margin: -11% auto;
   width: 24%;
   font-size: 23px;
+  height: 8%;
 }
 
 .hex:nth-child(2) {
