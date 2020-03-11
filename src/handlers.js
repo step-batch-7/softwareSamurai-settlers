@@ -148,8 +148,9 @@ const getJoinedPlayerDetails = function(req, res) {
   const { sessions, game } = req.app.locals;
   const session = sessions.getSession(sId);
   if (session) {
-    const details = game.getPlayerDetails(session.gameId);
-    res.json(details);
+    const playerDetails = game.getPlayerDetails();
+    const isGameStarted = game.hasStarted(session.gameId);
+    res.json({ playerDetails, isGameStarted });
   }
 };
 

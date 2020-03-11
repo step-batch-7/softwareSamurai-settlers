@@ -28,13 +28,6 @@ class GameList {
       return true;
     }
   }
-
-  getPlayersDetails(gameId) {
-    return {
-      playerDetails: this.games[gameId].getPlayerDetails(),
-      isGameStarted: this.games[gameId].hasStarted()
-    };
-  }
 }
 
 module.exports = { GameList };

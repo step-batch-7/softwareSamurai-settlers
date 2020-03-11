@@ -23,13 +23,4 @@ describe('GameList', () => {
       gameList.getGame(1000);
     });
   });
-
-  describe.skip('getPlayerDetails', () => {
-    const gameList = new GameList();
-    gameList.createGame();
-    assert.deepStrictEqual(gameList.getPlayersDetails(1000), {
-      playerDetails: {},
-      isGameStarted: false
-    });
-  });
 });
