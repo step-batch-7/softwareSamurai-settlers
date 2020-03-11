@@ -124,12 +124,12 @@ const ensureGame = function(req, res, next) {
   const { sessions, gameList } = req.app.locals;
   const session = sessions.getSession(sId);
   if (!session) {
-    res.redirect('index.html');
+    res.redirect('/index.html');
     return;
   }
   const game = gameList.getGame(session.gameId);
   if (!game.hasStarted()) {
-    res.redirect('catan/waiting.html');
+    res.redirect('/catan/waiting.html');
     return;
   }
   req.app.locals.game = game;
