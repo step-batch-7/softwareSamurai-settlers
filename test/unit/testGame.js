@@ -100,8 +100,8 @@ describe('Game', () => {
       assert.isFalse(game.hasStarted());
     });
   });
-  describe('resourceProduction', function() {
-    it('should produce resources according to numToken if ', function() {
+  describe('resourceProduction', () => {
+    it('should produce resources according to numToken', () => {
       const players = { p1: new Player('p1'), p2: new Player('p2'), p3: new Player('p3'), p4: new Player('p4') };
       players['p1'].settlements.push('efo');
       players['p3'].settlements.push('bcn');
@@ -110,13 +110,13 @@ describe('Game', () => {
       const game = new Game();
       sinon.replace(game, 'players', players);
       assert.isTrue(game.resourceProduction(5));
-      const actualPlayer1 = players['p1'].resources.status();
-      const actualPlayer2 = players['p2'].resources.status();
-      const actualPlayer3 = players['p3'].resources.status();
-      const actualPlayer4 = players['p4'].resources.status();
+      const actualPlayer1Resources = players['p1'].resources.status();
+      const actualPlayer2Resources = players['p2'].resources.status();
+      const actualPlayer3Resources = players['p3'].resources.status();
+      const actualPlayer4Resources = players['p4'].resources.status();
       const actualBankResources = game.bank.resources;
 
-      const expectedPlayer1 = {
+      const expectedPlayer1Resources = {
         ore: 0,
         wool: 1,
         lumber: 0,
@@ -124,7 +124,7 @@ describe('Game', () => {
         grain: 0
       };
 
-      const expectedPlayer2 = {
+      const expectedPlayer2Resources = {
         ore: 0,
         wool: 0,
         lumber: 0,
@@ -132,7 +132,7 @@ describe('Game', () => {
         grain: 0
       };
 
-      const expectedPlayer3 = {
+      const expectedPlayer3Resources = {
         ore: 0,
         wool: 0,
         lumber: 0,
@@ -140,7 +140,7 @@ describe('Game', () => {
         grain: 0
       };
 
-      const expectedPlayer4 = {
+      const expectedPlayer4Resources = {
         ore: 0,
         wool: 0,
         lumber: 0,
@@ -157,13 +157,13 @@ describe('Game', () => {
       };
 
       assert.deepStrictEqual(actualBankResources, expectedBankResources);
-      assert.deepStrictEqual(actualPlayer1, expectedPlayer1);
-      assert.deepStrictEqual(actualPlayer2, expectedPlayer2);
-      assert.deepStrictEqual(actualPlayer3, expectedPlayer3);
-      assert.deepStrictEqual(actualPlayer4, expectedPlayer4);
+      assert.deepStrictEqual(actualPlayer1Resources, expectedPlayer1Resources);
+      assert.deepStrictEqual(actualPlayer2Resources, expectedPlayer2Resources);
+      assert.deepStrictEqual(actualPlayer3Resources, expectedPlayer3Resources);
+      assert.deepStrictEqual(actualPlayer4Resources, expectedPlayer4Resources);
     });
 
-    it('should produce resources according to numToken', function() {
+    it('should not produce resources when numToken is undefined', () => {
       const game = new Game();
       assert.isFalse(game.resourceProduction());
     });
