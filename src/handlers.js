@@ -118,6 +118,20 @@ const joinGame = function(req, res) {
   res.render('join', { error: 'Game id is not valid' });
 };
 
+const ensureGame = function(req, res, next) {
+  const { sId } = req.cookies;
+  const { sessions, gameList } = req.app.locals;
+  const session = sessions.getSession(sId);
+  if (session) {
+    const game = gameList.getGame(session.gameId);
+    req.app.locals.game = game;
+    req.app.locals.playerId = session.playerId;
+    next();
+    return;
+  }
+  res.redirect('/index.html');
+};
+
 const hostNewGame = function(req, res) {
   const { hostName } = req.body;
   const { sessions, gameList } = req.app.locals;
@@ -131,10 +145,10 @@ const hostNewGame = function(req, res) {
 
 const getJoinedPlayerDetails = function(req, res) {
   const { sId } = req.cookies;
-  const { sessions, gameList } = req.app.locals;
+  const { sessions, game } = req.app.locals;
   const session = sessions.getSession(sId);
   if (session) {
-    const details = gameList.getPlayersDetails(session.gameId);
+    const details = game.getPlayerDetails(session.gameId);
     res.json(details);
   }
 };
@@ -159,5 +173,6 @@ module.exports = {
   serveWaitingPage,
   serveJoinPage,
   joinGame,
-  getJoinedPlayerDetails
+  getJoinedPlayerDetails,
+  ensureGame
 };

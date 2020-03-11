@@ -9,18 +9,22 @@ const { hostNewGame, serveJoinPage, joinGame } = require('./handlers');
 
 const app = express();
 
-app.get('/join.html', serveJoinPage);
-app.set('view engine', 'pug');
-app.set('views', './templates');
-app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use('/catan', catanRouter);
-app.use(express.static('public'));
 app.locals.game = new Game();
 app.locals.gameList = new GameList();
 app.locals.sessions = new Sessions();
 
+app.set('view engine', 'pug');
+app.set('views', './templates');
+
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use('/catan', catanRouter);
+
+app.use(express.static('public'));
+
+app.get('/join.html', serveJoinPage);
 app.post('/host', hostNewGame);
 app.post('/join', joinGame);
 

@@ -18,9 +18,11 @@ const {
   getRandomDiceNum,
   addResourcesToPlayer,
   serveWaitingPage,
-  getJoinedPlayerDetails
+  getJoinedPlayerDetails,
+  ensureGame
 } = require('./handlers');
 
+catanRouter.use(ensureGame);
 catanRouter.use(express.static('public'));
 catanRouter.get('/waiting.html', serveWaitingPage);
 catanRouter.get('/buildStatus', getBuildStatus);

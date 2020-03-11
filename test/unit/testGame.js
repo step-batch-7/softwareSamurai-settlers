@@ -100,9 +100,15 @@ describe('Game', () => {
       assert.isFalse(game.hasStarted());
     });
   });
+
   describe('resourceProduction', () => {
     it('should produce resources according to numToken', () => {
-      const players = { p1: new Player('p1'), p2: new Player('p2'), p3: new Player('p3'), p4: new Player('p4') };
+      const players = {
+        p1: new Player('p1'),
+        p2: new Player('p2'),
+        p3: new Player('p3'),
+        p4: new Player('p4')
+      };
       players['p1'].settlements.push('efo');
       players['p3'].settlements.push('bcn');
       players['p4'].settlements.push('klr');
@@ -168,4 +174,12 @@ describe('Game', () => {
       assert.isFalse(game.resourceProduction());
     });
   });
-}); 
+
+  describe('getPlayerDetails', () => {
+    it('should get player details of single player', () => {
+      const game = new Game();
+      game.addPlayer('virat');
+      assert.deepStrictEqual({ blue: 'virat' }, game.getPlayerDetails());
+    });
+  });
+});
