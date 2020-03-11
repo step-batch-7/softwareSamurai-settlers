@@ -128,12 +128,20 @@ const ensureGame = function(req, res, next) {
     return;
   }
   const game = gameList.getGame(session.gameId);
+  req.app.locals.game = game;
+  req.app.locals.playerId = session.playerId;
+  next();
+};
+
+const ensureGameStart = function(req, res, next) {
+  const { sId } = req.cookies;
+  const { sessions, gameList } = req.app.locals;
+  const session = sessions.getSession(sId);
+  const game = gameList.getGame(session.gameId);
   if (!game.hasStarted()) {
     res.redirect('/catan/waiting.html');
     return;
   }
-  req.app.locals.game = game;
-  req.app.locals.playerId = session.playerId;
   next();
 };
 
@@ -180,5 +188,6 @@ module.exports = {
   serveJoinPage,
   joinGame,
   getJoinedPlayerDetails,
-  ensureGame
+  ensureGame,
+  ensureGameStart
 };

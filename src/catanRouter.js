@@ -19,12 +19,14 @@ const {
   addResourcesToPlayer,
   serveWaitingPage,
   getJoinedPlayerDetails,
-  ensureGame
+  ensureGame,
+  ensureGameStart
 } = require('./handlers');
 
 catanRouter.use(ensureGame);
-catanRouter.use(express.static('public'));
 catanRouter.get('/waiting.html', serveWaitingPage);
+catanRouter.get('/joinedPlayerDetails', getJoinedPlayerDetails);
+catanRouter.use(ensureGameStart, express.static('public'));
 catanRouter.get('/buildStatus', getBuildStatus);
 catanRouter.get('/terrains', getTerrainDetails);
 catanRouter.get('/requestInitialSettlement', getAvailableSettlements);
@@ -32,7 +34,6 @@ catanRouter.get('/requestSettlement', getAvailableAdjSettlements);
 catanRouter.get('/cardsCount', getCardsCount);
 catanRouter.post('/resourceProduction', resourceProduction);
 catanRouter.get('/bankStatus', getBankStatus);
-catanRouter.get('/joinedPlayerDetails', getJoinedPlayerDetails);
 catanRouter.post('/buildSettlement', buildSettlement);
 catanRouter.post('/buildInitialSettlement', buildInitialSettlement);
 catanRouter.get('/getPossiblePathsForRoad', servePossiblePathsForRoad);
