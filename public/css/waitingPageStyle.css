@@ -115,6 +115,8 @@ body {
 
 .userIcon {
   height: 100px;
+  border-radius: 7px;
+  border: solid whitesmoke 2px;
 }
 
 .person:nth-child(1) > .userIcon {
