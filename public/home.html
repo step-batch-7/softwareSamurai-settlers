@@ -506,7 +506,7 @@
               onmouseout="makeNormal('road')"
             >
               <img
-                src="/assets/roads/blueRoad.svg"
+              id="roadImg"
                 alt="road"
                 style="height:86%; width:100%;margin-top: 10%;"
               />
@@ -519,7 +519,7 @@
               onmouseout="makeNormal('settlement')"
             >
               <img
-                src="/assets/settlements/blueSettlement.svg"
+              id="settlementImg"
                 alt="settlement"
                 style="height:100%; margin: -6px;"
               />
@@ -664,7 +664,7 @@
           </div>
           <div id="player-info1">
             <div class="player-initial">
-              <img src="/assets/icon_player.svg" alt="">
+              <img id="playerImg"  alt="">
               <div id="playerName"></div>
             </div>
               <div id="cards-count">
@@ -710,7 +710,7 @@
                 <div class="component">
                   <div>
                     <img
-                      src="assets/settlements/redSettlement.svg"
+                    id="settlementImg"
                       alt="settlement"
                       class="icon-size"
                     />
@@ -719,13 +719,13 @@
                 </div>
                 <div class="component">
                   <div>
-                    <img src="assets/roads/redRoad.svg" alt="road" class="icon-size" style="margin: 10%;" />
+                    <img id="roadImg" alt="road" class="icon-size" style="margin: 10%;" />
                   </div>
                   <div id="remainingRoads" class="count">0</div>
                 </div>
                 <div class="component">
                   <div>
-                    <img src="assets/cities/redCity.svg" alt="city" class="icon-size" style="margin: 10%;" />
+                    <img id="cityImg" alt="city" class="icon-size" style="margin: 10%;" />
                   </div>
                   <div id="remainingCities" class="count">0</div>
                 </div>
@@ -733,7 +733,7 @@
             </div>
             <div id="player-info2">
               <div class="player-initial">
-                    <img src="/assets/icon_player.svg" alt="">
+                    <img id="playerImg"  alt="">
                     <div id="playerName"></div>
               </div>
               <div id="cards-count">
@@ -779,7 +779,7 @@
                 <div class="component">
                   <div>
                     <img
-                      src="assets/settlements/orangeSettlement.svg"
+                    id="settlementImg"
                       alt="settlement"
                       class="icon-size"
                     />
@@ -788,13 +788,13 @@
                 </div>
                 <div class="component">
                   <div>
-                    <img src="assets/roads/orangeRoad.svg" alt="road" class="icon-size" style="margin: 10%;" />
+                    <img id="roadImg" alt="road" class="icon-size" style="margin: 10%;" />
                   </div>
                   <div id="remainingRoads" class="count">0</div>
                 </div>
                 <div class="component">
                   <div>
-                    <img src="assets/cities/orangeCity.svg" alt="city" class="icon-size" style="margin: 10%;" />
+                    <img id="cityImg" alt="city" class="icon-size" style="margin: 10%;" />
                   </div>
                   <div id="remainingCities" class="count">0</div>
                 </div>
@@ -802,7 +802,7 @@
             </div>
             <div id="player-info3">
               <div class="player-initial">
-                    <img src="/assets/icon_player.svg" alt="">
+                    <img id="playerImg"  alt="">
                     <div id="playerName"></div>
               </div>
               <div id="cards-count">
@@ -848,7 +848,7 @@
                 <div class="component">
                   <div>
                     <img
-                      src="assets/settlements/yellowSettlement.svg"
+                    id="settlementImg"
                       alt="settlement"
                       class="icon-size"
                     />
@@ -857,13 +857,13 @@
                 </div>
                 <div class="component">
                   <div>
-                    <img src="assets/roads/yellowRoad.svg" alt="road" class="icon-size" style="margin: 10%;" />
+                    <img id="roadImg" alt="road" class="icon-size" style="margin: 10%;" />
                   </div>
                   <div id="remainingRoads" class="count">0</div>
                 </div>
                 <div class="component">
                   <div>
-                    <img src="assets/cities/yellowCity.svg" alt="city" class="icon-size" style="margin: 10%;" />
+                    <img id="cityImg" alt="city" class="icon-size" style="margin: 10%;" />
                   </div>
                   <div id="remainingCities" class="count">0</div>
                 </div>
@@ -871,7 +871,7 @@
             </div>
             <div id="current-player">
                 <div class="player-initial">
-                    <img src="/assets/icon_player.svg" alt="">
+                    <img id="playerImg"  alt="">
                     <div id="playerName"></div>
                 </div>
                 <div id="current-player-cards-count">
@@ -919,7 +919,6 @@
                       <div>
                         <img
                           id="settlementImg"
-                          src="assets/settlements/blueSettlement.svg"
                           alt="settlement"
                           class="icon-size"
                         />
@@ -928,13 +927,13 @@
                     </div>
                     <div class="component">
                       <div>
-                        <img  id='roadImg' src="assets/roads/blueRoad.svg" alt="road" class="icon-size" style="margin: 10%;"/>
+                        <img  id='roadImg' alt="road" class="icon-size" style="margin: 10%;"/>
                       </div>
                       <div id="remainingRoads" class="count">0</div>
                     </div>
                     <div class="component">
                       <div>
-                        <img id="cityImg" src="assets/cities/blueCity.svg" alt="city" class="icon-size" style="margin: 10%;"/>
+                        <img id="cityImg" alt="city" class="icon-size" style="margin: 10%;"/>
                       </div>
                       <div id="remainingCities" class="count">0</div>
                     </div>

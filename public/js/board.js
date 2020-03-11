@@ -31,7 +31,7 @@ const renderSettlements = function(settlements) {
   settlements.forEach(settlement => {
     const intersection = document.getElementById(settlement);
     intersection.classList.add('afterSettlement');
-    const img = `<image href='/assets/settlements/blueSettlement.svg' 
+    const img = `<image href='/assets/settlements/blue-settlement.svg' 
     style="height:100%; width:100%;">`;
     intersection.innerHTML = img;
   });
@@ -42,7 +42,7 @@ const renderRoads = function(roads) {
     const path = document.getElementById(road);
     path.style.opacity = '1';
     path.classList.add('afterRoad');
-    const img = `<image href='/assets/roads/blueRoad.svg' 
+    const img = `<image href='/assets/roads/blue-road.svg' 
     class="road-image">`;
     path.innerHTML = img;
   });
@@ -98,7 +98,7 @@ const appendRoad = function(pathId) {
   path.style.animation = 'none';
   path.classList.add('afterRoad');
   hideAllPaths();
-  const img = '<image href="/assets/roads/blueRoad.svg" class="road-image">';
+  const img = '<image href="/assets/roads/blue-road.svg" class="road-image">';
   path.innerHTML = img;
 };
 
@@ -153,7 +153,7 @@ const renderNewSettlement = function(intersection, buildingFunction) {
   intersection.classList.remove('point');
   intersection.classList.remove('visibleIntersection');
   intersection.classList.add('afterSettlement');
-  const img = `<image href='/assets/settlements/blueSettlement.svg' 
+  const img = `<image href='/assets/settlements/blue-settlement.svg' 
     style="height:100%; width:100%;">`;
   intersection.innerHTML = img;
 };
@@ -213,64 +213,74 @@ const getPossiblePathsForRoad = async function() {
   }
 };
 
+const setInfoCount = (player, property, playerDetail) => {
+  const playerPropertyElement = player.querySelector(`#${property}`);
+  if (property === 'resourceCards' || property === 'developmentCards') {
+    playerPropertyElement.innerHTML = playerDetail[property];
+  }
+  playerPropertyElement.innerText = playerDetail[property];
+};
+
 const renderPlayerInfo = (player, playerDetail) => {
   for (const property in playerDetail) {
-    const playerPropertyElement = player.querySelector(`#${property}`);
-    if (property === 'resourceCards' || property === 'developmentCards') {
-      playerPropertyElement.innerHTML = playerDetail[property];
+    if (property !== 'colour') {
+      setInfoCount(player, property, playerDetail);
     }
-    playerPropertyElement.innerText = playerDetail[property];
   }
 };
 
-const renderPlayersDetails = function() {
-  const playersDetail = [
-    {
-      playerName: 'rahit',
-      resourceCards: 0,
-      developmentCards: 0,
-      victoryPoint: 0,
-      playedNightCards: 0,
-      longestRoadCount: 0,
-      remainingSettlement: 5,
-      remainingRoads: 15,
-      remainingCities: 4
-    },
-    {
-      playerName: 'rahit',
-      resourceCards: 10,
-      developmentCards: 2,
-      victoryPoint: 0,
-      playedNightCards: 0,
-      longestRoadCount: 0,
-      remainingSettlement: 5,
-      remainingRoads: 15,
-      remainingCities: 4
-    },
-    {
-      playerName: 'rahit',
-      resourceCards: 0,
-      developmentCards: 0,
-      victoryPoint: 0,
-      playedNightCards: 0,
-      longestRoadCount: 0,
-      remainingSettlement: 5,
-      remainingRoads: 15,
-      remainingCities: 4
-    },
-    {
-      playerName: 'rahit',
-      resourceCards: 0,
-      developmentCards: 0,
-      victoryPoint: 0,
-      playedNightCards: 0,
-      longestRoadCount: 0,
-      remainingSettlement: 5,
-      remainingRoads: 15,
-      remainingCities: 4
-    }
-  ];
+const playersDetail = [
+  {
+    playerName: 'rahit',
+    colour: 'blue',
+    resourceCards: 0,
+    developmentCards: 0,
+    victoryPoint: 0,
+    playedNightCards: 0,
+    longestRoadCount: 0,
+    remainingSettlement: 5,
+    remainingRoads: 15,
+    remainingCities: 4
+  },
+  {
+    playerName: 'rahit',
+    colour: 'red',
+    resourceCards: 0,
+    developmentCards: 0,
+    victoryPoint: 0,
+    playedNightCards: 0,
+    longestRoadCount: 0,
+    remainingSettlement: 5,
+    remainingRoads: 15,
+    remainingCities: 4
+  },
+  {
+    playerName: 'rahit',
+    colour: 'orange',
+    resourceCards: 10,
+    developmentCards: 2,
+    victoryPoint: 0,
+    playedNightCards: 0,
+    longestRoadCount: 0,
+    remainingSettlement: 5,
+    remainingRoads: 15,
+    remainingCities: 4
+  },
+  {
+    playerName: 'rahit',
+    colour: 'yellow',
+    resourceCards: 0,
+    developmentCards: 0,
+    victoryPoint: 0,
+    playedNightCards: 0,
+    longestRoadCount: 0,
+    remainingSettlement: 5,
+    remainingRoads: 15,
+    remainingCities: 4
+  }
+];
 
+const renderPlayersDetails = function() {
   playersDetail.forEach((playerDetail, index) => {
     if (index === 0) {
       const currentPlayer = document.getElementById('current-player');
@@ -279,5 +289,72 @@ const renderPlayersDetails = function() {
     }
     const player = document.getElementById(`player-info${index}`);
     renderPlayerInfo(player, playerDetail);
+  });
+};
+
+const setSrc = ({ element, dirName, colour, buildingType, extension }) => {
+  element
+    .querySelector(`#${buildingType}Img`)
+    .setAttribute(
+      'src',
+      `/assets/${dirName}/${colour}-${buildingType}.${extension}`
+    );
+};
+
+const setSrcForAction = colour => {
+  const element = document.getElementById('actions');
+  setSrc({
+    element,
+    dirName: 'roads',
+    colour: colour,
+    buildingType: 'road',
+    extension: 'svg'
+  });
+  setSrc({
+    element,
+    dirName: 'settlements',
+    colour: colour,
+    buildingType: 'settlement',
+    extension: 'svg'
+  });
+};
+
+const renderPlayersInfoImgs = () => {
+  playersDetail.forEach((playerDetail, index) => {
+    let element;
+    if (index === 0) {
+      element = document.getElementById('current-player');
+      setSrcForAction(playerDetail.colour);
+    } else {
+      element = document.getElementById(`player-info${index}`);
+    }
+    setSrc({
+      element,
+      dirName: 'roads',
+      colour: playerDetail.colour,
+      buildingType: 'road',
+      extension: 'svg'
+    });
+    setSrc({
+      element,
+      dirName: 'settlements',
+      colour: playerDetail.colour,
+      buildingType: 'settlement',
+      extension: 'svg'
+    });
+    setSrc({
+      element,
+      dirName: 'cities',
+      colour: playerDetail.colour,
+      buildingType: 'city',
+      extension: 'svg'
+    });
+    setSrc({
+      element,
+      dirName: 'players',
+      colour: playerDetail.colour,
+      buildingType: 'player',
+      extension: 'png'
+    });
   });
 };
