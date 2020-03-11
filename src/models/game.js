@@ -88,14 +88,14 @@ class Game {
           const resourceId = this.board.getResource(id);
           return {resource: productions[resourceId], count: 1};
         });
-        this.distriute(this.players[player], resourceCards);
+        this.distribute(this.players[player], resourceCards);
       }
       return true;
     }
     return false;
   }
 
-  distriute(player, resourceCards) {
+  distribute(player, resourceCards) {
     resourceCards.forEach(card => {
       if (this.bank.remove(card)) {
         player.addResources(card);
@@ -126,11 +126,7 @@ class Game {
   addResourcesToPlayer(playerId) {
     const terrains = this.board.getTerrains();
     const player = this.players[playerId];
-    const settlement = player
-      .getSettlements()
-      .slice()
-      .pop();
-    const tokenIds = settlement.split('');
+    const tokenIds = player.getLastSettlementTerrains();
     const resourceCards = tokenIds.reduce((resourceCards, tokenId) => {
       if (terrains[tokenId]) {
         const terrain = terrains[tokenId].resource;
@@ -138,10 +134,7 @@ class Game {
       }
       return resourceCards;
     }, []);
-    resourceCards.forEach(resourceCard => {
-      this.bank.remove(resourceCard);
-      player.addResources(resourceCard);
-    });
+    this.distribute(player, resourceCards);
   }
 
   addRoad(pathId) {

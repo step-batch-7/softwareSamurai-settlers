@@ -81,6 +81,14 @@ class Player {
     const roadResources = {lumber: 1, brick: 1};
     return this.resources.deduct(roadResources);
   }
+
+  getLastSettlementTerrains() {
+    const settlements = this.getSettlements();
+    if (settlements.length !== 0) {
+      return settlements.pop().split('');
+    }
+    return [];
+  }
 }
 
 module.exports = {Player};

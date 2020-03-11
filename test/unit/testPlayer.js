@@ -1,4 +1,5 @@
 const {assert} = require('chai');
+const sinon = require('sinon');
 const {Player} = require('../../src/models/player');
 
 describe('Player', () => {
@@ -107,6 +108,21 @@ describe('Player', () => {
     it('should not add victory point to player when points are not given', () => {
       const player = new Player();
       assert.isFalse(player.addVictoryPoints());
+    });
+  });
+  describe('getLastSettlementTerrains', function() {
+    it('should return the terrains of settlement when there is atleast a settlement', function() {
+      const player = new Player();
+      sinon.replace(player, 'getSettlements', () => ['abc', 'def']);
+      const actual = player.getLastSettlementTerrains();
+      assert.deepStrictEqual(actual, ['d', 'e', 'f']);
+    });
+
+    it('should return empty when there is no settlement', function() {
+      const player = new Player();
+      sinon.replace(player, 'getSettlements', () => []);
+      const actual = player.getLastSettlementTerrains();
+      assert.deepStrictEqual(actual, []);
     });
   });
 });
