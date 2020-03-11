@@ -1,0 +1,106 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  background: rgb(69, 145, 245);
+  background-image: url('/assets/page_bg.png');
+  background-size: contain;
+  overflow: hidden;
+}
+
+#screen {
+  width: 100%;
+  height: 100%;
+}
+
+#error {
+  color: red;
+}
+
+#landing-box {
+  width: 21%;
+  height: 60%;
+  border-radius: 7px;
+  border: solid whitesmoke 1px;
+  margin: 3% 0% 0% 39%;
+  background-color: transparent;
+}
+
+.text-box {
+  height: 15%;
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+  background-color: transparent;
+  margin: 15% 0% 0% 20%;
+}
+
+.title {
+  height: 13%;
+  margin: 10% 0% 8% 20%;
+}
+
+.title,
+.text-box {
+  font-size: 35px;
+  width: 60%;
+  text-align: center;
+  border-radius: 7px;
+  color: white;
+  text-shadow: -1px 1px 0 #000;
+  text-shadow: 1px 1px 0 #000;
+  text-shadow: 1px -1px 0 #000;
+  text-shadow: -1px -1px 0 #000;
+}
+
+#join-name-box,
+#game-Id-box {
+  font-size: 25px;
+  width: 90%;
+  height: 22%;
+  margin-left: 6%;
+  text-align: center;
+}
+
+#join-name,
+#game-Id {
+  color: white;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-bottom: solid 1px whitesmoke;
+  height: 60%;
+  width: 75%;
+  font-size: 20px;
+  text-align: center;
+}
+
+::placeholder {
+  color: white;
+  opacity: 0.5;
+}
+
+form {
+  width: 100%;
+  height: 77%;
+}
+
+.text-box:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.4);
+  transform: scaleX(1.02);
+}
+
+#go-back {
+  height: 70%;
+  width: 85%;
+  margin-top: 1%;
+}
+
+#go-back:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+#logo {
+  display: flex;
+  height: 25%;
+  width: 100%;
+}
