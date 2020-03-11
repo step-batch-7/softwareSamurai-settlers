@@ -98,6 +98,10 @@ const serveWaitingPage = function(req, res) {
   res.render('waitingPage', { gameId: gameId });
 };
 
+const serveJoinPage = function(req, res) {
+  res.render('join');
+};
+
 const hostNewGame = function(req, res) {
   const { hostName } = req.body;
   const { sessions, gameList } = req.app.locals;
@@ -126,5 +130,6 @@ module.exports = {
   getAvailableAdjSettlements,
   addRoadWithResources,
   hostNewGame,
-  serveWaitingPage
+  serveWaitingPage,
+  serveJoinPage
 };

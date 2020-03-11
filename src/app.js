@@ -5,10 +5,11 @@ const { GameList } = require('./models/gameList');
 const { Sessions } = require('./models/sessions');
 const { catanRouter } = require('./catanRouter');
 
-const { hostNewGame } = require('./handlers');
+const { hostNewGame, serveJoinPage } = require('./handlers');
 
 const app = express();
 
+app.get('/join.html', serveJoinPage);
 app.set('view engine', 'pug');
 app.set('views', './templates');
 app.use(cookieParser());

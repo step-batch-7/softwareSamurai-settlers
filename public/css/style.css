@@ -12,9 +12,13 @@ body {
   height: 100%;
 }
 
+#error {
+  color: red;
+}
+
 #landing-box {
   width: 21%;
-  height: 52%;
+  height: 60%;
   border-radius: 7px;
   border: solid whitesmoke 1px;
   margin: 3% 0% 0% 39%;
