@@ -26,7 +26,8 @@ const {
 catanRouter.use(ensureGame);
 catanRouter.get('/waiting.html', serveWaitingPage);
 catanRouter.get('/joinedPlayerDetails', getJoinedPlayerDetails);
-catanRouter.use(ensureGameStart, express.static('public'));
+catanRouter.get('/home.html', ensureGameStart, express.static('public'));
+catanRouter.use(express.static('public'));
 catanRouter.get('/buildStatus', getBuildStatus);
 catanRouter.get('/terrains', getTerrainDetails);
 catanRouter.get('/requestInitialSettlement', getAvailableSettlements);

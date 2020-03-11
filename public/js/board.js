@@ -6,17 +6,17 @@ const getTerrains = async function() {
     Array.from(terrains).forEach(terrain => {
       if (terrainsInfo[terrain.id].resource === 'desert') {
         const html = `<image class="terrain-image"
-         xlink:href='/assets/terrains/${terrainsInfo[terrain.id].resource}.jpg'
+           xlink:href='/catan/assets/terrains/desert.jpg'
           count="${terrainsInfo[terrain.id].noToken}"></image>
          <image id="robber"  x='0' y='30'  
-          xlink:href='/assets/robber.png'></image>
+          xlink:href='/catan/assets/robber.png'></image>
         `;
         terrain.innerHTML += html;
         return;
       }
-      const html = `<image class="terrain-image" xlink:href='/assets/terrains/${
-        terrainsInfo[terrain.id].resource
-      }.jpg' count="${terrainsInfo[terrain.id].noToken}"></image>
+      const html = `<image class="terrain-image" xlink:href=
+      '/catan/assets/terrains/${terrainsInfo[terrain.id].resource}.jpg'
+       count="${terrainsInfo[terrain.id].noToken}"></image>
       <circle cx="50" cy="55" r="17" fill="burlywood" opacity="0.7"/>
       <text x="50%" y="50%"  class="number-token" >
       ${terrainsInfo[terrain.id].noToken}</text>`;
@@ -31,7 +31,7 @@ const renderSettlements = function(settlements) {
   settlements.forEach(settlement => {
     const intersection = document.getElementById(settlement);
     intersection.classList.add('afterSettlement');
-    const img = `<image href='/assets/settlements/blue-settlement.svg' 
+    const img = `<image href='/catan/assets/settlements/blue-settlement.svg' 
     style="height:100%; width:100%;">`;
     intersection.innerHTML = img;
   });
@@ -42,7 +42,7 @@ const renderRoads = function(roads) {
     const path = document.getElementById(road);
     path.style.opacity = '1';
     path.classList.add('afterRoad');
-    const img = `<image href='/assets/roads/blue-road.svg' 
+    const img = `<image href='/catan/assets/roads/blue-road.svg' 
     class="road-image">`;
     path.innerHTML = img;
   });
@@ -98,7 +98,8 @@ const appendRoad = function(pathId) {
   path.style.animation = 'none';
   path.classList.add('afterRoad');
   hideAllPaths();
-  const img = '<image href="/assets/roads/blue-road.svg" class="road-image">';
+  const img =
+    '<image href="/catan/assets/roads/blue-road.svg" class="road-image">';
   path.innerHTML = img;
 };
 
@@ -153,7 +154,7 @@ const renderNewSettlement = function(intersection, buildingFunction) {
   intersection.classList.remove('point');
   intersection.classList.remove('visibleIntersection');
   intersection.classList.add('afterSettlement');
-  const img = `<image href='/assets/settlements/blue-settlement.svg' 
+  const img = `<image href='/catan/assets/settlements/blue-settlement.svg' 
     style="height:100%; width:100%;">`;
   intersection.innerHTML = img;
 };
@@ -297,7 +298,7 @@ const setSrc = ({ element, dirName, colour, buildingType, extension }) => {
     .querySelector(`#${buildingType}Img`)
     .setAttribute(
       'src',
-      `/assets/${dirName}/${colour}-${buildingType}.${extension}`
+      `/catan/assets/${dirName}/${colour}-${buildingType}.${extension}`
     );
 };
 

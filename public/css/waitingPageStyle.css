@@ -3,7 +3,7 @@ body {
   height: 100vh;
   background: rgb(69, 145, 245);
   font-family: sans-serif;
-  background-image: url('/assets/page_bg.png');
+  background-image: url('/catan/assets/page_bg.png');
   background-size: contain;
 }
 

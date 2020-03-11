@@ -5,7 +5,12 @@ const { GameList } = require('./models/gameList');
 const { Sessions } = require('./models/sessions');
 const { catanRouter } = require('./catanRouter');
 
-const { hostNewGame, serveJoinPage, joinGame } = require('./handlers');
+const {
+  hostNewGame,
+  serveJoinPage,
+  joinGame,
+  ensureSession
+} = require('./handlers');
 
 const app = express();
 
@@ -22,6 +27,7 @@ app.use(express.json());
 
 app.use('/catan', catanRouter);
 
+app.use(ensureSession);
 app.use(express.static('public'));
 
 app.get('/join.html', serveJoinPage);

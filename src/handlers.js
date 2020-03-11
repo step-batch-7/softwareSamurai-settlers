@@ -167,6 +167,19 @@ const getJoinedPlayerDetails = function(req, res) {
   }
 };
 
+const ensureSession = function(req, res, next) {
+  const { sId } = req.cookies;
+  const { sessions, gameList } = req.app.locals;
+  const session = sessions.getSession(sId);
+  if (session) {
+    const game = gameList.getGame(session.gameId);
+    req.app.locals.game = game;
+    res.redirect('/catan/waiting.html');
+    return;
+  }
+  next();
+};
+
 module.exports = {
   getTerrainDetails,
   getCardsCount,
@@ -189,5 +202,6 @@ module.exports = {
   joinGame,
   getJoinedPlayerDetails,
   ensureGame,
-  ensureGameStart
+  ensureGameStart,
+  ensureSession
 };

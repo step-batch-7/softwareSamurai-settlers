@@ -22,7 +22,7 @@ describe('Handlers', () => {
       request(app)
         .get('/catan/joinedPlayerDetails')
         .set('cookie', 'sId=100')
-        .expect(200, done)
+        .expect(302, done)
         .expect(/"blue":"virat"/);
     });
   });
