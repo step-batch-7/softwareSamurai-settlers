@@ -252,10 +252,10 @@ svg {
 }
 
 #rollDice {
-  margin-left: 12%;
+  margin: 4%;
   cursor: pointer;
-  width: 100px;
-  height: 25px;
+  width: 83%;
+  height: 40%;
 }
 
 /* ----------------------- interactions for settlements ------------------------------------*/
@@ -345,16 +345,18 @@ svg {
   display: flex;
   margin-left: 72%;
 }
-#turn-details,
+
 #dice-box {
   height: 100%;
-  width: 50%;
+  width: 21%;
+  margin-left: 80%;
 }
 #dice {
   height: 11%;
-  width: 100%;
+  width: 70%;
   display: flex;
-  margin: 370% 0% 6% 0%;
+  flex-wrap: wrap;
+  margin: 235% 0% 0% 15%;
 }
 
 #dice1,
