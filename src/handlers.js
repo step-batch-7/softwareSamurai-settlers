@@ -95,7 +95,7 @@ const serveWaitingPage = function(req, res) {
   const { sId } = req.cookies;
   const { sessions } = req.app.locals;
   const { gameId } = sessions.getSession(sId);
-  res.render('waitingPage', { gameId: gameId });
+  res.render('waiting', { gameId: gameId });
 };
 
 const serveJoinPage = function(req, res) {
@@ -111,7 +111,7 @@ const joinGame = function(req, res) {
     const playerId = game.addPlayer(playerName);
     const sessionId = sessions.createSession(gameId, playerId);
     res.cookie('sId', sessionId);
-    return res.redirect('/catan/waitingPage.html');
+    return res.redirect('/catan/waiting.html');
   }
   res.render('join', { error: 'Game id is not valid' });
 };
@@ -124,7 +124,7 @@ const hostNewGame = function(req, res) {
   const playerId = game.addPlayer(hostName);
   const sessionId = sessions.createSession(gameId, playerId);
   res.cookie('sId', sessionId);
-  res.redirect('/catan/waitingPage.html');
+  res.redirect('/catan/waiting.html');
 };
 
 module.exports = {
