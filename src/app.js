@@ -5,7 +5,7 @@ const { GameList } = require('./models/gameList');
 const { Sessions } = require('./models/sessions');
 const { catanRouter } = require('./catanRouter');
 
-const { hostNewGame, serveJoinPage } = require('./handlers');
+const { hostNewGame, serveJoinPage, joinGame } = require('./handlers');
 
 const app = express();
 
@@ -22,5 +22,6 @@ app.locals.gameList = new GameList();
 app.locals.sessions = new Sessions();
 
 app.post('/host', hostNewGame);
+app.post('/join', joinGame);
 
 module.exports = { app };

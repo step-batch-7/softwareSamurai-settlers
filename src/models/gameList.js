@@ -22,6 +22,12 @@ class GameList {
   getGame(gameId) {
     return this.games[gameId];
   }
+
+  isGameAvailable(gameId) {
+    if (this.games[gameId]) {
+      return true;
+    }
+  }
 }
 
 module.exports = { GameList };
