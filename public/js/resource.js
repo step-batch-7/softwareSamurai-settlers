@@ -16,8 +16,8 @@ const fetchCardsCount = async function() {
 const updateDicePhase = function(num1, num2) {
   const firstDice = document.querySelector('#dice1 img');
   const secondDice = document.querySelector('#dice2 img');
-  firstDice.src = `./assets/dice/${num1}.jpg`;
-  secondDice.src = `./assets/dice/${num2}.jpg`;
+  firstDice.src = `./assets/dice/${num1}.png`;
+  secondDice.src = `./assets/dice/${num2}.png`;
 };
 
 const resourceProduction = async function(dice1, dice2) {
