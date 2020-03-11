@@ -20,8 +20,9 @@
   },
   "homepage": "https://github.com/step-batch-7/softwareSamurai-settlers#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
-    "cookie-parser": "^1.4.4"
+    "pug": "^2.0.4"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

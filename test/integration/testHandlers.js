@@ -2,16 +2,9 @@ const request = require('supertest');
 const { app } = require('../../src/app');
 
 describe('Get static file', () => {
-  it('Should redirected to catan page for /', done => {
-    request(app)
-      .get('/')
-      .expect(302, done)
-      .expect('Location', 'catan.html');
-  });
-
   it('Should give catan page for catan.html ', done => {
     request(app)
-      .get('/catan.html')
+      .get('/catan/home.html')
       .expect(200, done);
   });
 });

@@ -17,11 +17,11 @@ body {
 }
 
 #msg {
-  /* position: relative; */
   color: whitesmoke;
   font-size: large;
   align-self: center;
   margin-top: 8%;
+  margin-bottom: -10%;
 }
 
 .loader {
@@ -38,6 +38,13 @@ body {
   animation: fadein 3.3s infinite;
   opacity: 0;
   transform-origin: 50% 50%;
+}
+
+#gameId {
+  color: #fff;
+  margin: -11% auto;
+  width: 24%;
+  font-size: 23px;
 }
 
 .hex:nth-child(2) {

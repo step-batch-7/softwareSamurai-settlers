@@ -219,7 +219,7 @@ const renderPlayerInfo = (player, playerDetail) => {
     if (property === 'resourceCards' || property === 'developmentCards') {
       playerPropertyElement.innerHTML = playerDetail[property];
     }
-    
+    console.log(playerPropertyElement, property);
     playerPropertyElement.innerText = playerDetail[property];
   }
 };

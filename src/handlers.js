@@ -91,6 +91,13 @@ const addRoadWithResources = function(req, res) {
   res.end();
 };
 
+const serveWaitingPage = function(req, res) {
+  const { sId } = req.cookies;
+  const { sessions } = req.app.locals;
+  const { gameId } = sessions.getSession(sId);
+  res.render('waitingPage', { gameId: gameId });
+};
+
 const hostNewGame = function(req, res) {
   const { hostName } = req.body;
   const { sessions, gameList } = req.app.locals;
@@ -98,8 +105,8 @@ const hostNewGame = function(req, res) {
   const game = gameList.getGame(gameId);
   const playerId = game.addPlayer(hostName);
   const sessionId = sessions.createSession(gameId, playerId);
-  res.cookie('session_Id', sessionId);
-  res.redirect('/templates/waitingPage.html');
+  res.cookie('sId', sessionId);
+  res.redirect('/catan/waitingPage.html');
 };
 
 module.exports = {
@@ -118,5 +125,6 @@ module.exports = {
   buildInitialSettlement,
   getAvailableAdjSettlements,
   addRoadWithResources,
-  hostNewGame
+  hostNewGame,
+  serveWaitingPage
 };

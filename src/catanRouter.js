@@ -16,9 +16,12 @@ const {
   addRoad,
   addRoadWithResources,
   getRandomDiceNum,
-  addResourcesToPlayer
+  addResourcesToPlayer,
+  serveWaitingPage
 } = require('./handlers');
 
+catanRouter.use(express.static('public'));
+catanRouter.get('/waitingPage.html', serveWaitingPage);
 catanRouter.get('/buildStatus', getBuildStatus);
 catanRouter.get('/terrains', getTerrainDetails);
 catanRouter.get('/requestInitialSettlement', getAvailableSettlements);
