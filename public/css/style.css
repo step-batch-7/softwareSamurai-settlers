@@ -90,20 +90,19 @@ form {
   transform: scaleX(1.02);
 }
 
-#help {
+#go-back {
   height: 70%;
   width: 85%;
   margin-top: 1%;
 }
 
-#help:hover {
+#go-back:hover {
   cursor: pointer;
   transform: scale(1.05);
 }
 
 #logo {
   display: flex;
-  justify-content: space-between;
   height: 25%;
   width: 100%;
 }
