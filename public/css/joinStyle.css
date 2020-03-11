@@ -5,6 +5,7 @@ body {
   background-image: url('/assets/page_bg.png');
   background-size: contain;
   overflow: hidden;
+  font-family: sans-serif;
 }
 
 #screen {
@@ -14,6 +15,7 @@ body {
 
 #error {
   color: red;
+  margin: -8% 28% 4%;
 }
 
 #landing-box {
