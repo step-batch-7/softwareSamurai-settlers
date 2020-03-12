@@ -1,8 +1,40 @@
+const flip = element => {
+  const innerCard = element.parentElement.querySelector('.flip-card-inner');
+  innerCard.style.animation = 'flip 3s';
+  setTimeout(() => {
+    innerCard.style.animation = 'none';
+  }, 4000);
+};
+
+const countChangedBy = (element, previousCount, updatedCount) => {
+
+  let countUpdatedBy = 0;
+  if (updatedCount > previousCount) {
+    countUpdatedBy = `+${updatedCount - previousCount}`;
+  } else {
+    countUpdatedBy = `-${previousCount - updatedCount}`;
+  }
+
+  element.parentElement.querySelector(
+    '#count-changed-by'
+  ).innerText = countUpdatedBy;
+};
+
+const updateCount = (id, count) => {
+  const element = document.getElementById(`${id}`);
+  if (element.innerText != count) {
+
+    countChangedBy(element, +element.innerText, count);
+    element.innerText = count;
+    flip(element);
+  }
+};
+
 const updateResourceCards = function(resources, devCardsCount) {
-  document.getElementById('dev-count').innerHTML = devCardsCount;
+  updateCount('dev-count', devCardsCount);
   for (const resource in resources) {
-    const id = `#${resource}-count`;
-    document.querySelector(id).innerHTML = resources[resource];
+    const id = `${resource}-count`;
+    updateCount(id, resources[resource]);
   }
 };
 

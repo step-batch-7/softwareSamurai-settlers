@@ -378,127 +378,118 @@
         <div id="interactions">
           <fieldset id="player-cards">
             <legend class="card-heading">Your Resources</legend>
-          <div style="display: flex; justify-content: space-evenly; margin-top: -2.4%;">
-            <div style="margin: 0% 0% 0% 2%;">
-              <svg height="110" width="70">
-                <image
-                  x="5"
-                  y="8"
-                  xlink:href="/catan/assets/cards/resourceCards/brickCard.jpg"
-                  height="90"
-                  width="50"
-                />
-                <circle cx="50" cy="16" r="12" style="fill:rgba(0,0,0,0.5)" />
-                <text
-                  id="brick-count"
-                  x="45"
-                  y="20"
-                  style="fill:white;font-size:12;"
-                >
-                  0
-                </text>
-              </svg>
-            </div>
-            <div>
-              <svg height="110" width="70">
-                <image
-                  x="5"
-                  y="8"
-                  xlink:href="/catan/assets/cards/resourceCards/woolCard.jpg"
-                  height="90"
-                  width="50"
-                />
-                <circle cx="50" cy="16" r="12" style="fill:rgba(0,0,0,0.5)" />
-                <text
-                  id="wool-count"
-                  x="45"
-                  y="20"
-                  style="fill:white;font-size:12;"
-                >
-                  0
-                </text>
-              </svg>
-            </div>
-            <div>
-              <svg height="110" width="70">
-                <image
-                  x="5"
-                  y="8"
-                  xlink:href="/catan/assets/cards/resourceCards/lumberCard.jpg"
-                  height="90"
-                  width="50"
-                />
-                <circle cx="50" cy="16" r="12" style="fill:rgba(0,0,0,0.5)" />
-                <text
-                  id="lumber-count"
-                  x="45"
-                  y="20"
-                  style="fill:white;font-size:12;"
-                >
-                  0
-                </text>
-              </svg>
-            </div>
-            <div>
-              <svg height="110" width="70">
-                <image
-                  x="5"
-                  y="8"
-                  xlink:href="/catan/assets/cards/resourceCards/oreCard.jpg"
-                  height="90"
-                  width="50"
-                />
-                <circle cx="50" cy="16" r="12" style="fill:rgba(0,0,0,0.5)" />
-                <text
-                  id="ore-count"
-                  x="45"
-                  y="20"
-                  style="fill:white;font-size:12;"
-                >
-                  0
-                </text>
-              </svg>
-            </div>
-            <div>
-              <svg height="110" width="70">
-                <image
-                  x="5"
-                  y="8"
-                  xlink:href="/catan/assets/cards/resourceCards/grainCard.jpg"
-                  height="90"
-                  width="50"
-                />
-                <circle cx="50" cy="16" r="12" style="fill:rgba(0,0,0,0.5)" />
-                <text
-                  id="grain-count"
-                  x="45"
-                  y="20"
-                  style="fill:white;font-size:12;"
-                >
-                  0
-                </text>
-              </svg>
-            </div>
-            <div>
-          </div>
-              <svg height="110" width="70">
-                <image
-                  x="5"
-                  y="8" 
-                  xlink:href="/catan/assets/cards/developmentCards/developmentCard1.jpg"
-                  height="90"
-                  width="50"
-                />
-                <circle cx="50" cy="16" r="12" style="fill:rgba(0,0,0,0.5)" />
-                <text
-                  id="dev-count"
-                  x="45"
-                  y="20"
-                  style="fill:white;font-size:12;"
-                >
-                  0
-                </text>
-              </svg>
+            <div
+              style="display: flex; justify-content: space-evenly;
+              margin-top: -0.4%; height: 100%;"
+            >
+              <div class="flip-card">
+                <span id="count-changed-by" class="changed-count"></span>
+                <div class="flip-card-inner">
+                  <div class="flip-card-back">
+                    <img
+                      src="/catan/assets/cards/resourceCards/resCardBg.jpg"
+                      style="height: inherit; width: inherit;"
+                    />
+                  </div>
+                  <div class="flip-card-front">
+                    <img
+                      src="/catan/assets/cards/resourceCards/brickCard.jpg"
+                      style="height: inherit; width: inherit; "
+                    />
+                  </div>
+                </div>
+                <div class="circle" id="brick-count">0</div>
+              </div>
+              <div class="flip-card">
+                  <span id="count-changed-by" class="changed-count"></span>
+                  <div class="flip-card-inner">
+                    <div class="flip-card-back">
+                      <img
+                        src="/catan/assets/cards/resourceCards/resCardBg.jpg"
+                        style="height: inherit; width: inherit;"
+                      />
+                    </div>
+                    <div class="flip-card-front">
+                      <img
+                        src="/catan/assets/cards/resourceCards/woolCard.jpg"
+                        style="height: inherit; width: inherit; "
+                      />
+                    </div>
+                  </div>
+                  <div class="circle" id="wool-count">0</div>
+              </div>
+              <div class="flip-card">
+                  <span id="count-changed-by" class="changed-count"></span>
+                  <div class="flip-card-inner">
+                    <div class="flip-card-back">
+                      <img
+                        src="/catan/assets/cards/resourceCards/resCardBg.jpg"
+                        style="height: inherit; width: inherit;"
+                      />
+                    </div>
+                    <div class="flip-card-front">
+                      <img
+                        src="/catan/assets/cards/resourceCards/lumberCard.jpg"
+                        style="height: inherit; width: inherit; "
+                      />
+                    </div>
+                  </div>
+                  <div class="circle" id="lumber-count">0</div>
+              </div>
+              <div class="flip-card">
+                  <span id="count-changed-by" class="changed-count"></span>
+                  <div class="flip-card-inner">
+                    <div class="flip-card-back">
+                      <img
+                        src="/catan/assets/cards/resourceCards/resCardBg.jpg"
+                        style="height: inherit; width: inherit;"
+                      />
+                    </div>
+                    <div class="flip-card-front">
+                      <img
+                        src="/catan/assets/cards/resourceCards/oreCard.jpg"
+                        style="height: inherit; width: inherit; "
+                      />
+                    </div>
+                  </div>
+                  <div class="circle" id="ore-count">0</div>
+              </div>
+              <div class="flip-card">
+                  <span id="count-changed-by" class="changed-count"></span>
+                  <div class="flip-card-inner">
+                    <div class="flip-card-back">
+                      <img
+                        src="/catan/assets/cards/resourceCards/resCardBg.jpg"
+                        style="height: inherit; width: inherit;"
+                      />
+                    </div>
+                    <div class="flip-card-front">
+                      <img
+                        src="/catan/assets/cards/resourceCards/grainCard.jpg"
+                        style="height: inherit; width: inherit; "
+                      />
+                    </div>
+                  </div>
+                  <div class="circle" id="grain-count">0</div>
+              </div>
+              <div class="flip-card">
+                  <span id="count-changed-by" class="changed-count"></span>
+                  <div class="flip-card-inner">
+                    <div class="flip-card-back">
+                      <img
+                        src="/catan/assets/cards/resourceCards/resCardBg.jpg"
+                        style="height: inherit; width: inherit;"
+                      />
+                    </div>
+                    <div class="flip-card-front">
+                      <img
+                        src="/catan/assets/cards/developmentCards/developmentCard1.jpg"
+                        style="height: inherit; width: inherit; "
+                      />
+                    </div>
+                  </div>
+                  <div class="circle" id="dev-count">0</div>
+              </div>
             </div>
           </fieldset>
           <div id="actions">

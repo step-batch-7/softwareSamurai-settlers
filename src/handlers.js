@@ -23,8 +23,11 @@ const getAvailableSettlements = function(req, res) {
 const randNum = () => Math.ceil(Math.random() * 6);
 
 const getRandomDiceNum = function(req, res) {
+<<<<<<< HEAD
   const { game } = req.app.locals;
   game.toggleDiceRolledStatus();
+=======
+>>>>>>> |#60|Rahit/Anuja| Added animation on the change in no of cards
   res.json({ dice1: randNum(), dice2: randNum() });
 };
 
@@ -110,24 +113,28 @@ const joinGame = function(req, res) {
   const { playerName, gameId } = req.body;
   const { sessions, gameList } = req.app.locals;
   const isGameAvailable = gameList.isGameAvailable(gameId);
-  if (isGameAvailable) {
-    const game = gameList.getGame(gameId);
-    const playerId = game.addPlayer(playerName);
-    const sessionId = sessions.createSession(gameId, playerId);
-    res.cookie('sId', sessionId);
-    return res.redirect('/catan/waiting.html');
+
+  if (!isGameAvailable) {
+    return res.render('join', { error: 'Game id is not valid' });
   }
+<<<<<<< HEAD
   res.render('join', { error: 'Game id is not valid' });
+=======
+
+  const game = gameList.getGame(gameId);
+  const playerId = game.addPlayer(playerName);
+  const sessionId = sessions.createSession(gameId, playerId);
+  res.cookie('sId', sessionId);
+  res.redirect('/catan/waiting.html');
+>>>>>>> |#60|Rahit/Anuja| Added animation on the change in no of cards
 };
 
-// eslint-disable-next-line max-statements
 const ensureGame = function(req, res, next) {
   const { sId } = req.cookies;
   const { sessions, gameList } = req.app.locals;
   const session = sessions.getSession(sId);
   if (!session) {
-    res.redirect('/index.html');
-    return;
+    return res.redirect('/index.html');
   }
   const game = gameList.getGame(session.gameId);
   req.app.locals.game = game;

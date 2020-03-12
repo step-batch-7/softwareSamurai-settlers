@@ -147,10 +147,11 @@ body {
 }
 
 #interactions {
-  width: 99.4%;
+  width: 68.4%;
   height: 13.2%;
   display: flex;
   justify-content: space-between;
+  position: absolute;
 }
 
 #player-cards {
@@ -162,11 +163,11 @@ body {
 }
 
 .card-heading {
-    text-align: center;
-    font-size: large;
-    font-weight: 500;
-    -webkit-text-stroke: 0.6px black;
-    color: rgba(255, 255, 255, 0.973);
+  text-align: center;
+  font-size: large;
+  font-weight: 500;
+  -webkit-text-stroke: 0.6px black;
+  color: rgba(255, 255, 255, 0.973);
 }
 
 #board {
@@ -473,3 +474,75 @@ svg {
   pointer-events: none;
   background-color: transparent;
 }
+
+/*----------------------rotate---------------------*/
+.flip-card {
+  width: 12%;
+  height: 82%;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transform-style: preserve-3d;
+}
+
+@keyframes flip {
+  50% {
+    transform: rotateY(180deg);
+    z-index: -1;
+  }
+
+  55% {
+    z-index: 1;
+  }
+}
+
+.flip-card-front {
+  background: url('/catan/assets/cards/resourceCards/brickCard.jpg');
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+
+  /* background-color: blue; */
+  height: inherit;
+  width: inherit;
+  color: white;
+}
+
+.circle {
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 23%;
+  width: 38%;
+  margin: -164% 0% 0% 80%;
+  position: absolute;
+  text-align: center;
+  color: white;
+  font-size: small;
+  padding-top: 4%;
+}
+
+.changed-count {
+  margin: 54% 0% 0% 30%;
+  position: absolute;
+  color: #99C8DB;
+  font-size: x-large;
+}
+
+/*---------------------------------------------*/

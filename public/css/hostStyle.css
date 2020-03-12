@@ -1,7 +1,7 @@
 body {
   width: 100vw;
   height: 100vh;
-  background: rgb(69, 145, 245);
+  background: rgb(0, 145, 203);
   background-image: url('/assets/page_bg.png');
   background-size: contain;
   overflow: hidden;
