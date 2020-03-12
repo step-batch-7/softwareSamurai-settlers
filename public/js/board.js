@@ -256,7 +256,6 @@ const setSrcForAction = color => {
 };
 
 const renderPlayersInfoImgs = (otherPlayers, player) => {
-  setSrcForAction(player.color);
   const players = [player, ...otherPlayers];
   players.forEach((player, index) => {
     const element = document.getElementById(`player-info${index}`);

@@ -6,7 +6,7 @@ const hideAllPaths = () => {
 const requestDiceRolledStatus = async () => {
   const response = await fetch('/catan/diceRolledStatus');
   if (response.ok) {
-    const { diceRolledStatus } = await response.json();
+    const {diceRolledStatus} = await response.json();
     if (diceRolledStatus) {
       document.getElementById('rollDice').disabled = true;
       return;
@@ -57,41 +57,43 @@ const renderPlayersInfo = function(otherPlayers, player) {
 };
 
 const renderBankCards = function(bankCards) {
-  const bankElement = document.getElementById('bank');
-  const cardNames = Object.keys(bankCards);
-  cardNames.forEach(cardName => {
-    const card = bankElement.querySelector(`#${cardName}-count`);
-    card.innerText = bankCards[cardName];
-  });
+  updateCards('bank', bankCards);
 };
 
 const renderPlayerCards = function(player) {
-  const { resources, devCardCount } = player;
-  document.getElementById('dev-count').innerHTML = devCardCount;
-  for (const resource in resources) {
-    const id = `#${resource}-count`;
-    document.querySelector(id).innerHTML = resources[resource];
-  }
+  const {resources, devCardCount} = player;
+  updateCards('player-cards', resources, devCardCount);
 };
 
 const updateGameStatus = async function() {
   const response = await fetch('/catan/gameStatus');
   if (response.ok) {
-    const { bankCards, player, otherPlayers } = await response.json();
+    const {bankCards, player, otherPlayers} = await response.json();
     renderBankCards(bankCards);
     renderPlayerCards(player);
-    renderPlayersInfoImgs(otherPlayers, player);
     renderPlayersInfo(otherPlayers, player);
   }
 };
 
+const loadGameStatus = async function() {
+  const response = await fetch('/catan/loadGame');
+  if (response.ok) {
+    const {bankCards, player, otherPlayers} = await response.json();
+    renderBankCards(bankCards);
+    renderPlayerCards(player);
+    renderPlayersInfoImgs(otherPlayers, player);
+    renderPlayersInfo(otherPlayers, player);
+    setSrcForAction(player.color);
+  }
+};
+
 const main = () => {
-  updateGameStatus();
+  loadGameStatus();
+  // updateGameStatus();
   hideAllPaths();
   requestDiceRolledStatus();
   getTerrains();
   requestInitialSettlement();
-  // renderPlayersDetails();
 };
 
 const distributeResources = async () => {

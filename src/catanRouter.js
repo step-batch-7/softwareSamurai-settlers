@@ -23,7 +23,8 @@ const {
   ensureGameStart,
   serveGameStatus,
   getDiceRolledStatus,
-  endTurn
+  endTurn,
+  serveLoadGame
 } = require('./handlers');
 
 catanRouter.use(ensureGame);
@@ -52,5 +53,6 @@ catanRouter.get('/diceNumbers', getRandomDiceNum);
 catanRouter.post('/addResourcesToPlayer', addResourcesToPlayer);
 catanRouter.get('/gameStatus', serveGameStatus);
 catanRouter.get('/endTurn', endTurn);
+catanRouter.get('/loadGame', serveLoadGame);
 
-module.exports = { catanRouter };
+module.exports = {catanRouter};
