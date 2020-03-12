@@ -3,7 +3,7 @@ const getTerrains = async function() {
     credentials: 'include'
   });
   if (response.ok) {
-    const { terrainsInfo, settlements, roads } = await response.json();
+    const {terrainsInfo, settlements, roads} = await response.json();
     const terrains = document.getElementsByClassName('terrain');
     Array.from(terrains).forEach(terrain => {
       if (terrainsInfo[terrain.id].resource === 'desert') {
@@ -24,30 +24,7 @@ const getTerrains = async function() {
       ${terrainsInfo[terrain.id].noToken}</text>`;
       terrain.innerHTML += html;
     });
-    renderSettlements(settlements);
-    renderRoads(roads);
   }
-};
-
-const renderSettlements = function(settlements) {
-  settlements.forEach(settlement => {
-    const intersection = document.getElementById(settlement);
-    intersection.classList.add('afterSettlement');
-    const img = `<image href='/catan/assets/settlements/blue-settlement.svg' 
-    style="height:100%; width:100%;">`;
-    intersection.innerHTML = img;
-  });
-};
-
-const renderRoads = function(roads) {
-  roads.forEach(road => {
-    const path = document.getElementById(road);
-    path.style.opacity = '1';
-    path.classList.add('afterRoad');
-    const img = `<image href='/catan/assets/roads/blue-road.svg' 
-    class="road-image">`;
-    path.innerHTML = img;
-  });
 };
 
 const requestSettlement = async function() {
@@ -90,7 +67,8 @@ const removeAvailableSettlements = function(buildingFunction) {
 const removeAvailableRoads = function(buildingFunction) {
   const roadOptions = document.getElementsByClassName('path');
   Array.from(roadOptions).forEach(option => {
-    if (!Array.from(option.classList).includes('hide')) {
+    removeBgColor(option);
+    if (!option.classList.contains('hide')) {
       option.classList.add('hide');
       option.removeEventListener('click', buildingFunction);
     }
@@ -104,9 +82,6 @@ const appendRoad = function(pathId) {
   path.style.animation = 'none';
   path.classList.add('afterRoad');
   hideAllPaths();
-  const img =
-    '<image href="/catan/assets/roads/blue-road.svg" class="road-image">';
-  path.innerHTML = img;
 };
 
 const buildRoad = async function() {
@@ -117,10 +92,12 @@ const buildRoad = async function() {
       'Content-Type': 'application/json'
     },
     credentials: 'include',
-    body: JSON.stringify({ pathId })
+    body: JSON.stringify({pathId})
   });
   if (response.ok) {
     appendRoad(pathId);
+    updateGameStatus();
+    getBuildStatus();
     removeAvailableRoads(buildRoad);
     const stage = await response.json();
     if (stage.mode === 'setup') {
@@ -137,15 +114,22 @@ const buildRoadWithResources = async function() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ pathId })
+    body: JSON.stringify({pathId})
   });
   if (response.ok) {
     appendRoad(pathId);
-    fetchCardsCount();
-    getBankStatus();
+    updateGameStatus();
     getBuildStatus();
     removeAvailableRoads(buildRoadWithResources);
   }
+};
+
+const addBgColor = function(element, color) {
+  element.style.backgroundColor = color;
+};
+
+const removeBgColor = function(element) {
+  element.style.backgroundColor = 'transparent';
 };
 
 const showPossiblePathsForRoadInSetUp = async function() {
@@ -154,9 +138,10 @@ const showPossiblePathsForRoadInSetUp = async function() {
   });
 
   if (response.ok) {
-    const pathIds = await response.json();
+    const {color, pathIds} = await response.json();
     pathIds.forEach(pathId => {
       const path = document.getElementById(pathId);
+      addBgColor(path, color);
       path.classList.remove('hide');
       path.addEventListener('click', buildRoad);
     });
@@ -168,9 +153,6 @@ const renderNewSettlement = function(intersection, buildingFunction) {
   intersection.classList.remove('point');
   intersection.classList.remove('visibleIntersection');
   intersection.classList.add('afterSettlement');
-  const img = `<image href='/catan/assets/settlements/blue-settlement.svg' 
-    style="height:100%; width:100%;">`;
-  intersection.innerHTML = img;
 };
 
 const buildInitialSettlement = async function() {
@@ -181,11 +163,12 @@ const buildInitialSettlement = async function() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ intersection: intersection.id })
+    body: JSON.stringify({intersection: intersection.id})
   });
 
   if (response.ok) {
     renderNewSettlement(intersection, buildInitialSettlement);
+    updateGameStatus();
   }
   distributeResources();
   showPossiblePathsForRoadInSetUp();
@@ -199,13 +182,12 @@ const buildSettlement = async function() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ intersection: intersection.id })
+    body: JSON.stringify({intersection: intersection.id})
   });
 
   if (response.ok) {
     renderNewSettlement(intersection, buildSettlement);
-    fetchCardsCount();
-    getBankStatus();
+    updateGameStatus();
     getBuildStatus();
   }
 };
@@ -222,17 +204,18 @@ const getPossiblePathsForRoad = async function() {
     ) {
       return;
     }
-    const pathIds = await response.json();
+    const {pathIds, color} = await response.json();
 
     pathIds.forEach(pathId => {
       const path = document.getElementById(pathId);
+      addBgColor(path, color);
       path.classList.remove('hide');
       path.addEventListener('click', buildRoadWithResources);
     });
   }
 };
 
-const setSrc = ({ element, dirName, color, buildingType, extension }) => {
+const setSrc = ({element, dirName, color, buildingType, extension}) => {
   element
     .querySelector(`#${buildingType}Img`)
     .setAttribute(

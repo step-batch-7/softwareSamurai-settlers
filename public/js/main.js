@@ -28,6 +28,40 @@ const requestDiceRolledStatus = async () => {
   }
 };
 
+const renderRoads = function(roads, color) {
+  roads.forEach(road => {
+    const path = document.getElementById(road);
+    path.style.opacity = '1';
+    path.classList.add('afterRoad');
+    const img = `<image href='/catan/assets/roads/${color}-road.svg' 
+    class="road-image">`;
+    path.innerHTML = img;
+  });
+};
+
+const renderPlayersRoads = function(player, otherPlayers) {
+  const players = [player, ...otherPlayers];
+  players.forEach(player => renderRoads(player.roads, player.color));
+};
+
+const renderSettlements = function(settlements, color) {
+  settlements.forEach(settlement => {
+    const intersection = document.getElementById(settlement);
+    intersection.classList.add('afterSettlement');
+    const img = `<image href='/catan/assets/settlements
+    /${color}-settlement.svg' 
+    style="height:100%; width:100%;">`;
+    intersection.innerHTML = img;
+  });
+};
+
+const renderPlayersSettlements = function(player, otherPlayers) {
+  const players = [player, ...otherPlayers];
+  players.forEach(player =>
+    renderSettlements(player.settlements, player.color)
+  );
+};
+
 const getRemainingCount = function(asset, maxCount) {
   return maxCount - asset.length;
 };
@@ -88,6 +122,8 @@ const updateGameStatus = async function() {
     renderBankCards(bankCards);
     renderPlayerCards(player);
     renderPlayersInfo(otherPlayers, player);
+    renderPlayersSettlements(player, otherPlayers);
+    renderPlayersRoads(player, otherPlayers);
   }
 };
 

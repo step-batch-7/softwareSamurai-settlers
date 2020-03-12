@@ -427,7 +427,7 @@ button {
 .left-top-tilted-road,
 .right-down-tilted-road,
 .left-down-tilted-road {
-  background-color: #0b22b9;
+  /* background-color: #0b22b9; */
   opacity: 0.3;
   border-radius: 10px;
   text-align: center;
@@ -439,7 +439,7 @@ button {
 }
 
 .road {
-  background-color: #0b22b9;
+  /* background-color: #0b22b9; */
   opacity: 0.3;
   border-radius: 10px;
   text-align: center;
