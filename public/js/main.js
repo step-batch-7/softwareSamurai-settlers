@@ -8,7 +8,7 @@ const disableMyTurn = (rollDice, endTurn) => {
   document.getElementById('end-turn').disabled = endTurn;
 };
 
-const enablePlayerTurn = () => {
+const enablePlayerTurn = diceRolledStatus => {
   disableMyTurn(false, true);
   if (diceRolledStatus) {
     disableMyTurn(true, false);
@@ -19,9 +19,9 @@ const enablePlayerTurn = () => {
 const requestDiceRolledStatus = async () => {
   const response = await fetch('/catan/diceRolledStatus');
   if (response.ok) {
-    const { diceRolledStatus, turn, mode } = await response.json();
+    const {diceRolledStatus, turn, mode} = await response.json();
     if (turn && mode === 'normal') {
-      enablePlayerTurn();
+      enablePlayerTurn(diceRolledStatus);
       return;
     }
     disableMyTurn(true, true);
@@ -48,9 +48,8 @@ const renderSettlements = function(settlements, color) {
   settlements.forEach(settlement => {
     const intersection = document.getElementById(settlement);
     intersection.classList.add('afterSettlement');
-    const img = `<image href='/catan/assets/settlements
-    /${color}-settlement.svg' 
-    style="height:100%; width:100%;">`;
+    const imgUrl = `/catan/assets/settlements/${color}-settlement.svg`;
+    const img = `<image href='${imgUrl}' style="height:100%; width:100%;">`;
     intersection.innerHTML = img;
   });
 };
@@ -111,14 +110,14 @@ const renderBankCards = function(bankCards) {
 };
 
 const renderPlayerCards = function(player) {
-  const { resources, devCardCount } = player;
+  const {resources, devCardCount} = player;
   updateCards('player-cards', resources, devCardCount);
 };
 
 const updateGameStatus = async function() {
   const response = await fetch('/catan/gameStatus');
   if (response.ok) {
-    const { bankCards, player, otherPlayers } = await response.json();
+    const {bankCards, player, otherPlayers, stage} = await response.json();
     renderBankCards(bankCards);
     renderPlayerCards(player);
     renderPlayersInfo(otherPlayers, player);
@@ -128,14 +127,13 @@ const updateGameStatus = async function() {
 };
 
 const render = function(game) {
-  const { bankCards, player, otherPlayers } = game;
+  const {bankCards, player, otherPlayers} = game;
   renderBankCards(bankCards);
   renderPlayerCards(player);
   renderPlayersInfoImgs(otherPlayers, player);
 };
 
-const setupMode = function(game) {
-  const { player, stage } = game;
+const setupMode = function(player, stage) {
   if (player.turn && stage.mode === 'setup') {
     if (stage.build === 'settlement') {
       showPossiblePathsForRoadInSetUp();
@@ -145,22 +143,26 @@ const setupMode = function(game) {
   }
 };
 
+const updateGame = function() {
+  updateGameStatus();
+  requestDiceRolledStatus();
+};
+
 const loadGameStatus = async function() {
   const response = await fetch('/catan/loadGame');
   if (response.ok) {
     const game = await response.json();
+    setupMode(game.player, game.stage);
     hideAllPaths();
     getTerrains();
     render(game);
     setSrcForAction(game.player.color);
-    setupMode(game);
+    setInterval(updateGame, 500);
   }
 };
 
 const main = () => {
   loadGameStatus();
-  updateGameStatus();
-  requestDiceRolledStatus();
 };
 
 const distributeResources = async () => {
