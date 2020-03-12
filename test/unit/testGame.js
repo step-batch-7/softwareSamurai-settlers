@@ -348,6 +348,10 @@ describe('status', function() {
         settlements: [],
         turn: false,
         victoryPoints: 0
+      },
+      stage: {
+        build: '',
+        mode: 'setup'
       }
     };
     assert.deepStrictEqual(game.status('2'), expected);

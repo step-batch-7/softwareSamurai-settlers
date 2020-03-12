@@ -52,7 +52,7 @@ const addRoad = function(req, res) {
   const { game, playerId } = req.app.locals;
   const { pathId } = req.body;
   game.addRoad(playerId, pathId);
-  res.end();
+  res.json(game.status(playerId).stage);
 };
 
 const servePossiblePathsForRoadInSetup = (req, res) => {

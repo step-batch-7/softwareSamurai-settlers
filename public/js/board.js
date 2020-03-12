@@ -122,6 +122,10 @@ const buildRoad = async function() {
   if (response.ok) {
     appendRoad(pathId);
     removeAvailableRoads(buildRoad);
+    const stage = await response.json();
+    if (stage.mode === 'setup') {
+      endTurn();
+    }
   }
 };
 
