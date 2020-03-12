@@ -248,6 +248,13 @@ class Game {
   getDiceRolledStatus() {
     return this.diceRolledStatus;
   }
+  passTurn(playerId) {
+    if (this.players[playerId].endTurn()) {
+      this.turn.next();
+      return true;
+    }
+    return false;
+  }
 }
 
 module.exports = {Game};

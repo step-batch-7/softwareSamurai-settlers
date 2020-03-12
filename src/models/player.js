@@ -67,22 +67,22 @@ class Player {
   }
 
   canBuildSettlement() {
-    const resourcesNeeded = {grain: 1, brick: 1, lumber: 1, wool: 1};
+    const resourcesNeeded = { grain: 1, brick: 1, lumber: 1, wool: 1 };
     return this.resources.have(resourcesNeeded);
   }
 
   canBuildRoad() {
-    const resourcesNeeded = {brick: 1, lumber: 1};
+    const resourcesNeeded = { brick: 1, lumber: 1 };
     return this.resources.have(resourcesNeeded);
   }
 
   deductCardsForSettlement() {
-    const settlementResources = {grain: 1, lumber: 1, brick: 1, wool: 1};
+    const settlementResources = { grain: 1, lumber: 1, brick: 1, wool: 1 };
     return this.resources.deduct(settlementResources);
   }
 
   deductCardsForRoad() {
-    const roadResources = {lumber: 1, brick: 1};
+    const roadResources = { lumber: 1, brick: 1 };
     return this.resources.deduct(roadResources);
   }
 
@@ -124,6 +124,22 @@ class Player {
       longestRoad: this.longestRoad
     };
   }
+
+  startTurn() {
+    if (!this.turn) {
+      this.turn = true;
+      return true;
+    }
+    return false;
+  }
+
+  endTurn() {
+    if (this.turn) {
+      this.turn = false;
+      return true;
+    }
+    return false;
+  }
 }
 
-module.exports = {Player};
+module.exports = { Player };

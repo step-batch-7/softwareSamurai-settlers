@@ -252,6 +252,24 @@ describe('Game', () => {
       assert.isFalse(game.getDiceRolledStatus());
     });
     sinon.restore();
+    it('should toggle status to true when  diceRolledStatus is false', () => {
+      const game = new Game();
+      game.toggleDiceRolledStatus();
+      assert.isTrue(game.getDiceRolledStatus());
+    });
+  });
+});
+
+describe('getDiceRolledStatus', () => {
+  it('should give true when  diceRolledStatus is true', () => {
+    const game = new Game();
+    sinon.replace(game, 'diceRolledStatus', true);
+    assert.isTrue(game.getDiceRolledStatus());
+  });
+  sinon.restore();
+  it('should give false when  diceRolledStatus is false', () => {
+    const game = new Game();
+    assert.isFalse(game.getDiceRolledStatus());
   });
 });
 
@@ -333,5 +351,25 @@ describe('status', function() {
       }
     };
     assert.deepStrictEqual(game.status('2'), expected);
+  });
+});
+
+describe('passTurn', () => {
+  it('should end the turn and return true for valid playerId', () => {
+    const game = new Game();
+    game.addPlayer('virat');
+    game.addPlayer('rohit');
+    game.addPlayer('shikhar');
+    game.addPlayer('dhoni');
+    assert.isTrue(game.passTurn('1'));
+  });
+
+  it('should end the turn and return false for when playerId is not current playerId', () => {
+    const game = new Game();
+    game.addPlayer('virat');
+    game.addPlayer('rohit');
+    game.addPlayer('shikhar');
+    game.addPlayer('dhoni');
+    assert.isFalse(game.passTurn('2'));
   });
 });

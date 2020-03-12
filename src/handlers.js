@@ -193,6 +193,11 @@ const getDiceRolledStatus = (req, res) => {
   res.json({ diceRolledStatus });
 };
 
+const endTurn = (req, res) => {
+  const { game, playerId } = req.app.locals;
+  game.passTurn(playerId);
+};
+
 module.exports = {
   getTerrainDetails,
   getCardsCount,
@@ -218,5 +223,6 @@ module.exports = {
   ensureGameStart,
   ensureSession,
   serveGameStatus,
-  getDiceRolledStatus
+  getDiceRolledStatus,
+  endTurn
 };
