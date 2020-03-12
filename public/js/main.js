@@ -8,16 +8,20 @@ const disableMyTurn = (rollDice, endTurn) => {
   document.getElementById('end-turn').disabled = endTurn;
 };
 
+const enablePlayerTurn = () => {
+  disableMyTurn(false, true);
+  if (diceRolledStatus) {
+    disableMyTurn(true, false);
+    getBuildStatus();
+  }
+};
+
 const requestDiceRolledStatus = async () => {
   const response = await fetch('/catan/diceRolledStatus');
   if (response.ok) {
-    const {diceRolledStatus, turn} = await response.json();
-    if (turn) {
-      disableMyTurn(false, true);
-      if (diceRolledStatus) {
-        disableMyTurn(true, false);
-        getBuildStatus();
-      }
+    const { diceRolledStatus, turn, mode } = await response.json();
+    if (turn && mode === 'normal') {
+      enablePlayerTurn();
       return;
     }
     disableMyTurn(true, true);
@@ -73,14 +77,14 @@ const renderBankCards = function(bankCards) {
 };
 
 const renderPlayerCards = function(player) {
-  const {resources, devCardCount} = player;
+  const { resources, devCardCount } = player;
   updateCards('player-cards', resources, devCardCount);
 };
 
 const updateGameStatus = async function() {
   const response = await fetch('/catan/gameStatus');
   if (response.ok) {
-    const {bankCards, player, otherPlayers} = await response.json();
+    const { bankCards, player, otherPlayers } = await response.json();
     renderBankCards(bankCards);
     renderPlayerCards(player);
     renderPlayersInfo(otherPlayers, player);
@@ -88,14 +92,14 @@ const updateGameStatus = async function() {
 };
 
 const render = function(game) {
-  const {bankCards, player, otherPlayers} = game;
+  const { bankCards, player, otherPlayers } = game;
   renderBankCards(bankCards);
   renderPlayerCards(player);
   renderPlayersInfoImgs(otherPlayers, player);
 };
 
 const setupMode = function(game) {
-  const {player, stage} = game;
+  const { player, stage } = game;
   if (player.turn && stage.mode === 'setup') {
     if (stage.build === 'settlement') {
       showPossiblePathsForRoadInSetUp();

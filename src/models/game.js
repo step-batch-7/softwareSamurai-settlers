@@ -253,13 +253,13 @@ class Game {
   }
 
   passTurn(playerId) {
-    const isEnd = this.players[playerId].endTurn();
     const { mode } = this.stage;
     const nextPlayerId = this.turn.changeTurn(mode);
     if (!nextPlayerId) {
       this.stage.mode = 'normal';
-      return isEnd;
+      return true;
     }
+    const isEnd = this.players[playerId].endTurn();
     this.players[nextPlayerId].startTurn();
     return isEnd;
   }

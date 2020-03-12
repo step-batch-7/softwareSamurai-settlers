@@ -191,7 +191,8 @@ const getDiceRolledStatus = (req, res) => {
   const { game, playerId } = req.app.locals;
   const diceRolledStatus = game.getDiceRolledStatus();
   const turn = game.players[playerId].turn;
-  res.json({ diceRolledStatus, turn });
+  const { mode } = game.status(playerId).stage;
+  res.json({ diceRolledStatus, turn, mode });
 };
 
 const endTurn = (req, res) => {

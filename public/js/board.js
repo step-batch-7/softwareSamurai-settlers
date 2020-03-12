@@ -301,6 +301,7 @@ const endTurn = async () => {
     const actions = Array.from(document.querySelectorAll('.unit'));
     actions.forEach(action => {
       action.style.pointerEvents = 'none';
+      action.style.opacity = '0.6';
     });
   }
 };
