@@ -182,7 +182,6 @@ const ensureSession = function(req, res, next) {
 
 const serveGameStatus = function(req, res) {
   const {game, playerId} = req.app.locals;
-  console.log(game.status(playerId));
   res.json(game.status(playerId));
 };
 
