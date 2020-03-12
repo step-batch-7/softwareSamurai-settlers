@@ -228,21 +228,21 @@ const getPossiblePathsForRoad = async function() {
   }
 };
 
-const setInfoCount = (player, property, playerDetail) => {
-  const playerPropertyElement = player.querySelector(`#${property}`);
-  if (property === 'resourceCards' || property === 'developmentCards') {
-    playerPropertyElement.innerHTML = playerDetail[property];
-  }
-  playerPropertyElement.innerText = playerDetail[property];
-};
+// const setInfoCount = (player, property, playerDetail) => {
+//   const playerPropertyElement = player.querySelector(`#${property}`);
+//   if (property === 'resourceCards' || property === 'developmentCards') {
+//     playerPropertyElement.innerHTML = playerDetail[property];
+//   }
+//   playerPropertyElement.innerText = playerDetail[property];
+// };
 
-const renderPlayerInfo = (player, playerDetail) => {
-  for (const property in playerDetail) {
-    if (property !== 'colour') {
-      setInfoCount(player, property, playerDetail);
-    }
-  }
-};
+// const renderPlayerInfo = (player, playerDetail) => {
+//   for (const property in playerDetail) {
+//     if (property !== 'colour') {
+//       setInfoCount(player, property, playerDetail);
+//     }
+//   }
+// };
 
 const playersDetail = [
   {
@@ -338,7 +338,7 @@ const renderPlayersInfoImgs = () => {
   playersDetail.forEach((playerDetail, index) => {
     let element;
     if (index === 0) {
-      element = document.getElementById('current-player');
+      element = document.getElementById('player-info0');
       setSrcForAction(playerDetail.colour);
     } else {
       element = document.getElementById(`player-info${index}`);

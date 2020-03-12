@@ -15,6 +15,49 @@ const requestDiceRolledStatus = async () => {
   }
 };
 
+const getRemainingCount = function(asset, maxCount) {
+  return maxCount - asset.length;
+};
+
+const renderPlayerInfo1 = function(playerElement, player) {
+  const {
+    resourceCardCount,
+    devCardCount,
+    settlements,
+    roads,
+    cities,
+    army,
+    victoryPoints,
+    longestRoad
+  } = player;
+
+  playerElement.querySelector('#resource-cards').innerText = resourceCardCount;
+  playerElement.querySelector('#development-cards').innerText = devCardCount;
+  playerElement.querySelector('#victory-point').innerText = victoryPoints;
+  playerElement.querySelector('#army').innerText = army;
+  playerElement.querySelector('#longest-road').innerText = longestRoad;
+  playerElement.querySelector(
+    '#remaining-settlements'
+  ).innerText = getRemainingCount(settlements, 5);
+  playerElement.querySelector('#remaining-roads').innerText = getRemainingCount(
+    roads,
+    15
+  );
+  playerElement.querySelector(
+    '#remaining-cities'
+  ).innerText = getRemainingCount([], 4);
+  // console.log(playerElement);
+};
+
+const renderPlayersInfo = function(otherPlayers, player) {
+  const players = [player, ...otherPlayers];
+  // console.log(players, otherPlayers);
+  players.forEach((player, index) => {
+    const playerElement = document.querySelector(`#player-info${index}`);
+    renderPlayerInfo1(playerElement, player);
+  });
+};
+
 const renderBankCards = function(bankCards) {
   const bankElement = document.getElementById('bank');
   const cardNames = Object.keys(bankCards);
@@ -50,7 +93,7 @@ const main = () => {
   getTerrains();
   requestInitialSettlement();
   renderPlayersInfoImgs();
-  renderPlayersDetails();
+  // renderPlayersDetails();
 };
 
 const distributeResources = async () => {

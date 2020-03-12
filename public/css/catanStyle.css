@@ -60,8 +60,8 @@ body {
   display: flex;
 }
 
-#resource-cards,
-#development-cards {
+#resourceCards,
+#developmentCards {
   width: 50%;
   height: 100%;
 }
@@ -98,7 +98,7 @@ body {
   justify-content: space-evenly;
 }
 
-#current-player {
+#player-info0 {
   height: 16%;
   width: 100%;
   background: rgba(235, 233, 227, 0.623);
