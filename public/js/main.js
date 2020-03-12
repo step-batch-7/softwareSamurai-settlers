@@ -80,6 +80,7 @@ const updateGameStatus = async function() {
     const { bankCards, player, otherPlayers } = await response.json();
     renderBankCards(bankCards);
     renderPlayerCards(player);
+    renderPlayersInfoImgs(otherPlayers, player);
     renderPlayersInfo(otherPlayers, player);
   }
 };
@@ -90,7 +91,6 @@ const main = () => {
   requestDiceRolledStatus();
   getTerrains();
   requestInitialSettlement();
-  renderPlayersInfoImgs();
   // renderPlayersDetails();
 };
 

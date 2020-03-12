@@ -3,7 +3,7 @@ const getTerrains = async function() {
     credentials: 'include'
   });
   if (response.ok) {
-    const { terrainsInfo, settlements, roads } = await response.json();
+    const {terrainsInfo, settlements, roads} = await response.json();
     const terrains = document.getElementsByClassName('terrain');
     Array.from(terrains).forEach(terrain => {
       if (terrainsInfo[terrain.id].resource === 'desert') {
@@ -117,7 +117,7 @@ const buildRoad = async function() {
       'Content-Type': 'application/json'
     },
     credentials: 'include',
-    body: JSON.stringify({ pathId })
+    body: JSON.stringify({pathId})
   });
   if (response.ok) {
     appendRoad(pathId);
@@ -133,7 +133,7 @@ const buildRoadWithResources = async function() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ pathId })
+    body: JSON.stringify({pathId})
   });
   if (response.ok) {
     appendRoad(pathId);
@@ -177,7 +177,7 @@ const buildInitialSettlement = async function() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ intersection: intersection.id })
+    body: JSON.stringify({intersection: intersection.id})
   });
 
   if (response.ok) {
@@ -195,7 +195,7 @@ const buildSettlement = async function() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ intersection: intersection.id })
+    body: JSON.stringify({intersection: intersection.id})
   });
 
   if (response.ok) {
@@ -228,146 +228,63 @@ const getPossiblePathsForRoad = async function() {
   }
 };
 
-// const setInfoCount = (player, property, playerDetail) => {
-//   const playerPropertyElement = player.querySelector(`#${property}`);
-//   if (property === 'resourceCards' || property === 'developmentCards') {
-//     playerPropertyElement.innerHTML = playerDetail[property];
-//   }
-//   playerPropertyElement.innerText = playerDetail[property];
-// };
-
-// const renderPlayerInfo = (player, playerDetail) => {
-//   for (const property in playerDetail) {
-//     if (property !== 'colour') {
-//       setInfoCount(player, property, playerDetail);
-//     }
-//   }
-// };
-
-const playersDetail = [
-  {
-    playerName: 'rahit',
-    colour: 'blue',
-    resourceCards: 0,
-    developmentCards: 0,
-    victoryPoint: 0,
-    playedNightCards: 0,
-    longestRoadCount: 0,
-    remainingSettlement: 5,
-    remainingRoads: 15,
-    remainingCities: 4
-  },
-  {
-    playerName: 'rahit',
-    colour: 'red',
-    resourceCards: 0,
-    developmentCards: 0,
-    victoryPoint: 0,
-    playedNightCards: 0,
-    longestRoadCount: 0,
-    remainingSettlement: 5,
-    remainingRoads: 15,
-    remainingCities: 4
-  },
-  {
-    playerName: 'rahit',
-    colour: 'orange',
-    resourceCards: 10,
-    developmentCards: 2,
-    victoryPoint: 0,
-    playedNightCards: 0,
-    longestRoadCount: 0,
-    remainingSettlement: 5,
-    remainingRoads: 15,
-    remainingCities: 4
-  },
-  {
-    playerName: 'rahit',
-    colour: 'yellow',
-    resourceCards: 0,
-    developmentCards: 0,
-    victoryPoint: 0,
-    playedNightCards: 0,
-    longestRoadCount: 0,
-    remainingSettlement: 5,
-    remainingRoads: 0,
-    remainingCities: 4
-  }
-];
-
-const renderPlayersDetails = function() {
-  playersDetail.forEach((playerDetail, index) => {
-    if (index === 0) {
-      const currentPlayer = document.getElementById('current-player');
-      renderPlayerInfo(currentPlayer, playerDetail);
-      return;
-    }
-    const player = document.getElementById(`player-info${index}`);
-    renderPlayerInfo(player, playerDetail);
-  });
-};
-
-const setSrc = ({ element, dirName, colour, buildingType, extension }) => {
+const setSrc = ({element, dirName, color, buildingType, extension}) => {
   element
     .querySelector(`#${buildingType}Img`)
     .setAttribute(
       'src',
-      `/catan/assets/${dirName}/${colour}-${buildingType}.${extension}`
+      `/catan/assets/${dirName}/${color}-${buildingType}.${extension}`
     );
 };
 
-const setSrcForAction = colour => {
+const setSrcForAction = color => {
   const element = document.getElementById('actions');
   setSrc({
     element,
     dirName: 'roads',
-    colour: colour,
+    color: color,
     buildingType: 'road',
     extension: 'svg'
   });
   setSrc({
     element,
     dirName: 'settlements',
-    colour: colour,
+    color: color,
     buildingType: 'settlement',
     extension: 'svg'
   });
 };
 
-const renderPlayersInfoImgs = () => {
-  playersDetail.forEach((playerDetail, index) => {
-    let element;
-    if (index === 0) {
-      element = document.getElementById('player-info0');
-      setSrcForAction(playerDetail.colour);
-    } else {
-      element = document.getElementById(`player-info${index}`);
-    }
+const renderPlayersInfoImgs = (otherPlayers, player) => {
+  setSrcForAction(player.color);
+  const players = [player, ...otherPlayers];
+  players.forEach((player, index) => {
+    const element = document.getElementById(`player-info${index}`);
     setSrc({
       element,
       dirName: 'roads',
-      colour: playerDetail.colour,
+      color: player.color,
       buildingType: 'road',
       extension: 'svg'
     });
     setSrc({
       element,
       dirName: 'settlements',
-      colour: playerDetail.colour,
+      color: player.color,
       buildingType: 'settlement',
       extension: 'svg'
     });
     setSrc({
       element,
       dirName: 'cities',
-      colour: playerDetail.colour,
+      color: player.color,
       buildingType: 'city',
       extension: 'svg'
     });
     setSrc({
       element,
       dirName: 'players',
-      colour: playerDetail.colour,
+      color: player.color,
       buildingType: 'player',
       extension: 'png'
     });

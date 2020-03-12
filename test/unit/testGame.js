@@ -1,7 +1,7 @@
-const { assert } = require('chai');
+const {assert} = require('chai');
 const sinon = require('sinon');
-const { Game } = require('../../src/models/game');
-const { Player } = require('../../src/models/player');
+const {Game} = require('../../src/models/game');
+const {Player} = require('../../src/models/player');
 
 describe('Game', () => {
   describe('cardsCount', () => {
@@ -214,7 +214,7 @@ describe('Game', () => {
     it('should get player details of single player', () => {
       const game = new Game();
       game.addPlayer('virat');
-      assert.deepStrictEqual({ blue: 'virat' }, game.getPlayerDetails());
+      assert.deepStrictEqual({blue: 'virat'}, game.getPlayerDetails());
     });
   });
   describe('build settlement', () => {
@@ -226,7 +226,7 @@ describe('Game', () => {
         p3: new Player('p3'),
         p4: new Player('p4')
       };
-      players['p2'].resources = { deduct: sinon.stub().returns(true) };
+      players['p2'].resources = {deduct: sinon.stub().returns(true)};
       sinon.replace(game, 'players', players);
       assert.isTrue(game.buildSettlement('kl', 'p2'));
     });
@@ -292,7 +292,7 @@ describe('status', function() {
       otherPlayers: [
         {
           army: 0,
-          color: 'green',
+          color: 'yellow',
           devCardCount: 0,
           longestRoad: 0,
           name: 'p3',

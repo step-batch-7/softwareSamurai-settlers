@@ -35,7 +35,7 @@ class Game {
     this.bank = new Bank();
     this.players = {};
     this.isStarted = false;
-    this.availableColors = ['blue', 'red', 'green', 'orange'];
+    this.availableColors = ['blue', 'red', 'yellow', 'orange'];
     this.diceRolledStatus = false;
   }
 
@@ -50,7 +50,8 @@ class Game {
 
   generateNewPlayerId() {
     let lastId = Object.keys(this.players)
-      .sort().pop();
+      .sort()
+      .pop();
     return lastId ? `${++lastId}` : '1';
   }
 
