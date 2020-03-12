@@ -23,11 +23,8 @@ const getAvailableSettlements = function(req, res) {
 const randNum = () => Math.ceil(Math.random() * 6);
 
 const getRandomDiceNum = function(req, res) {
-<<<<<<< HEAD
   const { game } = req.app.locals;
   game.toggleDiceRolledStatus();
-=======
->>>>>>> |#60|Rahit/Anuja| Added animation on the change in no of cards
   res.json({ dice1: randNum(), dice2: randNum() });
 };
 
@@ -117,16 +114,12 @@ const joinGame = function(req, res) {
   if (!isGameAvailable) {
     return res.render('join', { error: 'Game id is not valid' });
   }
-<<<<<<< HEAD
-  res.render('join', { error: 'Game id is not valid' });
-=======
 
   const game = gameList.getGame(gameId);
   const playerId = game.addPlayer(playerName);
   const sessionId = sessions.createSession(gameId, playerId);
   res.cookie('sId', sessionId);
   res.redirect('/catan/waiting.html');
->>>>>>> |#60|Rahit/Anuja| Added animation on the change in no of cards
 };
 
 const ensureGame = function(req, res, next) {
