@@ -61,7 +61,7 @@ body {
 }
 
 #resourceCards,
-#developmentCards {
+#cards-count #developmentCards {
   width: 50%;
   height: 100%;
 }

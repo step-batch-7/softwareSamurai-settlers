@@ -46,12 +46,10 @@ const renderPlayerInfo1 = function(playerElement, player) {
   playerElement.querySelector(
     '#remaining-cities'
   ).innerText = getRemainingCount([], 4);
-  // console.log(playerElement);
 };
 
 const renderPlayersInfo = function(otherPlayers, player) {
   const players = [player, ...otherPlayers];
-  // console.log(players, otherPlayers);
   players.forEach((player, index) => {
     const playerElement = document.querySelector(`#player-info${index}`);
     renderPlayerInfo1(playerElement, player);
