@@ -100,7 +100,6 @@ const loadGameStatus = async function() {
 
 const main = () => {
   loadGameStatus();
-  // updateGameStatus();
   hideAllPaths();
   requestDiceRolledStatus();
   getTerrains();

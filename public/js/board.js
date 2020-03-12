@@ -19,8 +19,8 @@ const getTerrains = async function() {
       const html = `<image class="terrain-image" xlink:href=
       '/catan/assets/terrains/${terrainsInfo[terrain.id].resource}.jpg'
        count="${terrainsInfo[terrain.id].noToken}"></image>
-      <circle cx="50" cy="55" r="17" fill="burlywood" opacity="0.7"/>
-      <text x="50%" y="50%"  class="number-token" >
+      <circle cx="55" cy="65" r="17" fill="burlywood" opacity="0.7"/>
+      <text x="45%" y="49%"  class="number-token" >
       ${terrainsInfo[terrain.id].noToken}</text>`;
       terrain.innerHTML += html;
     });

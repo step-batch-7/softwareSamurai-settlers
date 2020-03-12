@@ -9,10 +9,23 @@ body {
 
 .background-image {
   z-index: 1;
-  width: 724px;
-  height: 602px;
+  width: 800px;
+  height: 637px;
   position: absolute;
-  clip-path: polygon(27% 1%, 73% 1%, 97% 50%, 73% 99%, 27% 99%, 3% 50%);
+  /* clip-path: polygon(28% 1%, 73% 2%, 94% 51%, 72% 99%, 29% 99%, 6% 52%); */
+  z-index: 1;
+  width: 800px;
+  height: 635px;
+  position: absolute;
+  clip-path: polygon(28% 1%, 73% 2%, 94% 51%, 72% 99%, 29% 99%, 6% 52%);
+  /* clip-path: polygon(
+    222px 5px,
+    581px 4px,
+    760px 318px,
+    563px 652px,
+    238px 652px,
+    42px 320px
+  ); */
 }
 
 #container {
@@ -178,24 +191,24 @@ body {
 }
 
 #board-border {
-  width: 724px;
-  height: 615px;
+  width: 100%;
+  height: 100%;
   fill: transparent;
   position: absolute;
   z-index: -1;
 }
 
 #display {
-  width: 724px;
-  height: 80%;
+  width: 55%;
+  height: 85%;
   display: block;
   position: absolute;
 }
 
 #rows {
-  height: 600px;
-  width: 720px;
-  margin-top: 60px;
+  height: 100%;
+  width: 100%;
+  margin-top: 7.8%;
 }
 
 .row {
@@ -204,9 +217,9 @@ body {
 }
 
 .terrain {
-  width: 101px;
-  height: 124px;
-  margin: 0px -3px -38px 0px;
+  width: 15%;
+  /* height: 1%; */
+  margin: 0.3% -1.9% -7.8% -0%;
 }
 
 #robber {
@@ -228,8 +241,8 @@ body {
 }
 
 .terrain-image {
-  height: 120px;
-  width: 100px;
+  height: 130px;
+  width: 110px;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   z-index: 1;
 }
@@ -271,9 +284,11 @@ svg {
 
 .pathsAndIntersections {
   position: absolute;
-  width: 720px;
-  height: 544px;
-  margin-top: 52px;
+  width: 768px;
+  height: 620px;
+  /* margin: 53px auto 35px; */
+  margin-top: 53px;
+  margin-left: 14px;
 }
 
 .point-block {
