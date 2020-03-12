@@ -170,8 +170,7 @@ const distributeResources = async () => {
     method: 'POST'
   });
   if (response.ok) {
-    fetchCardsCount();
-    getBankStatus();
+    updateGameStatus();
   }
 };
 

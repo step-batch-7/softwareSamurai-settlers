@@ -21,8 +21,9 @@ const countChangedBy = (element, previousCount, updatedCount) => {
 
 const updateCount = (parentElement, id, count) => {
   const element = parentElement.querySelector(`#${id}`);
-  if (element.innerText != count) {
-    countChangedBy(element, +element.innerText, count);
+  const previousCount = element.innerText;
+  if (+previousCount !== count) {
+    countChangedBy(element, +previousCount, count);
     element.innerText = count;
     flip(element);
   }
