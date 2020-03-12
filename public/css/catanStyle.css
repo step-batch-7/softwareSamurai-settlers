@@ -476,10 +476,17 @@ svg {
 }
 
 /*----------------------rotate---------------------*/
-.flip-card {
+.flip-card-resources {
   width: 12%;
   height: 82%;
   perspective: 1000px;
+}
+
+.flip-card-bank {
+  width: 11%;
+  height: 80%;
+  perspective: 1000px;
+  margin-top: 2.4%;
 }
 
 .flip-card-inner {
@@ -541,7 +548,7 @@ svg {
 .changed-count {
   margin: 54% 0% 0% 30%;
   position: absolute;
-  color: #99C8DB;
+  color: #99c8db;
   font-size: x-large;
 }
 
