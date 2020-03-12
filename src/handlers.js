@@ -183,9 +183,10 @@ const ensureSession = function(req, res, next) {
 };
 
 const serveGameStatus = function(req, res) {
-  const {game, playerId} = req.app.locals;
+  const { game, playerId } = req.app.locals;
   res.json(game.status(playerId));
-}
+};
+
 const getDiceRolledStatus = (req, res) => {
   const { game } = req.app.locals;
   const diceRolledStatus = game.getDiceRolledStatus();

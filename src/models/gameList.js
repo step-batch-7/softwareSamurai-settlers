@@ -24,7 +24,7 @@ class GameList {
   }
 
   isGameAvailable(gameId) {
-    if (this.games[gameId]) {
+    if (this.games[gameId] && !this.games[gameId].hasStarted()) {
       return true;
     }
   }
