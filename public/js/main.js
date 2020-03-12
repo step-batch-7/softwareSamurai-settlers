@@ -19,7 +19,7 @@ const enablePlayerTurn = diceRolledStatus => {
 const requestDiceRolledStatus = async () => {
   const response = await fetch('/catan/diceRolledStatus');
   if (response.ok) {
-    const {diceRolledStatus, turn, mode} = await response.json();
+    const { diceRolledStatus, turn, mode } = await response.json();
     if (turn && mode === 'normal') {
       enablePlayerTurn(diceRolledStatus);
       return;
@@ -67,7 +67,8 @@ const getRemainingCount = function(asset, maxCount) {
 
 const renderPlayerInfo1 = function(playerElement, player) {
   const {
-    resourceCardCount,
+    name,
+    resourceCount,
     devCardCount,
     settlements,
     roads,
@@ -77,8 +78,9 @@ const renderPlayerInfo1 = function(playerElement, player) {
     longestRoad
   } = player;
 
-  playerElement.querySelector('#resource-cards').innerText = resourceCardCount;
-  playerElement.querySelector('#development-cards').innerText = devCardCount;
+  playerElement.querySelector('#playerName').innerText = name;
+  playerElement.querySelector('#resource-cards').innerHTML = resourceCount;
+  playerElement.querySelector('#development-cards').innerHTML = devCardCount;
   playerElement.querySelector('#victory-point').innerText = victoryPoints;
   playerElement.querySelector('#army').innerText = army;
   playerElement.querySelector('#longest-road').innerText = longestRoad;
@@ -110,14 +112,14 @@ const renderBankCards = function(bankCards) {
 };
 
 const renderPlayerCards = function(player) {
-  const {resources, devCardCount} = player;
+  const { resources, devCardCount } = player;
   updateCards('player-cards', resources, devCardCount);
 };
 
 const updateGameStatus = async function() {
   const response = await fetch('/catan/gameStatus');
   if (response.ok) {
-    const {bankCards, player, otherPlayers, stage} = await response.json();
+    const { bankCards, player, otherPlayers, stage } = await response.json();
     renderBankCards(bankCards);
     renderPlayerCards(player);
     renderPlayersInfo(otherPlayers, player);
@@ -127,7 +129,7 @@ const updateGameStatus = async function() {
 };
 
 const render = function(game) {
-  const {bankCards, player, otherPlayers} = game;
+  const { bankCards, player, otherPlayers } = game;
   renderBankCards(bankCards);
   renderPlayerCards(player);
   renderPlayersInfoImgs(otherPlayers, player);
