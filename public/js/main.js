@@ -3,17 +3,23 @@ const hideAllPaths = () => {
   paths.forEach(path => path.classList.add('hide'));
 };
 
+const disableMyTurn = (rollDice, endTurn) => {
+  document.getElementById('rollDice').disabled = rollDice;
+  document.getElementById('end-turn').disabled = endTurn;
+};
+
 const requestDiceRolledStatus = async () => {
   const response = await fetch('/catan/diceRolledStatus');
   if (response.ok) {
-    const {diceRolledStatus} = await response.json();
-    if (diceRolledStatus) {
-      document.getElementById('rollDice').disabled = true;
-      document.getElementById('end-turn').disabled = false;
+    const { diceRolledStatus, turn } = await response.json();
+    if (turn) {
+      disableMyTurn(false, true);
+      if (diceRolledStatus) {
+        disableMyTurn(true, false);
+      }
       return;
     }
-    document.getElementById('rollDice').disabled = false;
-    document.getElementById('end-turn').disabled = true;
+    disableMyTurn(true, true);
   }
 };
 
@@ -51,6 +57,9 @@ const renderPlayerInfo1 = function(playerElement, player) {
 };
 
 const renderPlayersInfo = function(otherPlayers, player) {
+  if (!player.turn) {
+    document.getElementById('rollDice').disabled = true;
+  }
   const players = [player, ...otherPlayers];
   players.forEach((player, index) => {
     const playerElement = document.querySelector(`#player-info${index}`);
@@ -63,14 +72,14 @@ const renderBankCards = function(bankCards) {
 };
 
 const renderPlayerCards = function(player) {
-  const {resources, devCardCount} = player;
+  const { resources, devCardCount } = player;
   updateCards('player-cards', resources, devCardCount);
 };
 
 const updateGameStatus = async function() {
   const response = await fetch('/catan/gameStatus');
   if (response.ok) {
-    const {bankCards, player, otherPlayers} = await response.json();
+    const { bankCards, player, otherPlayers } = await response.json();
     renderBankCards(bankCards);
     renderPlayerCards(player);
     renderPlayersInfo(otherPlayers, player);
@@ -80,7 +89,7 @@ const updateGameStatus = async function() {
 const loadGameStatus = async function() {
   const response = await fetch('/catan/loadGame');
   if (response.ok) {
-    const {bankCards, player, otherPlayers} = await response.json();
+    const { bankCards, player, otherPlayers } = await response.json();
     renderBankCards(bankCards);
     renderPlayerCards(player);
     renderPlayersInfoImgs(otherPlayers, player);

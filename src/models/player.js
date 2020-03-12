@@ -134,6 +134,7 @@ class Player {
   }
 
   endTurn() {
+
     if (this.turn) {
       this.turn = false;
       return true;

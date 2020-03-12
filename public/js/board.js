@@ -3,7 +3,7 @@ const getTerrains = async function() {
     credentials: 'include'
   });
   if (response.ok) {
-    const {terrainsInfo, settlements, roads} = await response.json();
+    const { terrainsInfo, settlements, roads } = await response.json();
     const terrains = document.getElementsByClassName('terrain');
     Array.from(terrains).forEach(terrain => {
       if (terrainsInfo[terrain.id].resource === 'desert') {
@@ -117,7 +117,7 @@ const buildRoad = async function() {
       'Content-Type': 'application/json'
     },
     credentials: 'include',
-    body: JSON.stringify({pathId})
+    body: JSON.stringify({ pathId })
   });
   if (response.ok) {
     appendRoad(pathId);
@@ -133,7 +133,7 @@ const buildRoadWithResources = async function() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({pathId})
+    body: JSON.stringify({ pathId })
   });
   if (response.ok) {
     appendRoad(pathId);
@@ -177,7 +177,7 @@ const buildInitialSettlement = async function() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({intersection: intersection.id})
+    body: JSON.stringify({ intersection: intersection.id })
   });
 
   if (response.ok) {
@@ -195,7 +195,7 @@ const buildSettlement = async function() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({intersection: intersection.id})
+    body: JSON.stringify({ intersection: intersection.id })
   });
 
   if (response.ok) {
@@ -228,7 +228,7 @@ const getPossiblePathsForRoad = async function() {
   }
 };
 
-const setSrc = ({element, dirName, color, buildingType, extension}) => {
+const setSrc = ({ element, dirName, color, buildingType, extension }) => {
   element
     .querySelector(`#${buildingType}Img`)
     .setAttribute(
@@ -291,10 +291,12 @@ const renderPlayersInfoImgs = (otherPlayers, player) => {
 };
 
 const endTurn = async () => {
-  const response = await fetch('/endTurn');
+  const response = await fetch('/catan/endTurn');
   if (response.ok) {
     document.getElementById('end-turn').disabled = true;
     const actions = Array.from(document.querySelectorAll('.unit'));
-    actions.forEach(action => {});
+    actions.forEach(action => {
+      action.style.pointerEvents = 'none';
+    });
   }
 };

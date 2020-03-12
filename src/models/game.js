@@ -258,6 +258,8 @@ class Game {
       return isEnd;
     }
     this.turn.next();
+    const currentPlayerId = this.turn.currentPlayerId;
+    this.players[currentPlayerId].startTurn();
     return isEnd;
   }
 }
