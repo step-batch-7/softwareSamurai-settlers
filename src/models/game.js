@@ -250,6 +250,7 @@ class Game {
   getDiceRolledStatus() {
     return this.diceRolledStatus;
   }
+
   passTurn(playerId) {
     const isEnd = this.players[playerId].endTurn();
     const { mode, round } = this.stage;

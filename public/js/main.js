@@ -8,6 +8,13 @@ const disableMyTurn = (rollDice, endTurn) => {
   document.getElementById('end-turn').disabled = endTurn;
 };
 
+// const disableAction = () => {
+//   const actions = Array.from(document.querySelectorAll('.unit'));
+//   actions.forEach(action => {
+//     action.style.pointerEvents = 'none';
+//   });
+// };
+
 const requestDiceRolledStatus = async () => {
   const response = await fetch('/catan/diceRolledStatus');
   if (response.ok) {
@@ -16,6 +23,7 @@ const requestDiceRolledStatus = async () => {
       disableMyTurn(false, true);
       if (diceRolledStatus) {
         disableMyTurn(true, false);
+        getBuildStatus();
       }
       return;
     }
