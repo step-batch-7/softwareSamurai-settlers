@@ -89,7 +89,12 @@ describe('Game', () => {
   });
   describe('start', () => {
     it('should start the game when 4 players are added', () => {
-      const players = {p1: 'red', p2: 'green', p3: 'orange', p4: 'white'};
+      const players = {
+        p1: new Player('red'),
+        p2: new Player('green'),
+        p3: new Player('orange'),
+        p4: new Player('white')
+      };
       const game = new Game();
       sinon.replace(game, 'players', players);
       assert.isTrue(game.start());
@@ -101,7 +106,11 @@ describe('Game', () => {
     });
 
     it('should not start the game when less than 4 players are added', () => {
-      const players = {p1: 'red', p2: 'green', p3: 'orange'};
+      const players = {
+        p1: new Player('red'),
+        p2: new Player('green'),
+        p3: new Player('orange')
+      };
       const game = new Game();
       sinon.replace(game, 'players', players);
       assert.isFalse(game.start());
@@ -110,7 +119,12 @@ describe('Game', () => {
 
   describe('isStarted', () => {
     it('should return true when the game has started', () => {
-      const players = {p1: 'red', p2: 'green', p3: 'orange', p4: 'white'};
+      const players = {
+        p1: new Player('red'),
+        p2: new Player('green'),
+        p3: new Player('orange'),
+        p4: new Player('white')
+      };
       const game = new Game();
       sinon.replace(game, 'players', players);
       game.start();
@@ -228,5 +242,86 @@ describe('Game', () => {
     };
     sinon.replace(game, 'players', players);
     assert.isFalse(game.buildSettlement('kl', 'p2'));
+  });
+});
+
+describe('status', function() {
+  it('should give status of the game for given player', function() {
+    const game = new Game();
+    game.addPlayer('p1');
+    game.addPlayer('p2');
+    game.addPlayer('p3');
+    game.addPlayer('p4');
+    const expected = {
+      bankCards: {
+        brick: 19,
+        developmentCards: 25,
+        grain: 19,
+        lumber: 19,
+        ore: 19,
+        wool: 19
+      },
+      otherPlayers: [
+        {
+          army: 0,
+          color: 'green',
+          devCardCount: 0,
+          longestRoad: 0,
+          name: 'p3',
+          resourceCount: 0,
+          roads: [],
+          settlements: [],
+          victoryPoints: 0
+        },
+        {
+          army: 0,
+          color: 'orange',
+          devCardCount: 0,
+          longestRoad: 0,
+          name: 'p4',
+          resourceCount: 0,
+          roads: [],
+          settlements: [],
+          victoryPoints: 0
+        },
+        {
+          army: 0,
+          color: 'blue',
+          devCardCount: 0,
+          longestRoad: 0,
+          name: 'p1',
+          resourceCount: 0,
+          roads: [],
+          settlements: [],
+          victoryPoints: 0
+        }
+      ],
+      player: {
+        army: 0,
+        color: 'red',
+        devCardCount: 0,
+        devCards: {
+          knight: 0,
+          monoPoly: 0,
+          roadBuilding: 0,
+          yearOfPlenty: 0
+        },
+        longestRoad: 0,
+        name: 'p2',
+        resourceCount: 0,
+        resources: {
+          brick: 0,
+          grain: 0,
+          lumber: 0,
+          ore: 0,
+          wool: 0
+        },
+        roads: [],
+        settlements: [],
+        turn: false,
+        victoryPoints: 0
+      }
+    };
+    assert.deepStrictEqual(game.status('2'), expected);
   });
 });

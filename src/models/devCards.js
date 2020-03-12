@@ -12,6 +12,12 @@ class DevCards {
       university: 0
     };
   }
+
+  get victoryCardsCount() {
+    const {library, chapel, greatHall, market, university} = this.victoryCards;
+    return library + chapel + greatHall + market + university;
+  }
+
   status() {
     return {
       knight: this.knight,

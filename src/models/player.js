@@ -10,7 +10,11 @@ class Player {
     this.resources = new Resources();
     this.devCards = new DevCards();
     this.victoryPoints = 0;
+    this.army = 0;
+    this.longestRoad = 0;
+    this.turn = false;
   }
+
   cardsCount() {
     return {
       resources: this.resources.status(),
@@ -88,6 +92,37 @@ class Player {
       return settlements.pop().split('');
     }
     return [];
+  }
+
+  get status() {
+    return {
+      name: this.name,
+      color: this.color,
+      settlements: this.settlements,
+      roads: this.roads,
+      resources: this.resources.status(),
+      resourceCount: this.resources.count,
+      devCards: this.devCards.status(),
+      devCardCount: this.devCards.count(),
+      victoryPoints: this.victoryPoints,
+      army: this.army,
+      longestRoad: this.longestRoad,
+      turn: this.turn
+    };
+  }
+
+  get abstractStatus() {
+    return {
+      name: this.name,
+      color: this.color,
+      settlements: this.settlements,
+      roads: this.roads,
+      resourceCount: this.resources.count,
+      devCardCount: this.devCards.count(),
+      victoryPoints: this.victoryPoints - this.devCards.victoryCardsCount,
+      army: this.army,
+      longestRoad: this.longestRoad
+    };
   }
 }
 

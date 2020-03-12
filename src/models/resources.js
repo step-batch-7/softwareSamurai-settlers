@@ -43,6 +43,12 @@ class Resources {
     }
     return status;
   }
+
+  get count() {
+    return Object.values(this.status()).reduce((sum, count) => {
+      return sum + count;
+    }, 0);
+  }
 }
 
 module.exports = Resources;
