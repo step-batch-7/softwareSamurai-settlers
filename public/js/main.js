@@ -3,8 +3,21 @@ const hideAllPaths = () => {
   paths.forEach(path => path.classList.add('hide'));
 };
 
+const requestDiceRolledStatus = async () => {
+  const response = await fetch('/catan/diceRolledStatus');
+  if (response.ok) {
+    const { diceRolledStatus } = await response.json();
+    if (diceRolledStatus) {
+      document.getElementById('rollDice').disabled = true;
+      return;
+    }
+    document.getElementById('rollDice').disabled = false;
+  }
+};
+
 const main = () => {
   hideAllPaths();
+  requestDiceRolledStatus();
   getTerrains();
   getBankStatus();
   fetchCardsCount();

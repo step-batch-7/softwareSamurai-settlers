@@ -36,6 +36,7 @@ class Game {
     this.players = {};
     this.isStarted = false;
     this.availableColors = ['blue', 'red', 'green', 'orange'];
+    this.diceRolledStatus = false;
   }
 
   static initializeGame() {
@@ -240,6 +241,12 @@ class Game {
       player,
       otherPlayers
     };
+  }
+  toggleDiceRolledStatus() {
+    this.diceRolledStatus = !this.diceRolledStatus;
+  }
+  getDiceRolledStatus() {
+    return this.diceRolledStatus;
   }
 }
 

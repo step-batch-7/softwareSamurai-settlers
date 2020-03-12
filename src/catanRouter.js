@@ -21,7 +21,8 @@ const {
   getJoinedPlayerDetails,
   ensureGame,
   ensureGameStart,
-  serveGameStatus
+  serveGameStatus,
+  getDiceRolledStatus
 } = require('./handlers');
 
 catanRouter.use(ensureGame);
@@ -34,6 +35,7 @@ catanRouter.get('/terrains', getTerrainDetails);
 catanRouter.get('/requestInitialSettlement', getAvailableSettlements);
 catanRouter.get('/requestSettlement', getAvailableAdjSettlements);
 catanRouter.get('/cardsCount', getCardsCount);
+catanRouter.get('/diceRolledStatus', getDiceRolledStatus);
 catanRouter.post('/resourceProduction', resourceProduction);
 catanRouter.get('/bankStatus', getBankStatus);
 catanRouter.post('/buildSettlement', buildSettlement);

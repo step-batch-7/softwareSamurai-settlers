@@ -1,7 +1,7 @@
-const {assert} = require('chai');
+const { assert } = require('chai');
 const sinon = require('sinon');
-const {Game} = require('../../src/models/game');
-const {Player} = require('../../src/models/player');
+const { Game } = require('../../src/models/game');
+const { Player } = require('../../src/models/player');
 
 describe('Game', () => {
   describe('cardsCount', () => {
@@ -117,7 +117,7 @@ describe('Game', () => {
     });
   });
 
-  describe('isStarted', () => {
+  describe('hasStarted', () => {
     it('should return true when the game has started', () => {
       const players = {
         p1: new Player('red'),
@@ -214,7 +214,7 @@ describe('Game', () => {
     it('should get player details of single player', () => {
       const game = new Game();
       game.addPlayer('virat');
-      assert.deepStrictEqual({blue: 'virat'}, game.getPlayerDetails());
+      assert.deepStrictEqual({ blue: 'virat' }, game.getPlayerDetails());
     });
   });
   describe('build settlement', () => {
@@ -226,7 +226,7 @@ describe('Game', () => {
         p3: new Player('p3'),
         p4: new Player('p4')
       };
-      players['p2'].resources = {deduct: sinon.stub().returns(true)};
+      players['p2'].resources = { deduct: sinon.stub().returns(true) };
       sinon.replace(game, 'players', players);
       assert.isTrue(game.buildSettlement('kl', 'p2'));
     });
@@ -242,6 +242,16 @@ describe('Game', () => {
     };
     sinon.replace(game, 'players', players);
     assert.isFalse(game.buildSettlement('kl', 'p2'));
+  });
+
+  describe('toggleDiceRolledStatus', () => {
+    it('should toggle status to false when  diceRolledStatus is true', () => {
+      const game = new Game();
+      sinon.replace(game, 'diceRolledStatus', true);
+      game.toggleDiceRolledStatus();
+      assert.isFalse(game.getDiceRolledStatus());
+    });
+    sinon.restore();
   });
 });
 
