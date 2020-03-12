@@ -196,6 +196,7 @@ const getDiceRolledStatus = (req, res) => {
 const endTurn = (req, res) => {
   const { game, playerId } = req.app.locals;
   game.passTurn(playerId);
+  res.end();
 };
 
 module.exports = {
