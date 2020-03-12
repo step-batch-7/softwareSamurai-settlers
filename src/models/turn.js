@@ -9,6 +9,11 @@ class Turn {
     return this.currentPlayerId;
   }
 
+  previous() {
+    this.currentTurnIndex = (this.currentTurnIndex - 1) % 4;
+    return this.currentPlayerId;
+  }
+
   get currentPlayerId() {
     return this.playerIds[this.currentTurnIndex];
   }

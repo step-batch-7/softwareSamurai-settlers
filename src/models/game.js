@@ -37,6 +37,7 @@ class Game {
     this.isStarted = false;
     this.availableColors = ['blue', 'red', 'yellow', 'orange'];
     this.diceRolledStatus = false;
+    this.stage = { mode: 'setup', round: 1, build: '' };
   }
 
   static initializeGame() {
@@ -212,7 +213,7 @@ class Game {
     if (playerIds.length === 4) {
       this.turn = new Turn(playerIds);
       const playerId = this.turn.currentPlayerId;
-      this.players[playerId].turn = true;
+      this.players[playerId].startTurn();
       this.isStarted = true;
     }
     return this.isStarted;
@@ -250,11 +251,14 @@ class Game {
     return this.diceRolledStatus;
   }
   passTurn(playerId) {
-    if (this.players[playerId].endTurn()) {
-      this.turn.next();
-      return true;
+    const isEnd = this.players[playerId].endTurn();
+    const { mode, round } = this.stage;
+    if (mode === 'setup' && round === 2) {
+      this.turn.previous();
+      return isEnd;
     }
-    return false;
+    this.turn.next();
+    return isEnd;
   }
 }
 
