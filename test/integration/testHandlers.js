@@ -1,7 +1,7 @@
 const request = require('supertest');
 const sinon = require('sinon');
-const { app } = require('../../src/app');
-const { Game } = require('../../src/models/game');
+const {app} = require('../../src/app');
+const {Game} = require('../../src/models/game');
 
 describe('Handlers', () => {
   before(() => {
@@ -11,7 +11,7 @@ describe('Handlers', () => {
     game.addPlayer('shikhar');
     game.addPlayer('dhoni');
     sinon.replace(app.locals.sessions, 'getSession', () => {
-      return { gameId: 100, playerId: 1 };
+      return {gameId: 100, playerId: 1};
     });
 
     sinon.replace(app.locals.gameList, 'getGame', () => game);
@@ -59,7 +59,7 @@ describe('Handlers', () => {
       request(app)
         .post('/catan/buildSettlement')
         .set('content-type', 'application/json')
-        .send({ intersection: 'k1' })
+        .send({intersection: 'k1'})
         .expect(200, done);
     });
   });
@@ -77,7 +77,7 @@ describe('Handlers', () => {
       request(app)
         .post('/catan/buildRoad')
         .set('content-type', 'application/json')
-        .send({ pathId: 'k1-kj' })
+        .send({pathId: 'k1-kj'})
         .expect(200, done);
     });
   });
@@ -112,7 +112,7 @@ describe('Handlers', () => {
     it('should build the settlement for getting resources', done => {
       request(app)
         .post('/catan/buildInitialSettlement')
-        .send({ intersection: 'efo' })
+        .send({intersection: 'efo'})
         .expect(200, done);
     });
     it('should give add resources to player for /addResourcesToPlayer', done => {
@@ -143,7 +143,7 @@ describe('Handlers', () => {
       request(app)
         .post('/catan/buildSettlement')
         .set('content-type', 'application/json')
-        .send({ intersection: 'k1' })
+        .send({intersection: 'k1'})
         .expect(200, done);
     });
   });
@@ -153,7 +153,7 @@ describe('Handlers', () => {
       request(app)
         .post('/catan/resourceProduction')
         .set('content-type', 'application/json')
-        .send({ numToken: 10 })
+        .send({numToken: 10})
         .expect(200, done);
     });
   });
@@ -179,7 +179,7 @@ describe('Handlers', () => {
     it('should build the settlement on given intersection', done => {
       request(app)
         .post('/catan/buildInitialSettlement')
-        .send({ intersection: 'k1' })
+        .send({intersection: 'k1'})
         .expect(200, done);
     });
   });
@@ -205,6 +205,15 @@ describe('Handlers', () => {
       request(app)
         .post('/join')
         .expect(302, done);
+    });
+  });
+
+  context('/gameStatus', () => {
+    it('should give the game status for the given playerId', done => {
+      request(app)
+        .get('/catan/gameStatus')
+        .expect('Content-Type', 'application/json; charset=utf-8')
+        .expect(200, done);
     });
   });
 });

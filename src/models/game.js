@@ -33,7 +33,6 @@ class Game {
   constructor() {
     this.board = new Board();
     this.bank = new Bank();
-    // this.player = new Player();
     this.players = {};
     this.isStarted = false;
     this.availableColors = ['blue', 'red', 'green', 'orange'];

@@ -180,6 +180,12 @@ const ensureSession = function(req, res, next) {
   next();
 };
 
+const serveGameStatus = function(req, res) {
+  const {game, playerId} = req.app.locals;
+  console.log(game.status(playerId));
+  res.json(game.status(playerId));
+};
+
 module.exports = {
   getTerrainDetails,
   getCardsCount,
@@ -203,5 +209,6 @@ module.exports = {
   getJoinedPlayerDetails,
   ensureGame,
   ensureGameStart,
-  ensureSession
+  ensureSession,
+  serveGameStatus
 };

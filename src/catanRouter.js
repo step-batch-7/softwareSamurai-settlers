@@ -20,7 +20,8 @@ const {
   serveWaitingPage,
   getJoinedPlayerDetails,
   ensureGame,
-  ensureGameStart
+  ensureGameStart,
+  serveGameStatus
 } = require('./handlers');
 
 catanRouter.use(ensureGame);
@@ -46,5 +47,6 @@ catanRouter.post('/buildRoad', addRoad);
 catanRouter.post('/buildRoadWithResources', addRoadWithResources);
 catanRouter.get('/diceNumbers', getRandomDiceNum);
 catanRouter.post('/addResourcesToPlayer', addResourcesToPlayer);
+catanRouter.get('/gameStatus', serveGameStatus);
 
-module.exports = { catanRouter };
+module.exports = {catanRouter};
