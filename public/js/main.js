@@ -9,9 +9,11 @@ const requestDiceRolledStatus = async () => {
     const {diceRolledStatus} = await response.json();
     if (diceRolledStatus) {
       document.getElementById('rollDice').disabled = true;
+      document.getElementById('end-turn').disabled = false;
       return;
     }
     document.getElementById('rollDice').disabled = false;
+    document.getElementById('end-turn').disabled = true;
   }
 };
 

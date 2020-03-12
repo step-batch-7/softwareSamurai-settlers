@@ -87,5 +87,6 @@ const showDicePhase = async function() {
   const { dice1, dice2 } = await body;
   updateDicePhase(dice1, dice2);
   document.getElementById('rollDice').disabled = true;
+  document.getElementById('end-turn').disabled = false;
   resourceProduction(dice1, dice2);
 };

@@ -293,6 +293,8 @@ const renderPlayersInfoImgs = (otherPlayers, player) => {
 const endTurn = async () => {
   const response = await fetch('/endTurn');
   if (response.ok) {
-    document.getElementById('actions').pointerEvents = 'none';
+    document.getElementById('end-turn').disabled = true;
+    const actions = Array.from(document.querySelectorAll('.unit'));
+    actions.forEach(action => {});
   }
 };
