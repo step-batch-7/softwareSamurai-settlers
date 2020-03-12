@@ -6,7 +6,7 @@ const hideAllPaths = () => {
 const requestDiceRolledStatus = async () => {
   const response = await fetch('/catan/diceRolledStatus');
   if (response.ok) {
-    const { diceRolledStatus } = await response.json();
+    const {diceRolledStatus} = await response.json();
     if (diceRolledStatus) {
       document.getElementById('rollDice').disabled = true;
       return;
@@ -15,12 +15,39 @@ const requestDiceRolledStatus = async () => {
   }
 };
 
+const renderBankCards = function(bankCards) {
+  const bankElement = document.getElementById('bank');
+  const cardNames = Object.keys(bankCards);
+  cardNames.forEach(cardName => {
+    const card = bankElement.querySelector(`#${cardName}`);
+    card.querySelector('text').innerHTML = bankCards[cardName];
+  });
+};
+
+const renderPlayerCards = function(player) {
+  const {resources, devCardCount} = player;
+  document.getElementById('dev-count').innerHTML = devCardCount;
+  for (const resource in resources) {
+    const id = `#${resource}-count`;
+    document.querySelector(id).innerHTML = resources[resource];
+  }
+};
+
+const updateGameStatus = async function() {
+  const response = await fetch('/catan/gameStatus');
+  if (response.ok) {
+    const {bankCards, player, otherPlayers} = await response.json();
+    renderBankCards(bankCards);
+    renderPlayerCards(player);
+    renderPlayersInfo(otherPlayers, player);
+  }
+};
+
 const main = () => {
+  updateGameStatus();
   hideAllPaths();
   requestDiceRolledStatus();
   getTerrains();
-  getBankStatus();
-  fetchCardsCount();
   requestInitialSettlement();
   renderPlayersInfoImgs();
   renderPlayersDetails();

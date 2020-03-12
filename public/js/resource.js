@@ -9,7 +9,7 @@ const updateResourceCards = function(resources, devCardsCount) {
 const fetchCardsCount = async function() {
   const res = await fetch('/catan/cardsCount');
   const body = await res.json();
-  const { resources, totalDevCards } = await body;
+  const {resources, totalDevCards} = await body;
   updateResourceCards(resources, totalDevCards);
 };
 
@@ -21,15 +21,14 @@ const updateDicePhase = function(num1, num2) {
 };
 
 const resourceProduction = async function(dice1, dice2) {
-  const reqText = JSON.stringify({ numToken: dice1 + dice2 });
+  const reqText = JSON.stringify({numToken: dice1 + dice2});
   const res = await fetch('/catan/resourceProduction', {
     method: 'POST',
     body: reqText,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {'Content-Type': 'application/json'}
   });
   if (res.ok) {
-    fetchCardsCount();
-    getBankStatus();
+    updateGameStatus();
     getBuildStatus();
   }
 };
@@ -45,7 +44,7 @@ const updateBuildingStatus = function(status, buildingId) {
 const getBuildStatus = async function() {
   const res = await fetch('/catan/buildStatus');
   if (res.ok) {
-    const { settlement, road } = await res.json();
+    const {settlement, road} = await res.json();
 
     updateBuildingStatus(settlement, 'settlement');
     updateBuildingStatus(road, 'road');
@@ -55,7 +54,7 @@ const getBuildStatus = async function() {
 const showDicePhase = async function() {
   const res = await fetch('/catan/diceNumbers');
   const body = await res.json();
-  const { dice1, dice2 } = await body;
+  const {dice1, dice2} = await body;
   updateDicePhase(dice1, dice2);
   document.getElementById('rollDice').disabled = true;
   resourceProduction(dice1, dice2);
