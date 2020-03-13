@@ -5,7 +5,7 @@ const hideAllPaths = () => {
 
 const disableTurn = (rollDice, endTurn) => {
   const endTurnButton = document.getElementById('end-turn');
-  const rollDiceButton = document.getElementById('rollDice')
+  const rollDiceButton = document.getElementById('rollDice');
   rollDiceButton.disabled = rollDice;
   rollDiceButton.style.pointerEvents = rollDice ? 'none' : 'auto';
   endTurnButton.disabled = endTurn;
