@@ -89,7 +89,6 @@ const renderPlayerInfo1 = function(playerElement, player) {
     longestRoad
   } = player;
 
-  playerElement.querySelector('#playerName').innerText = name;
   playerElement.querySelector('#resource-cards').innerHTML = resourceCount;
   playerElement.querySelector('#development-cards').innerHTML = devCardCount;
   playerElement.querySelector('#victory-point').innerText = victoryPoints;

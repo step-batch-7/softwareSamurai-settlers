@@ -248,6 +248,7 @@ const renderPlayersInfoImgs = (otherPlayers, player) => {
   const players = [player, ...otherPlayers];
   players.forEach((player, index) => {
     const element = document.getElementById(`player-info${index}`);
+    element.querySelector('#playerName').innerText = player.name;
     setSrc({
       element,
       dirName: 'roads',
