@@ -184,31 +184,50 @@ const setupMode = function(player, stage) {
   }
 };
 
-const loadGame = async function() {
-  const response = await fetch('/catan/loadGame');
-  if (response.ok) {
-    const game = await response.json();
-    const updateGame = setInterval(async () => {
-      const res = await fetch('/catan/loadGame');
-      const game = await res.json();
-      if (game.player.turn) {
-        clearInterval(updateGame);
-        setupMode(game.player, game.stage);
-        requestDiceRolledStatus();
-      }
-      update(game);
-    }, 500);
-  }
+const renderBoard = function(boardData) {
+  const terrains = document.getElementsByClassName('terrain');
+  Array.from(terrains).forEach(terrain => {
+    if (boardData[terrain.id].resource === 'desert') {
+      const html = `<image class="terrain-image"
+           xlink:href='/catan/assets/terrains/desert.jpg'
+          count="${boardData[terrain.id].noToken}"></image>
+         <image id="robber"  x='0' y='30'  
+          xlink:href='/catan/assets/robber.png'></image>
+        `;
+      terrain.innerHTML += html;
+      return;
+    }
+    const html = `<image class="terrain-image" xlink:href=
+      '/catan/assets/terrains/${boardData[terrain.id].resource}.jpg'
+       count="${boardData[terrain.id].noToken}"></image>
+      <circle cx="55" cy="65" r="17" fill="burlywood" opacity="0.7"/>
+      <text x="45%" y="49%"  class="number-token" >
+      ${boardData[terrain.id].noToken}</text>`;
+    terrain.innerHTML += html;
+  });
+};
+
+const loadGame = function() {
+  const updateGame = setInterval(async () => {
+    const res = await fetch('/catan/gameStatus');
+    const game = await res.json();
+    if (game.player.turn) {
+      clearInterval(updateGame);
+      setupMode(game.player, game.stage);
+      requestDiceRolledStatus();
+    }
+    update(game);
+  }, 500);
 };
 
 const main = () => {
   hideAllPaths();
-  getTerrains();
   (async () => {
     const res = await fetch('/catan/loadGame');
-    const game = await res.json();
-    renderPlayersInfoImgs(game.otherPlayers, game.player);
-    setSrcForAction(game.player.color);
+    const { status, boardData } = await res.json();
+    renderBoard(boardData);
+    renderPlayersInfoImgs(status.otherPlayers, status.player);
+    setSrcForAction(status.player.color);
   })();
   loadGame();
 };

@@ -64,12 +64,8 @@ class Game {
     return id;
   }
 
-  getBoardData(playerId) {
-    return {
-      terrainsInfo: this.board.getTerrains(),
-      settlements: this.players[playerId].getSettlements(),
-      roads: this.players[playerId].getRoads()
-    };
+  get boardData() {
+    return this.board.getTerrains();
   }
 
   getAvailableSettlements() {

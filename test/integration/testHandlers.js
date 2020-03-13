@@ -35,16 +35,6 @@ describe('Handlers', () => {
     });
   });
 
-  context('Get getTerrainDetails', () => {
-    it('Should give terrain details for /terrains', done => {
-      request(app)
-        .get('/catan/terrains')
-        .set('cookie', 'sId = 1234')
-        .expect(200, done)
-        .expect(/"i":{"noToken":9,"resource":"forest"}/);
-    });
-  });
-
   context('getAvailableSettlements', () => {
     it('should give all the available settlements ', done => {
       request(app)

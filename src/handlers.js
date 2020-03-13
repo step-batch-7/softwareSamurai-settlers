@@ -1,9 +1,3 @@
-const getTerrainDetails = function(req, res) {
-  const { game, playerId } = req.app.locals;
-  const boardData = game.getBoardData(playerId);
-  res.json(boardData);
-};
-
 const getBankStatus = (req, res) => {
   const { game } = req.app.locals;
   res.json(game.bankStatus());
@@ -211,11 +205,10 @@ const endTurn = (req, res) => {
 
 const serveLoadGame = function(req, res) {
   const { game, playerId } = req.app.locals;
-  res.json(game.status(playerId));
+  res.json({ status: game.status(playerId), boardData: game.boardData });
 };
 
 module.exports = {
-  getTerrainDetails,
   getCardsCount,
   getBankStatus,
   getAvailableSettlements,

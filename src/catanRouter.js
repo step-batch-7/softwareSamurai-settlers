@@ -6,7 +6,6 @@ const {
   getAvailableSettlements,
   getAvailableAdjSettlements,
   getBankStatus,
-  getTerrainDetails,
   getCardsCount,
   resourceProduction,
   buildInitialSettlement,
@@ -33,7 +32,6 @@ catanRouter.get('/joinedPlayerDetails', getJoinedPlayerDetails);
 catanRouter.get('/home.html', ensureGameStart, express.static('public'));
 catanRouter.use(express.static('public'));
 catanRouter.get('/buildStatus', getBuildStatus);
-catanRouter.get('/terrains', getTerrainDetails);
 catanRouter.get('/requestInitialSettlement', getAvailableSettlements);
 catanRouter.get('/requestSettlement', getAvailableAdjSettlements);
 catanRouter.get('/cardsCount', getCardsCount);
@@ -55,4 +53,4 @@ catanRouter.get('/gameStatus', serveGameStatus);
 catanRouter.get('/endTurn', endTurn);
 catanRouter.get('/loadGame', serveLoadGame);
 
-module.exports = {catanRouter};
+module.exports = { catanRouter };
