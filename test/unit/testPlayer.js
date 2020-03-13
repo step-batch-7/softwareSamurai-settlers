@@ -150,4 +150,18 @@ describe('Player', () => {
       assert.isFalse(player.startTurn());
     });
   });
+
+  describe('canBuildCity', () => {
+    it('should give true if player has resources to build city', () => {
+      const player = new Player();
+      player.addResources({ resource: 'ore', count: 3 });
+      player.addResources({ resource: 'grain', count: 2 });
+      assert.isTrue(player.canBuildCity());
+    });
+    it('should give false if player has not enough resources to build city', () => {
+      const player = new Player();
+      player.addResources({ resource: 'grain', count: 2 });
+      assert.isFalse(player.canBuildCity());
+    });
+  });
 });

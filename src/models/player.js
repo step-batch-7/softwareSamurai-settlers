@@ -141,6 +141,11 @@ class Player {
     }
     return false;
   }
+
+  canBuildCity() {
+    const resourcesNeeded = { grain: 2, ore: 3 };
+    return this.resources.have(resourcesNeeded);
+  }
 }
 
 module.exports = { Player };
