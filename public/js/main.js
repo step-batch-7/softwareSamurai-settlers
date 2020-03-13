@@ -151,6 +151,16 @@ const updateGameStatus = async function() {
   }
 };
 
+const update = function(game) {
+  const { bankCards, player, otherPlayers, stage } = game;
+  renderBankCards(bankCards);
+  renderPlayerCards(player);
+  renderPlayersInfo(otherPlayers, player);
+  renderPlayersSettlements(player, otherPlayers);
+  renderPlayersRoads(player, otherPlayers);
+  highlightPlayer(otherPlayers, player);
+};
+
 const render = function(game) {
   const { bankCards, player, otherPlayers } = game;
   renderBankCards(bankCards);
@@ -175,9 +185,9 @@ const loadGame = async function() {
     renderPlayersInfoImgs(game.otherPlayers, game.player);
     setSrcForAction(game.player.color);
     const updateGame = setInterval(async () => {
-      updateGameStatus();
       const res = await fetch('/catan/loadGame');
       const game = await res.json();
+      update(game);
       if (game.player.turn) {
         clearInterval(updateGame);
         setupMode(game.player, game.stage);
