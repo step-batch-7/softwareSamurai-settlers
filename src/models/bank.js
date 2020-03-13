@@ -52,6 +52,16 @@ class Bank {
     }
     return true;
   }
+  getDevCard() {
+    const { developmentCards } = this;
+    const num = Math.floor(Math.random() * 5);
+    const developmentCard = developmentCards[num];
+    const [card] = Object.keys(developmentCard);
+    if (developmentCards[num][card]) {
+      developmentCards[num][card] -= 1;
+      return card;
+    }
+  }
 }
 
 module.exports = { Bank };

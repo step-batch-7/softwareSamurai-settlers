@@ -572,3 +572,32 @@ svg {
 .highlight {
   box-shadow: 5px 1.8px 0px 1px rgba(0, 0, 0, 0.3);
 }
+
+/*--------------------devCardOption-------------------*/
+
+#devCardOptionBox {
+  height: 5.5%;
+  width: 10%;
+  border-radius: 7px;
+  position: absolute;
+  z-index: 1;
+  background: rgba(235, 233, 227, 0.377);
+  margin-left: 55%;
+}
+
+#options {
+  margin-top: 4%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.action {
+  border-radius: 7px;
+  font-size: 17px;
+  width: 29%;
+  background-color: white;
+  cursor: pointer;
+  text-align: center;
+  padding: 4px;
+  font-weight: 200;
+}

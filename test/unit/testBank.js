@@ -1,3 +1,4 @@
+const sinon = require('sinon');
 const { assert } = require('chai');
 
 const { Bank } = require('../../src/models/bank');
@@ -38,6 +39,22 @@ describe('Bank', () => {
       const bank = new Bank();
       bank.remove({ resource: 'lumber', count: 1 });
       assert.isTrue(bank.add({ lumber: 1 }));
+    });
+  });
+
+  describe('getDevCard', () => {
+    it('should return devCard name', () => {
+      const bank = new Bank();
+      sinon.replace(Math, 'random', () => 0);
+      assert.strictEqual(bank.getDevCard(), 'knights');
+      sinon.restore();
+    });
+    it('should return undefined when development cards are empty', () => {
+      const bank = new Bank();
+      sinon.replace(Math, 'random', () => 0);
+      bank.developmentCards[0]['knights'] = 0;
+      assert.isUndefined(bank.getDevCard());
+      sinon.restore();
     });
   });
 });
