@@ -1,6 +1,5 @@
 const { assert } = require('chai');
 const { GameList } = require('../../src/models/gameList');
-const { Game } = require('./../../src/models/game');
 
 describe('GameList', () => {
   describe('generateGameId', () => {
