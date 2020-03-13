@@ -1,32 +1,3 @@
-// const getTerrains = async function() {
-//   const response = await fetch('/catan/terrains', {
-//     credentials: 'include'
-//   });
-// if (response.ok) {
-//   const { terrainsInfo } = await response.json();
-//   const terrains = document.getElementsByClassName('terrain');
-//   Array.from(terrains).forEach(terrain => {
-//     if (terrainsInfo[terrain.id].resource === 'desert') {
-//       const html = `<image class="terrain-image"
-//          xlink:href='/catan/assets/terrains/desert.jpg'
-//         count="${terrainsInfo[terrain.id].noToken}"></image>
-//        <image id="robber"  x='0' y='30'
-//         xlink:href='/catan/assets/robber.png'></image>
-//       `;
-//       terrain.innerHTML += html;
-//       return;
-//     }
-//     const html = `<image class="terrain-image" xlink:href=
-//     '/catan/assets/terrains/${terrainsInfo[terrain.id].resource}.jpg'
-//      count="${terrainsInfo[terrain.id].noToken}"></image>
-//     <circle cx="55" cy="65" r="17" fill="burlywood" opacity="0.7"/>
-//     <text x="45%" y="49%"  class="number-token" >
-//     ${terrainsInfo[terrain.id].noToken}</text>`;
-//     terrain.innerHTML += html;
-//   });
-// }
-// };
-
 const requestSettlement = async function() {
   const response = await fetch('/catan/requestSettlement', {
     credentials: 'include'
@@ -96,7 +67,6 @@ const buildRoad = async function() {
   });
   if (response.ok) {
     appendRoad(pathId);
-    updateGameStatus();
     removeAvailableRoads(buildRoad);
     loadGame();
   }
@@ -113,10 +83,10 @@ const buildRoadWithResources = async function() {
     body: JSON.stringify({ pathId })
   });
   if (response.ok) {
+    removeAvailableRoads(buildRoadWithResources);
     appendRoad(pathId);
     updateGameStatus();
     getBuildStatus();
-    removeAvailableRoads(buildRoadWithResources);
   }
 };
 
@@ -171,9 +141,9 @@ const buildInitialSettlement = async function() {
   if (response.ok) {
     renderNewSettlement(intersection, buildInitialSettlement);
     updateGameStatus();
+    distributeResources();
+    showPossiblePathsForRoadInSetUp();
   }
-  distributeResources();
-  showPossiblePathsForRoadInSetUp();
 };
 
 const buildSettlement = async function() {

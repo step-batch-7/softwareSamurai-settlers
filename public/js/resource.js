@@ -37,13 +37,6 @@ const updateCards = function(parent, resources, devCardsCount) {
   }
 };
 
-const fetchCardsCount = async function() {
-  const res = await fetch('/catan/cardsCount');
-  const body = await res.json();
-  const { resources, totalDevCards } = await body;
-  updateCards('player-cards', resources, totalDevCards);
-};
-
 const updateDicePhase = function(num1, num2) {
   const firstDice = document.querySelector('#dice1 img');
   const secondDice = document.querySelector('#dice2 img');
