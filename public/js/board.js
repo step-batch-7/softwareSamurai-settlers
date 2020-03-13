@@ -288,7 +288,7 @@ const endTurn = async () => {
   if (response.ok) {
     document.getElementById('end-turn').disabled = true;
     const actions = Array.from(document.querySelectorAll('.unit'));
-    actions.forEach(action => {
+    actions.slice(-1).forEach(action => {
       action.style.pointerEvents = 'none';
       action.style.opacity = '0.6';
     });

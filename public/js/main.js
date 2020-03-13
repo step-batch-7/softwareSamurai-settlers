@@ -3,17 +3,21 @@ const hideAllPaths = () => {
   paths.forEach(path => path.classList.add('hide'));
 };
 
-const disableMyTurn = (rollDice, endTurn) => {
+const disableTurn = (rollDice, endTurn) => {
+  const endTurnButton = document.getElementById('end-turn');
   document.getElementById('rollDice').disabled = rollDice;
-  document.getElementById('end-turn').disabled = endTurn;
+  endTurnButton.disabled = endTurn;
+  endTurnButton.style.opacity = endTurn ? '0.6' : '1';
+
 };
 
 const enablePlayerTurn = diceRolledStatus => {
-  disableMyTurn(false, true);
   if (diceRolledStatus) {
-    disableMyTurn(true, false);
+    disableTurn(true, false);
     getBuildStatus();
+    return;
   }
+  disableTurn(false, true);
 };
 
 const requestDiceRolledStatus = async () => {
