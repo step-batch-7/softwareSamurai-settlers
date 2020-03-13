@@ -21,7 +21,8 @@ const {
   serveGameStatus,
   getDiceRolledStatus,
   endTurn,
-  serveLoadGame
+  serveLoadGame,
+  servePossiblePositionsForCity
 } = require('./handlers');
 
 catanRouter.use(ensureGame);
@@ -41,6 +42,7 @@ catanRouter.get(
   '/getPossiblePathsForRoadInSetup',
   servePossiblePathsForRoadInSetup
 );
+catanRouter.get('/possiblePositionsForCity', servePossiblePositionsForCity);
 catanRouter.post('/buildRoad', addRoad);
 catanRouter.post('/buildRoadWithResources', addRoadWithResources);
 catanRouter.get('/diceNumbers', getRandomDiceNum);

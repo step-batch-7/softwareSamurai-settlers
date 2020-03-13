@@ -198,6 +198,11 @@ const serveLoadGame = function(req, res) {
   res.json({ status: game.status(playerId), boardData: game.boardData });
 };
 
+const servePossiblePositionsForCity = function(req, res) {
+  const { game, playerId } = req.app.locals;
+  res.json(game.possibleCities(playerId));
+};
+
 module.exports = {
   getAvailableSettlements,
   buildSettlement,
@@ -222,5 +227,6 @@ module.exports = {
   serveGameStatus,
   getDiceRolledStatus,
   endTurn,
-  serveLoadGame
+  serveLoadGame,
+  servePossiblePositionsForCity
 };

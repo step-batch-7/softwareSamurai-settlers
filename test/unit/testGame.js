@@ -451,3 +451,21 @@ describe('distribute', () => {
     );
   });
 });
+
+describe('possibleCites', () => {
+  it('should give possible positions for building cities for given player id', () => {
+    const game = new Game();
+    const playerId = game.addPlayer('p1');
+    game.buildInitialSettlement('hi', playerId);
+    const actual = game.possibleCities(playerId);
+    const expected = ['hi'];
+    assert.deepStrictEqual(actual, expected);
+  });
+
+  it('should give empty list player id having no place to build a city', () => {
+    const game = new Game();
+    const playerId = game.addPlayer('p1');
+    const actual = game.possibleCities(playerId);
+    assert.deepStrictEqual(actual, []);
+  });
+});

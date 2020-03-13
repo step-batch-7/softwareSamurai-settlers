@@ -264,6 +264,10 @@ class Game {
     this.players[nextPlayerId].startTurn();
     return isEnd;
   }
+
+  possibleCities(playerId) {
+    return this.players[playerId].getSettlements();
+  }
 }
 
 module.exports = { Game };
