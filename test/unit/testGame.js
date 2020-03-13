@@ -469,3 +469,84 @@ describe('possibleCites', () => {
     assert.deepStrictEqual(actual, []);
   });
 });
+
+describe('canBuild', () => {
+  it('Should give true for player having resources to build road', () => {
+    const game = new Game();
+    const playerId = game.addPlayer('John');
+    game.players[playerId].addResources({ resource: 'lumber', count: 1 });
+    game.players[playerId].addResources({ resource: 'brick', count: 1 });
+    const actual = game.canBuild(playerId);
+    const expected = { road: true, settlement: false, city: false };
+    assert.deepStrictEqual(actual, expected);
+  });
+  it('Should give false for player having no resources to build road', () => {
+    const game = new Game();
+    const playerId = game.addPlayer('John');
+    game.players[playerId].addResources({ resource: 'brick', count: 1 });
+    const actual = game.canBuild(playerId);
+    const expected = { road: false, settlement: false, city: false };
+    assert.deepStrictEqual(actual, expected);
+  });
+
+  it('Should give true for player having resources and place to build settlement', () => {
+    const game = new Game();
+    const playerId = game.addPlayer('John');
+    game.addRoad(playerId, 'kl-klr');
+    game.addRoad(playerId, 'klr-lmr');
+    game.players[playerId].addResources({ resource: 'lumber', count: 1 });
+    game.players[playerId].addResources({ resource: 'brick', count: 1 });
+    game.players[playerId].addResources({ resource: 'grain', count: 1 });
+    game.players[playerId].addResources({ resource: 'wool', count: 1 });
+    const actual = game.canBuild(playerId);
+    const expected = { road: true, settlement: true, city: false };
+    assert.deepStrictEqual(actual, expected);
+  });
+  it('Should give false for player having resources but no place to build settlement', () => {
+    const game = new Game();
+    const playerId = game.addPlayer('John');
+    game.players[playerId].addResources({ resource: 'lumber', count: 1 });
+    game.players[playerId].addResources({ resource: 'brick', count: 1 });
+    game.players[playerId].addResources({ resource: 'grain', count: 1 });
+    game.players[playerId].addResources({ resource: 'wool', count: 1 });
+    const actual = game.canBuild(playerId);
+    const expected = { road: true, settlement: false, city: false };
+    assert.deepStrictEqual(actual, expected);
+  });
+  it('Should give false for player having no resources and no place to build settlement', () => {
+    const game = new Game();
+    const playerId = game.addPlayer('John');
+    game.players[playerId].addResources({ resource: 'lumber', count: 1 });
+    const actual = game.canBuild(playerId);
+    const expected = { road: false, settlement: false, city: false };
+    assert.deepStrictEqual(actual, expected);
+  });
+
+  it('Should give true for player having resources and place to build city', () => {
+    const game = new Game();
+    const playerId = game.addPlayer('John');
+    game.buildInitialSettlement('klr', playerId);
+    game.players[playerId].addResources({ resource: 'grain', count: 2 });
+    game.players[playerId].addResources({ resource: 'ore', count: 3 });
+    const actual = game.canBuild(playerId);
+    const expected = { road: false, settlement: false, city: false };
+    assert.deepStrictEqual(actual, expected);
+  });
+  it('Should give false for player having no resources and no place to build city', () => {
+    const game = new Game();
+    const playerId = game.addPlayer('John');
+    game.players[playerId].addResources({ resource: 'lumber', count: 1 });
+    const actual = game.canBuild(playerId);
+    const expected = { road: false, settlement: false, city: false };
+    assert.deepStrictEqual(actual, expected);
+  });
+  it('Should give false for player having resources and no place to build  city', () => {
+    const game = new Game();
+    const playerId = game.addPlayer('John');
+    game.players[playerId].addResources({ resource: 'grain', count: 2 });
+    game.players[playerId].addResources({ resource: 'ore', count: 3 });
+    const actual = game.canBuild(playerId);
+    const expected = { road: false, settlement: false, city: false };
+    assert.deepStrictEqual(actual, expected);
+  });
+});

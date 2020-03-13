@@ -180,11 +180,14 @@ class Game {
     const player = this.players[playerId];
     const canBuildSettlement = player.canBuildSettlement();
     const canBuildRoad = player.canBuildRoad();
+    const canBuildCity = player.canBuildCity();
     const havePositionsToBuildSettlements =
       this.getAvailableAdjSettlements(playerId).length > 0;
+    const havePositionsToBuildCity = this.possibleCities(playerId) > 0;
     return {
       settlement: canBuildSettlement && havePositionsToBuildSettlements,
-      road: canBuildRoad
+      road: canBuildRoad,
+      city: canBuildCity && havePositionsToBuildCity
     };
   }
 
