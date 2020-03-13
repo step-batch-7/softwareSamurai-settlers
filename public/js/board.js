@@ -3,7 +3,7 @@ const getTerrains = async function() {
     credentials: 'include'
   });
   if (response.ok) {
-    const {terrainsInfo, settlements, roads} = await response.json();
+    const { terrainsInfo, settlements, roads } = await response.json();
     const terrains = document.getElementsByClassName('terrain');
     Array.from(terrains).forEach(terrain => {
       if (terrainsInfo[terrain.id].resource === 'desert') {
@@ -92,7 +92,7 @@ const buildRoad = async function() {
       'Content-Type': 'application/json'
     },
     credentials: 'include',
-    body: JSON.stringify({pathId})
+    body: JSON.stringify({ pathId })
   });
   if (response.ok) {
     appendRoad(pathId);
@@ -114,7 +114,7 @@ const buildRoadWithResources = async function() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({pathId})
+    body: JSON.stringify({ pathId })
   });
   if (response.ok) {
     appendRoad(pathId);
@@ -125,7 +125,13 @@ const buildRoadWithResources = async function() {
 };
 
 const addBgColor = function(element, color) {
-  element.style.backgroundColor = color;
+  const colors = {
+    red: 'red',
+    blue: 'blue',
+    yellow: 'rgb(255, 204, 0)',
+    orange: 'rgba(255, 89, 0, 1)'
+  };
+  element.style.backgroundColor = colors[color];
 };
 
 const removeBgColor = function(element) {
@@ -138,7 +144,7 @@ const showPossiblePathsForRoadInSetUp = async function() {
   });
 
   if (response.ok) {
-    const {color, pathIds} = await response.json();
+    const { color, pathIds } = await response.json();
     pathIds.forEach(pathId => {
       const path = document.getElementById(pathId);
       addBgColor(path, color);
@@ -163,7 +169,7 @@ const buildInitialSettlement = async function() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({intersection: intersection.id})
+    body: JSON.stringify({ intersection: intersection.id })
   });
 
   if (response.ok) {
@@ -182,7 +188,7 @@ const buildSettlement = async function() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({intersection: intersection.id})
+    body: JSON.stringify({ intersection: intersection.id })
   });
 
   if (response.ok) {
@@ -204,7 +210,7 @@ const getPossiblePathsForRoad = async function() {
     ) {
       return;
     }
-    const {pathIds, color} = await response.json();
+    const { pathIds, color } = await response.json();
 
     pathIds.forEach(pathId => {
       const path = document.getElementById(pathId);
@@ -215,7 +221,7 @@ const getPossiblePathsForRoad = async function() {
   }
 };
 
-const setSrc = ({element, dirName, color, buildingType, extension}) => {
+const setSrc = ({ element, dirName, color, buildingType, extension }) => {
   element
     .querySelector(`#${buildingType}Img`)
     .setAttribute(
@@ -286,5 +292,6 @@ const endTurn = async () => {
       action.style.pointerEvents = 'none';
       action.style.opacity = '0.6';
     });
+    loadGame();
   }
 };

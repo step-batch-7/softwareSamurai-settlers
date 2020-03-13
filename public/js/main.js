@@ -31,6 +31,9 @@ const requestDiceRolledStatus = async () => {
 const renderRoads = function(roads, color) {
   roads.forEach(road => {
     const path = document.getElementById(road);
+    if (path.querySelector('image')) {
+      return;
+    }
     path.style.opacity = '1';
     path.classList.add('afterRoad');
     const img = `<image href='/catan/assets/roads/${color}-road.svg' 
@@ -47,6 +50,9 @@ const renderPlayersRoads = function(player, otherPlayers) {
 const renderSettlements = function(settlements, color) {
   settlements.forEach(settlement => {
     const intersection = document.getElementById(settlement);
+    if (intersection.querySelector('image')) {
+      return;
+    }
     intersection.classList.add('afterSettlement');
     const imgUrl = `/catan/assets/settlements/${color}-settlement.svg`;
     const img = `<image href='${imgUrl}' style="height:100%; width:100%;">`;
@@ -150,21 +156,29 @@ const updateGame = function() {
   requestDiceRolledStatus();
 };
 
-const loadGameStatus = async function() {
+const loadGame = async function() {
   const response = await fetch('/catan/loadGame');
   if (response.ok) {
     const game = await response.json();
-    setupMode(game.player, game.stage);
-    hideAllPaths();
-    getTerrains();
-    render(game);
+    renderPlayersInfoImgs(game.otherPlayers, game.player);
     setSrcForAction(game.player.color);
-    setInterval(updateGame, 500);
+    const updateGame = setInterval(async () => {
+      updateGameStatus();
+      const res = await fetch('/catan/loadGame');
+      const game = await res.json();
+      if (game.player.turn) {
+        clearInterval(updateGame);
+        setupMode(game.player, game.stage);
+        requestDiceRolledStatus();
+      }
+    }, 500);
   }
 };
 
 const main = () => {
-  loadGameStatus();
+  hideAllPaths();
+  getTerrains();
+  loadGame();
 };
 
 const distributeResources = async () => {

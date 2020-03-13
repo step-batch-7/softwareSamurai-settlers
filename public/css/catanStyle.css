@@ -2,7 +2,8 @@ body {
   width: 99vw;
   height: 98vh;
   font-family: sans-serif;
-  background: rgb(0, 145, 203);
+  background: rgb(0, 148, 210);
+  /* background: rgb(0, 145, 203); */
   background-size: contain;
   overflow: hidden;
 }
@@ -199,8 +200,8 @@ body {
 }
 
 #display {
-  width: 55%;
-  height: 85%;
+  width: 790px;
+  height: 680px;
   display: block;
   position: absolute;
 }

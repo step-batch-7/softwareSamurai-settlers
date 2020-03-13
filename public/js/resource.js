@@ -61,6 +61,7 @@ const resourceProduction = async function(dice1, dice2) {
   if (res.ok) {
     updateGameStatus();
     getBuildStatus();
+    requestDiceRolledStatus();
   }
 };
 
