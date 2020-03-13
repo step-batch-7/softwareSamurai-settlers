@@ -121,7 +121,8 @@ class Player {
       devCardCount: this.devCards.count(),
       victoryPoints: this.victoryPoints - this.devCards.victoryCardsCount,
       army: this.army,
-      longestRoad: this.longestRoad
+      longestRoad: this.longestRoad,
+      turn: this.turn
     };
   }
 
@@ -134,7 +135,6 @@ class Player {
   }
 
   endTurn() {
-
     if (this.turn) {
       this.turn = false;
       return true;

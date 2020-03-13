@@ -299,7 +299,8 @@ describe('status', function() {
           resourceCount: 0,
           roads: [],
           settlements: [],
-          victoryPoints: 0
+          victoryPoints: 0,
+          turn: false
         },
         {
           army: 0,
@@ -310,7 +311,8 @@ describe('status', function() {
           resourceCount: 0,
           roads: [],
           settlements: [],
-          victoryPoints: 0
+          victoryPoints: 0,
+          turn: false
         },
         {
           army: 0,
@@ -321,7 +323,8 @@ describe('status', function() {
           resourceCount: 0,
           roads: [],
           settlements: [],
-          victoryPoints: 0
+          victoryPoints: 0,
+          turn: true
         }
       ],
       player: {
