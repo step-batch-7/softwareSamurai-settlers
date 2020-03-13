@@ -129,10 +129,16 @@ const renderPlayerCards = function(player) {
 
 const highlightPlayer = (otherPlayers, player) => {
   const players = [player, ...otherPlayers];
+  const lastPlayer = document.querySelector('.highlight');
+  if (lastPlayer) {
+    lastPlayer.classList.remove('highlight');
+    lastPlayer.style.backgroundColor = 'rgba(235, 233, 227, 0.377)';
+  }
   players.forEach((player, index) => {
     if (player.turn) {
       const playerElement = document.querySelector(`#player-info${index}`);
       playerElement.style.border = 'none';
+      playerElement.style.backgroundColor = 'rgba(245, 245, 245, 0.8)';
       playerElement.classList.add('highlight');
     }
   });
@@ -182,17 +188,15 @@ const loadGame = async function() {
   const response = await fetch('/catan/loadGame');
   if (response.ok) {
     const game = await response.json();
-    renderPlayersInfoImgs(game.otherPlayers, game.player);
-    setSrcForAction(game.player.color);
     const updateGame = setInterval(async () => {
       const res = await fetch('/catan/loadGame');
       const game = await res.json();
-      update(game);
       if (game.player.turn) {
         clearInterval(updateGame);
         setupMode(game.player, game.stage);
         requestDiceRolledStatus();
       }
+      update(game);
     }, 500);
   }
 };
@@ -200,6 +204,12 @@ const loadGame = async function() {
 const main = () => {
   hideAllPaths();
   getTerrains();
+  (async () => {
+    const res = await fetch('/catan/loadGame');
+    const game = await res.json();
+    renderPlayersInfoImgs(game.otherPlayers, game.player);
+    setSrcForAction(game.player.color);
+  })();
   loadGame();
 };
 
