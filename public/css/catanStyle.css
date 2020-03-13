@@ -258,7 +258,7 @@ svg {
   width: 40%;
   display: flex;
   justify-content: space-evenly;
-  margin-top: 4.5%;
+  margin-top: 2.5%;
 }
 
 .unit {
@@ -267,7 +267,7 @@ svg {
   border: solid 1px;
   margin-top: 19px;
   cursor: pointer;
-  background: rgba(235, 233, 227, 0.377);
+  /* background: rgba(235, 233, 227, 0.377); */
 }
 
 .disabledUnit {
@@ -429,7 +429,6 @@ button {
 .left-top-tilted-road,
 .right-down-tilted-road,
 .left-down-tilted-road {
-  /* background-color: #0b22b9; */
   opacity: 0.3;
   border-radius: 10px;
   text-align: center;
@@ -441,7 +440,6 @@ button {
 }
 
 .road {
-  /* background-color: #0b22b9; */
   opacity: 0.3;
   border-radius: 10px;
   text-align: center;
@@ -572,5 +570,5 @@ svg {
 /*---------------------highlight------------------------*/
 
 .highlight {
-  box-shadow: 5px 3px 0px 3px rgba(0,0,0,0.2);
+  box-shadow: 5px 1.8px 0px 1px rgba(0, 0, 0, 0.3);
 }
