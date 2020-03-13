@@ -206,16 +206,18 @@ const loadGame = function() {
   }, 500);
 };
 
+const loadPage = async function() {
+  const res = await fetch('/catan/loadGame');
+  const { status, boardData } = await res.json();
+  renderBoard(boardData);
+  renderPlayersInfoImgs(status.otherPlayers, status.player);
+  setSrcForAction(status.player.color);
+  loadGame();
+};
+
 const main = () => {
   hideAllPaths();
-  (async () => {
-    const res = await fetch('/catan/loadGame');
-    const { status, boardData } = await res.json();
-    renderBoard(boardData);
-    renderPlayersInfoImgs(status.otherPlayers, status.player);
-    setSrcForAction(status.player.color);
-    loadGame();
-  })();
+  loadPage();
 };
 
 const distributeResources = async () => {

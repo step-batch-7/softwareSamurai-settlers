@@ -68,6 +68,7 @@ const buildRoad = async function() {
   if (response.ok) {
     appendRoad(pathId);
     removeAvailableRoads(buildRoad);
+    updateGameStatus();
     loadGame();
   }
 };
