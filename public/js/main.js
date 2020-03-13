@@ -122,6 +122,17 @@ const renderPlayerCards = function(player) {
   updateCards('player-cards', resources, devCardCount);
 };
 
+const highlightPlayer = (otherPlayers, player) => {
+  const players = [player, ...otherPlayers];
+  players.forEach((player, index) => {
+    if (player.turn) {
+      const playerElement = document.querySelector(`#player-info${index}`);
+      playerElement.style.border = 'none';
+      playerElement.classList.add('highlight');
+    }
+  });
+};
+
 const updateGameStatus = async function() {
   const response = await fetch('/catan/gameStatus');
   if (response.ok) {
@@ -131,6 +142,7 @@ const updateGameStatus = async function() {
     renderPlayersInfo(otherPlayers, player);
     renderPlayersSettlements(player, otherPlayers);
     renderPlayersRoads(player, otherPlayers);
+    highlightPlayer(otherPlayers, player);
   }
 };
 
