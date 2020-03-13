@@ -1,3 +1,10 @@
+const getGameDetails = function(req) {
+  const { gameList, sessions } = req.app.locals;
+  const session = sessions.getSession(req.cookies.sId);
+  const game = gameList.getGame(session.gameId);
+  return { game, playerId: session.playerId };
+};
+
 const getAvailableSettlements = function(req, res) {
   const { game } = req.app.locals;
   const settlements = game.getAvailableSettlements();
@@ -7,33 +14,33 @@ const getAvailableSettlements = function(req, res) {
 const randNum = () => Math.ceil(Math.random() * 6);
 
 const getRandomDiceNum = function(req, res) {
-  const { game } = req.app.locals;
+  const { game } = getGameDetails(req);
   game.toggleDiceRolledStatus();
   res.json({ dice1: randNum(), dice2: randNum() });
 };
 
 const buildSettlement = function(req, res) {
   const { intersection } = req.body;
-  const { game, playerId } = req.app.locals;
+  const { game, playerId } = getGameDetails(req);
   game.buildSettlement(intersection, playerId);
   res.end();
 };
 
 const buildInitialSettlement = function(req, res) {
   const { intersection } = req.body;
-  const { game, playerId } = req.app.locals;
+  const { game, playerId } = getGameDetails(req);
   game.buildInitialSettlement(intersection, playerId);
   res.end();
 };
 
 const addResourcesToPlayer = function(req, res) {
-  const { game, playerId } = req.app.locals;
+  const { game, playerId } = getGameDetails(req);
   game.addResourcesToPlayer(playerId);
   res.end();
 };
 
 const addRoad = function(req, res) {
-  const { game, playerId } = req.app.locals;
+  const { game, playerId } = getGameDetails(req);
   const { pathId } = req.body;
   game.addRoad(playerId, pathId);
   game.passTurn(playerId);
@@ -41,7 +48,7 @@ const addRoad = function(req, res) {
 };
 
 const servePossiblePathsForRoadInSetup = (req, res) => {
-  const { game, playerId } = req.app.locals;
+  const { game, playerId } = getGameDetails(req);
   const possiblePositionsToBuildRoad = game.possiblePathsForSetup(playerId);
   res.json({
     pathIds: possiblePositionsToBuildRoad,
@@ -50,7 +57,7 @@ const servePossiblePathsForRoadInSetup = (req, res) => {
 };
 
 const servePossiblePathsForRoad = (req, res) => {
-  const { game, playerId } = req.app.locals;
+  const { game, playerId } = getGameDetails(req);
   const possiblePaths = game.possiblePaths(playerId);
   res.json({
     pathIds: possiblePaths,
@@ -60,26 +67,26 @@ const servePossiblePathsForRoad = (req, res) => {
 
 const resourceProduction = function(req, res) {
   const { numToken } = req.body;
-  const { game } = req.app.locals;
+  const { game } = getGameDetails(req);
   game.resourceProduction(numToken);
   res.end();
 };
 
 const getBuildStatus = function(req, res) {
-  const { game, playerId } = req.app.locals;
+  const { game, playerId } = getGameDetails(req);
   const buildStatus = game.canBuild(playerId);
   res.json(buildStatus);
 };
 
 const getAvailableAdjSettlements = function(req, res) {
-  const { game, playerId } = req.app.locals;
+  const { game, playerId } = getGameDetails(req);
   const adjSettlements = game.getAvailableAdjSettlements(playerId);
   res.json(adjSettlements);
 };
 
 const addRoadWithResources = function(req, res) {
   const { pathId } = req.body;
-  const { game, playerId } = req.app.locals;
+  const { game, playerId } = getGameDetails(req);
   game.addRoadWithResources(playerId, pathId);
   res.end();
 };
@@ -151,7 +158,8 @@ const hostNewGame = function(req, res) {
 
 const getJoinedPlayerDetails = function(req, res) {
   const { sId } = req.cookies;
-  const { sessions, game } = req.app.locals;
+  const { sessions } = req.app.locals;
+  const { game } = getGameDetails(req);
   const session = sessions.getSession(sId);
   if (session) {
     const playerDetails = game.getPlayerDetails();
@@ -174,12 +182,12 @@ const ensureSession = function(req, res, next) {
 };
 
 const serveGameStatus = function(req, res) {
-  const { game, playerId } = req.app.locals;
+  const { game, playerId } = getGameDetails(req);
   res.json(game.status(playerId));
 };
 
 const getDiceRolledStatus = (req, res) => {
-  const { game, playerId } = req.app.locals;
+  const { game, playerId } = getGameDetails(req);
   const diceRolledStatus = game.getDiceRolledStatus();
   const turn = game.players[playerId].turn;
   const { mode } = game.status(playerId).stage;
@@ -187,19 +195,19 @@ const getDiceRolledStatus = (req, res) => {
 };
 
 const endTurn = (req, res) => {
-  const { game, playerId } = req.app.locals;
+  const { game, playerId } = getGameDetails(req);
   game.toggleDiceRolledStatus();
   game.passTurn(playerId);
   res.end();
 };
 
 const serveLoadGame = function(req, res) {
-  const { game, playerId } = req.app.locals;
+  const { game, playerId } = getGameDetails(req);
   res.json({ status: game.status(playerId), boardData: game.boardData });
 };
 
 const servePossiblePositionsForCity = function(req, res) {
-  const { game, playerId } = req.app.locals;
+  const { game, playerId } = getGameDetails(req);
   res.json(game.possibleCities(playerId));
 };
 
