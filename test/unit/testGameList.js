@@ -1,5 +1,6 @@
 const { assert } = require('chai');
 const { GameList } = require('../../src/models/gameList');
+const { Game } = require('./../../src/models/game');
 
 describe('GameList', () => {
   describe('generateGameId', () => {
@@ -20,7 +21,26 @@ describe('GameList', () => {
   describe('getGame', () => {
     it('should return the game with given id', () => {
       const gameList = new GameList();
-      gameList.getGame(1000);
+      const gameId = gameList.createGame('john');
+      assert.deepStrictEqual(gameList.games[gameId], gameList.getGame(gameId));
+    });
+  });
+
+  describe('isGameAvailable', () => {
+    it('should give true when the game is available', () => {
+      const gameList = new GameList();
+      const gameId = gameList.createGame('john');
+      assert.isTrue(gameList.isGameAvailable(gameId));
+    });
+
+    it('should give false when the game is not available', () => {
+      const gameList = new GameList();
+      const gameId = gameList.createGame('john');
+      gameList.games[gameId].addPlayer('john');
+      gameList.games[gameId].addPlayer('john');
+      gameList.games[gameId].addPlayer('john');
+      gameList.games[gameId].addPlayer('john');
+      assert.isUndefined(gameList.isGameAvailable(gameId));
     });
   });
 });

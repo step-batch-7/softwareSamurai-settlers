@@ -1,6 +1,6 @@
-const {assert} = require('chai');
+const { assert } = require('chai');
 const sinon = require('sinon');
-const {Player} = require('../../src/models/player');
+const { Player } = require('../../src/models/player');
 
 describe('Player', () => {
   describe('cardsCount', () => {
@@ -29,7 +29,7 @@ describe('Player', () => {
   describe('addResources', () => {
     it('should add given resources to existing resources and return true for valid resources', () => {
       const player = new Player();
-      assert.isTrue(player.addResources({resource: 'wool', count: 2}));
+      assert.isTrue(player.addResources({ resource: 'wool', count: 2 }));
     });
 
     it('should not add given resources if given resources is undefined', () => {
@@ -53,18 +53,18 @@ describe('Player', () => {
   describe('canBuildSettlement', () => {
     it('should give true if player has resources to build settlement', () => {
       const player = new Player();
-      player.addResources({resource: 'wool', count: 2});
-      player.addResources({resource: 'brick', count: 2});
-      player.addResources({resource: 'lumber', count: 2});
-      player.addResources({resource: 'grain', count: 2});
+      player.addResources({ resource: 'wool', count: 2 });
+      player.addResources({ resource: 'brick', count: 2 });
+      player.addResources({ resource: 'lumber', count: 2 });
+      player.addResources({ resource: 'grain', count: 2 });
       assert.isTrue(player.canBuildSettlement());
     });
 
     it('should give false if player has resources to build settlement', () => {
       const player = new Player();
-      player.addResources({resource: 'wool', count: 2});
-      player.addResources({resource: 'brick', count: 2});
-      player.addResources({resource: 'lumber', count: 2});
+      player.addResources({ resource: 'wool', count: 2 });
+      player.addResources({ resource: 'brick', count: 2 });
+      player.addResources({ resource: 'lumber', count: 2 });
       assert.isFalse(player.canBuildSettlement());
     });
   });
@@ -72,10 +72,10 @@ describe('Player', () => {
   describe('deductCardsForSettlement', () => {
     it('should deduct the cards needed to build settlement', () => {
       const player = new Player();
-      player.addResources({resource: 'wool', count: 1});
-      player.addResources({resource: 'brick', count: 1});
-      player.addResources({resource: 'lumber', count: 1});
-      player.addResources({resource: 'grain', count: 2});
+      player.addResources({ resource: 'wool', count: 1 });
+      player.addResources({ resource: 'brick', count: 1 });
+      player.addResources({ resource: 'lumber', count: 1 });
+      player.addResources({ resource: 'grain', count: 2 });
       player.deductCardsForSettlement();
       assert.equal(player.resources.grain, 1);
       assert.equal(player.resources.lumber, 0);
@@ -86,16 +86,16 @@ describe('Player', () => {
   describe('addRoad', () => {
     it('should give true if the road is present', () => {
       const player = new Player();
-      player.addResources({resource: 'brick', count: 1});
-      player.addResources({resource: 'lumber', count: 1});
+      player.addResources({ resource: 'brick', count: 1 });
+      player.addResources({ resource: 'lumber', count: 1 });
       assert.isTrue(player.addRoad('a1-al'));
       assert.deepStrictEqual(player.roads, ['a1-al']);
     });
 
     it('should give false if road is not present', () => {
       const player = new Player();
-      player.addResources({resource: 'brick', count: 1});
-      player.addResources({resource: 'lumber', count: 1});
+      player.addResources({ resource: 'brick', count: 1 });
+      player.addResources({ resource: 'lumber', count: 1 });
       assert.isFalse(player.addRoad());
       assert.deepStrictEqual(player.roads, []);
     });
@@ -123,6 +123,31 @@ describe('Player', () => {
       sinon.replace(player, 'getSettlements', () => []);
       const actual = player.getLastSettlementTerrains();
       assert.deepStrictEqual(actual, []);
+    });
+  });
+
+  describe('deductCardsForRoad', function() {
+    it('should give true when the cards for road are deducted', function() {
+      const player = new Player();
+      player.addResources({ resource: 'lumber', count: 1 });
+      player.addResources({ resource: 'brick', count: 1 });
+      assert.isTrue(player.deductCardsForRoad());
+    });
+    it('should give false when the cards for road are not deducted', function() {
+      const player = new Player();
+      assert.isFalse(player.deductCardsForRoad());
+    });
+  });
+
+  describe('startTurn', function() {
+    it('should toggle the players turn status', function() {
+      const player = new Player();
+      assert.isTrue(player.startTurn());
+    });
+    it('should toggle the players turn status', function() {
+      const player = new Player();
+      player.startTurn();
+      assert.isFalse(player.startTurn());
     });
   });
 });

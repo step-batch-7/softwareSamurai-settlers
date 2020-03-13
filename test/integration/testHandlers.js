@@ -225,4 +225,40 @@ describe('Handlers', () => {
         .expect(200, done);
     });
   });
+  context('Post /buildRoadWithResources', () => {
+    it('should add road using resources', done => {
+      request(app)
+        .post('/catan/buildRoadWithResources')
+        .send('k1-k2')
+        .expect(200, done);
+    });
+  });
+  context('get /serveLoadGame', () => {
+    it('should give the current game status', done => {
+      request(app)
+        .get('/catan/loadGame')
+        .expect(200, done);
+    });
+  });
+  context('get /endTurn', () => {
+    it('should end the turn of the player', done => {
+      request(app)
+        .get('/catan/endTurn')
+        .expect(200, done);
+    });
+  });
+  context('post /joinGame', () => {
+    it('should join game when the game is not started', done => {
+      const game = new Game();
+      game.addPlayer('virat');
+      game.addPlayer('rohit');
+      game.addPlayer('shikhar');
+      game.addPlayer('dhoni');
+      sinon.replace(app.locals, 'game', game);
+      app.locals.playerId = 1;
+      request(app)
+        .get('/catan/endTurn')
+        .expect(200, done);
+    });
+  });
 });

@@ -1,7 +1,7 @@
-const {assert} = require('chai');
+const { assert } = require('chai');
 const sinon = require('sinon');
-const {Game} = require('../../src/models/game');
-const {Player} = require('../../src/models/player');
+const { Game } = require('../../src/models/game');
+const { Player } = require('../../src/models/player');
 
 describe('Game', () => {
   describe('cardsCount', () => {
@@ -214,7 +214,7 @@ describe('Game', () => {
     it('should get player details of single player', () => {
       const game = new Game();
       game.addPlayer('virat');
-      assert.deepStrictEqual({blue: 'virat'}, game.getPlayerDetails());
+      assert.deepStrictEqual({ blue: 'virat' }, game.getPlayerDetails());
     });
   });
   describe('build settlement', () => {
@@ -226,7 +226,7 @@ describe('Game', () => {
         p3: new Player('p3'),
         p4: new Player('p4')
       };
-      players['p2'].resources = {deduct: sinon.stub().returns(true)};
+      players['p2'].resources = { deduct: sinon.stub().returns(true) };
       sinon.replace(game, 'players', players);
       assert.isTrue(game.buildSettlement('kl', 'p2'));
     });
@@ -375,5 +375,76 @@ describe('passTurn', () => {
     game.addPlayer('shikhar');
     game.addPlayer('dhoni');
     assert.isFalse(game.passTurn('2'));
+  });
+});
+
+describe('addRoadWithResources', () => {
+  it('should add road and deduct resources of given player', () => {
+    const game = new Game();
+    game.addPlayer('john');
+    game.players['1'].addResources({ resource: 'lumber', count: 1 });
+    game.players['1'].addResources({ resource: 'brick', count: 1 });
+    assert.isTrue(game.addRoadWithResources('1', 'k1-k9'));
+  });
+});
+
+describe('passTurn', () => {
+  it('should change to normal mode when setup mode is done', () => {
+    const game = new Game();
+    game.addPlayer('1');
+    game.addPlayer('2');
+    game.addPlayer('3');
+    game.addPlayer('4');
+    sinon.replace(game.turn, 'changeTurn', () => false);
+    game.passTurn('1');
+    assert.deepEqual(game.stage.mode, 'normal');
+  });
+});
+
+describe('distribute', () => {
+  it('should distribute specified Cards from bank to all players', () => {
+    const game = new Game();
+    game.addPlayer('1');
+    game.distribute(game.players['1'], [
+      {
+        resource: 'lumber',
+        count: 1
+      },
+      { resource: 'ore', count: 2 }
+    ]);
+    const bank = {
+      brick: 19,
+      developmentCards: 25,
+      grain: 19,
+      lumber: 18,
+      ore: 17,
+      wool: 19
+    };
+    const player = {
+      devCards: {
+        knight: 0,
+        monoPoly: 0,
+        roadBuilding: 0,
+        yearOfPlenty: 0
+      },
+      resources: {
+        brick: 0,
+        grain: 0,
+        lumber: 1,
+        ore: 2,
+        wool: 0
+      },
+      totalDevCards: 0
+    };
+    assert.deepStrictEqual(game.cardsCount('1'), player);
+    assert.deepStrictEqual(game.bankStatus(), bank);
+  });
+  it('should not add to player when bank has no resources', () => {
+    const game = new Game();
+    game.addPlayer('1');
+    sinon.replace(game.bank, 'haveResource', () => false);
+    assert.isFalse(
+      game.distribute(game.players['1'], [{ resource: 'brick', count: 1 }])
+    );
   });
 });
