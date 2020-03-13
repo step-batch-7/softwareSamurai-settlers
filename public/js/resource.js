@@ -66,14 +66,13 @@ const updateBuildingStatus = function(status, buildingId) {
   document.getElementById(buildingId).classList.add('disabledUnit');
 };
 
-const getBuildStatus = async function() {
-  const res = await fetch('/catan/buildStatus');
-  if (res.ok) {
-    const { settlement, road } = await res.json();
-
-    updateBuildingStatus(settlement, 'settlement');
-    updateBuildingStatus(road, 'road');
-  }
+const getBuildStatus = function() {
+  fetch('/catan/buildStatus')
+    .then(res => res.json())
+    .then(({ settlement, road }) => {
+      updateBuildingStatus(settlement, 'settlement');
+      updateBuildingStatus(road, 'road');
+    });
 };
 
 const showDicePhase = async function() {
@@ -84,4 +83,13 @@ const showDicePhase = async function() {
   document.getElementById('rollDice').disabled = true;
   document.getElementById('end-turn').disabled = false;
   resourceProduction(dice1, dice2);
+};
+
+const distributeResources = async () => {
+  const response = await fetch('/catan/addResourcesToPlayer', {
+    method: 'POST'
+  });
+  if (response.ok) {
+    updateGameStatus();
+  }
 };

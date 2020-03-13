@@ -1,28 +1,76 @@
-const hideAllPaths = () => {
-  const paths = Array.from(document.querySelectorAll('.path'));
-  paths.forEach(path => path.classList.add('hide'));
+const makeNormal = buildingType => {
+  const element = document.getElementById(buildingType);
+  element.style.transform = 'scale(1)';
 };
 
-const renderBoard = function(boardData) {
-  const terrains = document.getElementsByClassName('terrain');
-  Array.from(terrains).forEach(terrain => {
-    if (boardData[terrain.id].resource === 'desert') {
-      const html = `<image class="terrain-image"
-           xlink:href='/catan/assets/terrains/desert.jpg'
-          count="${boardData[terrain.id].noToken}"></image>
-         <image id="robber"  x='0' y='30'  
-          xlink:href='/catan/assets/robber.png'></image>
-        `;
-      terrain.innerHTML += html;
-      return;
-    }
-    const html = `<image class="terrain-image" xlink:href=
-      '/catan/assets/terrains/${boardData[terrain.id].resource}.jpg'
-       count="${boardData[terrain.id].noToken}"></image>
-      <circle cx="55" cy="65" r="17" fill="burlywood" opacity="0.7"/>
-      <text x="45%" y="49%"  class="number-token" >
-      ${boardData[terrain.id].noToken}</text>`;
-    terrain.innerHTML += html;
+const makeBig = buildingType => {
+  const element = document.getElementById(buildingType);
+
+  if (!Array.from(element.classList).includes('disabledUnit')) {
+    element.style.transform = 'scale(1.03)';
+  }
+};
+
+const setSrc = ({ element, dirName, color, buildingType, extension }) => {
+  element
+    .querySelector(`#${buildingType}Img`)
+    .setAttribute(
+      'src',
+      `/catan/assets/${dirName}/${color}-${buildingType}.${extension}`
+    );
+};
+
+const setSrcForAction = color => {
+  const element = document.getElementById('actions');
+  setSrc({
+    element,
+    dirName: 'roads',
+    color: color,
+    buildingType: 'road',
+    extension: 'svg'
+  });
+  setSrc({
+    element,
+    dirName: 'settlements',
+    color: color,
+    buildingType: 'settlement',
+    extension: 'svg'
+  });
+};
+
+const renderPlayersInfoImgs = (otherPlayers, player) => {
+  const players = [player, ...otherPlayers];
+  players.forEach((player, index) => {
+    const element = document.getElementById(`player-info${index}`);
+    element.querySelector('#playerName').innerText = player.name;
+    setSrc({
+      element,
+      dirName: 'roads',
+      color: player.color,
+      buildingType: 'road',
+      extension: 'svg'
+    });
+    setSrc({
+      element,
+      dirName: 'settlements',
+      color: player.color,
+      buildingType: 'settlement',
+      extension: 'svg'
+    });
+    setSrc({
+      element,
+      dirName: 'cities',
+      color: player.color,
+      buildingType: 'city',
+      extension: 'svg'
+    });
+    setSrc({
+      element,
+      dirName: 'players',
+      color: player.color,
+      buildingType: 'player',
+      extension: 'png'
+    });
   });
 };
 
@@ -44,18 +92,6 @@ const enablePlayerTurn = diceRolledStatus => {
   disableTurn(false, true);
 };
 
-const requestDiceRolledStatus = async () => {
-  const response = await fetch('/catan/diceRolledStatus');
-  if (response.ok) {
-    const { diceRolledStatus, turn, mode } = await response.json();
-    if (turn && mode === 'normal') {
-      enablePlayerTurn(diceRolledStatus);
-      return;
-    }
-    disableTurn(true, true);
-  }
-};
-
 const renderRoads = function(roads, color) {
   roads.forEach(road => {
     const path = document.getElementById(road);
@@ -68,11 +104,6 @@ const renderRoads = function(roads, color) {
     class="road-image">`;
     path.innerHTML = img;
   });
-};
-
-const renderPlayersRoads = function(player, otherPlayers) {
-  const players = [player, ...otherPlayers];
-  players.forEach(player => renderRoads(player.roads, player.color));
 };
 
 const renderSettlements = function(settlements, color) {
@@ -88,18 +119,11 @@ const renderSettlements = function(settlements, color) {
   });
 };
 
-const renderPlayersSettlements = function(player, otherPlayers) {
-  const players = [player, ...otherPlayers];
-  players.forEach(player =>
-    renderSettlements(player.settlements, player.color)
-  );
-};
-
 const getRemainingCount = function(asset, maxCount) {
   return maxCount - asset.length;
 };
 
-const renderPlayerInfo1 = function(playerElement, player) {
+const renderPlayerInfo = function(playerElement, player) {
   const {
     resourceCount,
     devCardCount,
@@ -128,26 +152,6 @@ const renderPlayerInfo1 = function(playerElement, player) {
   ).innerText = getRemainingCount([], 4);
 };
 
-const renderPlayersInfo = function(otherPlayers, player) {
-  if (!player.turn) {
-    document.getElementById('rollDice').disabled = true;
-  }
-  const players = [player, ...otherPlayers];
-  players.forEach((player, index) => {
-    const playerElement = document.querySelector(`#player-info${index}`);
-    renderPlayerInfo1(playerElement, player);
-  });
-};
-
-const renderBankCards = function(bankCards) {
-  updateCards('bank', bankCards);
-};
-
-const renderPlayerCards = function(player) {
-  const { resources, devCardCount } = player;
-  updateCards('player-cards', resources, devCardCount);
-};
-
 const highlightPlayer = (otherPlayers, player) => {
   const players = [player, ...otherPlayers];
   const lastPlayer = document.querySelector('.highlight');
@@ -165,6 +169,62 @@ const highlightPlayer = (otherPlayers, player) => {
   });
 };
 
+const endTurn = () => {
+  fetch('/catan/endTurn').then(res => {
+    document.getElementById('end-turn').disabled = true;
+    const actions = Array.from(document.querySelectorAll('.unit'));
+    actions.slice(0, -1).forEach(action => {
+      action.style.pointerEvents = 'none';
+      action.style.opacity = '0.6';
+    });
+    loadGame();
+  });
+};
+
+const requestDiceRolledStatus = async () => {
+  const response = await fetch('/catan/diceRolledStatus');
+  if (response.ok) {
+    const { diceRolledStatus, turn, mode } = await response.json();
+    if (turn && mode === 'normal') {
+      enablePlayerTurn(diceRolledStatus);
+      return;
+    }
+    disableTurn(true, true);
+  }
+};
+
+const renderPlayersRoads = function(player, otherPlayers) {
+  const players = [player, ...otherPlayers];
+  players.forEach(player => renderRoads(player.roads, player.color));
+};
+
+const renderPlayersSettlements = function(player, otherPlayers) {
+  const players = [player, ...otherPlayers];
+  players.forEach(player =>
+    renderSettlements(player.settlements, player.color)
+  );
+};
+
+const renderPlayersInfo = function(otherPlayers, player) {
+  if (!player.turn) {
+    document.getElementById('rollDice').disabled = true;
+  }
+  const players = [player, ...otherPlayers];
+  players.forEach((player, index) => {
+    const playerElement = document.querySelector(`#player-info${index}`);
+    renderPlayerInfo(playerElement, player);
+  });
+};
+
+const renderBankCards = function(bankCards) {
+  updateCards('bank', bankCards);
+};
+
+const renderPlayerCards = function(player) {
+  const { resources, devCardCount } = player;
+  updateCards('player-cards', resources, devCardCount);
+};
+
 const render = function(game) {
   const { bankCards, player, otherPlayers } = game;
   renderBankCards(bankCards);
@@ -175,12 +235,12 @@ const render = function(game) {
   highlightPlayer(otherPlayers, player);
 };
 
-const updateGameStatus = async function() {
-  const res = await fetch('/catan/gameStatus');
-  if (res.ok) {
-    const game = await res.json();
-    render(game);
-  }
+const updateGameStatus = function() {
+  fetch('/catan/gameStatus')
+    .then(res => res.json())
+    .then(game => {
+      render(game);
+    });
 };
 
 const setupMode = function(player, stage) {
@@ -194,50 +254,32 @@ const setupMode = function(player, stage) {
 };
 
 const loadGame = function() {
-  const updateGame = setInterval(async () => {
-    const res = await fetch('/catan/gameStatus');
-    const game = await res.json();
-    if (game.player.turn) {
-      clearInterval(updateGame);
-      setupMode(game.player, game.stage);
-      requestDiceRolledStatus();
-    }
-    render(game);
-  }, 500);
+  const updateGame = setInterval(() => {
+    fetch('/catan/gameStatus')
+      .then(res => res.json())
+      .then(game => {
+        if (game.player.turn) {
+          clearInterval(updateGame);
+          setupMode(game.player, game.stage);
+          requestDiceRolledStatus();
+        }
+        render(game);
+      });
+  }, 1000);
 };
 
-const loadPage = async function() {
-  const res = await fetch('/catan/loadGame');
-  const { status, boardData } = await res.json();
-  renderBoard(boardData);
-  renderPlayersInfoImgs(status.otherPlayers, status.player);
-  setSrcForAction(status.player.color);
-  loadGame();
+const loadPage = function() {
+  fetch('/catan/loadGame')
+    .then(res => res.json())
+    .then(({ status, boardData }) => {
+      renderBoard(boardData);
+      renderPlayersInfoImgs(status.otherPlayers, status.player);
+      setSrcForAction(status.player.color);
+      loadGame();
+    });
 };
 
 const main = () => {
   hideAllPaths();
   loadPage();
-};
-
-const distributeResources = async () => {
-  const response = await fetch('/catan/addResourcesToPlayer', {
-    method: 'POST'
-  });
-  if (response.ok) {
-    updateGameStatus();
-  }
-};
-
-const makeNormal = buildingType => {
-  const element = document.getElementById(buildingType);
-  element.style.transform = 'scale(1)';
-};
-
-const makeBig = buildingType => {
-  const element = document.getElementById(buildingType);
-
-  if (!Array.from(element.classList).includes('disabledUnit')) {
-    element.style.transform = 'scale(1.03)';
-  }
 };

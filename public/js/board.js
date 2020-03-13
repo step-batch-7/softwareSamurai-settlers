@@ -1,30 +1,29 @@
-const requestSettlement = async function() {
-  const response = await fetch('/catan/requestSettlement', {
-    credentials: 'include'
+const renderBoard = function(boardData) {
+  const terrains = document.getElementsByClassName('terrain');
+  Array.from(terrains).forEach(terrain => {
+    if (boardData[terrain.id].resource === 'desert') {
+      const html = `<image class="terrain-image"
+           xlink:href='/catan/assets/terrains/desert.jpg'
+          count="${boardData[terrain.id].noToken}"></image>
+         <image id="robber"  x='0' y='30'  
+          xlink:href='/catan/assets/robber.png'></image>
+        `;
+      terrain.innerHTML += html;
+      return;
+    }
+    const html = `<image class="terrain-image" xlink:href=
+      '/catan/assets/terrains/${boardData[terrain.id].resource}.jpg'
+       count="${boardData[terrain.id].noToken}"></image>
+      <circle cx="55" cy="65" r="17" fill="burlywood" opacity="0.7"/>
+      <text x="45%" y="49%"  class="number-token" >
+      ${boardData[terrain.id].noToken}</text>`;
+    terrain.innerHTML += html;
   });
-  if (response.ok) {
-    const positions = await response.json();
-
-    positions.forEach(position => {
-      const intersection = document.getElementById(position);
-      intersection.classList.add('visibleIntersection');
-      intersection.addEventListener('click', buildSettlement, false);
-    });
-  }
 };
 
-const requestInitialSettlement = async function() {
-  const response = await fetch('/catan/requestInitialSettlement', {
-    credentials: 'include'
-  });
-  if (response.ok) {
-    const positions = await response.json();
-    positions.forEach(position => {
-      const intersection = document.getElementById(position);
-      intersection.classList.add('visibleIntersection');
-      intersection.addEventListener('click', buildInitialSettlement, false);
-    });
-  }
+const hideAllPaths = () => {
+  const paths = Array.from(document.querySelectorAll('.path'));
+  paths.forEach(path => path.classList.add('hide'));
 };
 
 const removeAvailableSettlements = function(buildingFunction) {
@@ -55,40 +54,11 @@ const appendRoad = function(pathId) {
   hideAllPaths();
 };
 
-const buildRoad = async function() {
-  const pathId = event.target.id;
-  const response = await fetch('/catan/buildRoad', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    credentials: 'include',
-    body: JSON.stringify({ pathId })
-  });
-  if (response.ok) {
-    appendRoad(pathId);
-    removeAvailableRoads(buildRoad);
-    updateGameStatus();
-    loadGame();
-  }
-};
-
-const buildRoadWithResources = async function() {
-  const pathId = event.target.id;
-  const response = await fetch('/catan/buildRoadWithResources', {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ pathId })
-  });
-  if (response.ok) {
-    removeAvailableRoads(buildRoadWithResources);
-    appendRoad(pathId);
-    updateGameStatus();
-    getBuildStatus();
-  }
+const renderNewSettlement = function(intersection, buildingFunction) {
+  removeAvailableSettlements(buildingFunction);
+  intersection.classList.remove('point');
+  intersection.classList.remove('visibleIntersection');
+  intersection.classList.add('afterSettlement');
 };
 
 const addBgColor = function(element, color) {
@@ -105,161 +75,118 @@ const removeBgColor = function(element) {
   element.style.backgroundColor = 'transparent';
 };
 
-const showPossiblePathsForRoadInSetUp = async function() {
-  const response = await fetch('/catan/getPossiblePathsForRoadInSetup', {
-    credentials: 'include'
-  });
-
-  if (response.ok) {
-    const { color, pathIds } = await response.json();
-    pathIds.forEach(pathId => {
-      const path = document.getElementById(pathId);
-      addBgColor(path, color);
-      path.classList.remove('hide');
-      path.addEventListener('click', buildRoad);
+const requestSettlement = function() {
+  fetch('/catan/requestSettlement')
+    .then(res => res.json())
+    .then(positions => {
+      positions.forEach(position => {
+        const intersection = document.getElementById(position);
+        intersection.classList.add('visibleIntersection');
+        intersection.addEventListener('click', buildSettlement, false);
+      });
     });
-  }
 };
 
-const renderNewSettlement = function(intersection, buildingFunction) {
-  removeAvailableSettlements(buildingFunction);
-  intersection.classList.remove('point');
-  intersection.classList.remove('visibleIntersection');
-  intersection.classList.add('afterSettlement');
+const requestInitialSettlement = function() {
+  fetch('/catan/requestInitialSettlement')
+    .then(res => res.json())
+    .then(positions => {
+      positions.forEach(position => {
+        const intersection = document.getElementById(position);
+        intersection.classList.add('visibleIntersection');
+        intersection.addEventListener('click', buildInitialSettlement, false);
+      });
+    });
 };
 
-const buildInitialSettlement = async function() {
-  const intersection = event.target;
-  const response = await fetch('/catan/buildInitialSettlement', {
+const getPossiblePathsForRoad = function() {
+  fetch('/catan/getPossiblePathsForRoad')
+    .then(res => res.json())
+    .then(({ pathIds, color }) => {
+      if (document.querySelector('#road').classList.contains('disabledUnit')) {
+        return;
+      }
+      pathIds.forEach(pathId => {
+        const path = document.getElementById(pathId);
+        addBgColor(path, color);
+        path.classList.remove('hide');
+        path.addEventListener('click', buildRoadWithResources);
+      });
+    });
+};
+
+const showPossiblePathsForRoadInSetUp = function() {
+  fetch('/catan/getPossiblePathsForRoadInSetup')
+    .then(res => res.json())
+    .then(({ color, pathIds }) => {
+      pathIds.forEach(pathId => {
+        const path = document.getElementById(pathId);
+        addBgColor(path, color);
+        path.classList.remove('hide');
+        path.addEventListener('click', buildRoad);
+      });
+    });
+};
+
+const buildRoad = function() {
+  const pathId = event.target.id;
+  fetch('/catan/buildRoad', {
     method: 'POST',
-    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ pathId })
+  }).then(() => {
+    appendRoad(pathId);
+    removeAvailableRoads(buildRoad);
+    updateGameStatus();
+    loadGame();
+  });
+};
+
+const buildRoadWithResources = function() {
+  const pathId = event.target.id;
+  fetch('/catan/buildRoadWithResources', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ pathId })
+  }).then(() => {
+    removeAvailableRoads(buildRoadWithResources);
+    appendRoad(pathId);
+    updateGameStatus();
+    getBuildStatus();
+  });
+};
+
+const buildInitialSettlement = function() {
+  const intersection = event.target;
+  fetch('/catan/buildInitialSettlement', {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ intersection: intersection.id })
-  });
-
-  if (response.ok) {
+  }).then(() => {
     renderNewSettlement(intersection, buildInitialSettlement);
     updateGameStatus();
     distributeResources();
     showPossiblePathsForRoadInSetUp();
-  }
+  });
 };
 
-const buildSettlement = async function() {
+const buildSettlement = function() {
   const intersection = event.target;
-  const response = await fetch('/catan/buildSettlement', {
+  fetch('/catan/buildSettlement', {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ intersection: intersection.id })
-  });
-
-  if (response.ok) {
+  }).then(() => {
     renderNewSettlement(intersection, buildSettlement);
     updateGameStatus();
     getBuildStatus();
-  }
-};
-
-const getPossiblePathsForRoad = async function() {
-  const response = await fetch('/catan/getPossiblePathsForRoad', {
-    credentials: 'include'
   });
-  if (response.ok) {
-    if (
-      Array.from(document.getElementById('road').classList).includes(
-        'disabledUnit'
-      )
-    ) {
-      return;
-    }
-    const { pathIds, color } = await response.json();
-
-    pathIds.forEach(pathId => {
-      const path = document.getElementById(pathId);
-      addBgColor(path, color);
-      path.classList.remove('hide');
-      path.addEventListener('click', buildRoadWithResources);
-    });
-  }
-};
-
-const setSrc = ({ element, dirName, color, buildingType, extension }) => {
-  element
-    .querySelector(`#${buildingType}Img`)
-    .setAttribute(
-      'src',
-      `/catan/assets/${dirName}/${color}-${buildingType}.${extension}`
-    );
-};
-
-const setSrcForAction = color => {
-  const element = document.getElementById('actions');
-  setSrc({
-    element,
-    dirName: 'roads',
-    color: color,
-    buildingType: 'road',
-    extension: 'svg'
-  });
-  setSrc({
-    element,
-    dirName: 'settlements',
-    color: color,
-    buildingType: 'settlement',
-    extension: 'svg'
-  });
-};
-
-const renderPlayersInfoImgs = (otherPlayers, player) => {
-  const players = [player, ...otherPlayers];
-  players.forEach((player, index) => {
-    const element = document.getElementById(`player-info${index}`);
-    element.querySelector('#playerName').innerText = player.name;
-    setSrc({
-      element,
-      dirName: 'roads',
-      color: player.color,
-      buildingType: 'road',
-      extension: 'svg'
-    });
-    setSrc({
-      element,
-      dirName: 'settlements',
-      color: player.color,
-      buildingType: 'settlement',
-      extension: 'svg'
-    });
-    setSrc({
-      element,
-      dirName: 'cities',
-      color: player.color,
-      buildingType: 'city',
-      extension: 'svg'
-    });
-    setSrc({
-      element,
-      dirName: 'players',
-      color: player.color,
-      buildingType: 'player',
-      extension: 'png'
-    });
-  });
-};
-
-const endTurn = async () => {
-  const response = await fetch('/catan/endTurn');
-  if (response.ok) {
-    document.getElementById('end-turn').disabled = true;
-    const actions = Array.from(document.querySelectorAll('.unit'));
-    actions.slice(0, -1).forEach(action => {
-      action.style.pointerEvents = 'none';
-      action.style.opacity = '0.6';
-    });
-    loadGame();
-  }
 };
