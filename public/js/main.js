@@ -168,11 +168,6 @@ const setupMode = function(player, stage) {
   }
 };
 
-const updateGame = function() {
-  updateGameStatus();
-  requestDiceRolledStatus();
-};
-
 const loadGame = async function() {
   const response = await fetch('/catan/loadGame');
   if (response.ok) {

@@ -99,10 +99,7 @@ const buildRoad = async function() {
     updateGameStatus();
     getBuildStatus();
     removeAvailableRoads(buildRoad);
-    const stage = await response.json();
-    if (stage.mode === 'setup') {
-      endTurn();
-    }
+    loadGame();
   }
 };
 
