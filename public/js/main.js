@@ -8,7 +8,6 @@ const disableTurn = (rollDice, endTurn) => {
   document.getElementById('rollDice').disabled = rollDice;
   endTurnButton.disabled = endTurn;
   endTurnButton.style.opacity = endTurn ? '0.6' : '1';
-
 };
 
 const enablePlayerTurn = diceRolledStatus => {
@@ -28,7 +27,7 @@ const requestDiceRolledStatus = async () => {
       enablePlayerTurn(diceRolledStatus);
       return;
     }
-    disableMyTurn(true, true);
+    disableTurn(true, true);
   }
 };
 
