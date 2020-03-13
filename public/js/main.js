@@ -5,7 +5,9 @@ const hideAllPaths = () => {
 
 const disableTurn = (rollDice, endTurn) => {
   const endTurnButton = document.getElementById('end-turn');
-  document.getElementById('rollDice').disabled = rollDice;
+  const rollDiceButton = document.getElementById('rollDice')
+  rollDiceButton.disabled = rollDice;
+  rollDiceButton.style.pointerEvents = rollDice ? 'none' : 'auto';
   endTurnButton.disabled = endTurn;
   endTurnButton.style.opacity = endTurn ? '0.6' : '1';
 };
