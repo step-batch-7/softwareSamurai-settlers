@@ -5,8 +5,6 @@ const {
   getBuildStatus,
   getAvailableSettlements,
   getAvailableAdjSettlements,
-  getBankStatus,
-  getCardsCount,
   resourceProduction,
   buildInitialSettlement,
   buildSettlement,
@@ -34,10 +32,8 @@ catanRouter.use(express.static('public'));
 catanRouter.get('/buildStatus', getBuildStatus);
 catanRouter.get('/requestInitialSettlement', getAvailableSettlements);
 catanRouter.get('/requestSettlement', getAvailableAdjSettlements);
-catanRouter.get('/cardsCount', getCardsCount);
 catanRouter.get('/diceRolledStatus', getDiceRolledStatus);
 catanRouter.post('/resourceProduction', resourceProduction);
-catanRouter.get('/bankStatus', getBankStatus);
 catanRouter.post('/buildSettlement', buildSettlement);
 catanRouter.post('/buildInitialSettlement', buildInitialSettlement);
 catanRouter.get('/getPossiblePathsForRoad', servePossiblePathsForRoad);

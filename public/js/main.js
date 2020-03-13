@@ -3,6 +3,29 @@ const hideAllPaths = () => {
   paths.forEach(path => path.classList.add('hide'));
 };
 
+const renderBoard = function(boardData) {
+  const terrains = document.getElementsByClassName('terrain');
+  Array.from(terrains).forEach(terrain => {
+    if (boardData[terrain.id].resource === 'desert') {
+      const html = `<image class="terrain-image"
+           xlink:href='/catan/assets/terrains/desert.jpg'
+          count="${boardData[terrain.id].noToken}"></image>
+         <image id="robber"  x='0' y='30'  
+          xlink:href='/catan/assets/robber.png'></image>
+        `;
+      terrain.innerHTML += html;
+      return;
+    }
+    const html = `<image class="terrain-image" xlink:href=
+      '/catan/assets/terrains/${boardData[terrain.id].resource}.jpg'
+       count="${boardData[terrain.id].noToken}"></image>
+      <circle cx="55" cy="65" r="17" fill="burlywood" opacity="0.7"/>
+      <text x="45%" y="49%"  class="number-token" >
+      ${boardData[terrain.id].noToken}</text>`;
+    terrain.innerHTML += html;
+  });
+};
+
 const disableTurn = (rollDice, endTurn) => {
   const endTurnButton = document.getElementById('end-turn');
   const rollDiceButton = document.getElementById('rollDice');
@@ -78,7 +101,6 @@ const getRemainingCount = function(asset, maxCount) {
 
 const renderPlayerInfo1 = function(playerElement, player) {
   const {
-    name,
     resourceCount,
     devCardCount,
     settlements,
@@ -143,21 +165,8 @@ const highlightPlayer = (otherPlayers, player) => {
   });
 };
 
-const updateGameStatus = async function() {
-  const response = await fetch('/catan/gameStatus');
-  if (response.ok) {
-    const { bankCards, player, otherPlayers, stage } = await response.json();
-    renderBankCards(bankCards);
-    renderPlayerCards(player);
-    renderPlayersInfo(otherPlayers, player);
-    renderPlayersSettlements(player, otherPlayers);
-    renderPlayersRoads(player, otherPlayers);
-    highlightPlayer(otherPlayers, player);
-  }
-};
-
-const update = function(game) {
-  const { bankCards, player, otherPlayers, stage } = game;
+const render = function(game) {
+  const { bankCards, player, otherPlayers } = game;
   renderBankCards(bankCards);
   renderPlayerCards(player);
   renderPlayersInfo(otherPlayers, player);
@@ -166,44 +175,22 @@ const update = function(game) {
   highlightPlayer(otherPlayers, player);
 };
 
-const render = function(game) {
-  const { bankCards, player, otherPlayers } = game;
-  renderBankCards(bankCards);
-  renderPlayerCards(player);
-  renderPlayersInfoImgs(otherPlayers, player);
+const updateGameStatus = async function() {
+  const res = await fetch('/catan/gameStatus');
+  if (res.ok) {
+    const game = await res.json();
+    render(game);
+  }
 };
 
 const setupMode = function(player, stage) {
   if (player.turn && stage.mode === 'setup') {
-    if (stage.build === 'settlement') {
-      showPossiblePathsForRoadInSetUp();
-      return;
-    }
+    // if (stage.build === 'settlement') {
+    //   showPossiblePathsForRoadInSetUp();
+    //   return;
+    // }
     requestInitialSettlement();
   }
-};
-
-const renderBoard = function(boardData) {
-  const terrains = document.getElementsByClassName('terrain');
-  Array.from(terrains).forEach(terrain => {
-    if (boardData[terrain.id].resource === 'desert') {
-      const html = `<image class="terrain-image"
-           xlink:href='/catan/assets/terrains/desert.jpg'
-          count="${boardData[terrain.id].noToken}"></image>
-         <image id="robber"  x='0' y='30'  
-          xlink:href='/catan/assets/robber.png'></image>
-        `;
-      terrain.innerHTML += html;
-      return;
-    }
-    const html = `<image class="terrain-image" xlink:href=
-      '/catan/assets/terrains/${boardData[terrain.id].resource}.jpg'
-       count="${boardData[terrain.id].noToken}"></image>
-      <circle cx="55" cy="65" r="17" fill="burlywood" opacity="0.7"/>
-      <text x="45%" y="49%"  class="number-token" >
-      ${boardData[terrain.id].noToken}</text>`;
-    terrain.innerHTML += html;
-  });
 };
 
 const loadGame = function() {
@@ -215,7 +202,7 @@ const loadGame = function() {
       setupMode(game.player, game.stage);
       requestDiceRolledStatus();
     }
-    update(game);
+    render(game);
   }, 500);
 };
 
@@ -227,8 +214,8 @@ const main = () => {
     renderBoard(boardData);
     renderPlayersInfoImgs(status.otherPlayers, status.player);
     setSrcForAction(status.player.color);
+    loadGame();
   })();
-  loadGame();
 };
 
 const distributeResources = async () => {

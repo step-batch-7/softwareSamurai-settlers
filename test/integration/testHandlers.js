@@ -72,24 +72,6 @@ describe('Handlers', () => {
     });
   });
 
-  context('Get /cardsCount', () => {
-    it('should give count of resource and devCards', done => {
-      request(app)
-        .get('/catan/cardsCount')
-        .expect(200, done)
-        .expect('Content-Type', 'application/json; charset=utf-8');
-    });
-  });
-
-  describe('Get /bankStatus', () => {
-    it('should give bank status for /bankStatus', done => {
-      request(app)
-        .get('/catan/bankStatus')
-        .expect(200, done)
-        .expect('Content-Type', 'application/json; charset=utf-8');
-    });
-  });
-
   context('Post /addResourcesToPlayer', () => {
     const game = new Game();
     game.addPlayer('virat');

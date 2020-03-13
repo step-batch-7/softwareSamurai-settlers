@@ -1,13 +1,3 @@
-const getBankStatus = (req, res) => {
-  const { game } = req.app.locals;
-  res.json(game.bankStatus());
-};
-
-const getCardsCount = function(req, res) {
-  const { game, playerId } = req.app.locals;
-  res.json(game.cardsCount(playerId));
-};
-
 const getAvailableSettlements = function(req, res) {
   const { game } = req.app.locals;
   const settlements = game.getAvailableSettlements();
@@ -209,8 +199,6 @@ const serveLoadGame = function(req, res) {
 };
 
 module.exports = {
-  getCardsCount,
-  getBankStatus,
   getAvailableSettlements,
   buildSettlement,
   addResourcesToPlayer,
