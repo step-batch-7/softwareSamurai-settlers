@@ -35,7 +35,7 @@ class Game {
     this.bank = new Bank();
     this.players = {};
     this.isStarted = false;
-    this.availableColors = ['blue', 'red', 'yellow', 'orange'];
+    this.availableColors = ['blue', 'red', 'green', 'orange'];
     this.diceRolledStatus = false;
     this.stage = { mode: 'setup', build: '' };
   }

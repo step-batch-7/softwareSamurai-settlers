@@ -128,7 +128,7 @@ body {
 }
 
 .person:nth-child(3) > .userIcon {
-  background: rgb(255, 255, 0);
+  background: rgb(14, 240, 38);
 }
 
 .person:nth-child(4) > .userIcon {

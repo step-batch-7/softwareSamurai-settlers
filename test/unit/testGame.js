@@ -292,7 +292,7 @@ describe('status', function() {
       otherPlayers: [
         {
           army: 0,
-          color: 'yellow',
+          color: 'green',
           devCardCount: 0,
           longestRoad: 0,
           name: 'p3',

@@ -72,6 +72,7 @@ body {
   width: 26%;
   height: 100%;
   display: flex;
+  margin-left: -6%;
 }
 
 #resourceCards,
@@ -92,7 +93,7 @@ body {
   width: 72px;
   margin: 2px;
   border-radius: 5px;
-  box-shadow: 1px 1px 2px 0.5px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 1px 1px 2px 0.5px rgba(0, 0, 0, 0.2); */
   display: flex;
 }
 
@@ -146,8 +147,8 @@ body {
 }
 
 .current-player-icon-size {
-  height: 60%;
-  width: 135%;
+  height: 50%;
+  width: 130%;
   margin: 0% 0% 0% -8%;
 }
 
@@ -524,7 +525,6 @@ svg {
 }
 
 .flip-card-front {
-  background: url('/catan/assets/cards/resourceCards/brickCard.jpg');
   background-size: cover;
   position: absolute;
   width: 100%;
@@ -540,8 +540,6 @@ svg {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transform: rotateY(180deg);
-
-  /* background-color: blue; */
   height: inherit;
   width: inherit;
   color: white;
@@ -567,12 +565,6 @@ svg {
   font-size: x-large;
 }
 
-/*---------------------highlight------------------------*/
-
-.highlight {
-  box-shadow: 5px 1.8px 0px 1px rgba(0, 0, 0, 0.3);
-}
-
 /*--------------------devCardOption-------------------*/
 
 #devCardOptionBox {
@@ -583,6 +575,7 @@ svg {
   z-index: 1;
   background: rgba(235, 233, 227, 0.377);
   margin-left: 55%;
+  display: none;
 }
 
 #options {
