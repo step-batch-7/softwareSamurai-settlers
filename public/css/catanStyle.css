@@ -594,3 +594,17 @@ svg {
   padding: 4px;
   font-weight: 200;
 }
+
+/* ------------------------ Activity log -------------------------*/
+
+.activity {
+  width: 100%;
+  margin-top: 2%;
+  font-weight: 200;
+}
+
+.activity-title {
+  font-weight: 1000;
+  font-size: large;
+  margin-left: 2%;
+}
