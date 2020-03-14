@@ -65,7 +65,7 @@ const addBgColor = function(element, color) {
   const colors = {
     red: 'red',
     blue: 'blue',
-    yellow: 'rgb(255, 254, 2)',
+    green: 'rgb(14, 240, 38)',
     orange: 'rgba(255, 89, 0, 1)'
   };
   element.style.backgroundColor = colors[color];
