@@ -150,7 +150,10 @@ describe('Game', () => {
 
       const game = new Game();
       sinon.replace(game, 'players', players);
-      assert.isTrue(game.resourceProduction(5));
+      sinon.replace(game.diceNumbers, 'dice1', 3);
+      sinon.replace(game.diceNumbers, 'dice2', 2);
+
+      assert.isTrue(game.resourceProduction());
       const actualPlayer1Resources = players['p1'].resources.status();
       const actualPlayer2Resources = players['p2'].resources.status();
       const actualPlayer3Resources = players['p3'].resources.status();
@@ -202,11 +205,6 @@ describe('Game', () => {
       assert.deepStrictEqual(actualPlayer2Resources, expectedPlayer2Resources);
       assert.deepStrictEqual(actualPlayer3Resources, expectedPlayer3Resources);
       assert.deepStrictEqual(actualPlayer4Resources, expectedPlayer4Resources);
-    });
-
-    it('should not produce resources when numToken is undefined', () => {
-      const game = new Game();
-      assert.isFalse(game.resourceProduction());
     });
   });
 
@@ -355,6 +353,10 @@ describe('status', function() {
       stage: {
         build: '',
         mode: 'setup'
+      },
+      diceNumbers: {
+        dice1: 1,
+        dice2: 6
       }
     };
     assert.deepStrictEqual(game.status('2'), expected);
@@ -548,6 +550,14 @@ describe('canBuild', () => {
     const actual = game.canBuild(playerId);
     const expected = { road: false, settlement: false, city: false };
     assert.deepStrictEqual(actual, expected);
+  });
+
+  describe('updateDice', function() {
+    it('should update dice values', function() {
+      const game = new Game();
+      game.updateDice(3, 4);
+      assert.deepEqual(game.diceNumbers, { dice1: 3, dice2: 4 });
+    });
   });
 });
 

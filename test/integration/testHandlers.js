@@ -102,14 +102,6 @@ describe('Handlers', () => {
     });
   });
 
-  context('get /diceNumbers', () => {
-    it('should random 2 dice numbers', done => {
-      request(app)
-        .get('/catan/diceNumbers')
-        .expect(200, done);
-    });
-  });
-
   context('post /resourceProduction', () => {
     it('should get resources if numberToken matches the terrain', done => {
       request(app)
@@ -120,12 +112,11 @@ describe('Handlers', () => {
     });
   });
 
-  describe('post /resourceProduction', () => {
+  describe('get /resourceProduction', () => {
     it('should increase resources based on number token', done => {
       request(app)
-        .post('/catan/resourceProduction')
-        .set('content-type', 'application/json')
-        .send({ numToken: 10 })
+        .get('/catan/resourceProduction')
+        .expect('content-type', 'application/json; charset=utf-8')
         .expect(200, done);
     });
   });

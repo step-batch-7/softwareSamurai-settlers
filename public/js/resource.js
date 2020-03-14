@@ -44,18 +44,16 @@ const updateDicePhase = function(num1, num2) {
   secondDice.src = `./assets/dice/${num2}.png`;
 };
 
-const resourceProduction = async function(dice1, dice2) {
-  const reqText = JSON.stringify({ numToken: dice1 + dice2 });
-  const res = await fetch('/catan/resourceProduction', {
-    method: 'POST',
-    body: reqText,
-    headers: { 'Content-Type': 'application/json' }
-  });
-  if (res.ok) {
-    updateGameStatus();
-    requestDiceRolledStatus();
-    getBuildStatus();
-  }
+const resourceProduction = function(dice1, dice2) {
+  fetch('/catan/resourceProduction')
+    .then(res => res.json())
+    .then(({ dice1, dice2 }) => {
+      updateDicePhase(dice1, dice2);
+      document.getElementById('rollDice').disabled = true;
+      document.getElementById('end-turn').disabled = false;
+      updateGameStatus();
+      getBuildStatus();
+    });
 };
 
 const updateBuildingStatus = function(status, buildingId) {
@@ -73,16 +71,6 @@ const getBuildStatus = function() {
       updateBuildingStatus(settlement, 'settlement');
       updateBuildingStatus(road, 'road');
     });
-};
-
-const showDicePhase = async function() {
-  const res = await fetch('/catan/diceNumbers');
-  const body = await res.json();
-  const { dice1, dice2 } = await body;
-  updateDicePhase(dice1, dice2);
-  document.getElementById('rollDice').disabled = true;
-  document.getElementById('end-turn').disabled = false;
-  resourceProduction(dice1, dice2);
 };
 
 const distributeResources = async () => {

@@ -225,6 +225,10 @@ const renderPlayerCards = function(player) {
   updateCards('player-cards', resources, devCardCount);
 };
 
+const renderDice = function({ dice1, dice2 }) {
+  updateDicePhase(dice1, dice2);
+};
+
 const render = function(game) {
   const { bankCards, player, otherPlayers } = game;
   renderBankCards(bankCards);
@@ -233,6 +237,7 @@ const render = function(game) {
   renderPlayersSettlements(player, otherPlayers);
   renderPlayersRoads(player, otherPlayers);
   highlightPlayer(otherPlayers, player);
+  renderDice(game.diceNumbers);
 };
 
 const updateGameStatus = function() {

@@ -12,7 +12,6 @@ const {
   servePossiblePathsForRoadInSetup,
   addRoad,
   addRoadWithResources,
-  getRandomDiceNum,
   addResourcesToPlayer,
   serveWaitingPage,
   getJoinedPlayerDetails,
@@ -34,7 +33,7 @@ catanRouter.get('/buildStatus', getBuildStatus);
 catanRouter.get('/requestInitialSettlement', getAvailableSettlements);
 catanRouter.get('/requestSettlement', getAvailableAdjSettlements);
 catanRouter.get('/diceRolledStatus', getDiceRolledStatus);
-catanRouter.post('/resourceProduction', resourceProduction);
+catanRouter.get('/resourceProduction', resourceProduction);
 catanRouter.post('/buildSettlement', buildSettlement);
 catanRouter.post('/buildInitialSettlement', buildInitialSettlement);
 catanRouter.get('/getPossiblePathsForRoad', servePossiblePathsForRoad);
@@ -45,7 +44,6 @@ catanRouter.get(
 catanRouter.get('/possiblePositionsForCity', servePossiblePositionsForCity);
 catanRouter.post('/buildRoad', addRoad);
 catanRouter.post('/buildRoadWithResources', addRoadWithResources);
-catanRouter.get('/diceNumbers', getRandomDiceNum);
 catanRouter.post('/addResourcesToPlayer', addResourcesToPlayer);
 catanRouter.get('/gameStatus', serveGameStatus);
 catanRouter.get('/endTurn', endTurn);

@@ -38,6 +38,7 @@ class Game {
     this.availableColors = ['blue', 'red', 'green', 'orange'];
     this.diceRolledStatus = false;
     this.stage = { mode: 'setup', build: '' };
+    this.diceNumbers = { dice1: 1, dice2: 6 };
   }
 
   static initializeGame() {
@@ -72,24 +73,22 @@ class Game {
     return this.board.getAvailableSettlements();
   }
 
-  resourceProduction(numToken) {
-    if (numToken) {
-      const terrains = this.board.getTerrains();
-      const selectedTerrains = pickTerrains(terrains, numToken);
-      for (const player in this.players) {
-        const terrainsId = this.players[player].getTerrainsId();
-        const resourceId = terrainsId.filter(id => {
-          return selectedTerrains.includes(id);
-        });
-        const resourceCards = resourceId.map(id => {
-          const resourceId = this.board.getResource(id);
-          return { resource: productions[resourceId], count: 1 };
-        });
-        this.distribute(this.players[player], resourceCards);
-      }
-      return true;
+  resourceProduction() {
+    const numToken = this.diceNumbers.dice1 + this.diceNumbers.dice2;
+    const terrains = this.board.getTerrains();
+    const selectedTerrains = pickTerrains(terrains, numToken);
+    for (const player in this.players) {
+      const terrainsId = this.players[player].getTerrainsId();
+      const resourceId = terrainsId.filter(id => {
+        return selectedTerrains.includes(id);
+      });
+      const resourceCards = resourceId.map(id => {
+        const resourceId = this.board.getResource(id);
+        return { resource: productions[resourceId], count: 1 };
+      });
+      this.distribute(this.players[player], resourceCards);
     }
-    return false;
+    return true;
   }
 
   distribute(player, resourceCards) {
@@ -244,6 +243,7 @@ class Game {
     );
     return {
       stage: this.stage,
+      diceNumbers: this.diceNumbers,
       bankCards: this.bank.status,
       player,
       otherPlayers
@@ -281,6 +281,11 @@ class Game {
       return true;
     }
     return false;
+  }
+
+  updateDice(dice1, dice2) {
+    this.diceNumbers.dice1 = dice1;
+    this.diceNumbers.dice2 = dice2;
   }
 }
 

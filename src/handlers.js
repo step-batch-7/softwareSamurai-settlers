@@ -11,14 +11,6 @@ const getAvailableSettlements = function(req, res) {
   res.json(settlements);
 };
 
-const randNum = () => Math.ceil(Math.random() * 6);
-
-const getRandomDiceNum = function(req, res) {
-  const { game } = getGameDetails(req);
-  game.toggleDiceRolledStatus();
-  res.json({ dice1: randNum(), dice2: randNum() });
-};
-
 const buildSettlement = function(req, res) {
   const { intersection } = req.body;
   const { game, playerId } = getGameDetails(req);
@@ -65,11 +57,16 @@ const servePossiblePathsForRoad = (req, res) => {
   });
 };
 
+const randNum = () => Math.ceil(Math.random() * 6);
+
 const resourceProduction = function(req, res) {
-  const { numToken } = req.body;
   const { game } = getGameDetails(req);
-  game.resourceProduction(numToken);
-  res.end();
+  game.toggleDiceRolledStatus();
+  const dice1 = randNum();
+  const dice2 = randNum();
+  game.updateDice(dice1, dice2);
+  game.resourceProduction();
+  res.json({ dice1, dice2 });
 };
 
 const getBuildStatus = function(req, res) {
@@ -215,7 +212,6 @@ module.exports = {
   getAvailableSettlements,
   buildSettlement,
   addResourcesToPlayer,
-  getRandomDiceNum,
   servePossiblePathsForRoadInSetup,
   addRoad,
   resourceProduction,
