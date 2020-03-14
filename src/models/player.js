@@ -2,19 +2,11 @@ const Resources = require('./resources');
 const DevCards = require('./devCards');
 
 class Player {
-  // eslint-disable-next-line max-statements
   constructor(name, color) {
     this.name = name;
     this.color = color;
-    // this.settlements = [];
-    // this.roads = [];
-    // this.cities = [];
     this.resources = new Resources();
     this.devCards = new DevCards();
-    // this.victoryPoints = 0;
-    // this.army = 0;
-    // this.longestRoad = 0;
-    // this.turn = false;
   }
 
   static initialize(name, color) {
