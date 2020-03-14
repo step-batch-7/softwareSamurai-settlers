@@ -171,7 +171,6 @@ const buildInitialSettlement = function() {
   }).then(() => {
     renderNewSettlement(intersection, buildInitialSettlement);
     updateGameStatus();
-    distributeResources();
     showPossiblePathsForRoadInSetUp();
   });
 };

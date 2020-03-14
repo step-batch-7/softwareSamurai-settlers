@@ -110,6 +110,7 @@ class Game {
   buildInitialSettlement(intersection, playerId) {
     this.board.buildSettlement(intersection);
     this.players[playerId].addSettlement(intersection);
+    this.addResourcesToPlayer(playerId);
   }
 
   buildSettlement(intersection, playerId) {
@@ -124,17 +125,21 @@ class Game {
   }
 
   addResourcesToPlayer(playerId) {
-    const terrains = this.board.getTerrains();
     const player = this.players[playerId];
-    const tokenIds = player.getLastSettlementTerrains();
-    const resourceCards = tokenIds.reduce((resourceCards, tokenId) => {
-      if (terrains[tokenId]) {
-        const terrain = terrains[tokenId].resource;
-        resourceCards.push({ resource: productions[terrain], count: 1 });
-      }
-      return resourceCards;
-    }, []);
-    this.distribute(player, resourceCards);
+    const settlements = player.status.settlements;
+
+    if (settlements.length === 2) {
+      const tokenIds = player.getLastSettlementTerrains();
+      const terrains = this.board.getTerrains();
+      const resourceCards = tokenIds.reduce((resourceCards, tokenId) => {
+        if (terrains[tokenId]) {
+          const terrain = terrains[tokenId].resource;
+          resourceCards.push({ resource: productions[terrain], count: 1 });
+        }
+        return resourceCards;
+      }, []);
+      this.distribute(player, resourceCards);
+    }
   }
 
   addRoad(playerId, pathId) {

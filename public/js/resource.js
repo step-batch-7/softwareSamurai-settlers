@@ -72,12 +72,3 @@ const getBuildStatus = function() {
       updateBuildingStatus(road, 'road');
     });
 };
-
-const distributeResources = async () => {
-  const response = await fetch('/catan/addResourcesToPlayer', {
-    method: 'POST'
-  });
-  if (response.ok) {
-    updateGameStatus();
-  }
-};

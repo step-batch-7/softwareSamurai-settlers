@@ -12,7 +12,6 @@ const {
   servePossiblePathsForRoadInSetup,
   addRoad,
   addRoadWithResources,
-  addResourcesToPlayer,
   serveWaitingPage,
   getJoinedPlayerDetails,
   ensureGame,
@@ -45,7 +44,6 @@ catanRouter.get(
 catanRouter.get('/possiblePositionsForCity', servePossiblePositionsForCity);
 catanRouter.post('/buildRoad', addRoad);
 catanRouter.post('/buildRoadWithResources', addRoadWithResources);
-catanRouter.post('/addResourcesToPlayer', addResourcesToPlayer);
 catanRouter.get('/gameStatus', serveGameStatus);
 catanRouter.get('/endTurn', endTurn);
 catanRouter.get('/loadGame', serveLoadGame);

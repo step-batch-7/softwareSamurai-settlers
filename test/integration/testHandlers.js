@@ -72,28 +72,6 @@ describe('Handlers', () => {
     });
   });
 
-  context('Post /addResourcesToPlayer', () => {
-    const game = new Game();
-    game.addPlayer('virat');
-    game.addPlayer('rohit');
-    game.addPlayer('shikhar');
-    game.addPlayer('dhoni');
-    game.buildInitialSettlement('efo', '1');
-    sinon.replace(app.locals, 'game', game);
-    app.locals.playerId = 1;
-    it('should build the settlement for getting resources', done => {
-      request(app)
-        .post('/catan/buildInitialSettlement')
-        .send({ intersection: 'efo' })
-        .expect(200, done);
-    });
-    it('should give add resources to player for /addResourcesToPlayer', done => {
-      request(app)
-        .post('/catan/addResourcesToPlayer', 1)
-        .expect(200, done);
-    });
-  });
-
   context('get /getPossiblePathsForRoadInSetup', () => {
     it('should get possible paths for building a road for /getPossiblePathsForRoadInSetup', done => {
       request(app)

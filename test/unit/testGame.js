@@ -551,13 +551,13 @@ describe('canBuild', () => {
     const expected = { road: false, settlement: false, city: false };
     assert.deepStrictEqual(actual, expected);
   });
+});
 
-  describe('updateDice', function() {
-    it('should update dice values', function() {
-      const game = new Game();
-      game.updateDice(3, 4);
-      assert.deepEqual(game.diceNumbers, { dice1: 3, dice2: 4 });
-    });
+describe('updateDice', function() {
+  it('should update dice values', function() {
+    const game = new Game();
+    game.updateDice(3, 4);
+    assert.deepEqual(game.diceNumbers, { dice1: 3, dice2: 4 });
   });
 });
 
@@ -575,5 +575,38 @@ describe('buildCity', () => {
     game.players[playerId].addResources({ resource: 'ore', count: 3 });
     game.players[playerId].addResources({ resource: 'grain', count: 2 });
     assert.isTrue(game.buildCity(playerId, 'k1'));
+  });
+});
+
+describe('addResourcesToPlayer', function() {
+  it('should add resource to player when they build second settlement', function() {
+    const game = new Game();
+    game.addPlayer('virat');
+    game.addPlayer('rohit');
+    game.addPlayer('shikhar');
+    game.addPlayer('dhoni');
+    sinon.replace(game.players['1'], 'settlements', ['b1', 'efo']);
+    game.addResourcesToPlayer('1');
+    const actualPlayerResources = game.players['1'].resources.status();
+    const actualBankResources = game.bank.resources;
+
+    const expectedPlayerResources = {
+      ore: 0,
+      wool: 2,
+      lumber: 0,
+      brick: 0,
+      grain: 1
+    };
+
+    const expectedBankResources = {
+      ore: 19,
+      wool: 17,
+      lumber: 19,
+      brick: 19,
+      grain: 18
+    };
+
+    assert.deepStrictEqual(actualBankResources, expectedBankResources);
+    assert.deepStrictEqual(actualPlayerResources, expectedPlayerResources);
   });
 });

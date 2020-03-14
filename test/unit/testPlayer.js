@@ -111,18 +111,11 @@ describe('Player', () => {
     });
   });
   describe('getLastSettlementTerrains', function() {
-    it('should return the terrains of settlement when there is atleast a settlement', function() {
+    it('should return the terrains of settlement when there is at least a settlement', function() {
       const player = Player.initialize();
-      sinon.replace(player, 'getSettlements', () => ['abc', 'def']);
+      sinon.replace(player, 'settlements', ['abc', 'def']);
       const actual = player.getLastSettlementTerrains();
       assert.deepStrictEqual(actual, ['d', 'e', 'f']);
-    });
-
-    it('should return empty when there is no settlement', function() {
-      const player = Player.initialize();
-      sinon.replace(player, 'getSettlements', () => []);
-      const actual = player.getLastSettlementTerrains();
-      assert.deepStrictEqual(actual, []);
     });
   });
 

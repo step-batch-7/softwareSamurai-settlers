@@ -93,11 +93,10 @@ class Player {
   }
 
   getLastSettlementTerrains() {
-    const settlements = this.getSettlements();
-    if (settlements.length !== 0) {
-      return settlements.pop().split('');
-    }
-    return [];
+    return this.settlements
+      .slice()
+      .pop()
+      .split('');
   }
 
   get status() {
