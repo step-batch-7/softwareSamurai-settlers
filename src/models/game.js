@@ -59,7 +59,7 @@ class Game {
   addPlayer(name) {
     const color = this.availableColors.shift();
     const id = this.generateNewPlayerId();
-    this.players[id] = new Player(name, color);
+    this.players[id] = Player.initialize(name, color);
     this.start();
     return id;
   }
@@ -270,6 +270,17 @@ class Game {
 
   possibleCities(playerId) {
     return this.players[playerId].getSettlements();
+  }
+
+  buildCity(playerId, settlementPosition) {
+    const player = this.players[playerId];
+    if (player.deductCardsForCity()) {
+      player.addCity(settlementPosition);
+      this.board.buildCity(settlementPosition);
+      this.bank.add({ grain: 2, ore: 3 });
+      return true;
+    }
+    return false;
   }
 }
 

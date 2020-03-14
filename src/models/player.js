@@ -2,17 +2,31 @@ const Resources = require('./resources');
 const DevCards = require('./devCards');
 
 class Player {
+  // eslint-disable-next-line max-statements
   constructor(name, color) {
     this.name = name;
     this.color = color;
-    this.settlements = [];
-    this.roads = [];
+    // this.settlements = [];
+    // this.roads = [];
+    // this.cities = [];
     this.resources = new Resources();
     this.devCards = new DevCards();
-    this.victoryPoints = 0;
-    this.army = 0;
-    this.longestRoad = 0;
-    this.turn = false;
+    // this.victoryPoints = 0;
+    // this.army = 0;
+    // this.longestRoad = 0;
+    // this.turn = false;
+  }
+
+  static initialize(name, color) {
+    const player = new Player(name, color);
+    player.settlements = [];
+    player.roads = [];
+    player.cities = [];
+    player.victoryPoints = 0;
+    player.army = 0;
+    player.longestRoad = 0;
+    player.turn = false;
+    return player;
   }
 
   cardsCount() {
@@ -145,6 +159,19 @@ class Player {
   canBuildCity() {
     const resourcesNeeded = { grain: 2, ore: 3 };
     return this.resources.have(resourcesNeeded);
+  }
+
+  addCity(cityPosition) {
+    this.cities.push(cityPosition);
+    this.settlements = this.settlements.filter(settlement => {
+      return settlement !== cityPosition;
+    });
+    this.addVictoryPoints(1);
+  }
+
+  deductCardsForCity() {
+    const cityResources = { grain: 2, ore: 3 };
+    return this.resources.deduct(cityResources);
   }
 }
 

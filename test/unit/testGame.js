@@ -7,10 +7,10 @@ describe('Game', () => {
   describe('cardsCount', () => {
     it('should give cardsCount for the given player', () => {
       const players = {
-        1: new Player(),
-        2: new Player(),
-        3: new Player(),
-        4: new Player()
+        1: Player.initialize(),
+        2: Player.initialize(),
+        3: Player.initialize(),
+        4: Player.initialize()
       };
       const game = new Game();
       sinon.replace(game, 'players', players);
@@ -53,10 +53,10 @@ describe('Game', () => {
   describe('addRoad', () => {
     it('should add the road to Game when pathId is valid', () => {
       const players = {
-        1: new Player(),
-        2: new Player(),
-        3: new Player(),
-        4: new Player()
+        1: Player.initialize(),
+        2: Player.initialize(),
+        3: Player.initialize(),
+        4: Player.initialize()
       };
       const game = new Game();
       sinon.replace(game, 'players', players);
@@ -77,10 +77,10 @@ describe('Game', () => {
   describe('getAvailableAdjSettlements ', () => {
     it('should give empty array if no positions are available', () => {
       const players = {
-        1: new Player(),
-        2: new Player(),
-        3: new Player(),
-        4: new Player()
+        1: Player.initialize(),
+        2: Player.initialize(),
+        3: Player.initialize(),
+        4: Player.initialize()
       };
       const game = new Game();
       sinon.replace(game, 'players', players);
@@ -90,10 +90,10 @@ describe('Game', () => {
   describe('start', () => {
     it('should start the game when 4 players are added', () => {
       const players = {
-        p1: new Player('red'),
-        p2: new Player('green'),
-        p3: new Player('orange'),
-        p4: new Player('white')
+        p1: Player.initialize('red'),
+        p2: Player.initialize('green'),
+        p3: Player.initialize('orange'),
+        p4: Player.initialize('white')
       };
       const game = new Game();
       sinon.replace(game, 'players', players);
@@ -107,9 +107,9 @@ describe('Game', () => {
 
     it('should not start the game when less than 4 players are added', () => {
       const players = {
-        p1: new Player('red'),
-        p2: new Player('green'),
-        p3: new Player('orange')
+        p1: Player.initialize('red'),
+        p2: Player.initialize('green'),
+        p3: Player.initialize('orange')
       };
       const game = new Game();
       sinon.replace(game, 'players', players);
@@ -120,10 +120,10 @@ describe('Game', () => {
   describe('hasStarted', () => {
     it('should return true when the game has started', () => {
       const players = {
-        p1: new Player('red'),
-        p2: new Player('green'),
-        p3: new Player('orange'),
-        p4: new Player('white')
+        p1: Player.initialize('red'),
+        p2: Player.initialize('green'),
+        p3: Player.initialize('orange'),
+        p4: Player.initialize('white')
       };
       const game = new Game();
       sinon.replace(game, 'players', players);
@@ -139,10 +139,10 @@ describe('Game', () => {
   describe('resourceProduction', () => {
     it('should produce resources according to numToken', () => {
       const players = {
-        p1: new Player('p1'),
-        p2: new Player('p2'),
-        p3: new Player('p3'),
-        p4: new Player('p4')
+        p1: Player.initialize('p1'),
+        p2: Player.initialize('p2'),
+        p3: Player.initialize('p3'),
+        p4: Player.initialize('p4')
       };
       players['p1'].settlements.push('efo');
       players['p3'].settlements.push('bcn');
@@ -221,10 +221,10 @@ describe('Game', () => {
     it('should build a settlement and return true when cards are deducted', () => {
       const game = new Game();
       const players = {
-        p1: new Player('p1'),
-        p2: new Player('p2'),
-        p3: new Player('p3'),
-        p4: new Player('p4')
+        p1: Player.initialize('p1'),
+        p2: Player.initialize('p2'),
+        p3: Player.initialize('p3'),
+        p4: Player.initialize('p4')
       };
       players['p2'].resources = { deduct: sinon.stub().returns(true) };
       sinon.replace(game, 'players', players);
@@ -235,10 +235,10 @@ describe('Game', () => {
   it('should build a settlement and return true when cards are deducted', () => {
     const game = new Game();
     const players = {
-      p1: new Player('p1'),
-      p2: new Player('p2'),
-      p3: new Player('p3'),
-      p4: new Player('p4')
+      p1: Player.initialize('p1'),
+      p2: Player.initialize('p2'),
+      p3: Player.initialize('p3'),
+      p4: Player.initialize('p4')
     };
     sinon.replace(game, 'players', players);
     assert.isFalse(game.buildSettlement('kl', 'p2'));
@@ -550,3 +550,4 @@ describe('canBuild', () => {
     assert.deepStrictEqual(actual, expected);
   });
 });
+
