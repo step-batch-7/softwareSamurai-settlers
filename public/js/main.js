@@ -284,15 +284,6 @@ const main = () => {
   loadPage();
 };
 
-const distributeResources = async () => {
-  const response = await fetch('/catan/addResourcesToPlayer', {
-    method: 'POST'
-  });
-  if (response.ok) {
-    updateGameStatus();
-  }
-};
-
 const showDevCardOption = () => {
   const devCardOptionBox = document.querySelector('#devCardOptionBox');
   if (devCardOptionBox.style.display === 'none') {
