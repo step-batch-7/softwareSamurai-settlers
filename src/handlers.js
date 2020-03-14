@@ -6,7 +6,7 @@ const getGameDetails = function(req) {
 };
 
 const getAvailableSettlements = function(req, res) {
-  const { game } = req.app.locals;
+  const { game } = getGameDetails(req);
   const settlements = game.getAvailableSettlements();
   res.json(settlements);
 };
@@ -119,14 +119,11 @@ const joinGame = function(req, res) {
 
 const ensureGame = function(req, res, next) {
   const { sId } = req.cookies;
-  const { sessions, gameList } = req.app.locals;
+  const { sessions } = req.app.locals;
   const session = sessions.getSession(sId);
   if (!session) {
     return res.redirect('/index.html');
   }
-  const game = gameList.getGame(session.gameId);
-  req.app.locals.game = game;
-  req.app.locals.playerId = session.playerId;
   next();
 };
 

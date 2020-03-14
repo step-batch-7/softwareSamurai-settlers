@@ -137,8 +137,8 @@ const buildRoad = function() {
     },
     body: JSON.stringify({ pathId })
   }).then(() => {
-    appendRoad(pathId);
     removeAvailableRoads(buildRoad);
+    appendRoad(pathId);
     updateGameStatus();
     loadGame();
   });
