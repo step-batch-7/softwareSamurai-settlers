@@ -283,3 +283,23 @@ const main = () => {
   hideAllPaths();
   loadPage();
 };
+
+const distributeResources = async () => {
+  const response = await fetch('/catan/addResourcesToPlayer', {
+    method: 'POST'
+  });
+  if (response.ok) {
+    updateGameStatus();
+  }
+};
+
+const showDevCardOption = () => {
+  const devCardOptionBox = document.querySelector('#devCardOptionBox');
+  if (devCardOptionBox.style.display === 'none') {
+    devCardOptionBox.style.display = 'block';
+    return;
+  }
+  devCardOptionBox.style.display = 'none';
+};
+
+const buyDevCard = () => {};

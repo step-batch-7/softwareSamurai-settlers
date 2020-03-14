@@ -377,9 +377,15 @@
         </div>
         <div id="devCardOptionBox">
           <div id="options">
-            <div class="action">Buy</div>
-            <div class="action">Play</div>
+            <button class="action" onclick="buyDevCard()">Buy</button>
+            <button class="action" disabled="true">Play</button>
           </div>
+          <svg height="30" width="100">
+            <polyline
+              points="50,5 75,20 100,5"
+              style="fill:rgba(235, 233, 227, 0.377)"
+            />
+          </svg>
         </div>
         <div id="interactions">
           <fieldset id="player-cards">
@@ -535,7 +541,9 @@
             ></button>
             <button
               class="unit"
-              style="pointer-events: none; border: none; padding: 0;"
+              id="development-card"
+              onclick="showDevCardOption()"
+              style=" border: none; padding: 0;"
             >
               <img
                 src="./assets/cards/developmentCards/dev.png"

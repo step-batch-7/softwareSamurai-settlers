@@ -568,18 +568,18 @@ svg {
 /*--------------------devCardOption-------------------*/
 
 #devCardOptionBox {
-  height: 5.5%;
+  height: 6.5%;
   width: 10%;
   border-radius: 7px;
   position: absolute;
   z-index: 1;
   background: rgba(235, 233, 227, 0.377);
-  margin-left: 55%;
+  margin: -1.5% 0% 0% 56%;
   display: none;
 }
 
 #options {
-  margin-top: 4%;
+  margin: 6% 0% 3.7% 0%;
   display: flex;
   justify-content: space-around;
 }
@@ -587,12 +587,14 @@ svg {
 .action {
   border-radius: 7px;
   font-size: 17px;
-  width: 29%;
+  width: 35%;
   background-color: white;
   cursor: pointer;
   text-align: center;
   padding: 4px;
-  font-weight: 200;
+  font-weight: 400;
+  border: none;
+  outline: none;
 }
 
 /* ------------------------ Activity log -------------------------*/
