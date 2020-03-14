@@ -561,3 +561,19 @@ describe('canBuild', () => {
   });
 });
 
+describe('buildCity', () => {
+  it('should give false when the player does not have enough resources', () => {
+    const game = new Game();
+    const playerId = game.addPlayer('p1');
+    assert.isFalse(game.buildCity(playerId, 'k1'));
+  });
+
+  it('should give true when the player have enough resources and previous settlements to upgrade to city', () => {
+    const game = new Game();
+    const playerId = game.addPlayer('p1');
+    game.players[playerId].addSettlement('k1');
+    game.players[playerId].addResources({ resource: 'ore', count: 3 });
+    game.players[playerId].addResources({ resource: 'grain', count: 2 });
+    assert.isTrue(game.buildCity(playerId, 'k1'));
+  });
+});

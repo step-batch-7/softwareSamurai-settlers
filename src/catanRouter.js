@@ -21,7 +21,8 @@ const {
   getDiceRolledStatus,
   endTurn,
   serveLoadGame,
-  servePossiblePositionsForCity
+  servePossiblePositionsForCity,
+  buildCity
 } = require('./handlers');
 
 catanRouter.use(ensureGame);
@@ -48,5 +49,5 @@ catanRouter.post('/addResourcesToPlayer', addResourcesToPlayer);
 catanRouter.get('/gameStatus', serveGameStatus);
 catanRouter.get('/endTurn', endTurn);
 catanRouter.get('/loadGame', serveLoadGame);
-
+catanRouter.post('/buildCity', buildCity);
 module.exports = { catanRouter };

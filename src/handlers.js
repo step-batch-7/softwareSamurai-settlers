@@ -205,6 +205,13 @@ const servePossiblePositionsForCity = function(req, res) {
   res.json(game.possibleCities(playerId));
 };
 
+const buildCity = function(req, res) {
+  const { cityPosition } = req.body;
+  const { game, playerId } = getGameDetails(req);
+  game.buildCity(playerId, cityPosition);
+  res.end();
+};
+
 module.exports = {
   getAvailableSettlements,
   buildSettlement,
@@ -229,5 +236,6 @@ module.exports = {
   getDiceRolledStatus,
   endTurn,
   serveLoadGame,
-  servePossiblePositionsForCity
+  servePossiblePositionsForCity,
+  buildCity
 };

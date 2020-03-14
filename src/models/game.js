@@ -276,7 +276,6 @@ class Game {
     const player = this.players[playerId];
     if (player.deductCardsForCity()) {
       player.addCity(settlementPosition);
-      this.board.buildCity(settlementPosition);
       this.bank.add({ grain: 2, ore: 3 });
       return true;
     }

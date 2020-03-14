@@ -224,4 +224,22 @@ describe('Handlers', () => {
         .expect(200, done);
     });
   });
+
+  describe('Get /possiblePositionsForCity', () => {
+    it('Should give possible Positions for building city', done => {
+      request(app)
+        .get('/catan/possiblePositionsForCity')
+        .expect(200, done);
+    });
+  });
+
+  describe('buildCity', () => {
+    it('should build the city on given position', done => {
+      request(app)
+        .post('/catan/buildCity')
+        .set('content-type', 'application/json')
+        .send({ intersection: 'k1' })
+        .expect(200, done);
+    });
+  });
 });
