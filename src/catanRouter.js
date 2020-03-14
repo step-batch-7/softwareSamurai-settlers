@@ -48,4 +48,5 @@ catanRouter.get('/gameStatus', serveGameStatus);
 catanRouter.get('/endTurn', endTurn);
 catanRouter.get('/loadGame', serveLoadGame);
 catanRouter.post('/buildCity', buildCity);
+catanRouter.get('/requestCity', servePossiblePositionsForCity);
 module.exports = { catanRouter };

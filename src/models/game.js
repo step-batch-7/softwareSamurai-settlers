@@ -187,7 +187,7 @@ class Game {
     const canBuildCity = player.canBuildCity();
     const havePositionsToBuildSettlements =
       this.getAvailableAdjSettlements(playerId).length > 0;
-    const havePositionsToBuildCity = this.possibleCities(playerId) > 0;
+    const havePositionsToBuildCity = this.possibleCities(playerId).length > 0;
     return {
       settlement: canBuildSettlement && havePositionsToBuildSettlements,
       road: canBuildRoad,

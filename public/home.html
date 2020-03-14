@@ -536,9 +536,18 @@
               />
             </button>
             <button
-              class="unit"
-              style="pointer-events: none; border: none;"
-            ></button>
+              class="unit disabledUnit"
+              id="city"
+              onclick="requestCity()"
+              onmouseover="makeBig('city')"
+              onmouseout="makeNormal('city')"
+            >
+              <img
+                id="cityImg"
+                alt="city"
+                style="height:100%; margin: -6px;"
+              />
+            </button>
             <button
               class="unit"
               id="development-card"

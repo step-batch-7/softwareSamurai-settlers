@@ -54,11 +54,11 @@ const appendRoad = function(pathId) {
   hideAllPaths();
 };
 
-const renderNewSettlement = function(intersection, buildingFunction) {
+const renderBuilding = function(intersection, buildingFunction, className) {
   removeAvailableSettlements(buildingFunction);
   intersection.classList.remove('point');
   intersection.classList.remove('visibleIntersection');
-  intersection.classList.add('afterSettlement');
+  intersection.classList.add(className);
 };
 
 const addBgColor = function(element, color) {
@@ -83,6 +83,19 @@ const requestSettlement = function() {
         const intersection = document.getElementById(position);
         intersection.classList.add('visibleIntersection');
         intersection.addEventListener('click', buildSettlement, false);
+      });
+    });
+};
+
+const requestCity = function() {
+  fetch('/catan/requestCity')
+    .then(res => res.json())
+    .then(positions => {
+      positions.forEach(position => {
+        const intersection = document.getElementById(position);
+        intersection.classList.add('visibleIntersection');
+        intersection.classList.add('point');
+        intersection.addEventListener('click', buildCity, false);
       });
     });
 };
@@ -169,7 +182,7 @@ const buildInitialSettlement = function() {
     },
     body: JSON.stringify({ intersection: intersection.id })
   }).then(() => {
-    renderNewSettlement(intersection, buildInitialSettlement);
+    renderBuilding(intersection, buildInitialSettlement);
     updateGameStatus();
     showPossiblePathsForRoadInSetUp();
   });
@@ -184,7 +197,22 @@ const buildSettlement = function() {
     },
     body: JSON.stringify({ intersection: intersection.id })
   }).then(() => {
-    renderNewSettlement(intersection, buildSettlement);
+    renderBuilding(intersection, buildSettlement, 'afterSettlement');
+    updateGameStatus();
+    getBuildStatus();
+  });
+};
+
+const buildCity = function() {
+  const intersection = event.target.parentElement;
+  fetch('/catan/buildCity', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ cityPosition: intersection.id })
+  }).then(() => {
+    renderBuilding(intersection, buildCity, 'city');
     updateGameStatus();
     getBuildStatus();
   });

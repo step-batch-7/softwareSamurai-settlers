@@ -298,7 +298,8 @@ describe('status', function() {
           roads: [],
           settlements: [],
           victoryPoints: 0,
-          turn: false
+          turn: false,
+          cities: []
         },
         {
           army: 0,
@@ -310,7 +311,8 @@ describe('status', function() {
           roads: [],
           settlements: [],
           victoryPoints: 0,
-          turn: false
+          turn: false,
+          cities: []
         },
         {
           army: 0,
@@ -322,7 +324,8 @@ describe('status', function() {
           roads: [],
           settlements: [],
           victoryPoints: 0,
-          turn: true
+          turn: true,
+          cities: []
         }
       ],
       player: {
@@ -348,7 +351,8 @@ describe('status', function() {
         roads: [],
         settlements: [],
         turn: false,
-        victoryPoints: 0
+        victoryPoints: 0,
+        cities: []
       },
       stage: {
         build: '',
@@ -531,7 +535,7 @@ describe('canBuild', () => {
     game.players[playerId].addResources({ resource: 'grain', count: 2 });
     game.players[playerId].addResources({ resource: 'ore', count: 3 });
     const actual = game.canBuild(playerId);
-    const expected = { road: false, settlement: false, city: false };
+    const expected = { road: false, settlement: false, city: true };
     assert.deepStrictEqual(actual, expected);
   });
   it('Should give false for player having no resources and no place to build city', () => {

@@ -36,6 +36,13 @@ const setSrcForAction = color => {
     buildingType: 'settlement',
     extension: 'svg'
   });
+  setSrc({
+    element,
+    dirName: 'cities',
+    color: color,
+    buildingType: 'city',
+    extension: 'svg'
+  });
 };
 
 const renderPlayersInfoImgs = (otherPlayers, player) => {
@@ -114,6 +121,19 @@ const renderSettlements = function(settlements, color) {
     }
     intersection.classList.add('afterSettlement');
     const imgUrl = `/catan/assets/settlements/${color}-settlement.svg`;
+    const img = `<image href='${imgUrl}' style="height:100%; width:100%;">`;
+    intersection.innerHTML = img;
+  });
+};
+
+const renderCities = function(cities, color) {
+  cities.forEach(city => {
+    const intersection = document.getElementById(city);
+    const classList = intersection.classList;
+    if (classList.contains('image') && classList.contains('afterCity')) {
+      return;
+    }
+    const imgUrl = `/catan/assets/cities/${color}-city.svg`;
     const img = `<image href='${imgUrl}' style="height:100%; width:100%;">`;
     intersection.innerHTML = img;
   });
@@ -205,6 +225,13 @@ const renderPlayersSettlements = function(player, otherPlayers) {
   );
 };
 
+const renderPlayerCities = (player, otherPlayers) => {
+  const players = [player, ...otherPlayers];
+  players.forEach(player => {
+    renderCities(player.cities, player.color);
+  });
+};
+
 const renderPlayersInfo = function(otherPlayers, player) {
   if (!player.turn) {
     document.getElementById('rollDice').disabled = true;
@@ -235,6 +262,7 @@ const render = function(game) {
   renderPlayerCards(player);
   renderPlayersInfo(otherPlayers, player);
   renderPlayersSettlements(player, otherPlayers);
+  renderPlayerCities(player, otherPlayers);
   renderPlayersRoads(player, otherPlayers);
   highlightPlayer(otherPlayers, player);
   renderDice(game.diceNumbers);

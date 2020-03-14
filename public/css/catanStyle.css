@@ -360,7 +360,8 @@ svg {
   animation: open-animation 3s infinite;
 }
 
-.afterSettlement {
+.afterSettlement,
+.city {
   height: 25px;
   width: 25px;
   margin: -2% 0% 0% 0%;

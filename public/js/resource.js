@@ -67,8 +67,9 @@ const updateBuildingStatus = function(status, buildingId) {
 const getBuildStatus = function() {
   fetch('/catan/buildStatus')
     .then(res => res.json())
-    .then(({ settlement, road }) => {
+    .then(({ settlement, road, city }) => {
       updateBuildingStatus(settlement, 'settlement');
       updateBuildingStatus(road, 'road');
+      updateBuildingStatus(city, 'city');
     });
 };
