@@ -1,57 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/catan/css/waitingPageStyle.css" />
-    <script src="/catan/js/waiting.js"> </script>
-    <title>Catan Lobby</title>
-  </head>
-  <body onload="main()">
-    <div id="container">
-      <div id="msg">Waiting for other Settlers ....</div>
-      <div id="gameId">Game Id : 
-      span= gameId
-      </div>
+html(lang="en")
 
-      <svg x="0px" y="0px" width="170.49px" height="177px" class="loader">
-        <polygon class="hex" points="16.623,87 0,58.5 16.623,30 49.868,30 66.49,58.5 49.868,87"/>
-        <polygon class="hex" points="68.623,57 52,28.5 68.623,0 101.868,0 118.49,28.5 101.868,57 " />
-        <polygon class="hex" points="120.623,87 104,58.5 120.623,30 153.868,30 170.49,58.5 153.868,87 " />
-        <polygon class="hex" points="120.623,147 104,118.5 120.623,90 153.868,90 170.49,118.5 153.868,147 " />
-        <polygon class="hex" points="68.623,177 52,148.5 68.623,120 101.868,120 118.49,148.5 101.868,177 " />
-        <polygon class="hex" points="16.623,147 0,118.5 16.623,90 49.868,90 66.49,118.5 49.868,147 " />
-        <polygon class="hex" points="68.623,117 52,88.5 68.623,60 101.868,60 118.49,88.5 101.868,117 " />
-      </svg>
+  head
+    link(rel="stylesheet" href="/catan/css/waitingPageStyle.css")
+    script(src="/catan/js/waiting.js")
+    title Catan Lobby
 
-      <div id="joined">
-        <div class="person">
-          <div class="userIcon">
-            <img src="/catan/assets/symbols/usericon.png" alt="" />
-          </div>
-          <span class="username" id="blue">?</span>
-        </div>
-        <div class="person">
-          <div class="userIcon">
-            <img src="/catan/assets/symbols/usericon.png" alt="" />
-          </div>
-          <span class="username" id="red">?</span>
-        </div>
+  body
+    div#container
+      div#msg Waiting for other Settlers ....
+      div#gameId Game Id : 
+        span= gameId
+      svg(x="0px" y="0px" width="170.49px" height="177px" class="loader")
+        polygon.hex(points="16.623,87 0,58.5 16.623,30 49.868,30 66.49,58.5 49.868,87")
+        polygon.hex(points="68.623,57 52,28.5 68.623,0 101.868,0 118.49,28.5 101.868,57")
+        polygon.hex(points="120.623,87 104,58.5 120.623,30 153.868,30 170.49,58.5 153.868,87")
+        polygon.hex(points="120.623,147 104,118.5 120.623,90 153.868,90 170.49,118.5 153.868,147")
+        polygon.hex(points="68.623,177 52,148.5 68.623,120 101.868,120 118.49,148.5 101.868,177")
+        polygon.hex(points="16.623,147 0,118.5 16.623,90 49.868,90 66.49,118.5 49.868,147")
+        polygon.hex(points="68.623,117 52,88.5 68.623,60 101.868,60 118.49,88.5 101.868,117")
 
-        <div class="person">
-          <div class="userIcon">
-            <img src="/catan/assets/symbols/usericon.png" alt="" />
-          </div>
-          <span class="username" id="green">?</span>
-        </div>
+      div#joined
+        div.person
+          div.userIcon
+            img(src="/catan/assets/symbols/usericon.png" alt="")
+          span.username#blue
+        div.person
+          div.userIcon
+            img(src="/catan/assets/symbols/usericon.png" alt="")
+          span.username#red
 
-        <div class="person">
-          <div class="userIcon">
-            <img src="/catan/assets/symbols/usericon.png" alt="" />
-          </div>
-          <span class="username" id="orange">?</span>
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
+        div.person
+          div.userIcon
+             img(src="/catan/assets/symbols/usericon.png" alt="")
+          span.username#green
+
+        div.person
+          div.userIcon
+             img(src="/catan/assets/symbols/usericon.png" alt="")
+          span.username#orange
+
