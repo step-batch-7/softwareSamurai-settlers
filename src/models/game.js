@@ -51,10 +51,10 @@ class Game {
   }
 
   generateNewPlayerId() {
-    let lastId = Object.keys(this.players)
+    const lastId = Object.keys(this.players)
       .sort()
       .pop();
-    return lastId ? `${++lastId}` : '1';
+    return lastId ? `${Number(lastId) + 1}` : '1';
   }
 
   addPlayer(name) {

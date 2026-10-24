@@ -6,10 +6,10 @@ class GameList {
   }
 
   generateGameId() {
-    let [lastId] = Object.keys(this.games)
+    const [lastId] = Object.keys(this.games)
       .sort()
       .reverse();
-    return ++lastId || 1000;
+    return Number(lastId) + 1 || 1000;
   }
 
   createGame(hostName) {

@@ -7,7 +7,7 @@ const flip = element => {
 };
 
 const countChangedBy = (element, previousCount, updatedCount) => {
-  let countUpdatedBy = 0;
+  let countUpdatedBy;
   if (updatedCount > previousCount) {
     countUpdatedBy = `+${updatedCount - previousCount}`;
   } else {
